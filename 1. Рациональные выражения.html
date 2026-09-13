@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рациональные дроби — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        header p { font-size: 1rem; opacity: 0.9; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        /* Таблица терминов */
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        /* Блоки правил и формул */
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Дроби в тексте */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .fraction .num {
+            border-bottom: 2px solid var(--text);
+            padding: 0 6px 2px;
+        }
+        .fraction .den {
+            padding: 2px 6px 0;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        /* SVG контейнеры */
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Задачи */
+        .task-level {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Практика */
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        /* Итоги и подсказки */
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1.1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>📐 Рациональные дроби и их свойства</h1>
+        <p>Алгебра, 8 класс | Глава 1, §1</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Зачем нам это?</h3>
+        <p>Представь, что ты настраиваешь умный датчик для теплицы. Он вычисляет влажность по формуле, где есть деление. Но что если в знаменателе окажется ноль? Датчик «зависнет», а математический механизм сломается! В алгебре 8 класса мы встречаем такие же «красные флаги» — значения переменных, при которых дроби теряют смысл. Сегодня мы научимся их вычислять и обходить! 🚀</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Рациональное выражение</b></td>
+                <td>Любое выражение, состоящее из чисел, переменных, знаков действий и скобок (целое или дробное).</td>
+            </tr>
+            <tr>
+                <td><b>Целое выражение</b></td>
+                <td>Выражение, где нет деления на переменную (например: <i>3x + 5</i>).</td>
+            </tr>
+            <tr>
+                <td><b>Дробное выражение</b></td>
+                <td>Выражение, где есть деление на переменную (например: <span class="fraction"><span class="num">5</span><span class="den">x</span></span>).</td>
+            </tr>
+            <tr>
+                <td><b>Рациональная дробь</b></td>
+                <td>Дробь, у которой и в числителе, и в знаменателе стоят многочлены.</td>
+            </tr>
+            <tr>
+                <td><b>Допустимые значения</b></td>
+                <td>Такие значения переменной, при которых знаменатель НЕ равен нулю.</td>
+            </tr>
+            <tr>
+                <td><b>Область определения</b></td>
+                <td>Все допустимые значения переменной вместе (то, где дробь «живёт»).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Знаменатель — это фундамент!</b><br>
+            На ноль делить нельзя. Значит, знаменатель дроби никогда не должен обращаться в ноль.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Числовая прямая с "дырками" -->
+            <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Пример: Область определения для дроби 5 / (a(a-9))</text>
+                <!-- Line -->
+                <line x1="20" y1="60" x2="380" y2="60" stroke="#1e293b" stroke-width="2"/>
+                <polygon points="380,60 370,55 370,65" fill="#1e293b"/>
+                <polygon points="20,60 30,55 30,65" fill="#1e293b"/>
+                
+                <!-- 0 -->
+                <line x1="100" y1="55" x2="100" y2="65" stroke="#1e293b" stroke-width="2"/>
+                <text x="95" y="85" font-family="sans-serif" font-size="16" fill="#1e293b">0</text>
+                <circle cx="100" cy="60" r="7" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+                <text x="80" y="40" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold">Нельзя!</text>
+                
+                <!-- 9 -->
+                <line x1="300" y1="55" x2="300" y2="65" stroke="#1e293b" stroke-width="2"/>
+                <text x="295" y="85" font-family="sans-serif" font-size="16" fill="#1e293b">9</text>
+                <circle cx="300" cy="60" r="7" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+                <text x="280" y="40" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold">Нельзя!</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Когда дробь равна нулю?</b><br>
+            Дробь равна нулю только тогда, когда её числитель равен нулю, <b>а знаменатель при этом НЕ равен нулю</b>.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">A</span><span class="den">B</span></span> = 0 &nbsp; ⇔ &nbsp; A = 0 &nbsp; И &nbsp; B ≠ 0
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Логический шлюз -->
+            <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="160" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+                <text x="100" y="45" font-family="sans-serif" font-size="15" fill="#16a34a" font-weight="bold" text-anchor="middle">Числитель = 0</text>
+                <text x="100" y="65" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">(Обязательно! ✅)</text>
+
+                <rect x="220" y="20" width="160" height="60" rx="10" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+                <text x="300" y="45" font-family="sans-serif" font-size="15" fill="#b45309" font-weight="bold" text-anchor="middle">Знаменатель ≠ 0</text>
+                <text x="300" y="65" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">(Проверяем! ⚠️)</text>
+
+                <path d="M 200 90 L 200 115" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+
+                <rect x="100" y="115" width="200" height="35" rx="17" fill="#2563eb"/>
+                <text x="200" y="138" font-family="sans-serif" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">Дробь = 0 🎉</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>Давай потренируемся на задачах из учебника. Помни: не спеши, проверяй знаменатель!</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№4 из учебника)</h3>
+            <p>Найдите допустимые значения переменной <i>a</i> для дроби:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">5</span><span class="den">a(a - 9)</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Вспоминаем главное правило. Дробь имеет смысл, только если знаменатель не равен нулю.<br>
+                    Значит, <i>a(a - 9) ≠ 0</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Произведение равно нулю только тогда, когда хотя бы один из множителей равен нулю. Нам нужно обратное — оба множителя должны быть НЕ равны нулю.<br>
+                    <i>a ≠ 0</i> &nbsp; и &nbsp; <i>a - 9 ≠ 0</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Решаем второе неравенство:<br>
+                    <i>a ≠ 9</i>.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> Все числа, кроме 0 и 9. (Можно записать: <i>a ≠ 0, a ≠ 9</i>).<br>
+                    <b>Проверка:</b> Если подставить <i>a = 0</i>, знаменатель станет 0 — ошибка! Если <i>a = 9</i>, знаменатель тоже 0 — ошибка! Если <i>a = 1</i>, знаменатель равен -8 — всё работает! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (№6 из учебника)</h3>
+            <p>При каком значении <i>x</i> значение дроби равно нулю?</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">(x - 2)² - 25</span><span class="den">2x + 6</span></span> = 0
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> По второму правилу, дробь равна нулю, когда числитель равен нулю, а знаменатель НЕ равен нулю.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Приравниваем числитель к нулю:<br>
+                    <i>(x - 2)² - 25 = 0</i><br>
+                    <i>(x - 2)² = 25</i><br>
+                    <i>x - 2 = 5</i> &nbsp; или &nbsp; <i>x - 2 = -5</i><br>
+                    <i>x = 7</i> &nbsp; или &nbsp; <i>x = -3</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> <u>Самый важный шаг!</u> Проверяем знаменатель для найденных корней. Он не должен быть равен нулю.<br>
+                    <i>2x + 6 ≠ 0</i><br>
+                    <i>2x ≠ -6</i><br>
+                    <i>x ≠ -3</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Смотрим на наши корни: <i>x = 7</i> и <i>x = -3</i>. Корень <i>x = -3</i> запрещён знаменателем! Выбрасываем его.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <i>x = 7</i>.<br>
+                    <b>Проверка:</b> Подставим <i>x = 7</i>: числитель = <i>(7-2)² - 25 = 25 - 25 = 0</i>. Знаменатель = <i>2(7) + 6 = 20</i>. Дробь <i>0 / 20 = 0</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№18а из учебника)</h3>
+            <p>Докажите, что при любом значении переменной значение дроби положительно:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">3</span><span class="den">x² + 1</span></span> &gt; 0
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Чтобы дробь была положительной (больше нуля), нужно, чтобы её числитель и знаменатель имели <b>одинаковые знаки</b> (оба плюса или оба минуса).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Смотрим на числитель. Там стоит <i>3</i>. Это положительное число (<i>3 &gt; 0</i>). Значит, и знаменатель тоже обязан быть положительным.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Анализируем знаменатель: <i>x² + 1</i>.<br>
+                    Мы знаем из прошлых классов, что квадрат любого числа всегда больше или равен нулю: <i>x² ≥ 0</i>.<br>
+                    Если к <i>x²</i> прибавить единицу, то результат всегда будет строго больше нуля: <i>x² + 1 ≥ 1 &gt; 0</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Делаем вывод. Числитель положительный, знаменатель положительный. Делим плюс на плюс — получаем плюс!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Доказательство завершено.</b> Так как <i>3 &gt; 0</i> и <i>x² + 1 &gt; 0</i> для любого <i>x</i>, то и вся дробь всегда положительна. ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для инженера умного дома</h3>
+        <p>Ты проектируешь микросхему для датчика освещённости. Коэффициент усиления сигнала вычисляется по формуле:</p>
+        <div class="formula">
+            K = <span class="fraction"><span class="num">U</span><span class="den">R² - 4R</span></span>
+        </div>
+        <p>Где <i>U</i> — напряжение, а <i>R</i> — сопротивление в омах. Если знаменатель обратится в ноль, микросхема сгорит! Найди «аварийные» значения сопротивления <i>R</i>, при которых систему включать нельзя.</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Составляем уравнение для «аварийного» режима (знаменатель равен нулю):<br>
+                <i>R² - 4R = 0</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Выносим общий множитель <i>R</i> за скобки:<br>
+                <i>R(R - 4) = 0</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Произведение равно нулю, когда первый множитель равен нулю ИЛИ второй равен нулю:<br>
+                <i>R = 0</i> &nbsp; или &nbsp; <i>R - 4 = 0</i> (отсюда <i>R = 4</i>).
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Систему нельзя включать при сопротивлении <i>R = 0</i> и <i>R = 4</i> Ома. Отлично, ты спас оборудование от поломки! 🛡️
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Рациональные выражения</b> делятся на целые и дробные.</li>
+            <li><b>Рациональная дробь</b> — это дробь, где в числителе и знаменателе многочлены.</li>
+            <li>🚫 <b>Знаменатель никогда не может быть равен нулю!</b> Это главное ограничение.</li>
+            <li><b>Допустимые значения</b> — это все значения переменной, кроме тех, что обращают знаменатель в ноль.</li>
+            <li>Дробь равна нулю только в одном случае: <b>Числитель = 0, НО Знаменатель ≠ 0</b>.</li>
+            <li>💡 <b>Лайфхак:</b> Всегда решай знаменатель отдельно и выписывай «запрещённые» значения на полях, прежде чем сокращать или приравнивать к нулю!</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Забыть проверить знаменатель</i> при решении уравнений вида «дробь = 0». Ученики находят корни числителя и забывают исключить те, что обнуляют знаменатель (как в задаче №6).</li>
+            <li><i>Путаница в терминах:</i> «целое выражение» vs «рациональное». Напомните, что рациональное — это «зонтик» для обоих типов.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Используйте алгоритм-памятку: 1) Приравнять знаменатель к нулю. 2) Найти корни. 3) Вычеркнуть их из ответов.</li>
+            <li>Разрешите пользоваться цветными маркерами: знаменатель всегда обводится красным кругом.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Попросите их составить дробь, которая <i>никогда</i> не имеет смысла (например, <span class="fraction"><span class="num">1</span><span class="den">x² + 5</span></span> — нет, она всегда имеет смысл. А вот <span class="fraction"><span class="num">1</span><span class="den">x² + 1</span></span>... стоп, она тоже имеет. Пусть составят дробь, которая <i>всегда</i> положительна, как в задаче №18, или всегда отрицательна).</li>
+        </ul>
+    </div>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §1)<br>
+        Создано с ❤️ для современных уроков
+    </footer>
+
+</div>
+
+</body>
+</html>

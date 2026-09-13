@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сложение и вычитание дробей с разными знаменателями — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        header p { font-size: 1rem; opacity: 0.9; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .fraction .num {
+            border-bottom: 2px solid var(--text);
+            padding: 0 6px 2px;
+        }
+        .fraction .den {
+            padding: 2px 6px 0;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1.1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>🔄 Сложение и вычитание дробей с разными знаменателями</h1>
+        <p>Алгебра, 8 класс | Глава 1, §4</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Яблоки и апельсины</h3>
+        <p>Представь, что у тебя есть 3 яблока и 2 апельсина. Ты не можешь просто сказать «у меня 5 фруктов», потому что это разные вещи! Сначала нужно привести их к одному понятию — «фрукты». В алгебре то же самое: чтобы сложить дроби с разными знаменателями, сначала нужно привести их к <b>общему знаменателю</b>. Это как сказать «и яблоки, и апельсины — это фрукты»! 🍎🍊</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Общий знаменатель</b></td>
+                <td>Один знаменатель для всех дробей, к которому мы приводим каждую дробь.</td>
+            </tr>
+            <tr>
+                <td><b>Дополнительный множитель</b></td>
+                <td>То, на что умножаем числитель и знаменатель дроби, чтобы получить общий знаменатель.</td>
+            </tr>
+            <tr>
+                <td><b>НОК (наименьшее общее кратное)</b></td>
+                <td>Самое маленькое число, которое делится на все знаменатели без остатка.</td>
+            </tr>
+            <tr>
+                <td><b>Приведение к общему знаменателю</b></td>
+                <td>Процесс: находим общий знаменатель → находим дополнительные множители → умножаем числители и знаменатели.</td>
+            </tr>
+            <tr>
+                <td><b>Разложение на множители</b></td>
+                <td>Представление многочлена в виде произведения (вынос общего множителя, формулы сокращенного умножения, группировка).</td>
+            </tr>
+            <tr>
+                <td><b>Целое выражение как дробь</b></td>
+                <td>Любое число или выражение можно записать как дробь со знаменателем 1 (например, <i>a = a/1</i>).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Алгоритм сложения/вычитания дробей с разными знаменателями</b><br>
+            1. Разложить знаменатели на множители (если нужно).<br>
+            2. Найти общий знаменатель (НОК коэффициентов × все переменные с наибольшими показателями).<br>
+            3. Найти дополнительные множители для каждой дроби.<br>
+            4. Умножить числители на дополнительные множители.<br>
+            5. Сложить/вычесть полученные числители.<br>
+            6. Записать результат с общим знаменателем.<br>
+            7. Сократить дробь (если возможно).
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Алгоритм приведения к общему знаменателю -->
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Алгоритм: от разных знаменателей к одному</text>
+                
+                <!-- Step 1 -->
+                <rect x="20" y="40" width="100" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="70" y="60" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">Разные</text>
+                <text x="70" y="75" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">знаменатели</text>
+                
+                <!-- Arrow -->
+                <path d="M 120 65 L 140 65" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+                
+                <!-- Step 2 -->
+                <rect x="150" y="40" width="100" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="200" y="60" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">Найти общий</text>
+                <text x="200" y="75" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">знаменатель</text>
+                
+                <!-- Arrow -->
+                <path d="M 250 65 L 270 65" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                
+                <!-- Step 3 -->
+                <rect x="280" y="40" width="100" height="50" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="330" y="60" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">Домножить</text>
+                <text x="330" y="75" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">числители</text>
+                
+                <!-- Result -->
+                <rect x="100" y="120" width="200" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="200" y="140" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">Сложить/вычесть</text>
+                <text x="200" y="155" font-family="sans-serif" font-size="12" fill="#1e293b" text-anchor="middle">числители, знаменатель общий</text>
+                
+                <path d="M 200 90 L 200 120" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Как найти общий знаменатель?</b><br>
+            Общий знаменатель = НОК коэффициентов × все переменные с <b>наибольшими</b> показателями степени.
+        </div>
+
+        <div class="formula">
+            Пример: для дробей <span class="fraction"><span class="num">x</span><span class="den">4ab</span></span> и <span class="fraction"><span class="num">5</span><span class="den">6ab²</span></span><br>
+            НОК(4, 6) = 12<br>
+            Переменные: a (макс. степень 1), b (макс. степень 2)<br>
+            Общий знаменатель: <b>12ab²</b>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Целое выражение минус дробь</b><br>
+            Если нужно вычесть дробь из целого выражения (например, <i>a - </i><span class="fraction"><span class="num">3</span><span class="den">a+1</span></span>), представь целое выражение как дробь со знаменателем 1: <i>a = </i><span class="fraction"><span class="num">a</span><span class="den">1</span></span>.
+        </div>
+
+        <div class="formula">
+            a - <span class="fraction"><span class="num">3</span><span class="den">a + 1</span></span> = <span class="fraction"><span class="num">a</span><span class="den">1</span></span> - <span class="fraction"><span class="num">3</span><span class="den">a + 1</span></span> = <span class="fraction"><span class="num">a(a + 1) - 3</span><span class="den">a + 1</span></span> = <span class="fraction"><span class="num">a² + a - 3</span><span class="den">a + 1</span></span>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника, строго следуя алгоритму.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (по мотивам Примера 1 из учебника)</h3>
+            <p>Сложите дроби:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">x</span><span class="den">4ab</span></span> + <span class="fraction"><span class="num">5</span><span class="den">6ab²</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Знаменатели разные: <i>4ab</i> и <i>6ab²</i>. Нужно найти общий знаменатель.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Находим НОК коэффициентов: НОК(4, 6) = 12.<br>
+                    Переменные: <i>a</i> (макс. степень 1), <i>b</i> (макс. степень 2).<br>
+                    Общий знаменатель: <i>12ab²</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Находим дополнительные множители:<br>
+                    Для первой дроби: <i>12ab² : 4ab = 3b</i>.<br>
+                    Для второй дроби: <i>12ab² : 6ab² = 2a</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Умножаем числители на дополнительные множители:<br>
+                    Первая дробь: <i>x · 3b = 3bx</i>.<br>
+                    Вторая дробь: <i>5 · 2a = 10a</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Складываем числители, знаменатель общий:<br>
+                    <span class="fraction"><span class="num">3bx + 10a</span><span class="den">12ab²</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 6:</b> Проверяем, можно ли сократить. Числитель <i>3bx + 10a</i> на множители не раскладывается, общего с знаменателем нет.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">3bx + 10a</span><span class="den">12ab²</span></span>.<br>
+                    <b>Проверка:</b> Пусть <i>a=1, b=1, x=2</i>. Исходная: <i>2/4 + 5/6 = 1/2 + 5/6 = 3/6 + 5/6 = 8/6 = 4/3</i>. Ответ: <i>(6 + 10)/12 = 16/12 = 4/3</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (по образцу Примера 2 из учебника)</h3>
+            <p>Вычтите дроби, предварительно разложив знаменатели на множители:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">a + 3</span><span class="den">a² - ab</span></span> - <span class="fraction"><span class="num">b - 3</span><span class="den">ab + b²</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Раскладываем знаменатели на множители:<br>
+                    <i>a² - ab = a(a - b)</i><br>
+                    <i>ab + b² = b(a + b)</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Находим общий знаменатель. Коэффициенты: 1. Переменные и скобки: <i>a</i>, <i>b</i>, <i>(a - b)</i>, <i>(a + b)</i>.<br>
+                    Общий знаменатель: <i>ab(a - b)(a + b)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Находим дополнительные множители:<br>
+                    Для первой дроби: <i>ab(a - b)(a + b) : a(a - b) = b(a + b)</i>.<br>
+                    Для второй дроби: <i>ab(a - b)(a + b) : b(a + b) = a(a - b)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Умножаем числители на дополнительные множители:<br>
+                    Первая дробь: <i>(a + 3) · b(a + b) = b(a + 3)(a + b)</i>.<br>
+                    Вторая дробь: <i>(b - 3) · a(a - b) = a(b - 3)(a - b)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Вычитаем числители (не забываем про скобки!):<br>
+                    <i>b(a + 3)(a + b) - a(b - 3)(a - b)</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 6:</b> Раскрываем скобки:<br>
+                    Первая часть: <i>b(a² + ab + 3a + 3b) = a²b + ab² + 3ab + 3b²</i>.<br>
+                    Вторая часть: <i>a(ab - b² - 3a + 3b) = a²b - ab² - 3a² + 3ab</i>.<br>
+                    Разность: <i>(a²b + ab² + 3ab + 3b²) - (a²b - ab² - 3a² + 3ab) = a²b + ab² + 3ab + 3b² - a²b + ab² + 3a² - 3ab = 2ab² + 3b² + 3a²</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 7:</b> Записываем результат:<br>
+                    <span class="fraction"><span class="num">3a² + 2ab² + 3b²</span><span class="den">ab(a - b)(a + b)</span></span>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">3a² + 2ab² + 3b²</span><span class="den">ab(a - b)(a + b)</span></span>.<br>
+                    <b>Проверка:</b> Пусть <i>a=2, b=1</i>. Исходная: <i>5/2 - (-2)/3 = 5/2 + 2/3 = 15/6 + 4/6 = 19/6</i>. Ответ: <i>(12 + 4 + 3)/(2·1·1·3) = 19/6</i>. Отлично, ты справился! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№89а из учебника)</h3>
+            <p>Докажите, что при всех допустимых значениях <i>y</i> значение выражения не зависит от <i>y</i>:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">5y + 3</span><span class="den">2y + 2</span></span> - <span class="fraction"><span class="num">7y + 4</span><span class="den">3y + 3</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Раскладываем знаменатели на множители:<br>
+                    <i>2y + 2 = 2(y + 1)</i><br>
+                    <i>3y + 3 = 3(y + 1)</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Находим общий знаменатель. НОК(2, 3) = 6. Переменные: <i>(y + 1)</i>.<br>
+                    Общий знаменатель: <i>6(y + 1)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Находим дополнительные множители:<br>
+                    Для первой дроби: <i>6(y + 1) : 2(y + 1) = 3</i>.<br>
+                    Для второй дроби: <i>6(y + 1) : 3(y + 1) = 2</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Умножаем числители на дополнительные множители:<br>
+                    Первая дробь: <i>(5y + 3) · 3 = 15y + 9</i>.<br>
+                    Вторая дробь: <i>(7y + 4) · 2 = 14y + 8</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> <u>Внимание: вычитаем!</u> Вычитаем числители (не забываем про скобки!):<br>
+                    <i>(15y + 9) - (14y + 8) = 15y + 9 - 14y - 8 = y + 1</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 6:</b> Записываем результат:<br>
+                    <span class="fraction"><span class="num">y + 1</span><span class="den">6(y + 1)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 7:</b> Сокращаем на <i>(y + 1)</i> (при условии <i>y ≠ -1</i>):<br>
+                    <span class="fraction"><span class="num">y + 1</span><span class="den">6(y + 1)</span></span> = <span class="fraction"><span class="num">1</span><span class="den">6</span></span>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">1</span><span class="den">6</span></span>.<br>
+                    <b>Вывод:</b> Переменная <i>y</i> исчезла! Значение выражения равно <b>1/6</b> при всех допустимых <i>y</i> (кроме <i>y = -1</i>). Доказано! ✅<br>
+                    <b>Проверка:</b> Пусть <i>y = 0</i>: <i>3/2 - 4/3 = 9/6 - 8/6 = 1/6</i>. Пусть <i>y = 1</i>: <i>8/4 - 11/6 = 2 - 11/6 = 12/6 - 11/6 = 1/6</i>. Всё сходится! 🎉
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для инженера-строителя</h3>
+        <p>Ты проектируешь мост. Два участка дороги имеют разную длину, но ты хочешь выразить их общую длину в виде одной дроби. Первый участок: <span class="fraction"><span class="num">3x</span><span class="den">x - 2</span></span> км, второй: <span class="fraction"><span class="num">5</span><span class="den">x + 2</span></span> км. Найди общую длину моста в виде одной дроби.</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Знаменатели разные: <i>x - 2</i> и <i>x + 2</i>. Они не раскладываются дальше.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Общий знаменатель: <i>(x - 2)(x + 2)</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Дополнительные множители:<br>
+                Для первой дроби: <i>(x - 2)(x + 2) : (x - 2) = x + 2</i>.<br>
+                Для второй дроби: <i>(x - 2)(x + 2) : (x + 2) = x - 2</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Умножаем числители:<br>
+                Первая дробь: <i>3x(x + 2) = 3x² + 6x</i>.<br>
+                Вторая дробь: <i>5(x - 2) = 5x - 10</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 5:</b> Складываем числители:<br>
+                <i>(3x² + 6x) + (5x - 10) = 3x² + 11x - 10</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 6:</b> Записываем результат:<br>
+                <span class="fraction"><span class="num">3x² + 11x - 10</span><span class="den">(x - 2)(x + 2)</span></span>
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Общая длина моста: <span class="fraction"><span class="num">3x² + 11x - 10</span><span class="den">(x - 2)(x + 2)</span></span> км. Отличная работа, инженер! 🌉
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Алгоритм:</b> 1) Разложить знаменатели. 2) Найти общий знаменатель. 3) Найти дополнительные множители. 4) Умножить числители. 5) Сложить/вычесть. 6) Сократить.</li>
+            <li><b>Общий знаменатель:</b> НОК коэффициентов × все переменные/скобки с наибольшими степенями.</li>
+            <li><b>Дополнительный множитель:</b> Общий знаменатель делим на старый знаменатель дроби.</li>
+            <li>⚠️ <b>Ловушка минуса:</b> При вычитании дробей обязательно бери весь числитель второй дроби в скобки!</li>
+            <li><b>Целое как дробь:</b> <i>a = a/1</i>. Это помогает привести целое выражение к общему знаменателю с дробью.</li>
+            <li>💡 <b>Лайфхак:</b> Если после всех действий <i>y</i> (или другая переменная) исчезла из ответа — значит, значение выражения не зависит от этой переменной!</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Неправильный общий знаменатель:</i> ученики часто забывают взять переменные с наибольшими степенями. Например, для <i>4ab</i> и <i>6ab²</i> пишут <i>12ab</i> вместо <i>12ab²</i>.</li>
+            <li><i>Потеря минуса при вычитании:</i> забывают менять знаки у всех слагаемых во втором числителе. Требуйте явно писать скобки!</li>
+            <li><i>Забытое сокращение:</i> после сложения/вычитания не проверяют, можно ли сократить дробь.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте алгоритм-памятку с пронумерованными шагами.</li>
+            <li>Разрешите использовать цветные маркеры: общий знаменатель — зелёным, дополнительные множители — синим.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача №89б из учебника (более сложная, с «зеркальными» знаменателями).</li>
+            <li>Попросите их придумать своё выражение, которое не зависит от переменной.</li>
+        </ul>
+    </div>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §4)<br>
+        Создано с ❤️ для современных уроков
+    </footer>
+
+</div>
+
+</body>
+</html>

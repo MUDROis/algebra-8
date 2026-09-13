@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгебра 8 класс — Интерактивный курс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+
+        .chapter {
+            background: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chapter-header:hover {
+            background: linear-gradient(135deg, #1d4ed8, #0284c7);
+        }
+
+        .chapter-header h2 {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .chapter-header .arrow {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .chapter.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .chapter-content {
+            display: none;
+            padding: 24px;
+        }
+
+        .chapter.active .chapter-content {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 32px;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .lesson-list {
+            list-style: none;
+        }
+
+        .lesson-item {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .lesson-item:hover {
+            background: #f1f5f9;
+            transform: translateX(4px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .lesson-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .lesson-number {
+            font-weight: 600;
+            color: var(--primary);
+            margin-right: 12px;
+            min-width: 30px;
+        }
+
+        .lesson-title {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .extra-note {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .chapter-header h2 { font-size: 1.1rem; }
+            .lesson-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>📚 Алгебра 8 класс</h1>
+        <p>Интерактивный курс с практическими заданиями и проектами</p>
+    </header>
+
+    <!-- ГЛАВА I -->
+    <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+            <h2>ГЛАВА I. РАЦИОНАЛЬНЫЕ ДРОБИ</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="chapter-content">
+            
+            <div class="section">
+                <h3 class="section-title">§ 1. РАЦИОНАЛЬНЫЕ ДРОБИ И ИХ СВОЙСТВА</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">1.</span><span class="lesson-title">Рациональные выражения</span></span>
+                        <a href="1-racionalnye-vyrazheniya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">2.</span><span class="lesson-title">Основное свойство дроби. Сокращение дробей</span></span>
+                        <a href="2-osnovnoe-svojstvo-drobi.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 2. СУММА И РАЗНОСТЬ ДРОБЕЙ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">3.</span><span class="lesson-title">Сложение и вычитание дробей с одинаковыми знаменателями</span></span>
+                        <a href="3-slozhenie-vychitanie-odinakovye.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">4.</span><span class="lesson-title">Сложение и вычитание дробей с разными знаменателями</span></span>
+                        <a href="4-slozhenie-vychitanie-raznye.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 3. ПРОИЗВЕДЕНИЕ И ЧАСТНОЕ ДРОБЕЙ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">5.</span><span class="lesson-title">Умножение дробей. Возведение дроби в степень</span></span>
+                        <a href="5-umnozhenie-drobei.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">6.</span><span class="lesson-title">Деление дробей</span></span>
+                        <a href="6-delenie-drobei.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">7.</span><span class="lesson-title">Преобразование рациональных выражений</span></span>
+                        <a href="7-preobrazovanie-vyrazhenii.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">8.</span><span class="lesson-title">Функция y = k/x и её график</span></span>
+                        <a href="8-funkciya-k-x.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+                <div class="extra-note">
+                    <strong>Для тех, кто хочет знать больше:</strong><br>
+                    <a href="9-predstavlenie-drobi.html" style="color: #92400e; text-decoration: underline;">9. Представление дроби в виде суммы дробей</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ГЛАВА II -->
+    <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+            <h2>ГЛАВА II. КВАДРАТНЫЕ КОРНИ</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="chapter-content">
+            
+            <div class="section">
+                <h3 class="section-title">§ 4. АРИФМЕТИЧЕСКИЙ КВАДРАТНЫЙ КОРЕНЬ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">10.</span><span class="lesson-title">Действительные числа</span></span>
+                        <a href="10-deistvitelnye-chisla.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">11.</span><span class="lesson-title">Квадратные корни. Арифметический квадратный корень</span></span>
+                        <a href="11-kvadratnye-korni.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">12.</span><span class="lesson-title">Уравнение x² = a</span></span>
+                        <a href="12-uravnenie-x-kvadrat.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">13.</span><span class="lesson-title">Нахождение приближённых значений квадратного корня</span></span>
+                        <a href="13-priblizhennye-znacheniya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">14.</span><span class="lesson-title">Функция y = √x и её график</span></span>
+                        <a href="14-funkciya-koren.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 5. СВОЙСТВА АРИФМЕТИЧЕСКОГО КВАДРАТНОГО КОРНЯ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">15.</span><span class="lesson-title">Квадратный корень из произведения и дроби</span></span>
+                        <a href="15-koren-iz-proizvedeniya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">16.</span><span class="lesson-title">Квадратный корень из степени</span></span>
+                        <a href="16-koren-iz-stepeni.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 6. ПРИМЕНЕНИЕ СВОЙСТВ АРИФМЕТИЧЕСКОГО КВАДРАТНОГО КОРНЯ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">17.</span><span class="lesson-title">Вынесение множителя из-под знака корня. Внесение множителя под знак корня</span></span>
+                        <a href="17-vynesenie-mnozhitelya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">18.</span><span class="lesson-title">Преобразование выражений, содержащих квадратные корни</span></span>
+                        <a href="18-preobrazovanie-s-kornyami.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+                <div class="extra-note">
+                    <strong>Для тех, кто хочет знать больше:</strong><br>
+                    <a href="19-dvoinye-radikaly.html" style="color: #92400e; text-decoration: underline;">19. Преобразование двойных радикалов</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ГЛАВА III -->
+    <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+            <h2>ГЛАВА III. УРАВНЕНИЯ И СИСТЕМЫ УРАВНЕНИЙ</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="chapter-content">
+            
+            <div class="section">
+                <h3 class="section-title">§ 7. КВАДРАТНОЕ УРАВНЕНИЕ И ЕГО КОРНИ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">20.</span><span class="lesson-title">Неполные квадратные уравнения</span></span>
+                        <a href="20-nepolnye-uravneniya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">21.</span><span class="lesson-title">Формула корней квадратного уравнения</span></span>
+                        <a href="21-formula-kornei.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">22.</span><span class="lesson-title">Решение задач</span></span>
+                        <a href="22-reshenie-zadach-kvadrat.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">23.</span><span class="lesson-title">Теорема Виета</span></span>
+                        <a href="23-teorema-vieta.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 8. КВАДРАТНЫЙ ТРЁХЧЛЕН</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">24.</span><span class="lesson-title">Квадратный трёхчлен и его корни</span></span>
+                        <a href="24-kvadratnyi-trekhchlen.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">25.</span><span class="lesson-title">Разложение квадратного трёхчлена на множители</span></span>
+                        <a href="25-razlozhenie-na-mnozhiteli.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 9. ДРОБНЫЕ РАЦИОНАЛЬНЫЕ УРАВНЕНИЯ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">26.</span><span class="lesson-title">Решение дробных рациональных уравнений</span></span>
+                        <a href="26-drobnye-uravneniya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">27.</span><span class="lesson-title">Решение задач</span></span>
+                        <a href="27-reshenie-zadach-drobnye.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 10. УРАВНЕНИЯ С ДВУМЯ ПЕРЕМЕННЫМИ И ИХ СИСТЕМЫ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">28.</span><span class="lesson-title">Уравнение с двумя переменными и его график</span></span>
+                        <a href="28-uravnenie-dvuh-peremennyh.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">29.</span><span class="lesson-title">Исследование систем двух линейных уравнений с двумя переменными</span></span>
+                        <a href="29-issledovanie-sistem.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">30.</span><span class="lesson-title">Графический способ решения систем уравнений</span></span>
+                        <a href="30-graficheskii-sposob.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">31.</span><span class="lesson-title">Алгебраический способ решения систем уравнений</span></span>
+                        <a href="31-algebraicheskii-sposob.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">32.</span><span class="lesson-title">Решение задач</span></span>
+                        <a href="32-reshenie-zadach-sistemy.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+                <div class="extra-note">
+                    <strong>Для тех, кто хочет знать больше:</strong><br>
+                    <a href="33-uravneniya-s-parametrom.html" style="color: #92400e; text-decoration: underline;">33. Уравнения с параметром</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ГЛАВА IV -->
+    <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+            <h2>ГЛАВА IV. НЕРАВЕНСТВА</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="chapter-content">
+            
+            <div class="section">
+                <h3 class="section-title">§ 11. ЧИСЛОВЫЕ НЕРАВЕНСТВА И ИХ СВОЙСТВА</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">34.</span><span class="lesson-title">Числовые неравенства</span></span>
+                        <a href="34-chislovye-neravenstva.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">35.</span><span class="lesson-title">Свойства числовых неравенств</span></span>
+                        <a href="35-svoistva-neravenstv.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">36.</span><span class="lesson-title">Сложение и умножение числовых неравенств</span></span>
+                        <a href="36-slozhenie-umnozhenie.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 12. НЕРАВЕНСТВА С ОДНОЙ ПЕРЕМЕННОЙ И ИХ СИСТЕМЫ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">37.</span><span class="lesson-title">Пересечение и объединение множеств</span></span>
+                        <a href="37-peresechenie-mnozhestv.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">38.</span><span class="lesson-title">Числовые промежутки</span></span>
+                        <a href="38-chislovye-promezhutki.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">39.</span><span class="lesson-title">Решение неравенств с одной переменной</span></span>
+                        <a href="39-reshenie-neravenstv.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">40.</span><span class="lesson-title">Решение систем неравенств с одной переменной</span></span>
+                        <a href="40-sistemy-neravenstv.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+                <div class="extra-note">
+                    <strong>Для тех, кто хочет знать больше:</strong><br>
+                    <a href="41-dokazatelstvo-neravenstv.html" style="color: #92400e; text-decoration: underline;">41. Доказательство неравенств</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ГЛАВА V -->
+    <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+            <h2>ГЛАВА V. ФУНКЦИИ</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="chapter-content">
+            
+            <div class="section">
+                <h3 class="section-title">§ 13. ФУНКЦИЯ И ЕЁ СВОЙСТВА</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">42.</span><span class="lesson-title">Функция. Область определения и множество значений функции</span></span>
+                        <a href="42-funkciya-opredelenie.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">43.</span><span class="lesson-title">Свойства функции</span></span>
+                        <a href="43-svoistva-funkcii.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 14. СВОЙСТВА НЕКОТОРЫХ ВИДОВ ФУНКЦИЙ</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">44.</span><span class="lesson-title">Свойства линейной функции</span></span>
+                        <a href="44-lineinaya-funkciya.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">45.</span><span class="lesson-title">Свойства функций y = k/x и y = √x</span></span>
+                        <a href="45-svoistva-funkcii-k-x.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+                <div class="extra-note">
+                    <strong>Для тех, кто хочет знать больше:</strong><br>
+                    <a href="46-celaya-drobnaya-chasti.html" style="color: #92400e; text-decoration: underline;">46. Целая и дробная части числа</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ГЛАВА VI -->
+    <div class="chapter">
+        <div class="chapter-header" onclick="toggleChapter(this)">
+            <h2>ГЛАВА VI. СТЕПЕНЬ С ЦЕЛЫМ ПОКАЗАТЕЛЕМ И ЕЁ СВОЙСТВА</h2>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="chapter-content">
+            
+            <div class="section">
+                <h3 class="section-title">§ 15. СТЕПЕНЬ С ЦЕЛЫМ ПОКАЗАТЕЛЕМ И ЕЁ СВОЙСТВА</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">47.</span><span class="lesson-title">Определение степени с целым отрицательным показателем</span></span>
+                        <a href="47-stepen-otricatelnyi.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">48.</span><span class="lesson-title">Свойства степени с целым показателем</span></span>
+                        <a href="48-svoistva-stepeni.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">§ 16. СТАНДАРТНЫЙ ВИД ЧИСЛА</h3>
+                <ul class="lesson-list">
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">49.</span><span class="lesson-title">Понятие стандартного вида числа</span></span>
+                        <a href="49-standartnyi-vid.html" class="btn">Перейти</a>
+                    </li>
+                    <li class="lesson-item">
+                        <span><span class="lesson-number">50.</span><span class="lesson-title">Решение задач с большими и малыми числами</span></span>
+                        <a href="50-zadachi-bolshie-malye.html" class="btn">Перейти</a>
+                    </li>
+                </ul>
+                <div class="extra-note">
+                    <strong>Для тех, кто хочет знать больше:</strong><br>
+                    <a href="51-funkcii-x-minus-stepen.html" style="color: #92400e; text-decoration: underline;">51. Функции y = x⁻¹ и y = x⁻² и их свойства</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p> Интерактивный курс алгебры для 8 класса</p>
+        <p>Создано с ❤️ для современных учеников</p>
+    </footer>
+
+</div>
+
+<script>
+    function toggleChapter(element) {
+        const chapter = element.parentElement;
+        const isActive = chapter.classList.contains('active');
+        
+        // Закрыть все главы
+        document.querySelectorAll('.chapter').forEach(ch => {
+            ch.classList.remove('active');
+        });
+        
+        // Открыть текущую, если она была закрыта
+        if (!isActive) {
+            chapter.classList.add('active');
+        }
+    }
+
+    // Открыть первую главу по умолчанию
+    document.querySelector('.chapter').classList.add('active');
+</script>
+
+</body>
+</html>

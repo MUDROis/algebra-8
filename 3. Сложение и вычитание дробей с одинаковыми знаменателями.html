@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сложение и вычитание дробей с одинаковыми знаменателями — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        header p { font-size: 1rem; opacity: 0.9; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .fraction .num {
+            border-bottom: 2px solid var(--text);
+            padding: 0 6px 2px;
+        }
+        .fraction .den {
+            padding: 2px 6px 0;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1.1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>➕➖ Сложение и вычитание дробей с одинаковыми знаменателями</h1>
+        <p>Алгебра, 8 класс | Глава 1, §3</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Конструктор Лего</h3>
+        <p>Представь, что ты собираешь замок из Лего. Ты можешь легко соединить две красные детали (2 красных + 3 красных = 5 красных). Но ты не можешь просто так сложить красную деталь и синюю! В алгебре «одинаковый знаменатель» — это как «одинаковая форма деталей». Если знаменатели (формы) совпадают, мы смело складываем или вычитаем числители (содержимое). Но есть один секрет: после сборки замок часто нужно «уменьшить» (сократить дробь)! 🧱</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Общий знаменатель</b></td>
+                <td>Одинаковая нижняя часть дробей. Показывает, на какие «равные части» делится целое.</td>
+            </tr>
+            <tr>
+                <td><b>Сложение дробей</b></td>
+                <td>Действие, при котором числители складываются, а знаменатель остается прежним.</td>
+            </tr>
+            <tr>
+                <td><b>Вычитание дробей</b></td>
+                <td>Действие, при котором из числителя первой дроби вычитается числитель второй.</td>
+            </tr>
+            <tr>
+                <td><b>«Ловушка минуса»</b></td>
+                <td>Ошибка при вычитании: забывают поменять знаки у всех слагаемых в скобках перед числителем второй дроби.</td>
+            </tr>
+            <tr>
+                <td><b>Противоположные знаменатели</b></td>
+                <td>Знаменатели, отличающиеся только знаком (например, <i>a - b</i> и <i>b - a</i>).</td>
+            </tr>
+            <tr>
+                <td><b>Тождественное преобразование</b></td>
+                <td>Замена одного выражения другим, равным ему по значению (упрощение).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Сложение и вычитание</b><br>
+            Чтобы сложить или вычесть дроби с одинаковыми знаменателями, нужно выполнить действие с числителями, а знаменатель оставить тот же.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">c</span></span> + <span class="fraction"><span class="num">b</span><span class="den">c</span></span> = <span class="fraction"><span class="num">a + b</span><span class="den">c</span></span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fraction"><span class="num">a</span><span class="den">c</span></span> - <span class="fraction"><span class="num">b</span><span class="den">c</span></span> = <span class="fraction"><span class="num">a - b</span><span class="den">c</span></span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Ловушка минуса -->
+            <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">⚠️ Осторожно: «Ловушка минуса» при вычитании!</text>
+                
+                <!-- Wrong way -->
+                <rect x="20" y="40" width="160" height="120" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,5"/>
+                <text x="100" y="65" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold" text-anchor="middle">❌ ОШИБКА</text>
+                <text x="100" y="95" font-family="sans-serif" font-size="16" fill="#1e293b" text-anchor="middle">A - (B + C)</text>
+                <text x="100" y="125" font-family="sans-serif" font-size="14" fill="#dc2626" text-anchor="middle">= A - B + C</text>
+                <text x="100" y="145" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">(Забыли поменять знак у C!)</text>
+
+                <!-- Right way -->
+                <rect x="220" y="40" width="160" height="120" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="300" y="65" font-family="sans-serif" font-size="14" fill="#16a34a" font-weight="bold" text-anchor="middle">✅ ВЕРНО</text>
+                <text x="300" y="95" font-family="sans-serif" font-size="16" fill="#1e293b" text-anchor="middle">A - (B + C)</text>
+                <text x="300" y="125" font-family="sans-serif" font-size="14" fill="#16a34a" font-weight="bold" text-anchor="middle">= A - B - C</text>
+                <text x="300" y="145" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">(Минус меняет ВСЕ знаки!)</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Противоположные знаменатели</b><br>
+            Если знаменатели дробей отличаются только знаком (например, <i>x - y</i> и <i>y - x</i>), нужно вынести <i>-1</i> из одного из них, чтобы знаменатели стали одинаковыми!
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">x - y</span></span> + <span class="fraction"><span class="num">b</span><span class="den">y - x</span></span> = <span class="fraction"><span class="num">a</span><span class="den">x - y</span></span> - <span class="fraction"><span class="num">b</span><span class="den">x - y</span></span> = <span class="fraction"><span class="num">a - b</span><span class="den">x - y</span></span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Зеркальные знаменатели -->
+            <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Знаменатели-«зеркала» связаны через -1</text>
+                
+                <rect x="40" y="50" width="100" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="90" y="85" font-family="Courier New, monospace" font-size="20" fill="#2563eb" font-weight="bold" text-anchor="middle">a - b</text>
+                
+                <text x="200" y="85" font-family="sans-serif" font-size="24" fill="#dc2626" font-weight="bold" text-anchor="middle">= -1 ·</text>
+                
+                <rect x="260" y="50" width="100" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="310" y="85" font-family="Courier New, monospace" font-size="20" fill="#dc2626" font-weight="bold" text-anchor="middle">b - a</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Золотой финал</b><br>
+            После сложения/вычитания числителей <b>всегда</b> проверяй: можно ли получившуюся дробь сократить? Для этого раскладывай числитель и знаменатель на множители!
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи, опираясь на примеры из учебника. Помни про «ловушку минуса» и сокращение в конце!</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (по мотивам № 55, 56 из учебника)</h3>
+            <p>Выполните действие:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">4a + 5b</span><span class="den">7m</span></span> + <span class="fraction"><span class="num">3a - 2b</span><span class="den">7m</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Знаменатели одинаковые (<i>7m</i>). Применяем правило сложения: складываем числители, знаменатель оставляем прежним.<br>
+                    <i>Не забываем брать каждый числитель в скобки, чтобы не потерять знаки!</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Раскрываем скобки в числителе:<br>
+                    <span class="fraction"><span class="num">(4a + 5b) + (3a - 2b)</span><span class="den">7m</span></span> = <span class="fraction"><span class="num">4a + 5b + 3a - 2b</span><span class="den">7m</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Приводим подобные слагаемые в числителе:<br>
+                    <i>(4a + 3a) + (5b - 2b) = 7a + 3b</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Проверяем, можно ли сократить дробь. Числитель <i>7a + 3b</i> на множители не раскладывается, общего с <i>7m</i> нет.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">7a + 3b</span><span class="den">7m</span></span>.<br>
+                    <b>Проверка:</b> Пусть <i>a=1, b=1, m=1</i>. Исходная: <i>9/7 + 1/7 = 10/7</i>. Ответ: <i>10/7</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (по образцу Примера 2 из учебника)</h3>
+            <p>Вычтите дроби и упростите результат:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">x² + 16</span><span class="den">x - 4</span></span> - <span class="fraction"><span class="num">8x</span><span class="den">x - 4</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Знаменатели одинаковые. Вычитаем числители. <u>Внимание:</u> перед вторым числителем стоит минус, поэтому его нужно взять в скобки!
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Записываем:<br>
+                    <span class="fraction"><span class="num">(x² + 16) - (8x)</span><span class="den">x - 4</span></span> = <span class="fraction"><span class="num">x² - 8x + 16</span><span class="den">x - 4</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Смотрим на числитель. Это формула сокращенного умножения — квадрат разности:<br>
+                    <i>x² - 2·x·4 + 4² = (x - 4)²</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Подставляем разложение в дробь и сокращаем на общий множитель <i>(x - 4)</i>:<br>
+                    <span class="fraction"><span class="num">(x - 4)²</span><span class="den">x - 4</span></span> = <span class="fraction"><span class="num">(x - 4)(x - 4)</span><span class="den">x - 4</span></span> = x - 4
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <i>x - 4</i> (при <i>x ≠ 4</i>).<br>
+                    <b>Проверка:</b> Пусть <i>x = 5</i>. Исходная: <i>41/1 - 40/1 = 1</i>. Ответ: <i>5 - 4 = 1</i>. Отлично, ты справился! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (по мотивам Примеров 3 и 4 из учебника)</h3>
+            <p>Упростите выражение, содержащее «зеркальные» знаменатели:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">2a</span><span class="den">a - 3b</span></span> + <span class="fraction"><span class="num">a + 3b</span><span class="den">3b - a</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Смотрим на знаменатели: <i>(a - 3b)</i> и <i>(3b - a)</i>. Они противоположные! Чтобы привести их к общему знаменателю, вынесем <i>-1</i> из второго знаменателя.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Преобразуем вторую дробь. Минус, вынесенный из знаменателя, «всплывает» перед всей дробью:<br>
+                    <span class="fraction"><span class="num">a + 3b</span><span class="den">-(a - 3b)</span></span> = - <span class="fraction"><span class="num">a + 3b</span><span class="den">a - 3b</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Теперь знаменатели одинаковые. Выполняем вычитание числителей (не забывая про скобки!):<br>
+                    <span class="fraction"><span class="num">2a - (a + 3b)</span><span class="den">a - 3b</span></span> = <span class="fraction"><span class="num">2a - a - 3b</span><span class="den">a - 3b</span></span> = <span class="fraction"><span class="num">a - 3b</span><span class="den">a - 3b</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Сокращаем числитель и знаменатель на <i>(a - 3b)</i>.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 1.<br>
+                    <b>Вывод:</b> Если числитель и знаменатель после всех преобразований стали полностью одинаковыми, дробь равна единице! 🎉
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>💻 Задача для IT-оптимизатора</h3>
+        <p>Ты пишешь код для игрового движка. Два разных модуля рассчитывают нагрузку на процессор. Первый модуль выдает формулу <span class="fraction"><span class="num">3x²</span><span class="den">x - 2</span></span>, а второй — <span class="fraction"><span class="num">4x - 4</span><span class="den">x - 2</span></span>. Твой шеф просит объединить эти расчеты в одну формулу, чтобы процессор тратил меньше ресурсов (меньше делений!). Упрости итоговую формулу общей нагрузки.</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Складываем две дроби, так как знаменатели уже одинаковые (<i>x - 2</i>):<br>
+                Нагрузка = <span class="fraction"><span class="num">3x²</span><span class="den">x - 2</span></span> + <span class="fraction"><span class="num">4x - 4</span><span class="den">x - 2</span></span> = <span class="fraction"><span class="num">3x² + 4x - 4</span><span class="den">x - 2</span></span>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Чтобы упростить, раскладываем числитель на множители. Ищем корни квадратного трехчлена <i>3x² + 4x - 4 = 0</i>.<br>
+                Дискриминант: <i>D = 16 - 4·3·(-4) = 16 + 48 = 64</i>.<br>
+                Корни: <i>x₁ = (-4 + 8) / 6 = 2/3</i>, <i>x₂ = (-4 - 8) / 6 = -2</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Записываем разложение: <i>3x² + 4x - 4 = 3(x - 2/3)(x + 2) = (3x - 2)(x + 2)</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> К сожалению, общих множителей со знаменателем <i>(x - 2)</i> нет. Значит, дробь не сокращается. Но мы всё равно объединили два деления в одно!
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ для кода:</b> Итоговая нагрузка вычисляется по одной формуле: <span class="fraction"><span class="num">3x² + 4x - 4</span><span class="den">x - 2</span></span>. Процессор скажет тебе спасибо! 🚀
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Алгоритм:</b> 1) Сложить/вычесть числители. 2) Знаменатель оставить тот же. 3) Разложить на множители. 4) Сократить.</li>
+            <li>⚠️ <b>Ловушка минуса:</b> При вычитании дробей обязательно бери весь числитель второй дроби в скобки: <i>A - (B + C) = A - B - C</i>.</li>
+            <li><b>Зеркальные знаменатели:</b> <i>(a - b)</i> и <i>(b - a)</i> — это противоположные выражения. Выноси <i>-1</i>, чтобы сделать их одинаковыми.</li>
+            <li><b>Формулы сокращенного умножения:</b> Часто после сложения в числителе получается квадрат суммы/разности или разность квадратов. Держи их в голове!</li>
+            <li>💡 <b>Лайфхак:</b> Если после всех действий числитель и знаменатель стали одинаковыми (например, <i>5x - 2</i> и <i>5x - 2</i>), ответ — просто <b>1</b>.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Потеря знака при вычитании:</i> ученики пишут <i>(a+b) - (c+d) = a+b-c+d</i> (забывают поменять знак у <i>d</i>). Требуйте явно рисовать скобки вокруг числителя второй дроби на первых порах.</li>
+            <li><i>Забывчивость в финале:</i> ученики получают дробь вида <span class="fraction"><span class="num">x² - 9</span><span class="den">x - 3</span></span> и считают это окончательным ответом, не замечая, что её можно сократить до <i>x + 3</i>.</li>
+            <li><i>Страх перед «зеркалами»:</i> видя <i>(2x - 5)</i> и <i>(5 - 2x)</i>, ученики паникуют. Научите их простому правилу: «Если буквы и цифры те же, но знаки наоборот — просто ставь минус перед дробью».</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Разрешите использовать цветные ручки: числитель первой дроби обводить синим, второй — красным. При вычитании красный минус обводится в кружок.</li>
+            <li>Дайте шпаргалку с разложением на множители (вынос общего множителя, формулы сокращенного умножения, группировка).</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача № 65 из учебника (доказать, что значение выражения не зависит от <i>x</i>). Это отличный повод показать, что иногда после всех сокращений переменная вообще «исчезает», и ответом становится просто число!</li>
+        </ul>
+    </div>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §3)<br>
+        Создано с ❤️ для современных уроков
+    </footer>
+
+</div>
+
+</body>
+</html>

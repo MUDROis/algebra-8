@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основное свойство дроби. Сокращение дробей — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        header p { font-size: 1rem; opacity: 0.9; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .fraction .num {
+            border-bottom: 2px solid var(--text);
+            padding: 0 6px 2px;
+        }
+        .fraction .den {
+            padding: 2px 6px 0;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1.1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>⚖️ Основное свойство дроби. Сокращение дробей</h1>
+        <p>Алгебра, 8 класс | Глава 1, §2</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Дроби-близнецы</h3>
+        <p>Ты делил пиццу на 2 части и съел одну? Это <span class="fraction"><span class="num">1</span><span class="den">2</span></span>. А если бы пиццу разрезали на 4 части и ты съел две? Это <span class="fraction"><span class="num">2</span><span class="den">4</span></span>. В жизни это одно и то же количество! В алгебре 8 класса мы учимся находить таких «близнецов» среди букв и доказывать, что они равны, даже если выглядят по-разному. 🍕</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Основное свойство дроби</b></td>
+                <td>Правило: если числитель и знаменатель умножить на одно и то же число (или многочлен), дробь не изменится.</td>
+            </tr>
+            <tr>
+                <td><b>Тождество</b></td>
+                <td>Равенство, которое верно при <i>любых</i> допустимых значениях переменных.</td>
+            </tr>
+            <tr>
+                <td><b>Дополнительный множитель</b></td>
+                <td>То, на что мы умножаем «верх» и «низ» дроби, чтобы привести её к новому знаменателю.</td>
+            </tr>
+            <tr>
+                <td><b>Приведение к новому знаменателю</b></td>
+                <td>Преобразование дроби: меняем знаменатель, но «вес» дроби сохраняем.</td>
+            </tr>
+            <tr>
+                <td><b>Сокращение дроби</b></td>
+                <td>Деление числителя и знаменателя на их общий множитель (делаем дробь проще).</td>
+            </tr>
+            <tr>
+                <td><b>Правило смены знака</b></td>
+                <td>Лайфхак: минус можно «гулять» между числителем, знаменателем и всей дробью.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Основное свойство рациональной дроби</b><br>
+            Если числитель и знаменатель дроби умножить на один и тот же ненулевой многочлен, то получится равная ей дробь.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> = <span class="fraction"><span class="num">a · c</span><span class="den">b · c</span></span> &nbsp; (где b ≠ 0, c ≠ 0)
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Весы -->
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Умножение на «c» не меняет «вес» дроби!</text>
+                <!-- Base -->
+                <rect x="180" y="160" width="40" height="20" fill="#64748b" rx="4"/>
+                <line x1="200" y1="160" x2="200" y2="80" stroke="#64748b" stroke-width="4"/>
+                <!-- Beam -->
+                <line x1="50" y1="80" x2="350" y2="80" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="200" cy="80" r="6" fill="#dc2626"/>
+                <!-- Left pan -->
+                <line x1="50" y1="80" x2="30" y2="130" stroke="#1e293b" stroke-width="2"/>
+                <line x1="50" y1="80" x2="70" y2="130" stroke="#1e293b" stroke-width="2"/>
+                <path d="M 20 130 Q 50 150 80 130 Z" fill="#0ea5e9"/>
+                <text x="50" y="120" font-family="sans-serif" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">a / b</text>
+                <!-- Right pan -->
+                <line x1="350" y1="80" x2="330" y2="130" stroke="#1e293b" stroke-width="2"/>
+                <line x1="350" y1="80" x2="370" y2="130" stroke="#1e293b" stroke-width="2"/>
+                <path d="M 320 130 Q 350 150 380 130 Z" fill="#0ea5e9"/>
+                <text x="350" y="120" font-family="sans-serif" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">ac / bc</text>
+                <!-- Equals sign -->
+                <text x="200" y="50" font-family="sans-serif" font-size="24" fill="#16a34a" font-weight="bold" text-anchor="middle">=</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Как «гуляет» минус?</b><br>
+            Если изменить знак числителя (или знак знаменателя) и одновременно поставить минус <i>перед всей дробью</i>, значение не изменится.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">-a</span><span class="den">b</span></span> = <span class="fraction"><span class="num">a</span><span class="den">-b</span></span> = - <span class="fraction"><span class="num">a</span><span class="den">b</span></span>
+        </div>
+        <p><i>💡 Лайфхак: Всегда избавляйся от минуса в знаменателе — так проще не ошибиться при сокращении!</i></p>
+
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника, не забывая про допустимые значения.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№ 28а из учебника)</h3>
+            <p>Сократите дробь:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">4a²</span><span class="den">6ac</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Вспоминаем, что сокращение — это деление числителя и знаменателя на их общий множитель. Ищем, что есть и «сверху», и «снизу».
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Числитель: <i>4a² = 2 · 2 · a · a</i>.<br>
+                    Знаменатель: <i>6ac = 2 · 3 · a · c</i>.<br>
+                    Общий множитель: <i>2a</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Делим «верх» и «низ» на <i>2a</i>:<br>
+                    <i>4a² : 2a = 2a</i><br>
+                    <i>6ac : 2a = 3c</i>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">2a</span><span class="den">3c</span></span>.<br>
+                    <b>Проверка:</b> Если <i>a=3, c=2</i>, то исходная: <i>36 / 36 = 1</i>. Новая: <i>6 / 6 = 1</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (по образцу примера 4 из учебника)</h3>
+            <p>Сократите дробь, аккуратно работая со знаками:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">x - 1</span><span class="den">x(1 - x)</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Смотрим на скобки. В числителе <i>(x - 1)</i>, а в знаменателе <i>(1 - x)</i>. Они похожи, но знаки разные. Это не общий множитель в чистом виде!
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Применяем правило смены знака. Вынесем <i>-1</i> за скобки в числителе:<br>
+                    <i>x - 1 = -(1 - x)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Переписываем дробь:<br>
+                    <span class="fraction"><span class="num">-(1 - x)</span><span class="den">x(1 - x)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Теперь видим общий множитель <i>(1 - x)</i>. Сокращаем на него числитель и знаменатель. Минус остается «сверху» перед дробью.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> - <span class="fraction"><span class="num">1</span><span class="den">x</span></span> (или <span class="fraction"><span class="num">-1</span><span class="den">x</span></span>).<br>
+                    <b>Проверка:</b> Если <i>x=2</i>, исходная: <i>1 / (2·(-1)) = -0.5</i>. Новая: <i>-1 / 2 = -0.5</i>. Отлично, ты справился! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№ 38а из учебника)</h3>
+            <p>Постройте график функции:</p>
+            <div class="formula">
+                y = <span class="fraction"><span class="num">x² - 25</span><span class="den">x - 5</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Определяем область определения. Знаменатель не равен нулю: <i>x - 5 ≠ 0</i>, значит <i>x ≠ 5</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Упрощаем функцию (сокращаем дробь). Раскладываем числитель как разность квадратов:<br>
+                    <i>x² - 25 = (x - 5)(x + 5)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Сокращаем на <i>(x - 5)</i>:<br>
+                    y = <span class="fraction"><span class="num">(x - 5)(x + 5)</span><span class="den">x - 5</span></span> = x + 5.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Строим график. Это обычная прямая <i>y = x + 5</i>. Но помним про Шаг 1! При <i>x = 5</i> функция не существует. Находим «запретную» точку: если <i>x = 5</i>, то <i>y = 5 + 5 = 10</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Рисуем прямую и ставим «выколотую» точку (пустой кружок) в координатах <i>(5; 10)</i>.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> Прямая <i>y = x + 5</i> с выколотой точкой <i>(5; 10)</i>.<br>
+                    <b>Вывод:</b> График функции — это прямая, но с «дыркой» там, где знаменатель исходной дроби обращается в ноль. 🕳️
+                </div>
+            </details>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: График с выколотой точкой -->
+            <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">График y = (x²-25)/(x-5) — прямая с «дыркой»</text>
+                <!-- Axes -->
+                <line x1="40" y1="200" x2="380" y2="200" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <line x1="150" y1="230" x2="150" y2="40" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+                <text x="370" y="220" font-family="sans-serif" font-size="14" fill="#1e293b">x</text>
+                <text x="160" y="50" font-family="sans-serif" font-size="14" fill="#1e293b">y</text>
+                <text x="135" y="215" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+                
+                <!-- Line y = x + 5 -->
+                <line x1="50" y1="200" x2="350" y2="50" stroke="#2563eb" stroke-width="3"/>
+                
+                <!-- Hole at x=5, y=10 -->
+                <circle cx="250" cy="100" r="6" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+                <text x="260" y="90" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">(5; 10) — выколота!</text>
+                
+                <line x1="250" y1="200" x2="250" y2="100" stroke="#dc2626" stroke-width="1" stroke-dasharray="4,4"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>💻 Задача для IT-инженера</h3>
+        <p>Ты пишешь алгоритм для дрона. Он вычисляет оптимальный угол наклона по формуле:</p>
+        <div class="formula">
+            α = <span class="fraction"><span class="num">S² - 16</span><span class="den">2S - 8</span></span>
+        </div>
+        <p>Где <i>S</i> — площадь зоны посадки. Твой чип работает медленно с громоздкими формулами. Упрости формулу для внутреннего кода и найди «аварийное» значение <i>S</i>, при котором дрон зависнет (делитель станет нулём).</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Ищем «аварийное» значение. Знаменатель не должен быть равен нулю:<br>
+                <i>2S - 8 = 0</i> → <i>2S = 8</i> → <i>S = 4</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Упрощаем формулу для чипа. Числитель — разность квадратов: <i>S² - 16 = (S - 4)(S + 4)</i>.<br>
+                Знаменатель выносим за скобки: <i>2S - 8 = 2(S - 4)</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Сокращаем на общий множитель <i>(S - 4)</i>:<br>
+                α = <span class="fraction"><span class="num">(S - 4)(S + 4)</span><span class="den">2(S - 4)</span></span> = <span class="fraction"><span class="num">S + 4</span><span class="den">2</span></span>.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Для чипа пишем простую формулу <i>α = (S + 4) / 2</i>. Аварийное значение: <i>S = 4</i> (при этой площади дрон не сможет рассчитать угол, нужно менять зону посадки). Отличная оптимизация! 🚀
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Основное свойство дроби:</b> умножение или деление числителя и знаменателя на одно и то же ненулевое число не меняет значение дроби.</li>
+            <li><b>Тождество</b> — это равенство, верное при всех допустимых значениях переменных.</li>
+            <li><b>Сокращение дроби:</b> всегда сначала раскладывай на множители (формулы сокращенного умножения, вынос общего множителя, группировка).</li>
+            <li>💡 <b>Правило минуса:</b> <span class="fraction"><span class="num">a</span><span class="den">b-a</span></span> = - <span class="fraction"><span class="num">a</span><span class="den">a-b</span></span>. Меняй порядок вычитания, не забывая про минус!</li>
+            <li><b>«Выколотая точка»:</b> если дробь сократилась, но знаменатель исходной дроби обращался в ноль при каком-то <i>x</i>, на графике в этой точке будет «дырка».</li>
+            <li>⚠️ <b>Ловушка:</b> нельзя сокращать слагаемые! <span class="fraction"><span class="num">x + 5</span><span class="den">5</span></span> ≠ x. Сокращать можно только множители!</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Сокращение слагаемых:</i> ученики часто «зачеркивают» пятерки в дроби <span class="fraction"><span class="num">x + 5</span><span class="den">5</span></span>. Напоминайте: сокращать можно только то, что стоит в скобках (множители), а не то, что сложено/вычтено.</li>
+            <li><i>Потеря минуса:</i> при замене <i>(a - b)</i> на <i>-(b - a)</i> минус часто теряется. Требуйте явно прописывать этот шаг на полях.</li>
+            <li><i>Забытая «дырка»:</i> при построении графика сокращенной функции ученики рисуют сплошную прямую, игнорируя ОДЗ исходной дроби.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Разрешите на первых порах раскладывать многочлены на множители «лесенкой» или цветными ручками (числитель — синим, знаменатель — красным, общие множители обвести в кружок).</li>
+            <li>Дайте шпаргалку с формулами сокращенного умножения (разность квадратов, квадрат суммы/разности).</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Попросите их доказать, что дробь <span class="fraction"><span class="num">x² + 1</span><span class="den">x² + 2</span></span> несократима ни при каких <i>x</i> (так как разность числителя и знаменателя равна 1, а у единицы нет других множителей).</li>
+            <li>Задача № 47 из учебника (исследование знака дроби) — отличный материал для дополнительного исследования.</li>
+        </ul>
+    </div>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §2)<br>
+        Создано с ❤️ для современных уроков
+    </footer>
+
+</div>
+
+</body>
+</html>
