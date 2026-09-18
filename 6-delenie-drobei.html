@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деление дробей — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        header p { font-size: 1rem; opacity: 0.9; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .exercise-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>➗ Деление дробей</h1>
+        <p>Алгебра, 8 класс | Глава 1, §6</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Обратное действие</h3>
+        <p>Представь, что ты умножил число на 3 и получил 15. Как вернуться обратно? Правильно — разделить на 3! В алгебре деление — это действие, обратное умножению. Но есть хитрость: чтобы разделить на дробь, нужно умножить на <b>обратную</b> дробь! Это как «перевернуть» дробь вверх ногами. 🔄</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Деление дробей</b></td>
+                <td>Действие, при котором первую дробь умножают на дробь, обратную второй.</td>
+            </tr>
+            <tr>
+                <td><b>Обратная дробь</b></td>
+                <td>Дробь, у которой числитель и знаменатель поменялись местами (например, <span class="fraction"><span class="num">3</span><span class="den">5</span></span> и <span class="fraction"><span class="num">5</span><span class="den">3</span></span>).</td>
+            </tr>
+            <tr>
+                <td><b>Взаимно обратные дроби</b></td>
+                <td>Две дроби, произведение которых равно 1 (например, <span class="fraction"><span class="num">2</span><span class="den">7</span></span> и <span class="fraction"><span class="num">7</span><span class="den">2</span></span>).</td>
+            </tr>
+            <tr>
+                <td><b>Деление на многочлен</b></td>
+                <td>Многочлен представляют как дробь со знаменателем 1, затем применяют правило деления.</td>
+            </tr>
+            <tr>
+                <td><b>Сокращение</b></td>
+                <td>После деления всегда проверяй, можно ли сократить результат!</td>
+            </tr>
+            <tr>
+                <td><b>ОДЗ</b></td>
+                <td>Область допустимых значений: делитель ≠ 0, знаменатели ≠ 0.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Деление дробей</b><br>
+            Чтобы разделить одну дробь на другую, нужно первую дробь умножить на дробь, обратную второй.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> : <span class="fraction"><span class="num">c</span><span class="den">d</span></span> = <span class="fraction"><span class="num">a</span><span class="den">b</span></span> · <span class="fraction"><span class="num">d</span><span class="den">c</span></span> = <span class="fraction"><span class="num">a · d</span><span class="den">b · c</span></span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Схема деления дробей с правильными формулами -->
+            <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+                <text x="250" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Правило деления дробей: «Переворачиваем» вторую дробь!</text>
+                
+                <!-- Первая дробь -->
+                <rect x="30" y="60" width="90" height="70" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="75" y="85" font-family="sans-serif" font-size="20" fill="#2563eb" font-weight="bold" text-anchor="middle">a</text>
+                <line x1="40" y1="92" x2="110" y2="92" stroke="#2563eb" stroke-width="2"/>
+                <text x="75" y="115" font-family="sans-serif" font-size="20" fill="#2563eb" font-weight="bold" text-anchor="middle">b</text>
+                
+                <!-- Знак деления -->
+                <text x="140" y="105" font-family="sans-serif" font-size="28" fill="#1e293b" font-weight="bold" text-anchor="middle">:</text>
+                
+                <!-- Вторая дробь -->
+                <rect x="160" y="60" width="90" height="70" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="205" y="85" font-family="sans-serif" font-size="20" fill="#dc2626" font-weight="bold" text-anchor="middle">c</text>
+                <line x1="170" y1="92" x2="240" y2="92" stroke="#dc2626" stroke-width="2"/>
+                <text x="205" y="115" font-family="sans-serif" font-size="20" fill="#dc2626" font-weight="bold" text-anchor="middle">d</text>
+                
+                <!-- Стрелка переворота -->
+                <path d="M 205 130 Q 205 150 205 160" stroke="#f59e0b" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+                <text x="220" y="150" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold">Переворот!</text>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b" />
+                    </marker>
+                </defs>
+                
+                <!-- Обратная дробь -->
+                <rect x="310" y="60" width="90" height="70" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="355" y="85" font-family="sans-serif" font-size="20" fill="#b45309" font-weight="bold" text-anchor="middle">d</text>
+                <line x1="320" y1="92" x2="390" y2="92" stroke="#f59e0b" stroke-width="2"/>
+                <text x="355" y="115" font-family="sans-serif" font-size="20" fill="#b45309" font-weight="bold" text-anchor="middle">c</text>
+                
+                <!-- Знак умножения и равно -->
+                <text x="140" y="195" font-family="sans-serif" font-size="24" fill="#16a34a" font-weight="bold" text-anchor="middle">=</text>
+                <text x="170" y="195" font-family="sans-serif" font-size="24" fill="#16a34a" font-weight="bold" text-anchor="middle">×</text>
+                
+                <text x="250" y="215" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Первая × Обратная второй</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Деление на многочлен</b><br>
+            При делении дроби на многочлен этот многочлен записывают в виде дроби со знаменателем 1, а затем применяют правило деления дробей.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> : c = <span class="fraction"><span class="num">a</span><span class="den">b</span></span> : <span class="fraction"><span class="num">c</span><span class="den">1</span></span> = <span class="fraction"><span class="num">a</span><span class="den">b</span></span> · <span class="fraction"><span class="num">1</span><span class="den">c</span></span> = <span class="fraction"><span class="num">a</span><span class="den">b · c</span></span>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Взаимно обратные дроби</b><br>
+            Произведение взаимно обратных дробей равно 1. Это помогает проверять деление!
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> · <span class="fraction"><span class="num">b</span><span class="den">a</span></span> = 1
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника, не забывая про ОДЗ.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№134а из учебника)</h3>
+            <p>Выполните деление:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">5m</span><span class="den">6n</span></span> : <span class="fraction"><span class="num">15m</span><span class="den">8n</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило деления дробей: первую дробь умножаем на дробь, обратную второй.<br>
+                    Обратная к <span class="fraction"><span class="num">15m</span><span class="den">8n</span></span> — это <span class="fraction"><span class="num">8n</span><span class="den">15m</span></span>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Записываем умножение:<br>
+                    <span class="fraction"><span class="num">5m</span><span class="den">6n</span></span> · <span class="fraction"><span class="num">8n</span><span class="den">15m</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Умножаем числители и знаменатели:<br>
+                    Числитель: <i>5m · 8n = 40mn</i><br>
+                    Знаменатель: <i>6n · 15m = 90mn</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Записываем дробь:<br>
+                    <span class="fraction"><span class="num">40mn</span><span class="den">90mn</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Сокращаем дробь. Общий множитель: <i>10mn</i>.<br>
+                    <i>40mn : 10mn = 4</i><br>
+                    <i>90mn : 10mn = 9</i>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">4</span><span class="den">9</span></span>.<br>
+                    <b>Проверка:</b> Подставим <i>m=3, n=2</i>. Исходная: <i>(15/12) : (45/16) = 1.25 : 2.8125 = 0.444...</i> Ответ: <i>4/9 ≈ 0.444...</i> Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (№140б из учебника)</h3>
+            <p>Выполните деление:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">5</span><span class="den">a</span></span> : <span class="fraction"><span class="num">6ab</span><span class="den">a² - b²</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило деления. Обратная дробь:<br>
+                    Обратная к <span class="fraction"><span class="num">6ab</span><span class="den">a² - b²</span></span> — это <span class="fraction"><span class="num">a² - b²</span><span class="den">6ab</span></span>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Записываем умножение:<br>
+                    <span class="fraction"><span class="num">5</span><span class="den">a</span></span> · <span class="fraction"><span class="num">a² - b²</span><span class="den">6ab</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Раскладываем <i>a² - b²</i> как разность квадратов:<br>
+                    <i>a² - b² = (a - b)(a + b)</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Умножаем:<br>
+                    Числитель: <i>5 · (a - b)(a + b)</i><br>
+                    Знаменатель: <i>a · 6ab = 6a²b</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Записываем результат:<br>
+                    <span class="fraction"><span class="num">5(a - b)(a + b)</span><span class="den">6a²b</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 6:</b> Проверяем сокращение. Общих множителей нет.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">5(a - b)(a + b)</span><span class="den">6a²b</span></span> (при <i>a ≠ 0, b ≠ 0, a ≠ ±b</i>).<br>
+                    <b>Проверка:</b> Подставим <i>a=2, b=1</i>. Исходная: <i>5/2 : 12/3 = 2.5 : 4 = 0.625</i>. Ответ: <i>5·1·3/(6·4·1) = 15/24 = 0.625</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№143а из учебника)</h3>
+            <p>Выполните деление:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">3x</span><span class="den">6y</span></span> : <span class="fraction"><span class="num">5x + 10y</span><span class="den">y²</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило деления. Обратная дробь:<br>
+                    Обратная к <span class="fraction"><span class="num">5x + 10y</span><span class="den">y²</span></span> — это <span class="fraction"><span class="num">y²</span><span class="den">5x + 10y</span></span>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Записываем умножение:<br>
+                    <span class="fraction"><span class="num">3x</span><span class="den">6y</span></span> · <span class="fraction"><span class="num">y²</span><span class="den">5x + 10y</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Упрощаем первую дробь:<br>
+                    <span class="fraction"><span class="num">3x</span><span class="den">6y</span></span> = <span class="fraction"><span class="num">x</span><span class="den">2y</span></span> (сократили на 3)
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Раскладываем знаменатель второй дроби:<br>
+                    <i>5x + 10y = 5(x + 2y)</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Умножаем:<br>
+                    <span class="fraction"><span class="num">x</span><span class="den">2y</span></span> · <span class="fraction"><span class="num">y²</span><span class="den">5(x + 2y)</span></span> = <span class="fraction"><span class="num">x · y²</span><span class="den">2y · 5(x + 2y)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 6:</b> Сокращаем <i>y</i>:<br>
+                    <i>y² : y = y</i><br>
+                    Получаем: <span class="fraction"><span class="num">xy</span><span class="den">10(x + 2y)</span></span>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">xy</span><span class="den">10(x + 2y)</span></span> (при <i>y ≠ 0, x ≠ -2y</i>).<br>
+                    <b>Проверка:</b> Подставим <i>x=2, y=1</i>. Исходная: <i>6/6 : 20/1 = 1 : 20 = 0.05</i>. Ответ: <i>2·1/(10·4) = 2/40 = 0.05</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2>📝 Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+        
+        <h3>🟢 Базовый уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>1.</b> <span class="fraction"><span class="num">2a</span><span class="den">3b</span></span> : <span class="fraction"><span class="num">4a</span><span class="den">9b</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>2.</b> <span class="fraction"><span class="num">7x</span><span class="den">5y</span></span> : <span class="fraction"><span class="num">14x</span><span class="den">15y</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>3.</b> <span class="fraction"><span class="num">8m</span><span class="den">11n</span></span> : <span class="fraction"><span class="num">16m</span><span class="den">33n</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>4.</b> <span class="fraction"><span class="num">5p</span><span class="den">6q</span></span> : <span class="fraction"><span class="num">25p</span><span class="den">18q</span></span>
+            </div>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>5.</b> <span class="fraction"><span class="num">3</span><span class="den">x</span></span> : <span class="fraction"><span class="num">6xy</span><span class="den">x² - y²</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>6.</b> <span class="fraction"><span class="num">a + b</span><span class="den">a</span></span> : <span class="fraction"><span class="num">a² - b²</span><span class="den">ab</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>7.</b> <span class="fraction"><span class="num">2x</span><span class="den">3y</span></span> : <span class="fraction"><span class="num">4x²</span><span class="den">9y²</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>8.</b> <span class="fraction"><span class="num">m² - n²</span><span class="den">m</span></span> : <span class="fraction"><span class="num">m + n</span><span class="den">mn</span></span>
+            </div>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>9.</b> <span class="fraction"><span class="num">x² - 4</span><span class="den">x + 1</span></span> : (x - 2)
+            </div>
+            <div class="exercise-item">
+                <b>10.</b> <span class="fraction"><span class="num">a² + 2ab + b²</span><span class="den">a - b</span></span> : <span class="fraction"><span class="num">a + b</span><span class="den">a² - b²</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>11.</b> <span class="fraction"><span class="num">3x + 6</span><span class="den">x² - 9</span></span> : <span class="fraction"><span class="num">x + 2</span><span class="den">x - 3</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>12.</b> (a² - 4a + 4) : <span class="fraction"><span class="num">a² - 4</span><span class="den">a + 2</span></span>
+            </div>
+        </div>
+
+        <details>
+            <summary>📋 Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. <span class="fraction"><span class="num">3</span><span class="den">2</span></span><br>
+                2. <span class="fraction"><span class="num">3</span><span class="den">2</span></span><br>
+                3. <span class="fraction"><span class="num">3</span><span class="den">2</span></span><br>
+                4. <span class="fraction"><span class="num">3</span><span class="den">5</span></span><br>
+                5. <span class="fraction"><span class="num">x² - y²</span><span class="den">2xy</span></span><br>
+                6. <span class="fraction"><span class="num">b</span><span class="den">a - b</span></span><br>
+                7. <span class="fraction"><span class="num">3y</span><span class="den">2x</span></span><br>
+                8. <i>n(m - n)</i><br>
+                9. <span class="fraction"><span class="num">x + 2</span><span class="den">x + 1</span></span><br>
+                10. <i>a + b</i><br>
+                11. <span class="fraction"><span class="num">3</span><span class="den">x + 3</span></span><br>
+                12. <i>a - 2</i>
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2> Блок 3. Практическое применение</h2>
+        <h3>🚴 Задача для велосипедиста</h3>
+        <p>Велосипедист проехал первые 30 км со скоростью <i>v</i> км/ч, а остальные 17 км — со скоростью на 2 км/ч больше. Время вычисляется по формуле <i>t = s/v</i>. Найди общее время пути <i>t</i> в виде одной дроби и вычисли при <i>v = 15</i> км/ч.</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Время на первом участке: <i>t₁ = 30/v</i>.<br>
+                Время на втором участке: <i>t₂ = 17/(v + 2)</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Общее время: <i>t = t₁ + t₂ = 30/v + 17/(v + 2)</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Приводим к общему знаменателю <i>v(v + 2)</i>:<br>
+                <span class="fraction"><span class="num">30(v + 2)</span><span class="den">v(v + 2)</span></span> + <span class="fraction"><span class="num">17v</span><span class="den">v(v + 2)</span></span>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Складываем числители:<br>
+                <i>30(v + 2) + 17v = 30v + 60 + 17v = 47v + 60</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 5:</b> Записываем результат:<br>
+                <i>t = (47v + 60) / (v(v + 2))</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 6:</b> Подставляем <i>v = 15</i>:<br>
+                <i>t = (47·15 + 60) / (15·17) = (705 + 60) / 255 = 765 / 255 = 3</i> часа.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> <i>t = (47v + 60) / (v(v + 2))</i> часов. При <i>v = 15</i>: <b>3 часа</b>.<br>
+                <b>Проверка:</b> <i>t₁ = 30/15 = 2</i> ч, <i>t₂ = 17/17 = 1</i> ч. Всего: <i>2 + 1 = 3</i> ч. Всё верно! ‍♂️
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Правило деления:</b> первая дробь × обратная второй дроби.</li>
+            <li><b>Обратная дробь:</b> числитель и знаменатель меняются местами.</li>
+            <li><b>Деление на многочлен:</b> представь многочлен как дробь со знаменателем 1.</li>
+            <li><b>Сокращение:</b> всегда сокращай результат после деления!</li>
+            <li>⚠️ <b>ОДЗ:</b> делитель ≠ 0, все знаменатели ≠ 0.</li>
+            <li>💡 <b>Лайфхак:</b> произведение взаимно обратных дробей = 1 (проверка).</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Забывают «перевернуть»:</i> ученики иногда просто делят числитель на числитель и знаменатель на знаменатель. Напоминайте: умножаем на ОБРАТНУЮ!</li>
+            <li><i>Путают умножение и деление:</i> при делении на дробь нужно умножать, а не делить. Это частая ошибка.</li>
+            <li><i>Забытое ОДЗ:</i> при делении на выражение с переменной забывают указать ограничения (делитель ≠ 0).</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Разрешите сначала записать «переворот» второй дроби отдельно, затем умножать. Это снижает когнитивную нагрузку.</li>
+            <li>Используйте цветные маркеры: первая дробь — синим, обратная второй — красным. Стрелка «переворота» — жёлтым.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача №147 из учебника (задача на движение с течением реки) — требует составления уравнения и проверки ОДЗ.</li>
+            <li>Попросите их доказать, что деление на дробь эквивалентно умножению на обратную через определение деления.</li>
+        </ul>
+    </div>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §6)<br>
+        Создано с ❤️ для современных уроков
+    </footer>
+
+</div>
+
+</body>
+</html>

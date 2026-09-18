@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умножение дробей. Возведение дроби в степень — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        header p { font-size: 1rem; opacity: 0.9; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .fraction .num {
+            border-bottom: 2px solid var(--text);
+            padding: 0 6px 2px;
+        }
+        .fraction .den {
+            padding: 2px 6px 0;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: ""; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1.1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>✖️ Умножение дробей. Возведение дроби в степень</h1>
+        <p>Алгебра, 8 класс | Глава 1, §5</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2> Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Рецепт пирога</h3>
+        <p>Представь, что ты готовишь пирог по рецепту. Тебе нужно <span class="fraction"><span class="num">2</span><span class="den">3</span></span> стакана муки, но ты хочешь приготовить только половину порции. Сколько муки нужно? Правильно — <span class="fraction"><span class="num">2</span><span class="den">3</span></span> · <span class="fraction"><span class="num">1</span><span class="den">2</span></span> = <span class="fraction"><span class="num">2</span><span class="den">6</span></span> = <span class="fraction"><span class="num">1</span><span class="den">3</span></span> стакана! В алгебре мы умножаем дроби так же: числитель на числитель, знаменатель на знаменатель. А потом сокращаем! 🥧</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Умножение дробей</b></td>
+                <td>Правило: числитель умножаем на числитель, знаменатель на знаменатель.</td>
+            </tr>
+            <tr>
+                <td><b>Возведение дроби в степень</b></td>
+                <td>Возводим в степень и числитель, и знаменатель отдельно.</td>
+            </tr>
+            <tr>
+                <td><b>Обратная дробь</b></td>
+                <td>Дробь, у которой числитель и знаменатель поменялись местами (например, <span class="fraction"><span class="num">3</span><span class="den">5</span></span> и <span class="fraction"><span class="num">5</span><span class="den">3</span></span>).</td>
+            </tr>
+            <tr>
+                <td><b>Сокращение</b></td>
+                <td>Деление числителя и знаменателя на общий множитель (упрощение дроби).</td>
+            </tr>
+            <tr>
+                <td><b>Многочлен как дробь</b></td>
+                <td>Любой многочлен можно записать как дробь со знаменателем 1 (например, <i>x + 2 = (x+2)/1</i>).</td>
+            </tr>
+            <tr>
+                <td><b>Степень дроби</b></td>
+                <td>Запись вида <span class="fraction"><span class="num">a</span><span class="den">b</span></span>ⁿ, где n — показатель степени.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Умножение дробей</b><br>
+            Чтобы умножить дробь на дробь, нужно перемножить их числители и перемножить их знаменатели. Первое произведение записать в числитель, второе — в знаменатель.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> · <span class="fraction"><span class="num">c</span><span class="den">d</span></span> = <span class="fraction"><span class="num">a · c</span><span class="den">b · d</span></span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Схема умножения дробей -->
+            <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Правило умножения дробей</text>
+                
+                <!-- Первая дробь -->
+                <rect x="40" y="50" width="80" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="80" y="75" font-family="Courier New, monospace" font-size="18" fill="#2563eb" font-weight="bold" text-anchor="middle">a</text>
+                <line x1="50" y1="80" x2="110" y2="80" stroke="#2563eb" stroke-width="2"/>
+                <text x="80" y="100" font-family="Courier New, monospace" font-size="18" fill="#2563eb" font-weight="bold" text-anchor="middle">b</text>
+                
+                <!-- Знак умножения -->
+                <text x="140" y="85" font-family="sans-serif" font-size="24" fill="#1e293b" font-weight="bold" text-anchor="middle">×</text>
+                
+                <!-- Вторая дробь -->
+                <rect x="160" y="50" width="80" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="200" y="75" font-family="Courier New, monospace" font-size="18" fill="#dc2626" font-weight="bold" text-anchor="middle">c</text>
+                <line x1="170" y1="80" x2="230" y2="80" stroke="#dc2626" stroke-width="2"/>
+                <text x="200" y="100" font-family="Courier New, monospace" font-size="18" fill="#dc2626" font-weight="bold" text-anchor="middle">d</text>
+                
+                <!-- Стрелки -->
+                <path d="M 80 110 L 80 130 L 100 130" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <path d="M 200 110 L 200 130 L 180 130" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a" />
+                    </marker>
+                </defs>
+                
+                <!-- Результат -->
+                <rect x="260" y="50" width="100" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="310" y="75" font-family="Courier New, monospace" font-size="18" fill="#16a34a" font-weight="bold" text-anchor="middle">a·c</text>
+                <line x1="270" y1="80" x2="350" y2="80" stroke="#16a34a" stroke-width="2"/>
+                <text x="310" y="100" font-family="Courier New, monospace" font-size="18" fill="#16a34a" font-weight="bold" text-anchor="middle">b·d</text>
+                
+                <text x="200" y="160" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Числитель × Числитель, Знаменатель × Знаменатель</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Возведение дроби в степень</b><br>
+            Чтобы возвести дробь в степень, нужно возвести в эту степень числитель и знаменатель отдельно.
+        </div>
+
+        <div class="formula">
+            (<span class="fraction"><span class="num">a</span><span class="den">b</span></span>)ⁿ = <span class="fraction"><span class="num">aⁿ</span><span class="den">bⁿ</span></span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Возведение в степень -->
+            <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+                <text x="200" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Возведение дроби в куб (n=3)</text>
+                
+                <!-- Исходная дробь в кубе -->
+                <rect x="40" y="50" width="100" height="70" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="90" y="80" font-family="Courier New, monospace" font-size="20" fill="#2563eb" font-weight="bold" text-anchor="middle">a</text>
+                <line x1="50" y1="85" x2="130" y2="85" stroke="#2563eb" stroke-width="2"/>
+                <text x="90" y="110" font-family="Courier New, monospace" font-size="20" fill="#2563eb" font-weight="bold" text-anchor="middle">b</text>
+                <text x="145" y="70" font-family="sans-serif" font-size="24" fill="#2563eb" font-weight="bold">³</text>
+                
+                <!-- Стрелка -->
+                <path d="M 160 85 L 200 85" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow2)"/>
+                <defs>
+                    <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+                
+                <!-- Результат -->
+                <rect x="220" y="50" width="140" height="70" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="290" y="80" font-family="Courier New, monospace" font-size="20" fill="#16a34a" font-weight="bold" text-anchor="middle">a³</text>
+                <line x1="230" y1="85" x2="350" y2="85" stroke="#16a34a" stroke-width="2"/>
+                <text x="290" y="110" font-family="Courier New, monospace" font-size="20" fill="#16a34a" font-weight="bold" text-anchor="middle">b³</text>
+                
+                <text x="200" y="145" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Возводим числитель и знаменатель отдельно</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Умножение дроби на многочлен</b><br>
+            При умножении дроби на многочлен этот многочлен записывают в виде дроби со знаменателем 1, а затем применяют правило умножения дробей.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> · c = <span class="fraction"><span class="num">a</span><span class="den">b</span></span> · <span class="fraction"><span class="num">c</span><span class="den">1</span></span> = <span class="fraction"><span class="num">a · c</span><span class="den">b</span></span>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника, не забывая сокращать результат.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№112б из учебника)</h3>
+            <p>Выполните умножение:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">8c</span><span class="den">15m</span></span> · <span class="fraction"><span class="num">5m</span><span class="den">6c</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило умножения дробей: числитель умножаем на числитель, знаменатель на знаменатель.<br>
+                    <span class="fraction"><span class="num">8c · 5m</span><span class="den">15m · 6c</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Выполняем умножение в числителе и знаменателе:<br>
+                    Числитель: <i>8c · 5m = 40cm</i><br>
+                    Знаменатель: <i>15m · 6c = 90cm</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Записываем дробь:<br>
+                    <span class="fraction"><span class="num">40cm</span><span class="den">90cm</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Сокращаем дробь. Общий множитель числителя и знаменателя: <i>10cm</i>.<br>
+                    <i>40cm : 10cm = 4</i><br>
+                    <i>90cm : 10cm = 9</i>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">4</span><span class="den">9</span></span>.<br>
+                    <b>Проверка:</b> Подставим <i>c=3, m=2</i>. Исходная: <i>(24/30) · (10/18) = (4/5) · (5/9) = 20/45 = 4/9</i>. Ответ: <i>4/9</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 2 (№121а из учебника)</h3>
+            <p>Выполните умножение:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">x - 1</span><span class="den">x</span></span> · <span class="fraction"><span class="num">x</span><span class="den">x + 1</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило умножения дробей:<br>
+                    <span class="fraction"><span class="num">(x - 1) · x</span><span class="den">x · (x + 1)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Видим общий множитель <i>x</i> в числителе и знаменателе. Сокращаем на <i>x</i> (при условии <i>x ≠ 0</i>):<br>
+                    <span class="fraction"><span class="num">(x - 1) · x</span><span class="den">x · (x + 1)</span></span> = <span class="fraction"><span class="num">x - 1</span><span class="den">x + 1</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверяем, можно ли ещё сократить. Числитель <i>x - 1</i> и знаменатель <i>x + 1</i> общих множителей не имеют.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">x - 1</span><span class="den">x + 1</span></span> (при <i>x ≠ 0, x ≠ -1</i>).<br>
+                    <b>Проверка:</b> Подставим <i>x = 2</i>. Исходная: <i>(1/2) · (2/3) = 2/6 = 1/3</i>. Ответ: <i>(2-1)/(2+1) = 1/3</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№114а из учебника)</h3>
+            <p>Упростите выражение:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">48x⁷y</span><span class="den">16x³</span></span> · <span class="fraction"><span class="num">7y</span><span class="den">25y</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило умножения дробей:<br>
+                    <span class="fraction"><span class="num">48x⁷y · 7y</span><span class="den">16x³ · 25y</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Выполняем умножение в числителе и знаменателе:<br>
+                    Числитель: <i>48 · 7 = 336</i>, <i>x⁷</i> остаётся, <i>y · y = y²</i>. Итого: <i>336x⁷y²</i>.<br>
+                    Знаменатель: <i>16 · 25 = 400</i>, <i>x³</i> остаётся, <i>y</i> остаётся. Итого: <i>400x³y</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Записываем дробь:<br>
+                    <span class="fraction"><span class="num">336x⁷y²</span><span class="den">400x³y</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Сокращаем числовую часть. НОД(336, 400) = 16.<br>
+                    <i>336 : 16 = 21</i><br>
+                    <i>400 : 16 = 25</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Сокращаем переменные:<br>
+                    <i>x⁷ : x³ = x⁴</i> (вычитаем показатели: 7 - 3 = 4)<br>
+                    <i>y² : y = y</i> (вычитаем показатели: 2 - 1 = 1)
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">21x⁴y</span><span class="den">25</span></span>.<br>
+                    <b>Проверка:</b> Подставим <i>x=2, y=3</i>. Исходная: <i>(48·128·3)/(16·8) · (21)/(75) = (18432/128) · (21/75) = 144 · 0.28 = 40.32</i>. Ответ: <i>(21·16·3)/25 = 1008/25 = 40.32</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👨‍🍳 Задача для шеф-повара</h3>
+        <p>Ты готовишь торт по рецепту, где нужно <span class="fraction"><span class="num">3</span><span class="den">4</span></span> стакана сахара. Но ты хочешь приготовить только <span class="fraction"><span class="num">2</span><span class="den">3</span></span> от рецепта. Сколько сахара нужно? А если рецепт требует <span class="fraction"><span class="num">x</span><span class="den">y</span></span> стакана муки, и ты готовишь <span class="fraction"><span class="num">y</span><span class="den">x</span></span> от рецепта?</p>
+
+        <details>
+            <summary>Показать решение шеф-повара</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Задача про сахар (числовой пример):<br>
+                <span class="fraction"><span class="num">3</span><span class="den">4</span></span> · <span class="fraction"><span class="num">2</span><span class="den">3</span></span> = <span class="fraction"><span class="num">3 · 2</span><span class="den">4 · 3</span></span> = <span class="fraction"><span class="num">6</span><span class="den">12</span></span> = <span class="fraction"><span class="num">1</span><span class="den">2</span></span> стакана сахара.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Задача про муку (алгебраический пример):<br>
+                <span class="fraction"><span class="num">x</span><span class="den">y</span></span> · <span class="fraction"><span class="num">y</span><span class="den">x</span></span> = <span class="fraction"><span class="num">x · y</span><span class="den">y · x</span></span> = <span class="fraction"><span class="num">xy</span><span class="den">xy</span></span> = 1 стакан муки.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Нужно <span class="fraction"><span class="num">1</span><span class="den">2</span></span> стакана сахара и 1 стакан муки. Интересный факт: когда умножаем дробь на обратную, всегда получается 1! 🎂
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Умножение дробей:</b> числитель × числитель, знаменатель × знаменатель.</li>
+            <li><b>Возведение в степень:</b> возводим числитель и знаменатель отдельно: <span class="fraction"><span class="num">a</span><span class="den">b</span></span>ⁿ = <span class="fraction"><span class="num">aⁿ</span><span class="den">bⁿ</span></span>.</li>
+            <li><b>Многочлен как дробь:</b> любой многочлен можно записать со знаменателем 1.</li>
+            <li><b>Сокращение:</b> всегда сокращай результат умножения, если есть общие множители.</li>
+            <li>⚠️ <b>ОДЗ:</b> помни про допустимые значения переменных (знаменатель ≠ 0).</li>
+            <li>💡 <b>Лайфхак:</b> дробь × обратная дробь = 1 (например, <span class="fraction"><span class="num">3</span><span class="den">5</span></span> · <span class="fraction"><span class="num">5</span><span class="den">3</span></span> = 1).</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Перекрёстное умножение:</i> ученики иногда умножают числитель первой дроби на знаменатель второй. Напоминайте: числитель × числитель, знаменатель × знаменатель!</li>
+            <li><i>Забытое сокращение:</i> после умножения забывают сократить результат. Требуйте всегда проверять, есть ли общие множители.</li>
+            <li><i>Потеря ОДЗ:</i> при сокращении переменных забывают указывать ограничения (например, <i>x ≠ 0</i>).</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Разрешите сначала умножать «в лоб» (получать большие числа), а потом сокращать. Это проще, чем сокращать до умножения.</li>
+            <li>Используйте цветные маркеры: числители — синим, знаменатели — красным. Общие множители обводить в кружок.</li>
+        </ul>
+        <p><b> Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача №126 из учебника (найти значение выражения после упрощения) — требует внимательности и проверки ОДЗ.</li>
+            <li>Попросите их доказать, что (<span class="fraction"><span class="num">a</span><span class="den">b</span></span>)ⁿ = <span class="fraction"><span class="num">aⁿ</span><span class="den">bⁿ</span></span> через определение степени.</li>
+        </ul>
+    </div>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §5)<br>
+        Создано с ❤️ для современных уроков
+    </footer>
+
+</div>
+
+</body>
+</html>
