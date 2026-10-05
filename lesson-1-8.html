@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Функция y = k/x и её график — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1> Функция y = k/x и её график</h1>
+        <p class="subtitle">Урок 8 • Глава 1, §8</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3> Разминка: Скорость и время</h3>
+        <p>Представь, что ты едешь на велосипеде 60 км. Если едешь со скоростью 30 км/ч, доедешь за 2 часа. А если 60 км/ч — за 1 час. Чем быстрее едешь, тем меньше времени тратишь! Это и есть <b>обратная пропорциональность</b>: одна величина растёт, другая падает. В алгебре это описывается формулой y = k/x. </p>
+
+        <h3> Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Обратная пропорциональность</b></td>
+                <td>Функция вида y = k/x, где k ≠ 0. При увеличении x в n раз, y уменьшается в n раз.</td>
+            </tr>
+            <tr>
+                <td><b>Коэффициент k</b></td>
+                <td>Число, которое показывает «силу» связи. Равно произведению x·y для любой точки графика.</td>
+            </tr>
+            <tr>
+                <td><b>Область определения</b></td>
+                <td>Все числа, кроме 0 (на ноль делить нельзя!).</td>
+            </tr>
+            <tr>
+                <td><b>Гипербола</b></td>
+                <td>График функции y = k/x — кривая из двух ветвей.</td>
+            </tr>
+            <tr>
+                <td><b>Ветви гиперболы</b></td>
+                <td>Две отдельные кривые. При k > 0 — в I и III четвертях, при k < 0 — во II и IV.</td>
+            </tr>
+            <tr>
+                <td><b>Асимптота</b></td>
+                <td>Линия, к которой график бесконечно приближается, но никогда не касается (оси x и y).</td>
+            </tr>
+            <tr>
+                <td><b>Симметрия</b></td>
+                <td>Гипербола симметрична относительно начала координат (точки (0; 0)).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Определение обратной пропорциональности</b><br>
+            Функция вида y = k/x, где x — независимая переменная, а k — ненулевое число, называется обратной пропорциональностью.
+        </div>
+
+        <div class="formula">
+            y = <span class="fraction"><span class="num">k</span><span class="den">x</span></span>, где k ≠ 0
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Область определения</b><br>
+            Область определения функции y = k/x — множество всех чисел, кроме нуля. Это следует из того, что выражение k/x имеет смысл при всех x ≠ 0.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Свойство обратной пропорциональности</b><br>
+            Если x₁ и x₂ — два значения аргумента, а y₁ и y₂ — соответствующие значения функции, то:
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">x₁</span><span class="den">x₂</span></span> = <span class="fraction"><span class="num">y₂</span><span class="den">y₁</span></span>
+        </div>
+
+        <p><i>Отношение двух произвольных значений аргумента равно обратному отношению соответствующих значений функции.</i></p>
+
+        <div class="svg-container">
+            <!-- SVG: Таблица значений для y = 12/x -->
+            <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Таблица значений для функции y = 12/x</text>
+                
+                <!-- Table header -->
+                <rect x="50" y="40" width="500" height="35" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="100" y="62" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">x</text>
+                <text x="200" y="62" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">1</text>
+                <text x="300" y="62" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">2</text>
+                <text x="400" y="62" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">3</text>
+                <text x="500" y="62" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">4</text>
+                
+                <!-- Row 1 -->
+                <rect x="50" y="75" width="500" height="35" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="100" y="97" font-family="sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="middle">y</text>
+                <text x="200" y="97" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">12</text>
+                <text x="300" y="97" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">6</text>
+                <text x="400" y="97" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">4</text>
+                <text x="500" y="97" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">3</text>
+                
+                <!-- Row 2 -->
+                <rect x="50" y="110" width="500" height="35" rx="4" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="100" y="132" font-family="sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="middle">x</text>
+                <text x="200" y="132" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">6</text>
+                <text x="300" y="132" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">8</text>
+                <text x="400" y="132" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">12</text>
+                <text x="500" y="132" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">24</text>
+                
+                <!-- Row 3 -->
+                <rect x="50" y="145" width="500" height="35" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="100" y="167" font-family="sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="middle">y</text>
+                <text x="200" y="167" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">2</text>
+                <text x="300" y="167" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">1.5</text>
+                <text x="400" y="167" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">1</text>
+                <text x="500" y="167" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">0.5</text>
+                
+                <!-- Note -->
+                <text x="300" y="210" font-family="sans-serif" font-size="14" fill="#16a34a" text-anchor="middle" font-weight="bold">Проверка: x · y = 12 для всех пар ✓</text>
+                <text x="300" y="230" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">1·12 = 12, 2·6 = 12, 3·4 = 12, 4·3 = 12, 6·2 = 12, 8·1.5 = 12, 12·1 = 12, 24·0.5 = 12</text>
+                
+                <!-- Negative values -->
+                <text x="300" y="260" font-family="sans-serif" font-size="13" fill="#dc2626" text-anchor="middle">Отрицательные x дают отрицательные y: (-1)·(-12) = 12, (-2)·(-6) = 12</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: График функции y = k/x</b><br>
+            Графиком обратной пропорциональности является <b>гипербола</b> — кривая, состоящая из двух ветвей.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: График гиперболы y = 12/x -->
+            <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                <text x="250" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">График функции y = 12/x (k > 0)</text>
+                
+                <!-- Grid -->
+                <line x1="50" y1="200" x2="450" y2="200" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="250" y1="50" x2="250" y2="350" stroke="#cbd5e1" stroke-width="1"/>
+                
+                <!-- Axes -->
+                <line x1="50" y1="200" x2="450" y2="200" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <line x1="250" y1="350" x2="250" y2="50" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+                
+                <text x="440" y="220" font-family="sans-serif" font-size="14" fill="#1e293b">x</text>
+                <text x="260" y="60" font-family="sans-serif" font-size="14" fill="#1e293b">y</text>
+                <text x="240" y="220" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+                
+                <!-- Scale marks -->
+                <line x1="290" y1="195" x2="290" y2="205" stroke="#1e293b" stroke-width="1"/>
+                <text x="290" y="220" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">2</text>
+                
+                <line x1="330" y1="195" x2="330" y2="205" stroke="#1e293b" stroke-width="1"/>
+                <text x="330" y="220" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">4</text>
+                
+                <line x1="370" y1="195" x2="370" y2="205" stroke="#1e293b" stroke-width="1"/>
+                <text x="370" y="220" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">6</text>
+                
+                <line x1="245" y1="160" x2="255" y2="160" stroke="#1e293b" stroke-width="1"/>
+                <text x="235" y="165" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="end">2</text>
+                
+                <line x1="245" y1="120" x2="255" y2="120" stroke="#1e293b" stroke-width="1"/>
+                <text x="235" y="125" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="end">4</text>
+                
+                <line x1="245" y1="80" x2="255" y2="80" stroke="#1e293b" stroke-width="1"/>
+                <text x="235" y="85" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="end">6</text>
+                
+                <!-- Hyperbola branches (k > 0) -->
+                <!-- First quadrant branch -->
+                <path d="M 260 100 Q 280 140 290 160 Q 310 180 330 185 Q 370 195 410 198" 
+                      stroke="#2563eb" stroke-width="3" fill="none"/>
+                
+                <!-- Third quadrant branch -->
+                <path d="M 240 300 Q 220 260 210 240 Q 190 220 170 215 Q 130 205 90 202" 
+                      stroke="#2563eb" stroke-width="3" fill="none"/>
+                
+                <!-- Points -->
+                <circle cx="290" cy="160" r="4" fill="#dc2626"/>
+                <text x="295" y="155" font-family="sans-serif" font-size="11" fill="#dc2626">(2; 6)</text>
+                
+                <circle cx="330" cy="140" r="4" fill="#dc2626"/>
+                <text x="335" y="135" font-family="sans-serif" font-size="11" fill="#dc2626">(4; 3)</text>
+                
+                <circle cx="370" cy="130" r="4" fill="#dc2626"/>
+                <text x="375" y="125" font-family="sans-serif" font-size="11" fill="#dc2626">(6; 2)</text>
+                
+                <circle cx="210" cy="240" r="4" fill="#dc2626"/>
+                <text x="195" y="255" font-family="sans-serif" font-size="11" fill="#dc2626">(-2; -6)</text>
+                
+                <circle cx="170" cy="220" r="4" fill="#dc2626"/>
+                <text x="155" y="235" font-family="sans-serif" font-size="11" fill="#dc2626">(-4; -3)</text>
+                
+                <text x="250" y="380" font-family="sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Ветви в I и III четвертях при k > 0</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 5: Расположение ветвей гиперболы</b><br>
+            • При <b>k > 0</b> ветви гиперболы расположены в <b>I и III</b> координатных четвертях<br>
+            • При <b>k < 0</b> ветви гиперболы расположены во <b>II и IV</b> координатных четвертях
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Сравнение гипербол при k > 0 и k < 0 -->
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Сравнение графиков при k > 0 и k < 0</text>
+                
+                <!-- Left: k > 0 -->
+                <rect x="20" y="40" width="270" height="240" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="155" y="60" font-family="sans-serif" font-size="14" fill="#16a34a" font-weight="bold" text-anchor="middle">k > 0 (например, y = 6/x)</text>
+                
+                <!-- Axes for left -->
+                <line x1="80" y1="160" x2="230" y2="160" stroke="#1e293b" stroke-width="2"/>
+                <line x1="155" y1="80" x2="155" y2="240" stroke="#1e293b" stroke-width="2"/>
+                
+                <!-- Branches for k > 0 -->
+                <path d="M 165 100 Q 180 130 190 145 Q 210 155 225 158" stroke="#16a34a" stroke-width="2" fill="none"/>
+                <path d="M 145 220 Q 130 190 120 175 Q 100 165 85 162" stroke="#16a34a" stroke-width="2" fill="none"/>
+                
+                <text x="155" y="270" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">I и III четверти</text>
+                
+                <!-- Right: k < 0 -->
+                <rect x="310" y="40" width="270" height="240" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="445" y="60" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold" text-anchor="middle">k < 0 (например, y = -6/x)</text>
+                
+                <!-- Axes for right -->
+                <line x1="370" y1="160" x2="520" y2="160" stroke="#1e293b" stroke-width="2"/>
+                <line x1="445" y1="80" x2="445" y2="240" stroke="#1e293b" stroke-width="2"/>
+                
+                <!-- Branches for k < 0 -->
+                <path d="M 435 100 Q 420 130 410 145 Q 390 155 375 158" stroke="#dc2626" stroke-width="2" fill="none"/>
+                <path d="M 455 220 Q 470 190 480 175 Q 500 165 515 162" stroke="#dc2626" stroke-width="2" fill="none"/>
+                
+                <text x="445" y="270" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">II и IV четверти</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2> Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника (§8, упражнения 181–198).</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№181 из учебника)</h3>
+            <p>Функция задана формулой y = 8/x. Перечертите таблицу и заполните её:</p>
+            
+            <table class="values-table">
+                <tr>
+                    <th>x</th>
+                    <td>-4</td>
+                    <td>-2</td>
+                    <td>-0.25</td>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <th>y</th>
+                    <td>?</td>
+                    <td>?</td>
+                    <td>?</td>
+                    <td>?</td>
+                    <td>?</td>
+                    <td>?</td>
+                </tr>
+            </table>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Используем формулу y = 8/x. Для каждого x вычисляем y.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Вычисляем значения:<br>
+                    • При x = -4: y = 8/(-4) = <b>-2</b><br>
+                    • При x = -2: y = 8/(-2) = <b>-4</b><br>
+                    • При x = -0.25: y = 8/(-0.25) = <b>-32</b><br>
+                    • При x = 2: y = 8/2 = <b>4</b><br>
+                    • При x = 5: y = 8/5 = <b>1.6</b><br>
+                    • При x = 16: y = 8/16 = <b>0.5</b>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Заполняем таблицу:
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    <table class="values-table">
+                        <tr>
+                            <th>x</th>
+                            <td>-4</td>
+                            <td>-2</td>
+                            <td>-0.25</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <th>y</th>
+                            <td>-2</td>
+                            <td>-4</td>
+                            <td>-32</td>
+                            <td>4</td>
+                            <td>1.6</td>
+                            <td>0.5</td>
+                        </tr>
+                    </table>
+                    <b>Проверка:</b> x · y = 8 для всех пар: (-4)·(-2) = 8 ✓, (-2)·(-4) = 8 ✓, (-0.25)·(-32) = 8 ✓, 2·4 = 8 ✓, 5·1.6 = 8 ✓, 16·0.5 = 8 ✓. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 2 (№188 из учебника)</h3>
+            <p>Постройте график функции:</p>
+            <div class="formula">
+                а) y = <span class="fraction"><span class="num">6</span><span class="den">x</span></span>; &nbsp;&nbsp;&nbsp; б) y = -<span class="fraction"><span class="num">6</span><span class="den">x</span></span>; &nbsp;&nbsp;&nbsp; в) y = <span class="fraction"><span class="num">1</span><span class="den">x</span></span>; &nbsp;&nbsp;&nbsp; г) y = -<span class="fraction"><span class="num">1</span><span class="den">x</span></span>; &nbsp;&nbsp;&nbsp; д) y = <span class="fraction"><span class="num">3</span><span class="den">x</span></span>; &nbsp;&nbsp;&nbsp; е) y = -<span class="fraction"><span class="num">3</span><span class="den">x</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Определяем знак k для каждой функции:<br>
+                    • а) k = 6 > 0 → ветви в I и III четвертях<br>
+                    • б) k = -6 < 0 → ветви во II и IV четвертях<br>
+                    • в) k = 1 > 0 → ветви в I и III четвертях<br>
+                    • г) k = -1 < 0 → ветви во II и IV четвертях<br>
+                    • д) k = 3 > 0 → ветви в I и III четвертях<br>
+                    • е) k = -3 < 0 → ветви во II и IV четвертях
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Для каждой функции находим несколько точек. Например, для y = 6/x:<br>
+                    • x = 1, y = 6<br>
+                    • x = 2, y = 3<br>
+                    • x = 3, y = 2<br>
+                    • x = 6, y = 1<br>
+                    • x = -1, y = -6<br>
+                    • x = -2, y = -3<br>
+                    • x = -3, y = -2<br>
+                    • x = -6, y = -1
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Отмечаем точки на координатной плоскости и соединяем плавной кривой.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> Все шесть графиков — гиперболы. При k > 0 (а, в, д) ветви в I и III четвертях, при k < 0 (б, г, е) — во II и IV. Чем больше |k|, тем дальше ветви от начала координат. ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№194 из учебника)</h3>
+            <p>На рисунке построен график зависимости времени, затрачиваемого на путь из пункта A в пункт B, от скорости движения. С помощью графика ответьте на вопросы:</p>
+            <p>а) Сколько времени потребуется на путь при скорости 80 км/ч? 25 км/ч? 40 км/ч?</p>
+            <p>б) С какой скоростью надо двигаться, чтобы добраться за 1 ч? за 4 ч? за 8 ч? за 16 ч?</p>
+            <p>в) Каково расстояние между пунктами A и B?</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Определяем расстояние. Из графика видно, что при скорости 40 км/ч время равно 2 ч. Значит, расстояние s = v · t = 40 · 2 = <b>80 км</b>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Формула зависимости: t = 80/v (обратная пропорциональность).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Ответ на вопрос а):<br>
+                    • При v = 80 км/ч: t = 80/80 = <b>1 ч</b><br>
+                    • При v = 25 км/ч: t = 80/25 = <b>3.2 ч</b> (3 ч 12 мин)<br>
+                    • При v = 40 км/ч: t = 80/40 = <b>2 ч</b>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Ответ на вопрос б):<br>
+                    • При t = 1 ч: v = 80/1 = <b>80 км/ч</b><br>
+                    • При t = 4 ч: v = 80/4 = <b>20 км/ч</b><br>
+                    • При t = 8 ч: v = 80/8 = <b>10 км/ч</b><br>
+                    • При t = 16 ч: v = 80/16 = <b>5 км/ч</b>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    а) 1 ч; 3.2 ч; 2 ч<br>
+                    б) 80 км/ч; 20 км/ч; 10 км/ч; 5 км/ч<br>
+                    в) Расстояние между A и B = <b>80 км</b><br>
+                    <b>Проверка:</b> 80·1 = 80 ✓, 25·3.2 = 80 ✓, 40·2 = 80 ✓. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 4 (№195 из учебника)</h3>
+            <p>Определите знак числа k, зная, что график функции y = k/x расположен:</p>
+            <p>а) в первой и третьей координатных четвертях;</p>
+            <p>б) во второй и четвёртой координатных четвертях.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Вспоминаем правило расположения ветвей гиперболы.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Если ветви в I и III четвертях, то k > 0 (положительное число).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Если ветви во II и IV четвертях, то k < 0 (отрицательное число).
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    а) k > 0<br>
+                    б) k < 0<br>
+                    <b>Примеры:</b> y = 5/x (k = 5 > 0) — ветви в I и III; y = -5/x (k = -5 < 0) — ветви во II и IV. ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2> Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+        
+        <h3>🟢 Базовый уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>1.</b> Найди значение y при x = 4, если y = 20/x
+            </div>
+            <div class="exercise-item">
+                <b>2.</b> Принадлежит ли точка A(2; 6) графику y = 12/x?
+            </div>
+            <div class="exercise-item">
+                <b>3.</b> В каких четвертях расположен график y = -7/x?
+            </div>
+            <div class="exercise-item">
+                <b>4.</b> Найди k, если график проходит через точку (3; 4)
+            </div>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>5.</b> Заполни таблицу для y = 10/x: x = -5, -2, -1, 1, 2, 5
+            </div>
+            <div class="exercise-item">
+                <b>6.</b> Построй график y = 4/x и найди y при x = 0.5
+            </div>
+            <div class="exercise-item">
+                <b>7.</b> Докажи, что если (a; b) лежит на графике y = k/x, то (-a; -b) тоже лежит
+            </div>
+            <div class="exercise-item">
+                <b>8.</b> Найди все целые значения x, при которых y = 12/x — целое число
+            </div>
+        </div>
+
+        <h3> Продвинутый уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>9.</b> График y = k/x проходит через (2; 6). Найди k и построй график
+            </div>
+            <div class="exercise-item">
+                <b>10.</b> Докажи, что произведение координат любой точки гиперболы y = k/x равно k
+            </div>
+            <div class="exercise-item">
+                <b>11.</b> Сравни графики y = 2/x и y = 8/x. Какой дальше от начала координат?
+            </div>
+            <div class="exercise-item">
+                <b>12.</b> Реши графически уравнение 6/x = x
+            </div>
+        </div>
+
+        <details>
+            <summary> Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. y = 5<br>
+                2. Да, 2·6 = 12 ✓<br>
+                3. Во II и IV четвертях<br>
+                4. k = 12<br>
+                5. y = -2, -5, -10, 10, 5, 2<br>
+                6. y = 8<br>
+                7. Если ab = k, то (-a)(-b) = ab = k ✓<br>
+                8. x = ±1, ±2, ±3, ±4, ±6, ±12<br>
+                9. k = 12, график y = 12/x<br>
+                10. x·y = x·(k/x) = k ✓<br>
+                11. y = 8/x дальше (|k| больше)<br>
+                12. x = ±√6 ≈ ±2.45
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>🚗 Задача для инженера-логиста</h3>
+        <p>Ты планируешь доставку груза из Москвы в Санкт-Петербург (расстояние 700 км). Время в пути зависит от скорости по формуле t = 700/v. Построй график этой зависимости и определи:</p>
+        <p>а) Сколько времени займёт поездка при скорости 100 км/ч? 140 км/ч?</p>
+        <p>б) С какой скоростью нужно ехать, чтобы доехать за 5 ч? за 7 ч?</p>
+        <p>в) Почему нельзя подставить v = 0?</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Формула: t = 700/v (обратная пропорциональность, k = 700).
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Ответ на вопрос а):<br>
+                • При v = 100 км/ч: t = 700/100 = <b>7 ч</b><br>
+                • При v = 140 км/ч: t = 700/140 = <b>5 ч</b>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Ответ на вопрос б):<br>
+                • При t = 5 ч: v = 700/5 = <b>140 км/ч</b><br>
+                • При t = 7 ч: v = 700/7 = <b>100 км/ч</b>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> При v = 0 формула t = 700/0 не имеет смысла (на ноль делить нельзя!). Физически это означает: если машина не движется, она никогда не доедет.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b><br>
+                а) 7 ч; 5 ч<br>
+                б) 140 км/ч; 100 км/ч<br>
+                в) При v = 0 деление на ноль невозможно — машина не движется.<br>
+                <b>Проверка:</b> 100·7 = 700 ✓, 140·5 = 700 ✓. Всё верно! 🚗
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Формула:</b> y = k/x, где k ≠ 0 — обратная пропорциональность.</li>
+            <li><b>Область определения:</b> все числа, кроме 0 (x ≠ 0).</li>
+            <li><b>График:</b> гипербола из двух ветвей.</li>
+            <li><b>Расположение ветвей:</b> при k > 0 — в I и III четвертях, при k < 0 — во II и IV.</li>
+            <li><b>Свойство:</b> x₁/x₂ = y₂/y₁ (отношение значений аргумента равно обратному отношению значений функции).</li>
+            <li><b>Произведение координат:</b> для любой точки (x; y) на графике x·y = k.</li>
+            <li>💡 <b>Лайфхак:</b> чем больше |k|, тем дальше ветви гиперболы от начала координат.</li>
+            <li>💡 <b>Симметрия:</b> гипербола симметрична относительно начала координат (0; 0).</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Путаница с четвертями:</i> ученики часто путают, где расположены ветви при k > 0 и k < 0. Напоминайте: «плюс — плюс и минус-минус» (I и III), «минус — плюс-минус и минус-плюс» (II и IV).</li>
+            <li><i>Деление на ноль:</i> забывают, что x ≠ 0. Требуйте всегда проверять область определения.</li>
+            <li><i>Неправильное построение:</i> соединяют ветви гиперболы через ноль. Подчёркивайте, что это две отдельные кривые!</li>
+            <li><i>Потеря знака:</i> при вычислении y для отрицательных x забывают минус в ответе.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте таблицу-шаблон: сначала вычислить k = x·y, потом проверять все точки.</li>
+            <li>Используйте цветные маркеры: ветви при k > 0 — зелёным, при k < 0 — красным.</li>
+            <li>Начните с простых k (1, 2, -1, -2), потом переходите к дробным.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача №198 из учебника (доказать, что значение дроби не зависит от переменных).</li>
+            <li>Попросите их исследовать, как меняется график при изменении k (анимация или серия графиков).</li>
+            <li>Задача на нахождение k по двум точкам и доказательство, что они лежат на одной гиперболе.</li>
+            <li>Исследуйте симметрию гиперболы относительно прямой y = x и y = -x.</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-7.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-1-10.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §8)
+    </footer>
+
+
+</div>
+
+</body>
+</html>

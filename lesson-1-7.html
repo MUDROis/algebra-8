@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преобразование рациональных выражений — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .exercise-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>🔄 Преобразование рациональных выражений</h1>
+        <p class="subtitle">Урок 7 • Глава 1, §7</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+        
+        <h3>🪝 Разминка: Средняя скорость</h3>
+        <p>Представь, что ты едешь на велосипеде: первый километр — со скоростью 10 км/ч, второй — 20 км/ч. Какая средняя скорость? Не 15 км/ч! Если бы ты ехал 1 км за 6 минут и 1 км за 3 минуты, то 2 км за 9 минут = 13.3 км/ч. В алгебре мы научимся выводить точную формулу для таких случаев! 🚴</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Рациональное выражение</b></td>
+                <td>Любое выражение из дробей, многочленов и действий (+, −, ×, ).</td>
+            </tr>
+            <tr>
+                <td><b>Преобразование</b></td>
+                <td>Упрощение выражения до вида одной рациональной дроби.</td>
+            </tr>
+            <tr>
+                <td><b>Порядок действий</b></td>
+                <td>Сначала умножение/деление, потом сложение/вычитание. Скобки — в первую очередь!</td>
+            </tr>
+            <tr>
+                <td><b>Основное свойство дроби</b></td>
+                <td>Можно умножать/делить числитель и знаменатель на одно и то же выражение.</td>
+            </tr>
+            <tr>
+                <td><b>Среднее гармоническое</b></td>
+                <td>Особый вид среднего, используемый для скоростей на одинаковых участках пути.</td>
+            </tr>
+            <tr>
+                <td><b>Тождество</b></td>
+                <td>Равенство, верное при всех допустимых значениях переменных.</td>
+            </tr>
+            <tr>
+                <td><b>ОДЗ</b></td>
+                <td>Область допустимых значений: все знаменатели ≠ 0.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+        
+        <div class="rule-box">
+            <b>Правило 1: Любое рациональное выражение → одна дробь</b><br>
+            Сумму, разность, произведение и частное рациональных дробей всегда можно представить в виде одной рациональной дроби.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Алгоритм преобразования -->
+            <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Алгоритм преобразования рациональных выражений</text>
+                
+                <!-- Step 1 -->
+                <rect x="20" y="50" width="130" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="85" y="75" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">1. Скобки</text>
+                <text x="85" y="95" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Сначала действия</text>
+                <text x="85" y="108" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">в скобках</text>
+                
+                <!-- Arrow -->
+                <path d="M 150 80 L 180 80" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+                
+                <!-- Step 2 -->
+                <rect x="180" y="50" width="130" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="245" y="75" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">2. × и ÷</text>
+                <text x="245" y="95" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Умножение и</text>
+                <text x="245" y="108" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">деление дробей</text>
+                
+                <!-- Arrow -->
+                <path d="M 310 80 L 340 80" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                
+                <!-- Step 3 -->
+                <rect x="340" y="50" width="130" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="405" y="75" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">3. + и −</text>
+                <text x="405" y="95" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Сложение и</text>
+                <text x="405" y="108" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">вычитание</text>
+                
+                <!-- Arrow -->
+                <path d="M 470 80 L 500 80" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                
+                <!-- Step 4 -->
+                <rect x="500" y="50" width="90" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="545" y="75" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">4. Сократить</text>
+                <text x="545" y="95" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Итоговая</text>
+                <text x="545" y="108" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">дробь</text>
+                
+                <text x="300" y="145" font-family="sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Порядок действий тот же, что и для чисел!</text>
+                
+                <!-- Example -->
+                <rect x="100" y="160" width="400" height="35" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+                <text x="300" y="182" font-family="Courier New, monospace" font-size="14" fill="#1e293b" text-anchor="middle">Пример: (a/b + b/a) · ab/(a²+b²) + 1</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Умножение числителя и знаменателя на одно выражение</b><br>
+            Если в числителе и знаменателе сложной дроби есть дроби, можно умножить числитель и знаменатель всей дроби на общий знаменатель внутренних дробей — это упростит выражение.
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">x/y − y/x</span><span class="den">x/y + y/x − 2</span></span> · <span class="fraction"><span class="num">xy</span><span class="den">xy</span></span> = <span class="fraction"><span class="num">x² − y²</span><span class="den">x² + y² − 2xy</span></span> = <span class="fraction"><span class="num">(x−y)(x+y)</span><span class="den">(x−y)²</span></span> = <span class="fraction"><span class="num">x+y</span><span class="den">x−y</span></span>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Формула средней скорости на равных участках</b><br>
+            Если пройдено <i>n</i> участков одинаковой длины со скоростями <i>v₁, v₂, ..., vₙ</i>, то средняя скорость:
+        </div>
+
+        <div class="formula">
+            v<sub>ср</sub> = n / (1/v₁ + 1/v₂ + ... + 1/vₙ)
+        </div>
+
+        <p>Для двух участков: <span class="formula" style="display:inline-block; padding:8px; font-size:1rem;">v<sub>ср</sub> = 2v₁v₂ / (v₁ + v₂)</span></p>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника, соблюдая порядок действий.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (по мотивам Примера 1 из учебника)</h3>
+            <p>Преобразуйте в рациональную дробь выражение:</p>
+            <div class="formula">
+                (x + 1) − <span class="fraction"><span class="num">x² − 4</span><span class="den">x + 2</span></span> · <span class="fraction"><span class="num">1</span><span class="den">x</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Соблюдаем порядок действий: сначала умножение дробей (в правой части).<br>
+                    <span class="fraction"><span class="num">x² − 4</span><span class="den">x + 2</span></span> · <span class="fraction"><span class="num">1</span><span class="den">x</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Раскладываем числитель как разность квадратов: <i>x² − 4 = (x − 2)(x + 2)</i>.<br>
+                    <span class="fraction"><span class="num">(x − 2)(x + 2)</span><span class="den">x + 2</span></span> · <span class="fraction"><span class="num">1</span><span class="den">x</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Сокращаем на <i>(x + 2)</i> (при <i>x ≠ −2</i>):<br>
+                    <span class="fraction"><span class="num">(x − 2)(x + 2)</span><span class="den">(x + 2) · x</span></span> = <span class="fraction"><span class="num">x − 2</span><span class="den">x</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Теперь вычитаем из многочлена <i>(x + 1)</i> полученную дробь. Представляем <i>(x + 1)</i> как дробь со знаменателем <i>x</i>:<br>
+                    <i>x + 1 = x(x + 1)/x = (x² + x)/x</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Выполняем вычитание:<br>
+                    <span class="fraction"><span class="num">x² + x</span><span class="den">x</span></span> − <span class="fraction"><span class="num">x − 2</span><span class="den">x</span></span> = <span class="fraction"><span class="num">x² + x − (x − 2)</span><span class="den">x</span></span> = <span class="fraction"><span class="num">x² + x − x + 2</span><span class="den">x</span></span> = <span class="fraction"><span class="num">x² + 2</span><span class="den">x</span></span>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">x² + 2</span><span class="den">x</span></span> (при <i>x ≠ 0, x ≠ −2</i>).<br>
+                    <b>Проверка:</b> Подставим <i>x = 2</i>. Исходная: <i>3 − (0/4)·(1/2) = 3 − 0 = 3</i>. Ответ: <i>(4+2)/2 = 3</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (по мотивам Примера 2 из учебника)</h3>
+            <p>Представьте выражение в виде рациональной дроби:</p>
+            <div class="formula">
+                (<span class="fraction"><span class="num">b</span><span class="den">a − b</span></span> + <span class="fraction"><span class="num">a</span><span class="den">a + b</span></span>) · <span class="fraction"><span class="num">ab</span><span class="den">a² + b²</span></span> + 1
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Сначала выполняем действие в скобках — сложение дробей. Общий знаменатель: <i>(a − b)(a + b) = a² − b²</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Приводим к общему знаменателю:<br>
+                    <span class="fraction"><span class="num">b(a + b) + a(a − b)</span><span class="den">(a − b)(a + b)</span></span> = <span class="fraction"><span class="num">ab + b² + a² − ab</span><span class="den">a² − b²</span></span> = <span class="fraction"><span class="num">a² + b²</span><span class="den">a² − b²</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Умножаем полученную дробь на <span class="fraction"><span class="num">ab</span><span class="den">a² + b²</span></span>:<br>
+                    <span class="fraction"><span class="num">a² + b²</span><span class="den">a² − b²</span></span> · <span class="fraction"><span class="num">ab</span><span class="den">a² + b²</span></span> = <span class="fraction"><span class="num">ab</span><span class="den">a² − b²</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Прибавляем 1. Представляем 1 как дробь со знаменателем <i>(a² − b²)</i>:<br>
+                    <span class="fraction"><span class="num">ab</span><span class="den">a² − b²</span></span> + <span class="fraction"><span class="num">a² − b²</span><span class="den">a² − b²</span></span> = <span class="fraction"><span class="num">ab + a² − b²</span><span class="den">a² − b²</span></span>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">a² + ab − b²</span><span class="den">a² − b²</span></span> (при <i>a ≠ ±b</i>).<br>
+                    <b>Проверка:</b> Подставим <i>a = 2, b = 1</i>. Исходная: <i>(1/1 + 2/3) · 2/5 + 1 = (5/3) · (2/5) + 1 = 2/3 + 1 = 5/3</i>. Ответ: <i>(4+2−1)/(4−1) = 5/3</i>. Всё верно! ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (по мотивам №163а из учебника)</h3>
+            <p>Докажите, что при всех допустимых значениях переменных значение выражения не зависит от <i>a</i> и <i>b</i>:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">a + b</span><span class="den">a − b</span></span> − <span class="fraction"><span class="num">a − b</span><span class="den">a + b</span></span> − <span class="fraction"><span class="num">4ab</span><span class="den">a² − b²</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Находим общий знаменатель. Заметим, что <i>a² − b² = (a − b)(a + b)</i>. Значит, общий знаменатель — <i>(a − b)(a + b)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Приводим все дроби к общему знаменателю:<br>
+                    <span class="fraction"><span class="num">(a + b)²</span><span class="den">(a − b)(a + b)</span></span> − <span class="fraction"><span class="num">(a − b)²</span><span class="den">(a − b)(a + b)</span></span> − <span class="fraction"><span class="num">4ab</span><span class="den">(a − b)(a + b)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Раскрываем квадраты в числителях:<br>
+                    <i>(a + b)² = a² + 2ab + b²</i><br>
+                    <i>(a − b)² = a² − 2ab + b²</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Выполняем вычитание числителей (не забываем про скобки!):<br>
+                    <i>(a² + 2ab + b²) − (a² − 2ab + b²) − 4ab</i><br>
+                    = <i>a² + 2ab + b² − a² + 2ab − b² − 4ab</i><br>
+                    = <i>(a² − a²) + (2ab + 2ab − 4ab) + (b² − b²)</i><br>
+                    = <i>0 + 0 + 0 = 0</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Записываем результат:<br>
+                    <span class="fraction"><span class="num">0</span><span class="den">a² − b²</span></span> = 0
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 0 (при <i>a ≠ ±b</i>).<br>
+                    <b>Вывод:</b> Переменные <i>a</i> и <i>b</i> полностью исчезли! Значение выражения равно 0 при любых допустимых <i>a</i> и <i>b</i>. Доказано! ✅<br>
+                    <b>Проверка:</b> Подставим <i>a = 3, b = 1</i>. Исходная: <i>4/2 − 2/4 − 12/8 = 2 − 0.5 − 1.5 = 0</i>. Всё верно! 
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2>📝 Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+        
+        <h3>🟢 Базовый уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>1.</b> (<span class="fraction"><span class="num">a</span><span class="den">b</span></span> − <span class="fraction"><span class="num">b</span><span class="den">a</span></span>) · <span class="fraction"><span class="num">a + b</span><span class="den">a − b</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>2.</b> (<span class="fraction"><span class="num">x</span><span class="den">y</span></span> + <span class="fraction"><span class="num">y</span><span class="den">x</span></span>) · <span class="fraction"><span class="num">xy</span><span class="den">x² + y²</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>3.</b> <span class="fraction"><span class="num">m</span><span class="den">m − n</span></span> − <span class="fraction"><span class="num">n</span><span class="den">m + n</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>4.</b> (<span class="fraction"><span class="num">1</span><span class="den">a</span></span> + <span class="fraction"><span class="num">1</span><span class="den">b</span></span>) : <span class="fraction"><span class="num">a + b</span><span class="den">ab</span></span>
+            </div>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>5.</b> <span class="fraction"><span class="num">2m − 1</span><span class="den">2m + 1</span></span> − <span class="fraction"><span class="num">2m + 1</span><span class="den">2m − 1</span></span> + <span class="fraction"><span class="num">1</span><span class="den">4m² − 1</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>6.</b> (<span class="fraction"><span class="num">x</span><span class="den">x − 2</span></span> − <span class="fraction"><span class="num">x</span><span class="den">x + 2</span></span>) : <span class="fraction"><span class="num">4x</span><span class="den">x² − 4</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>7.</b> <span class="fraction"><span class="num">a² + 2a + 1</span><span class="den">a + 1</span></span> − <span class="fraction"><span class="num">a² − 2a + 1</span><span class="den">a − 1</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>8.</b> (<span class="fraction"><span class="num">1</span><span class="den">x − 1</span></span> − <span class="fraction"><span class="num">1</span><span class="den">x + 1</span></span>) · <span class="fraction"><span class="num">x² − 1</span><span class="den">2</span></span>
+            </div>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="exercise-grid">
+            <div class="exercise-item">
+                <b>9.</b> <span class="fraction"><span class="num">x/y − y/x</span><span class="den">x/y + y/x − 2</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>10.</b> <span class="fraction"><span class="num">a + b</span><span class="den">a − b</span></span> + <span class="fraction"><span class="num">a − b</span><span class="den">a + b</span></span> − <span class="fraction"><span class="num">2(a² + b²)</span><span class="den">a² − b²</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>11.</b> Докажите: <span class="fraction"><span class="num">1</span><span class="den">n(n+1)</span></span> = <span class="fraction"><span class="num">1</span><span class="den">n</span></span> − <span class="fraction"><span class="num">1</span><span class="den">n+1</span></span>
+            </div>
+            <div class="exercise-item">
+                <b>12.</b> Найдите среднюю скорость, если 3 участка по 10 км пройдены со скоростями 5, 10 и 15 км/ч.
+            </div>
+        </div>
+
+        <details>
+            <summary>📋 Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. <span class="fraction"><span class="num">(a + b)²</span><span class="den">ab</span></span><br>
+                2. 2<br>
+                3. <span class="fraction"><span class="num">m² + n²</span><span class="den">m² − n²</span></span><br>
+                4. 1<br>
+                5. <span class="fraction"><span class="num">1 − 8m</span><span class="den">4m² − 1</span></span><br>
+                6. 1<br>
+                7. 4<br>
+                8. 1<br>
+                9. <span class="fraction"><span class="num">x + y</span><span class="den">x − y</span></span><br>
+                10. 0<br>
+                11. Тождество доказано (раскройте правую часть)<br>
+                12. <span class="fraction"><span class="num">90</span><span class="den">11</span></span> ≈ 8.18 км/ч
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>🚴 Задача про среднюю скорость</h3>
+        <p>Велосипедист проехал 3 участка пути одинаковой длины (по 10 км каждый) со скоростями 15 км/ч, 20 км/ч и 30 км/ч. Найди среднюю скорость на всём пути. Почему она не равна среднему арифметическому (20 км/ч)?</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Находим время на каждом участке:<br>
+                <i>t₁ = 10/15 = 2/3 ч</i><br>
+                <i>t₂ = 10/20 = 1/2 ч</i><br>
+                <i>t₃ = 10/30 = 1/3 ч</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Общее время:<br>
+                <i>t = 2/3 + 1/2 + 1/3 = 4/6 + 3/6 + 2/6 = 9/6 = 3/2 ч</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Общий путь: <i>3 · 10 = 30 км</i>.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Средняя скорость:<br>
+                <i>v = 30 / (3/2) = 30 · 2/3 = 20 км/ч</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 5:</b> Проверяем по формуле среднего гармонического:<br>
+                <i>v = 3 / (1/15 + 1/20 + 1/30) = 3 / (4/60 + 3/60 + 2/60) = 3 / (9/60) = 3 · 60/9 = 180/9 = 20 км/ч</i>
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Средняя скорость = <b>20 км/ч</b>.<br>
+                <b>Вывод:</b> В данном случае среднее гармоническое совпало со средним арифметическим (это редкость!). Обычно средняя скорость <b>меньше</b> среднего арифметического, потому что на медленном участке тратится больше времени. ‍♂️
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Порядок действий:</b> скобки → умножение/деление → сложение/вычитание.</li>
+            <li><b>Любое рациональное выражение</b> можно представить в виде одной дроби.</li>
+            <li><b>Основное свойство дроби:</b> умножение числителя и знаменателя на одно выражение упрощает сложные дроби.</li>
+            <li><b>Среднее гармоническое:</b> используется для средних скоростей на равных участках.</li>
+            <li>⚠️ <b>ОДЗ:</b> всегда указывай, при каких значениях переменных выражение имеет смысл.</li>
+            <li>💡 <b>Лайфхак:</b> если после всех преобразований переменные исчезли — выражение не зависит от них (тождество).</li>
+            <li>💡 <b>Проверка:</b> подставь конкретные числа в исходное и полученное выражения — должны совпасть!</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b> Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Нарушение порядка действий:</i> ученики сначала складывают, потом умножают. Требуйте явно расставлять приоритеты.</li>
+            <li><i>Потеря скобок при вычитании:</i> <i>A − (B − C) = A − B + C</i>, а не <i>A − B − C</i>.</li>
+            <li><i>Забытое ОДЗ:</i> после сокращения забывают указать ограничения (например, <i>x ≠ −2</i>).</li>
+            <li><i>Неправильное среднее арифметическое вместо гармонического:</i> средняя скорость ≠ (v₁ + v₂)/2.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Разрешите расписывать каждый шаг отдельно, не пытаясь сделать всё в уме.</li>
+            <li>Используйте цветные маркеры: числители — синим, знаменатели — красным, общие множители — зелёным.</li>
+            <li>Дайте шаблон: «Сначала скобки, потом ×/÷, потом +/−, потом сократить».</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача №164 из учебника (доказать, что выражение — натуральное число при любом натуральном <i>n</i>).</li>
+            <li>Попросите их вывести формулу среднего гармонического для 4 чисел и доказать, что оно всегда меньше среднего арифметического.</li>
+            <li>Исследуйте задачу №172 (найти среднее гармоническое для разных наборов чисел).</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-6.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-1-8.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §7)
+    </footer>
+
+
+</div>
+
+</body>
+</html>

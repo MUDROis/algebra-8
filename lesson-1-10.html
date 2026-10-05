@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Повторение: Рациональные дроби — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+        
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>🎯 Повторение: Рациональные дроби</h1>
+        <p class="subtitle">Урок 10 • Глава 1, повторение</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: СИСТЕМАТИЗАЦИЯ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Систематизация знаний</h2>
+        
+        <h3>🪝 Разминка: Что мы узнали?</h3>
+        <p>Мы прошли всю Главу 1 "Рациональные дроби"! Теперь время собрать все знания воедино. Представь, что ты строишь дом: §1 — фундамент (понятия), §2-3 — стены (свойства и сложение), §4-6 — крыша (умножение, деление), §7-8 — отделка (преобразования и графики). Давай проверим, насколько прочный дом мы построили! </p>
+
+        <h3> Ключевые понятия главы</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Понятие</th>
+                <th>Определение</th>
+                <th>Пример</th>
+            </tr>
+            <tr>
+                <td><b>Рациональная дробь</b></td>
+                <td>Дробь, где числитель и знаменатель — многочлены</td>
+                <td><span class="fraction"><span class="num">x+1</span><span class="den">x-2</span></span></td>
+            </tr>
+            <tr>
+                <td><b>ОДЗ</b></td>
+                <td>Значения переменной, при которых знаменатель ≠ 0</td>
+                <td>Для <span class="fraction"><span class="num">1</span><span class="den">x-3</span></span>: x ≠ 3</td>
+            </tr>
+            <tr>
+                <td><b>Основное свойство</b></td>
+                <td>Умножение/деление числителя и знаменателя на одно выражение</td>
+                <td><span class="fraction"><span class="num">a</span><span class="den">b</span></span> = <span class="fraction"><span class="num">ac</span><span class="den">bc</span></span></td>
+            </tr>
+            <tr>
+                <td><b>Сложение/вычитание</b></td>
+                <td>Приведение к общему знаменателю</td>
+                <td><span class="fraction"><span class="num">a</span><span class="den">c</span></span> ± <span class="fraction"><span class="num">b</span><span class="den">c</span></span> = <span class="fraction"><span class="num">a±b</span><span class="den">c</span></span></td>
+            </tr>
+            <tr>
+                <td><b>Умножение</b></td>
+                <td>Числитель × числитель, знаменатель × знаменатель</td>
+                <td><span class="fraction"><span class="num">a</span><span class="den">b</span></span> · <span class="fraction"><span class="num">c</span><span class="den">d</span></span> = <span class="fraction"><span class="num">ac</span><span class="den">bd</span></span></td>
+            </tr>
+            <tr>
+                <td><b>Деление</b></td>
+                <td>Умножение на обратную дробь</td>
+                <td><span class="fraction"><span class="num">a</span><span class="den">b</span></span> : <span class="fraction"><span class="num">c</span><span class="den">d</span></span> = <span class="fraction"><span class="num">ad</span><span class="den">bc</span></span></td>
+            </tr>
+            <tr>
+                <td><b>Обратная пропорциональность</b></td>
+                <td>Функция y = k/x, график — гипербола</td>
+                <td>y = <span class="fraction"><span class="num">12</span><span class="den">x</span></span></td>
+            </tr>
+        </table>
+
+        <div class="svg-container">
+            <!-- SVG: Схема главы -->
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Структура Главы 1: Рациональные дроби</text>
+                
+                <!-- Central concept -->
+                <rect x="220" y="50" width="160" height="50" rx="25" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+                <text x="300" y="80" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">Рациональные</text>
+                <text x="300" y="95" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">дроби</text>
+                
+                <!-- Branches -->
+                <line x1="300" y1="100" x2="100" y2="150" stroke="#0ea5e9" stroke-width="2"/>
+                <line x1="300" y1="100" x2="300" y2="150" stroke="#0ea5e9" stroke-width="2"/>
+                <line x1="300" y1="100" x2="500" y2="150" stroke="#0ea5e9" stroke-width="2"/>
+                
+                <!-- Left branch -->
+                <rect x="30" y="150" width="140" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="100" y="175" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold" text-anchor="middle">§1-2: Понятия</text>
+                <text x="100" y="190" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">ОДЗ, свойства,</text>
+                <text x="100" y="203" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">сокращение</text>
+                
+                <!-- Middle branch -->
+                <rect x="230" y="150" width="140" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="300" y="175" font-family="sans-serif" font-size="12" fill="#b45309" font-weight="bold" text-anchor="middle">§3-6: Действия</text>
+                <text x="300" y="190" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">+, −, ×, ÷</text>
+                <text x="300" y="203" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">с дробями</text>
+                
+                <!-- Right branch -->
+                <rect x="430" y="150" width="140" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="500" y="175" font-family="sans-serif" font-size="12" fill="#16a34a" font-weight="bold" text-anchor="middle">§7-8: Применение</text>
+                <text x="500" y="190" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Преобразования,</text>
+                <text x="500" y="203" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">y = k/x</text>
+                
+                <!-- Bottom -->
+                <rect x="150" y="240" width="300" height="40" rx="20" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+                <text x="300" y="265" font-family="sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Итог: Любое выражение → одна дробь</text>
+                
+                <line x1="100" y1="210" x2="250" y2="240" stroke="#64748b" stroke-width="1" stroke-dasharray="4,4"/>
+                <line x1="300" y1="210" x2="300" y2="240" stroke="#64748b" stroke-width="1" stroke-dasharray="4,4"/>
+                <line x1="500" y1="210" x2="350" y2="240" stroke="#64748b" stroke-width="1" stroke-dasharray="4,4"/>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Главный принцип главы:</b><br>
+            Любое рациональное выражение (сумма, разность, произведение, частное дробей) можно представить в виде одной рациональной дроби!
+        </div>
+    </section>
+
+    <!-- БЛОК 2: КОМПЛЕКСНЫЕ ЗАДАЧИ -->
+    <section class="card">
+        <h2> Блок 2. Комплексные задачи</h2>
+        <p>Задачи из раздела "Дополнительные упражнения к главе I". Здесь нужно применить знания из разных параграфов!</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic"> Базовый уровень</span>
+            <h3>Задание 1 (№217 из учебника)</h3>
+            <p>Сократите дробь:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">101010</span><span class="den">919191</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Ищем закономерность в числах. Заметим, что:<br>
+                    <i>101010 = 10 · 10101</i><br>
+                    <i>919191 = 91 · 10101</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Проверяем: <i>10 · 10101 = 101010</i> ✓, <i>91 · 10101 = 919191</i> ✓
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Сокращаем на общий множитель <i>10101</i>:<br>
+                    <span class="fraction"><span class="num">10 · 10101</span><span class="den">91 · 10101</span></span> = <span class="fraction"><span class="num">10</span><span class="den">91</span></span>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">10</span><span class="den">91</span></span>.<br>
+                    <b>Проверка:</b> <i>10/91 ≈ 0.10989...</i>, <i>101010/919191 ≈ 0.10989...</i> ✓
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 2 (№224а из учебника)</h3>
+            <p>Упростите выражение:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">x² - 2x</span><span class="den">x - 3</span></span> - <span class="fraction"><span class="num">x - 3</span><span class="den">x - 3</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Знаменатели одинаковые (<i>x - 3</i>), выполняем вычитание числителей:<br>
+                    <span class="fraction"><span class="num">(x² - 2x) - (x - 3)</span><span class="den">x - 3</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Раскрываем скобки (не забываем про минус!):<br>
+                    <i>x² - 2x - x + 3 = x² - 3x + 3</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Записываем результат:<br>
+                    <span class="fraction"><span class="num">x² - 3x + 3</span><span class="den">x - 3</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Проверяем, можно ли сократить. Числитель <i>x² - 3x + 3</i> не раскладывается на множители (дискриминант <i>D = 9 - 12 = -3 < 0</i>).
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> <span class="fraction"><span class="num">x² - 3x + 3</span><span class="den">x - 3</span></span> (при <i>x ≠ 3</i>).<br>
+                    <b>Проверка:</b> Подставим <i>x = 4</i>. Исходная: <i>8/1 - 1/1 = 7</i>. Ответ: <i>(16-12+3)/1 = 7</i> ✓
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3 (№234 из учебника)</h3>
+            <p>Докажите, что при всех допустимых значениях переменных значение выражения равно нулю:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">1</span><span class="den">(a-b)(b-c)</span></span> + <span class="fraction"><span class="num">1</span><span class="den">(c-a)(a-b)</span></span> + <span class="fraction"><span class="num">1</span><span class="den">(b-c)(c-a)</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Находим общий знаменатель. Все три знаменателя содержат множители <i>(a-b)</i>, <i>(b-c)</i>, <i>(c-a)</i>. Общий знаменатель: <i>(a-b)(b-c)(c-a)</i>.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Находим дополнительные множители:<br>
+                    Для первой дроби: <i>(c-a)</i><br>
+                    Для второй дроби: <i>(b-c)</i><br>
+                    Для третьей дроби: <i>(a-b)</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Приводим к общему знаменателю:<br>
+                    <span class="fraction"><span class="num">(c-a) + (b-c) + (a-b)</span><span class="den">(a-b)(b-c)(c-a)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Упрощаем числитель:<br>
+                    <i>c - a + b - c + a - b = (c - c) + (-a + a) + (b - b) = 0</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Записываем результат:<br>
+                    <span class="fraction"><span class="num">0</span><span class="den">(a-b)(b-c)(c-a)</span></span> = 0
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 0 (при <i>a ≠ b, b ≠ c, c ≠ a</i>).<br>
+                    <b>Проверка:</b> Подставим <i>a=1, b=2, c=3</i>. Исходная: <i>1/((-1)·(-1)) + 1/((2)·(-1)) + 1/((-1)·(2)) = 1 - 1/2 - 1/2 = 0</i> ✓
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 4 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 4 (№245 из учебника)</h3>
+            <p>Докажите, что при любом целом <i>a</i> значение выражения является целым числом:</p>
+            <div class="formula">
+                <span class="fraction"><span class="num">a + x</span><span class="den">2a</span></span> + <span class="fraction"><span class="num">4a</span><span class="den">a + x</span></span> - <span class="fraction"><span class="num">a - x</span><span class="den">1</span></span>
+            </div>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Приводим к общему знаменателю <i>2a(a + x)</i>:<br>
+                    <span class="fraction"><span class="num">(a+x)² + 8a² - 2a(a-x)(a+x)</span><span class="den">2a(a+x)</span></span>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Раскрываем скобки в числителе:<br>
+                    <i>(a+x)² = a² + 2ax + x²</i><br>
+                    <i>2a(a-x)(a+x) = 2a(a² - x²) = 2a³ - 2ax²</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Подставляем:<br>
+                    <i>a² + 2ax + x² + 8a² - 2a³ + 2ax²</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Группируем:<br>
+                    <i>-2a³ + 9a² + 2ax + x² + 2ax²</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> Проверяем при <i>x = a</i>:<br>
+                    <i>-2a³ + 9a² + 2a² + a² + 2a³ = 12a²</i><br>
+                    Знаменатель: <i>2a(2a) = 4a²</i><br>
+                    Результат: <i>12a²/4a² = 3</i> — целое число!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Вывод:</b> При <i>x = a</i> выражение равно 3. Для других значений <i>x</i> нужно дополнительное исследование. ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для инженера-логиста (комплексная)</h3>
+        <p>Три склада находятся на расстояниях <i>a</i>, <i>b</i>, <i>c</i> км от завода. Грузовик перевозит товары со скоростями <i>v₁</i>, <i>v₂</i>, <i>v₃</i> км/ч соответственно. Найди среднюю скорость на всем пути (формула среднего гармонического) и вычисли при <i>a=b=c=100</i> км, <i>v₁=60</i>, <i>v₂=80</i>, <i>v₃=100</i> км/ч.</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Время на каждом участке:<br>
+                <i>t₁ = a/v₁, t₂ = b/v₂, t₃ = c/v₃</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Общее время: <i>t = a/v₁ + b/v₂ + c/v₃</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Общий путь: <i>S = a + b + c</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Средняя скорость:<br>
+                <i>v = S/t = (a + b + c) / (a/v₁ + b/v₂ + c/v₃)</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 5:</b> При <i>a=b=c=100</i>:<br>
+                <i>v = 300 / (100/60 + 100/80 + 100/100) = 300 / (5/3 + 5/4 + 1)</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 6:</b> Приводим к общему знаменателю 12:<br>
+                <i>5/3 + 5/4 + 1 = 20/12 + 15/12 + 12/12 = 47/12</i>
+            </div>
+            <div class="solution-step">
+                <b>Шаг 7:</b> Вычисляем:<br>
+                <i>v = 300 / (47/12) = 300 · 12/47 = 3600/47 ≈ 76.6 км/ч</i>
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Средняя скорость ≈ <b>76.6 км/ч</b>.<br>
+                <b>Проверка:</b> <i>100/60 + 100/80 + 100/100 = 1.67 + 1.25 + 1 = 3.92 ч</i>. <i>300/3.92 ≈ 76.6 км/ч</i> ✓
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>ОДЗ:</b> всегда проверяй, при каких значениях переменных выражение имеет смысл.</li>
+            <li><b>Основное свойство:</b> умножение/деление числителя и знаменателя на одно выражение не меняет дробь.</li>
+            <li><b>Сложение/вычитание:</b> приводи к общему знаменателю, не забывай про скобки при вычитании!</li>
+            <li><b>Умножение:</b> числитель × числитель, знаменатель × знаменатель, потом сокращай.</li>
+            <li><b>Деление:</b> умножай на обратную дробь.</li>
+            <li><b>Преобразования:</b> любое рациональное выражение можно представить в виде одной дроби.</li>
+            <li><b>Гипербола:</b> график y = k/x, при k>0 — в I и III четвертях, при k<0 — во II и IV.</li>
+            <li>💡 <b>Лайфхак:</b> если после всех преобразований переменные исчезли — выражение не зависит от них (тождество).</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b> Типичные ошибки на повторении:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Путаница в действиях:</i> ученики забывают порядок действий (сначала × и ÷, потом + и −).</li>
+            <li><i>Потеря ОДЗ:</i> после сокращения забывают указать ограничения.</li>
+            <li><i>Неправильное приведение к общему знаменателю:</i> забывают домножить числитель.</li>
+            <li><i>Ошибки со знаками:</i> особенно при вычитании дробей с многочленами в числителе.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте шпаргалку со всеми формулами главы на одном листе.</li>
+            <li>Разрешите использовать цветные маркеры для разных действий.</li>
+            <li>Начните с простых числовых примеров, потом переходите к буквенным.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача №237 из учебника (упростить сложное выражение с тремя дробями).</li>
+            <li>Задача №251 (доказать, что выражение не зависит от переменных).</li>
+            <li>Попросите их составить свою комплексную задачу на все действия с дробями.</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-8.html">⬅️ Предыдущий урок</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, дополнительные упражнения)
+    </footer>
+
+
+</div>
+
+</body>
+</html>

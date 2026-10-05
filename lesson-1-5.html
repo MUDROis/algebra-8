@@ -21,7 +21,12 @@
 
         body {
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-            background-color: var(--bg);
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
             color: var(--text);
             line-height: 1.6;
             font-size: 16px;
@@ -34,17 +39,30 @@
         }
 
         header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
             text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
         }
 
+
         header h1 { font-size: 1.8rem; margin-bottom: 10px; }
-        header p { font-size: 1rem; opacity: 0.9; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
 
         .card {
             background: var(--card-bg);
@@ -233,6 +251,31 @@
             .terms-table { font-size: 0.85rem; }
             .terms-table th, .terms-table td { padding: 8px; }
         }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -240,8 +283,10 @@
 <div class="container">
 
     <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
         <h1>✖️ Умножение дробей. Возведение дроби в степень</h1>
-        <p>Алгебра, 8 класс | Глава 1, §5</p>
+        <p class="subtitle">Урок 5 • Глава 1, §5</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
     </header>
 
     <!-- БЛОК 1: ИЗУЧЕНИЕ -->
@@ -550,10 +595,17 @@
         </ul>
     </div>
 
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-4.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-1-6.html">Следующий урок ➡️</a>
+    </nav>
+
     <footer>
-        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §5)<br>
-        Создано с ❤️ для современных уроков
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §5)
     </footer>
+
 
 </div>
 
