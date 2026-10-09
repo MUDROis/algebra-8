@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квадратный корень из произведения и дроби — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120,140,170,.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120,140,170,.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.65;
+        }
+        .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 40px; }
+
+        header {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            text-align: center;
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            margin-bottom: 12px;
+        }
+        header h1 { font-size: 1.55rem; margin-bottom: 6px; }
+        .subtitle { color: var(--text-light); font-size: .95rem; }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            padding: 26px 24px;
+            margin-bottom: 22px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .card h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .92rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+        th { background: #eff6ff; font-weight: 600; }
+
+        .formula {
+            color: var(--formula);
+            font-weight: 700;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+        }
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05rem;
+        }
+        .step-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-box b { color: var(--primary); }
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .warn-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .theorem-box {
+            background: #f0fdf4;
+            border: 2px solid #16a34a;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin: 14px 0;
+        }
+        .theorem-box h4 { color: #166534; margin-bottom: 8px; }
+
+        details {
+            margin: 12px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        summary {
+            cursor: pointer;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: .95rem;
+            user-select: none;
+        }
+        summary:hover { background: #e2e8f0; }
+        details > div { padding: 14px 16px; }
+
+        .level { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .8rem; font-weight: 700; margin-right: 6px; }
+        .level-basic  { background: #dcfce7; color: #166534; }
+        .level-mid    { background: #dbeafe; color: #1e40af; }
+        .level-adv    { background: #f3e8ff; color: #6b21a8; }
+
+        .practice-box { border-left: 5px solid var(--warning); }
+        .summary-box  { border-left: 5px solid var(--success); }
+        .teacher-note { border-left: 5px solid var(--purple); font-size: .93rem; }
+        .teacher-note h2 { border-bottom-color: var(--purple); }
+
+        .lesson-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0 18px;
+        }
+        .lesson-nav a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: .92rem;
+            transition: background .2s;
+        }
+        .lesson-nav a:hover { background: var(--accent); }
+
+        footer { text-align: center; color: var(--text-light); font-size: .85rem; padding-top: 8px; }
+
+        .svg-wrap { text-align: center; margin: 16px 0; }
+        .svg-wrap svg { max-width: 100%; height: auto; }
+
+        @media (max-width: 600px) {
+            .container { padding: 12px 8px 30px; }
+            header { padding: 20px 14px; }
+            header h1 { font-size: 1.25rem; }
+            .card { padding: 18px 14px; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════ ШАПКА ═══════════ -->
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>✖️➗ Квадратный корень из произведения и дроби</h1>
+        <p class="subtitle">Глава 2, § 15</p>
+    </header>
+
+    <!-- ═══════════ БЛОК 1: ИЗУЧЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение нового</h2>
+
+        <h3>🪝 Разминка: два волшебных свойства</h3>
+        <p>Сравни: <span class="formula">√(81·4)</span> и
+           <span class="formula">√81 · √4</span>.<br>
+           <span class="formula">√(81·4) = √324 = 18</span><br>
+           <span class="formula">√81 · √4 = 9 · 2 = 18</span><br>
+           Результаты совпадают! Это не случайность — это <strong>теорема</strong>,
+           которая превращает сложные корни в простые. Сегодня мы докажем её
+           и научимся применять! 🔑</p>
+
+        <h3>📘 Теорема 1. Корень из произведения</h3>
+
+        <div class="theorem-box">
+            <h4>ТЕОРЕМА 1</h4>
+            <p>Если <span class="formula">a ≥ 0</span> и
+               <span class="formula">b ≥ 0</span>, то</p>
+            <div class="formula-box">
+                <span class="formula">√(a·b) = √a · √b</span>
+            </div>
+            <p><strong>Словами:</strong> корень из произведения неотрицательных
+               множителей равен произведению корней из этих множителей.</p>
+        </div>
+
+        <div class="step-box">
+            <b>Доказательство.</b> Нужно проверить два условия:<br>
+            ① <span class="formula">√a · √b ≥ 0</span> — верно, так как оба корня
+            неотрицательны.<br>
+            ② <span class="formula">(√a · √b)² = (√a)² · (√b)² = a · b</span> — верно.<br>
+            По определению арифметического квадратного корня, теорема доказана. ✅
+        </div>
+
+        <div class="info-box">
+            💡 Теорема распространяется на любое число множителей:<br>
+            <span class="formula">√(a·b·c) = √a · √b · √c</span>
+            (при <span class="formula">a ≥ 0, b ≥ 0, c ≥ 0</span>)
+        </div>
+
+        <h3>📘 Теорема 2. Корень из дроби</h3>
+
+        <div class="theorem-box">
+            <h4>ТЕОРЕМА 2</h4>
+            <p>Если <span class="formula">a ≥ 0</span> и
+               <span class="formula">b > 0</span>, то</p>
+            <div class="formula-box">
+                <span class="formula">√(a/b) = √a / √b</span>
+            </div>
+            <p><strong>Словами:</strong> корень из дроби, числитель которой
+               неотрицателен, а знаменатель положителен, равен корню из числителя,
+               делённому на корень из знаменателя.</p>
+        </div>
+
+        <!-- SVG: две теоремы -->
+        <div class="svg-wrap">
+            <svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Теорема 1 -->
+                <rect x="20" y="20" width="270" height="190" rx="14"
+                      fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="155" y="50" text-anchor="middle"
+                      font-size="14" fill="#166534" font-weight="bold">Теорема 1</text>
+                <text x="155" y="80" text-anchor="middle"
+                      font-size="16" fill="#1e293b" font-weight="bold"
+                      font-family="'Cambria Math','Times New Roman',serif">√(a·b)</text>
+                <text x="155" y="110" text-anchor="middle"
+                      font-size="16" fill="#64748b">=</text>
+                <text x="155" y="140" text-anchor="middle"
+                      font-size="16" fill="#1e293b" font-weight="bold"
+                      font-family="'Cambria Math','Times New Roman',serif">√a · √b</text>
+                <text x="155" y="175" text-anchor="middle"
+                      font-size="12" fill="#64748b">a ≥ 0, b ≥ 0</text>
+                <text x="155" y="198" text-anchor="middle"
+                      font-size="12" fill="#15803d">√(64·0,04) = 8·0,2 = 1,6</text>
+
+                <!-- Теорема 2 -->
+                <rect x="330" y="20" width="270" height="190" rx="14"
+                      fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="465" y="50" text-anchor="middle"
+                      font-size="14" fill="#1e40af" font-weight="bold">Теорема 2</text>
+                <text x="465" y="80" text-anchor="middle"
+                      font-size="16" fill="#1e293b" font-weight="bold"
+                      font-family="'Cambria Math','Times New Roman',serif">√(a/b)</text>
+                <text x="465" y="110" text-anchor="middle"
+                      font-size="16" fill="#64748b">=</text>
+                <text x="465" y="140" text-anchor="middle"
+                      font-size="16" fill="#1e293b" font-weight="bold"
+                      font-family="'Cambria Math','Times New Roman',serif">√a / √b</text>
+                <text x="465" y="175" text-anchor="middle"
+                      font-size="12" fill="#64748b">a ≥ 0, b > 0</text>
+                <text x="465" y="198" text-anchor="middle"
+                      font-size="12" fill="#1e40af">√(36/169) = 6/13</text>
+            </svg>
+        </div>
+
+        <h3>📘 Примеры из учебника</h3>
+
+        <div class="step-box">
+            <b>Пример 1.</b> <span class="formula">√(64 · 0,04)</span><br>
+            <span class="formula">= √64 · √0,04 = 8 · 0,2 = 1,6</span> ✅
+        </div>
+
+        <div class="step-box">
+            <b>Пример 2.</b> <span class="formula">√(32 · 98)</span><br>
+            Разкладываем на полные квадраты:<br>
+            <span class="formula">32 = 16 · 2,  98 = 49 · 2</span><br>
+            <span class="formula">√(32·98) = √(16·2·49·2) = √(16·49·4)
+            = 4 · 7 · 2 = 56</span> ✅
+        </div>
+
+        <div class="step-box">
+            <b>Пример 3.</b> <span class="formula">√(36/169)</span><br>
+            <span class="formula">= √36 / √169 = 6/13</span> ✅
+        </div>
+
+        <div class="step-box">
+            <b>Пример 4.</b> <span class="formula">√20 · √5</span><br>
+            <span class="formula">= √(20·5) = √100 = 10</span> ✅
+        </div>
+
+        <div class="step-box">
+            <b>Пример 5.</b> <span class="formula">√80 / √5</span><br>
+            <span class="formula">= √(80/5) = √16 = 4</span> ✅
+        </div>
+
+        <div class="step-box">
+            <b>Пример 6.</b> <span class="formula">√11025</span><br>
+            Разкладываем: <span class="formula">11025 = 9 · 25 · 49</span><br>
+            <span class="formula">√11025 = √9 · √25 · √49 = 3 · 5 · 7 = 105</span> ✅
+        </div>
+
+        <div class="warn-box">
+            ⚠️ <strong>Обрати внимание:</strong> теоремы работают только для
+            <em>неотрицательных</em> множителей!<br>
+            <span class="formula">√(−4 · 9) ≠ √(−4) · √9</span> — так делать нельзя!<br>
+            Правильно: <span class="formula">√(−4 · 9)</span> не существует,
+            так как <span class="formula">−36 < 0</span>.
+        </div>
+    </section>
+
+    <!-- ═══════════ БЛОК 2: ЗАКРЕПЛЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>Задачи из учебника. Выбери уровень и вперёд! 🚀</p>
+
+        <!-- 🟢 Базовый -->
+        <h3><span class="level level-basic">🟢 Базовый</span>
+            Задание 1 (№ 362 из учебника)</h3>
+        <p>Найдите значение выражения:</p>
+        <div class="formula-box">
+            а) <span class="formula">√(100·49)</span> &nbsp;&nbsp;
+            б) <span class="formula">√(81·400)</span> &nbsp;&nbsp;
+            в) <span class="formula">√(64·121)</span> &nbsp;&nbsp;
+            г) <span class="formula">√(144·0,25)</span> &nbsp;&nbsp;
+            д) <span class="formula">√(0,01·169)</span> &nbsp;&nbsp;
+            е) <span class="formula">√(2,25·0,04)</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√(100·49) = √100 · √49 = 10 · 7 = 70</span> ✅<br>
+                    Проверка: <span class="formula">70² = 4900 = 100·49</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">√(81·400) = √81 · √400 = 9 · 20 = 180</span> ✅<br>
+                    Проверка: <span class="formula">180² = 32400 = 81·400</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">√(64·121) = √64 · √121 = 8 · 11 = 88</span> ✅<br>
+                    Проверка: <span class="formula">88² = 7744 = 64·121</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">√(144·0,25) = √144 · √0,25 = 12 · 0,5 = 6</span> ✅<br>
+                    Проверка: <span class="formula">6² = 36 = 144·0,25</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>д)</b> <span class="formula">√(0,01·169) = √0,01 · √169 = 0,1 · 13 = 1,3</span> ✅<br>
+                    Проверка: <span class="formula">1,3² = 1,69 = 0,01·169</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>е)</b> <span class="formula">√(2,25·0,04) = √2,25 · √0,04 = 1,5 · 0,2 = 0,3</span> ✅<br>
+                    Проверка: <span class="formula">0,3² = 0,09 = 2,25·0,04</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> 70; 180; 88; 6; 1,3; 0,3. Всё верно! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🔵 Средний -->
+        <h3><span class="level level-mid">🔵 Средний</span>
+            Задание 2 (№ 367 из учебника)</h3>
+        <p>Вычислите значение корня (нужно разложить на множители):</p>
+        <div class="formula-box">
+            а) <span class="formula">√(810·40)</span> &nbsp;&nbsp;
+            б) <span class="formula">√(10·250)</span> &nbsp;&nbsp;
+            в) <span class="formula">√(72·32)</span> &nbsp;&nbsp;
+            г) <span class="formula">√(8·98)</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√(810·40)</span><br>
+                    Раскладываем: <span class="formula">810 = 81·10, 40 = 4·10</span><br>
+                    <span class="formula">√(81·10·4·10) = √(81·4·100)
+                    = 9·2·10 = 180</span> ✅<br>
+                    Проверка: <span class="formula">180² = 32400 = 810·40</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">√(10·250)</span><br>
+                    <span class="formula">= √2500 = 50</span> ✅<br>
+                    Проверка: <span class="formula">50² = 2500 = 10·250</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">√(72·32)</span><br>
+                    Раскладываем: <span class="formula">72 = 36·2, 32 = 16·2</span><br>
+                    <span class="formula">√(36·2·16·2) = √(36·16·4)
+                    = 6·4·2 = 48</span> ✅<br>
+                    Проверка: <span class="formula">48² = 2304 = 72·32</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">√(8·98)</span><br>
+                    Раскладываем: <span class="formula">8 = 4·2, 98 = 49·2</span><br>
+                    <span class="formula">√(4·2·49·2) = √(4·49·4)
+                    = 2·7·2 = 28</span> ✅<br>
+                    Проверка: <span class="formula">28² = 784 = 8·98</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> 180; 50; 48; 28. Отлично! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🟣 Продвинутый -->
+        <h3><span class="level level-adv">🟣 Продвинутый</span>
+            Задание 3 (№ 369 + № 368 из учебника)</h3>
+        <p>Вычислите:</p>
+        <div class="formula-box">
+            а) <span class="formula">√(13² − 12²)</span> &nbsp;&nbsp;
+            б) <span class="formula">√(8² + 6²)</span> &nbsp;&nbsp;
+            в) <span class="formula">√(75·48)</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√(13² − 12²)</span><br>
+                    Используем формулу разности квадратов:<br>
+                    <span class="formula">13² − 12² = (13−12)(13+12) = 1·25 = 25</span><br>
+                    <span class="formula">√25 = 5</span> ✅<br>
+                    Проверка: <span class="formula">169 − 144 = 25, √25 = 5</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">√(8² + 6²)</span><br>
+                    <span class="formula">= √(64 + 36) = √100 = 10</span> ✅<br>
+                    Проверка: <span class="formula">10² = 100 = 64+36</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">√(75·48)</span><br>
+                    Раскладываем: <span class="formula">75 = 25·3, 48 = 16·3</span><br>
+                    <span class="formula">√(25·3·16·3) = √(25·16·9)
+                    = 5·4·3 = 60</span> ✅<br>
+                    Проверка: <span class="formula">60² = 3600 = 75·48</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> 5; 10; 60. Блестяще! 🏆</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- ═══════════ БЛОК 3: ПРАКТИКА ═══════════ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для архитектора: диагональ окна</h3>
+        <p>Архитектор проектирует прямоугольное окно со сторонами
+           <span class="formula">6 м</span> и <span class="formula">8 м</span>.
+           Для установки диагональной перемычки нужно найти длину диагонали.
+           Также нужно проверить, поместится ли окно в проём шириной
+           <span class="formula">11 м</span> при наклоне.</p>
+
+        <details>
+            <summary>Показать решение архитектора</summary>
+            <div>
+                <div class="step-box">
+                    <b>Шаг 1.</b> По теореме Пифагора диагональ прямоугольника:<br>
+                    <span class="formula">d = √(a² + b²)</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 2.</b> Подставляем <span class="formula">a = 6, b = 8</span>:<br>
+                    <span class="formula">d = √(6² + 8²) = √(36 + 64) = √100</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 3.</b> Вычисляем:<br>
+                    <span class="formula">d = √100 = 10 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 4.</b> Проверка ширины проёма:<br>
+                    Диагональ = <span class="formula">10 м</span><br>
+                    Ширина проёма = <span class="formula">11 м</span><br>
+                    <span class="formula">10 < 11</span> → окно поместится при наклоне ✅
+                </div>
+                <div class="step-box">
+                    <b>Шаг 5. Проверка:</b><br>
+                    <span class="formula">6² + 8² = 36 + 64 = 100</span><br>
+                    <span class="formula">√100 = 10</span> ✅<br>
+                    <span class="formula">10² = 100</span> ✅
+                </div>
+                <p><strong>Ответ:</strong> диагональ окна =
+                   <span class="formula">10 м</span>.
+                   Окно поместится в проём шириной 11 м. 🏗️</p>
+            </div>
+        </details>
+
+        <div class="info-box">
+            🌍 <strong>Где ещё нужны корни из произведений?</strong><br>
+            • Строительство: диагонали, площади, объёмы
+            <span class="formula">d = √(a²+b²)</span><br>
+            • Физика: кинетическая энергия
+            <span class="formula">E = mv²/2 → v = √(2E/m)</span><br>
+            • Электротехника: импеданс
+            <span class="formula">Z = √(R² + X²)</span><br>
+            • География: расстояние между точками на плоскости
+            <span class="formula">d = √((x₂−x₁)² + (y₂−y₁)²)</span>
+        </div>
+    </section>
+
+    <!-- ═══════════ ИТОГИ ═══════════ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul style="list-style:none;padding:0">
+            <li>✅ <strong>Теорема 1:</strong>
+                <span class="formula">√(a·b) = √a · √b</span> при
+                <span class="formula">a ≥ 0, b ≥ 0</span>.</li>
+            <li>✅ <strong>Теорема 2:</strong>
+                <span class="formula">√(a/b) = √a / √b</span> при
+                <span class="formula">a ≥ 0, b > 0</span>.</li>
+            <li>✅ Теоремы работают в <strong>обе стороны</strong>:<br>
+                <span class="formula">√a · √b = √(a·b)</span> и
+                <span class="formula">√a / √b = √(a/b)</span>.</li>
+            <li>✅ Для упрощения раскладываем подкоренное выражение
+                на <strong>полные квадраты</strong>:
+                <span class="formula">√72 = √(36·2) = 6√2</span>.</li>
+            <li>✅ Теорема о корне из произведения распространяется
+                на любое число множителей.</li>
+            <li>✅ Для разности квадратов:
+                <span class="formula">√(a²−b²) = √((a−b)(a+b))</span>.</li>
+            <li>💡 <strong>Лайфхак:</strong> если под корнем большое число —
+                разложи его на простые множители и вынеси полные квадраты!</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════ ПОДСКАЗКА УЧИТЕЛЮ ═══════════ -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><strong>Типичные ошибки:</strong></p>
+        <ul>
+            <li>Применяют теорему к отрицательным множителям:
+                <span class="formula">√(−4·9) ≠ √(−4)·√9</span>.</li>
+            <li>Путают <span class="formula">√(a+b)</span> и
+                <span class="formula">√a + √b</span> — это разные вещи!
+                Теорема работает только для <em>произведения</em>.</li>
+            <li>Забывают, что знаменатель должен быть строго положительным
+                (<span class="formula">b > 0</span>, а не
+                <span class="formula">b ≥ 0</span>).</li>
+            <li>При разложении на множители пропускают полные квадраты.</li>
+        </ul>
+        <p><strong>🪜 Подмостки для слабых учеников:</strong></p>
+        <ul>
+            <li>Дайте таблицу квадратов 1² … 20² для быстрого поиска.</li>
+            <li>Начните с полных квадратов:
+                <span class="formula">√(4·9), √(16·25), √(36·49)</span>.</li>
+            <li>Используйте алгоритм: «Разложи → Найди полные квадраты → Вынеси».</li>
+            <li>Разрешите калькулятор для проверки, но требуйте ручное разложение.</li>
+        </ul>
+        <p><strong>🚀 Вызов для сильных учеников:</strong></p>
+        <ul>
+            <li>№ 369 из учебника: корни из разности/суммы квадратов.</li>
+            <li>№ 370 из учебника: <span class="formula">√(17²−8²),
+                √(117²−108²)</span>.</li>
+            <li>№ 373 из учебника: докажите тождества.</li>
+            <li>№ 375 из учебника: приближённые значения с использованием
+                свойств корней.</li>
+            <li>Докажите теорему 2 самостоятельно (аналогично теореме 1).</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-14.html">⬅️ Предыдущий урок</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, § 15)
+    </footer>
+
+</div>
+</body>
+</html>

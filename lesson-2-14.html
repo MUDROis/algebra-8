@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Функция y = √x и её график — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120,140,170,.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120,140,170,.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.65;
+        }
+        .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 40px; }
+
+        header {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            text-align: center;
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            margin-bottom: 12px;
+        }
+        header h1 { font-size: 1.55rem; margin-bottom: 6px; }
+        .subtitle { color: var(--text-light); font-size: .95rem; }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            padding: 26px 24px;
+            margin-bottom: 22px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .card h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .92rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+        th { background: #eff6ff; font-weight: 600; }
+
+        .formula {
+            color: var(--formula);
+            font-weight: 700;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+        }
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05rem;
+        }
+        .step-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-box b { color: var(--primary); }
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .warn-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .prop-box {
+            background: #f0fdf4;
+            border: 2px solid #16a34a;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 10px 0;
+        }
+        .prop-box h4 { color: #166534; margin-bottom: 6px; }
+
+        details {
+            margin: 12px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        summary {
+            cursor: pointer;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: .95rem;
+            user-select: none;
+        }
+        summary:hover { background: #e2e8f0; }
+        details > div { padding: 14px 16px; }
+
+        .level { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .8rem; font-weight: 700; margin-right: 6px; }
+        .level-basic  { background: #dcfce7; color: #166534; }
+        .level-mid    { background: #dbeafe; color: #1e40af; }
+        .level-adv    { background: #f3e8ff; color: #6b21a8; }
+
+        .practice-box { border-left: 5px solid var(--warning); }
+        .summary-box  { border-left: 5px solid var(--success); }
+        .teacher-note { border-left: 5px solid var(--purple); font-size: .93rem; }
+        .teacher-note h2 { border-bottom-color: var(--purple); }
+
+        .lesson-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0 18px;
+        }
+        .lesson-nav a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: .92rem;
+            transition: background .2s;
+        }
+        .lesson-nav a:hover { background: var(--accent); }
+
+        footer { text-align: center; color: var(--text-light); font-size: .85rem; padding-top: 8px; }
+
+        .svg-wrap { text-align: center; margin: 16px 0; }
+        .svg-wrap svg { max-width: 100%; height: auto; }
+
+        @media (max-width: 600px) {
+            .container { padding: 12px 8px 30px; }
+            header { padding: 20px 14px; }
+            header h1 { font-size: 1.25rem; }
+            .card { padding: 18px 14px; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════ ШАПКА ═══════════ -->
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>📈 Функция y = √x и её график</h1>
+        <p class="subtitle">Глава 2, § 14</p>
+    </header>
+
+    <!-- ═══════════ БЛОК 1: ИЗУЧЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение нового</h2>
+
+        <h3>🪝 Разминка: от квадрата к корню</h3>
+        <p>Пусть длина стороны квадрата равна <span class="formula">a</span> см,
+           а его площадь — <span class="formula">S</span> см².
+           Зависимость площади от стороны: <span class="formula">S = a²</span>.<br>
+           А если наоборот? Зная площадь, найти сторону:
+           <span class="formula">a = √S</span>.<br>
+           Это и есть функция <span class="formula">y = √x</span>!
+           Сегодня мы изучим её свойства и построим график. 📐</p>
+
+        <h3>📌 Ключевые понятия</h3>
+        <table>
+            <tr><th>Понятие</th><th>Определение</th><th>Пример</th></tr>
+            <tr>
+                <td>Функция <span class="formula">y = √x</span></td>
+                <td>Каждому неотрицательному <span class="formula">x</span>
+                    ставится в соответствие его арифметический квадратный корень</td>
+                <td><span class="formula">√4 = 2, √9 = 3</span></td>
+            </tr>
+            <tr>
+                <td>Область определения</td>
+                <td>Множество неотрицательных чисел:
+                    <span class="formula">x ≥ 0</span></td>
+                <td><span class="formula">√(−4)</span> не существует</td>
+            </tr>
+            <tr>
+                <td>Область значений</td>
+                <td>Множество неотрицательных чисел:
+                    <span class="formula">y ≥ 0</span></td>
+                <td>Корень всегда ≥ 0</td>
+            </tr>
+            <tr>
+                <td>График</td>
+                <td>Ветвь параболы в первой координатной четверти,
+                    начинается в начале координат</td>
+                <td>Кривая, идущая вверх вправо</td>
+            </tr>
+        </table>
+
+        <h3>📘 Таблица значений функции</h3>
+        <table>
+            <tr>
+                <th><span class="formula">x</span></th>
+                <td>0</td><td>0,5</td><td>1</td><td>2</td><td>3</td>
+                <td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+            </tr>
+            <tr>
+                <th><span class="formula">y</span></th>
+                <td>0</td><td>0,7</td><td>1</td><td>1,4</td><td>1,7</td>
+                <td>2</td><td>2,2</td><td>2,4</td><td>2,6</td><td>2,8</td><td>3</td>
+            </tr>
+        </table>
+
+        <!-- SVG: график функции -->
+        <div class="svg-wrap">
+            <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg">
+                <!-- оси -->
+                <line x1="60" y1="295" x2="590" y2="295" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="70" y1="20" x2="70" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="595" y="299" font-size="13" fill="#64748b">x</text>
+                <text x="75" y="16" font-size="13" fill="#64748b">y</text>
+                <!-- деления по x -->
+                <line x1="125" y1="292" x2="125" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="125" y="312" text-anchor="middle" font-size="11" fill="#64748b">1</text>
+                <line x1="180" y1="292" x2="180" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="180" y="312" text-anchor="middle" font-size="11" fill="#64748b">2</text>
+                <line x1="235" y1="292" x2="235" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="235" y="312" text-anchor="middle" font-size="11" fill="#64748b">3</text>
+                <line x1="290" y1="292" x2="290" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="290" y="312" text-anchor="middle" font-size="11" fill="#64748b">4</text>
+                <line x1="345" y1="292" x2="345" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="345" y="312" text-anchor="middle" font-size="11" fill="#64748b">5</text>
+                <line x1="400" y1="292" x2="400" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="400" y="312" text-anchor="middle" font-size="11" fill="#64748b">6</text>
+                <line x1="455" y1="292" x2="455" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="455" y="312" text-anchor="middle" font-size="11" fill="#64748b">7</text>
+                <line x1="510" y1="292" x2="510" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="510" y="312" text-anchor="middle" font-size="11" fill="#64748b">8</text>
+                <line x1="565" y1="292" x2="565" y2="298" stroke="#94a3b8" stroke-width="1"/>
+                <text x="565" y="312" text-anchor="middle" font-size="11" fill="#64748b">9</text>
+                <!-- деления по y -->
+                <line x1="67" y1="215" x2="73" y2="215" stroke="#94a3b8" stroke-width="1"/>
+                <text x="60" y="219" text-anchor="end" font-size="11" fill="#64748b">1</text>
+                <line x1="67" y1="135" x2="73" y2="135" stroke="#94a3b8" stroke-width="1"/>
+                <text x="60" y="139" text-anchor="end" font-size="11" fill="#64748b">2</text>
+                <line x1="67" y1="55" x2="73" y2="55" stroke="#94a3b8" stroke-width="1"/>
+                <text x="60" y="59" text-anchor="end" font-size="11" fill="#64748b">3</text>
+
+                <!-- кривая графика -->
+                <path d="M 70,295
+                         Q 100,240 125,215
+                         Q 155,192 180,183
+                         Q 210,167 235,159
+                         Q 265,147 290,135
+                         Q 320,126 345,119
+                         Q 375,112 400,103
+                         Q 430,96 455,87
+                         Q 485,79 510,71
+                         Q 540,63 565,55"
+                      fill="none" stroke="#2563eb" stroke-width="2.5"/>
+
+                <!-- точки -->
+                <circle cx="70" cy="295" r="4" fill="#dc2626"/>
+                <circle cx="125" cy="215" r="4" fill="#dc2626"/>
+                <circle cx="290" cy="135" r="4" fill="#dc2626"/>
+                <circle cx="565" cy="55" r="4" fill="#dc2626"/>
+
+                <!-- подписи точек -->
+                <text x="80" y="285" font-size="11" fill="#dc2626">(0; 0)</text>
+                <text x="135" y="208" font-size="11" fill="#dc2626">(1; 1)</text>
+                <text x="300" y="128" font-size="11" fill="#dc2626">(4; 2)</text>
+                <text x="530" y="48" font-size="11" fill="#dc2626">(9; 3)</text>
+
+                <!-- подпись графика -->
+                <text x="520" y="85" font-size="15" fill="#2563eb" font-weight="bold">y = √x</text>
+
+                <!-- подпись первой четверти -->
+                <text x="350" y="330" text-anchor="middle"
+                      font-size="12" fill="#64748b">График в первой четверти (x ≥ 0, y ≥ 0)</text>
+            </svg>
+        </div>
+
+        <h3>📘 Свойства функции y = √x</h3>
+
+        <div class="prop-box">
+            <h4>Свойство 1. Проходит через начало координат</h4>
+            <p>Если <span class="formula">x = 0</span>, то
+               <span class="formula">y = √0 = 0</span>.<br>
+               Точка (0; 0) лежит на графике.</p>
+        </div>
+
+        <div class="prop-box">
+            <h4>Свойство 2. График в первой четверти</h4>
+            <p>Если <span class="formula">x > 0</span>, то
+               <span class="formula">y = √x > 0</span>.<br>
+               Все точки графика, кроме (0; 0), расположены в первой координатной четверти.</p>
+        </div>
+
+        <div class="prop-box">
+            <h4>Свойство 3. Функция возрастает</h4>
+            <p>Большему значению аргумента соответствует большее значение функции.
+               График идёт вверх (слева направо).<br>
+               Пример: <span class="formula">√6 > √3</span>, так как
+               <span class="formula">6 > 3</span>.</p>
+        </div>
+
+        <div class="info-box">
+            💡 <strong>Симметрия:</strong> график
+            <span class="formula">y = √x</span> симметричен графику
+            <span class="formula">y = x²</span> (при <span class="formula">x ≥ 0</span>)
+            относительно прямой <span class="formula">y = x</span>.<br>
+            Это связано с тем, что если точка
+            <span class="formula">(a; b)</span> лежит на графике
+            <span class="formula">y = x²</span>, то точка
+            <span class="formula">(b; a)</span> лежит на графике
+            <span class="formula">y = √x</span>.
+        </div>
+    </section>
+
+    <!-- ═══════════ БЛОК 2: ЗАКРЕПЛЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>Задачи из учебника. Выбери уровень и вперёд! 🚀</p>
+
+        <!-- 🟢 Базовый -->
+        <h3><span class="level level-basic">🟢 Базовый</span>
+            Задание 1 (№ 350 из учебника)</h3>
+        <p>Принадлежит ли графику функции
+           <span class="formula">y = √x</span> точка:</p>
+        <div class="formula-box">
+            а) <span class="formula">A(64; 8)</span> &nbsp;&nbsp;
+            б) <span class="formula">B(10000; 100)</span> &nbsp;&nbsp;
+            в) <span class="formula">C(−81; 9)</span> &nbsp;&nbsp;
+            г) <span class="formula">D(25; −5)</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> Точка <span class="formula">A(64; 8)</span>:<br>
+                    Подставляем <span class="formula">x = 64</span> в функцию:
+                    <span class="formula">y = √64 = 8</span><br>
+                    Полученное значение совпадает с ординатой точки.<br>
+                    <strong>Ответ:</strong> точка принадлежит графику ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> Точка <span class="formula">B(10000; 100)</span>:<br>
+                    <span class="formula">y = √10000 = 100</span><br>
+                    Совпадает с ординатой точки.<br>
+                    <strong>Ответ:</strong> точка принадлежит графику ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> Точка <span class="formula">C(−81; 9)</span>:<br>
+                    <span class="formula">x = −81 < 0</span> — функция не определена
+                    при отрицательных <span class="formula">x</span>.<br>
+                    <strong>Ответ:</strong> точка <strong>не принадлежит</strong> графику ❌
+                </div>
+                <div class="step-box">
+                    <b>г)</b> Точка <span class="formula">D(25; −5)</span>:<br>
+                    <span class="formula">y = √25 = 5</span>, а не
+                    <span class="formula">−5</span>.<br>
+                    Арифметический корень всегда неотрицателен!<br>
+                    <strong>Ответ:</strong> точка <strong>не принадлежит</strong> графику ❌
+                </div>
+                <p><strong>Итог:</strong> принадлежат графику точки A и B;
+                   не принадлежат — C и D. Всё верно! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🔵 Средний -->
+        <h3><span class="level level-mid">🔵 Средний</span>
+            Задание 2 (№ 351 из учебника)</h3>
+        <p>Пересекает ли график функции
+           <span class="formula">y = √x</span> прямая?
+           Если пересекает, то в какой точке?</p>
+        <div class="formula-box">
+            а) <span class="formula">y = 1</span> &nbsp;&nbsp;
+            б) <span class="formula">y = 10</span> &nbsp;&nbsp;
+            в) <span class="formula">y = 100</span> &nbsp;&nbsp;
+            г) <span class="formula">y = −100</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> Прямая <span class="formula">y = 1</span>:<br>
+                    Решаем: <span class="formula">√x = 1</span><br>
+                    <span class="formula">x = 1² = 1</span><br>
+                    <strong>Ответ:</strong> пересекает в точке
+                    <span class="formula">(1; 1)</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> Прямая <span class="formula">y = 10</span>:<br>
+                    <span class="formula">√x = 10</span><br>
+                    <span class="formula">x = 10² = 100</span><br>
+                    <strong>Ответ:</strong> пересекает в точке
+                    <span class="formula">(100; 10)</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> Прямая <span class="formula">y = 100</span>:<br>
+                    <span class="formula">√x = 100</span><br>
+                    <span class="formula">x = 100² = 10000</span><br>
+                    <strong>Ответ:</strong> пересекает в точке
+                    <span class="formula">(10000; 100)</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> Прямая <span class="formula">y = −100</span>:<br>
+                    <span class="formula">√x = −100</span> — невозможно,
+                    так как <span class="formula">√x ≥ 0</span> при любом
+                    допустимом <span class="formula">x</span>.<br>
+                    <strong>Ответ:</strong> <strong>не пересекает</strong> ❌
+                </div>
+                <p><strong>Вывод:</strong> любая горизонтальная прямая
+                   <span class="formula">y = c</span> при
+                   <span class="formula">c ≥ 0</span> пересекает график ровно в одной точке.
+                   При <span class="formula">c < 0</span> — не пересекает. Отлично! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🟣 Продвинутый -->
+        <h3><span class="level level-adv">🟣 Продвинутый</span>
+            Задание 3 (№ 353а из учебника)</h3>
+        <p>Имеют ли общие точки графики функций
+           <span class="formula">y = √x</span> и
+           <span class="formula">y = x</span>?
+           Если да, найдите координаты этих точек.</p>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>Шаг 1.</b> Общие точки — это решения системы:<br>
+                    <span class="formula">y = √x</span><br>
+                    <span class="formula">y = x</span><br>
+                    Приравниваем: <span class="formula">√x = x</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 2.</b> Возводим обе части в квадрат
+                    (при <span class="formula">x ≥ 0</span>):<br>
+                    <span class="formula">x = x²</span><br>
+                    <span class="formula">x² − x = 0</span><br>
+                    <span class="formula">x(x − 1) = 0</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 3.</b> Корни:<br>
+                    <span class="formula">x = 0</span> или
+                    <span class="formula">x = 1</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 4.</b> Находим координаты точек:<br>
+                    При <span class="formula">x = 0</span>:
+                    <span class="formula">y = √0 = 0</span> → точка
+                    <span class="formula">(0; 0)</span><br>
+                    При <span class="formula">x = 1</span>:
+                    <span class="formula">y = √1 = 1</span> → точка
+                    <span class="formula">(1; 1)</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 5. Проверка:</b><br>
+                    Точка (0; 0): <span class="formula">√0 = 0</span> ✅<br>
+                    Точка (1; 1): <span class="formula">√1 = 1</span> ✅
+                </div>
+                <p><strong>Ответ:</strong> графики имеют две общие точки:
+                   <span class="formula">(0; 0)</span> и
+                   <span class="formula">(1; 1)</span>.
+                   Блестяще! 🏆</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- ═══════════ БЛОК 3: ПРАКТИКА ═══════════ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для ландшафтного дизайнера</h3>
+        <p>Дизайнер создаёт три квадратные клумбы с площадями
+           <span class="formula">4 м²</span>,
+           <span class="formula">9 м²</span> и
+           <span class="formula">16 м²</span>.
+           Найдите сторону каждой клумбы и определите,
+           сколько погонных метров бордюра нужно закупить
+           для ограждения всех трёх клумб.</p>
+
+        <details>
+            <summary>Показать решение дизайнера</summary>
+            <div>
+                <div class="step-box">
+                    <b>Шаг 1.</b> Сторона квадрата равна
+                    <span class="formula">a = √S</span>.<br>
+                    Это и есть функция
+                    <span class="formula">y = √x</span>!
+                </div>
+                <div class="step-box">
+                    <b>Шаг 2.</b> Находим стороны:<br>
+                    Клумба 1: <span class="formula">a₁ = √4 = 2 м</span> ✅<br>
+                    Клумба 2: <span class="formula">a₂ = √9 = 3 м</span> ✅<br>
+                    Клумба 3: <span class="formula">a₃ = √16 = 4 м</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>Шаг 3.</b> Периметр каждой клумбы
+                    (<span class="formula">P = 4a</span>):<br>
+                    <span class="formula">P₁ = 4 · 2 = 8 м</span><br>
+                    <span class="formula">P₂ = 4 · 3 = 12 м</span><br>
+                    <span class="formula">P₃ = 4 · 4 = 16 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 4.</b> Общий бордюр:<br>
+                    <span class="formula">P = 8 + 12 + 16 = 36 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 5. Проверка:</b><br>
+                    <span class="formula">2² = 4</span> ✅,
+                    <span class="formula">3² = 9</span> ✅,
+                    <span class="formula">4² = 16</span> ✅<br>
+                    <span class="formula">4 · 2 + 4 · 3 + 4 · 4 = 8 + 12 + 16 = 36</span> ✅
+                </div>
+                <p><strong>Ответ:</strong> стороны клумб —
+                   <span class="formula">2 м, 3 м, 4 м</span>;
+                   бордюра нужно <span class="formula">36 м</span>.
+                   Дизайнер доволен! 🌳</p>
+            </div>
+        </details>
+
+        <div class="info-box">
+            🌍 <strong>Где ещё используется функция y = √x?</strong><br>
+            • Строительство: сторона квадрата по площади
+            <span class="formula">a = √S</span><br>
+            • Физика: скорость по кинетической энергии
+            <span class="formula">v = √(2E/m)</span><br>
+            • Астрономия: радиус орбиты по периоду обращения
+            <span class="formula">r = ∛(T²)</span> (закон Кеплера)<br>
+            • IT: алгоритмы поиска, хеширование, графика
+        </div>
+    </section>
+
+    <!-- ═══════════ ИТОГИ ═══════════ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul style="list-style:none;padding:0">
+            <li>✅ Функция <span class="formula">y = √x</span> определена при
+                <span class="formula">x ≥ 0</span> и принимает значения
+                <span class="formula">y ≥ 0</span>.</li>
+            <li>✅ График — ветвь параболы в первой координатной четверти,
+                начинается в точке (0; 0).</li>
+            <li>✅ Функция <strong>возрастает</strong>: большему
+                <span class="formula">x</span> соответствует больший
+                <span class="formula">y</span>.</li>
+            <li>✅ Горизонтальная прямая <span class="formula">y = c</span>
+                при <span class="formula">c ≥ 0</span> пересекает график ровно
+                в одной точке <span class="formula">(c²; c)</span>.</li>
+            <li>✅ При <span class="formula">c < 0</span> прямая
+                <span class="formula">y = c</span> не пересекает график.</li>
+            <li>✅ График <span class="formula">y = √x</span> симметричен
+                графику <span class="formula">y = x²</span>
+                (при <span class="formula">x ≥ 0</span>) относительно прямой
+                <span class="formula">y = x</span>.</li>
+            <li>💡 <strong>Лайфхак:</strong> чтобы проверить, принадлежит ли точка
+                <span class="formula">(a; b)</span> графику, подставь
+                <span class="formula">a</span> в функцию и сравни результат с
+                <span class="formula">b</span>.</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════ ПОДСКАЗКА УЧИТЕЛЮ ═══════════ -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><strong>Типичные ошибки:</strong></p>
+        <ul>
+            <li>Забывают, что <span class="formula">√x ≥ 0</span>:
+                пишут <span class="formula">√25 = ±5</span>, а не
+                <span class="formula">√25 = 5</span>.</li>
+            <li>Пытаются вычислить <span class="formula">√(−a)</span>
+                для положительного <span class="formula">a</span>.</li>
+            <li>Путают графики <span class="formula">y = x²</span> и
+                <span class="formula">y = √x</span>.</li>
+            <li>При проверке принадлежности точки подставляют
+                <span class="formula">y</span> вместо
+                <span class="formula">x</span>.</li>
+        </ul>
+        <p><strong>🪜 Подмостки для слабых учеников:</strong></p>
+        <ul>
+            <li>Дайте таблицу квадратов 1² … 20² для быстрого поиска корней.</li>
+            <li>Начните с полных квадратов:
+                <span class="formula">√1, √4, √9, √16, √25</span>.</li>
+            <li>Постройте график по точкам на клетчатой бумаге —
+                визуализация помогает понять форму кривой.</li>
+            <li>Используйте цветные маркеры: один для оси
+                <span class="formula">x</span>, другой для оси
+                <span class="formula">y</span>.</li>
+        </ul>
+        <p><strong>🚀 Вызов для сильных учеников:</strong></p>
+        <ul>
+            <li>№ 352 из учебника: докажите, что графики не имеют общих точек.</li>
+            <li>№ 354 из учебника: какой из графиков линейных функций
+                не пересекает график <span class="formula">y = √x</span>?</li>
+            <li>№ 355 из учебника: решите графически уравнение.</li>
+            <li>№ 356 из учебника: сравните числа, используя свойства функции.</li>
+            <li>Постройте график <span class="formula">y = √(−x)</span>
+                и объясните, чем он отличается от
+                <span class="formula">y = √x</span>.</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-13.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-15.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, § 14)
+    </footer>
+
+</div>
+</body>
+</html>

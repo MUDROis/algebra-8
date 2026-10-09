@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квадратные корни. Арифметический квадратный корень — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120,140,170,.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120,140,170,.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.65;
+        }
+        .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 40px; }
+
+        header {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            text-align: center;
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            margin-bottom: 12px;
+        }
+        header h1 { font-size: 1.55rem; margin-bottom: 6px; }
+        .subtitle { color: var(--text-light); font-size: .95rem; }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            padding: 26px 24px;
+            margin-bottom: 22px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .card h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .92rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+        th { background: #eff6ff; font-weight: 600; }
+
+        .formula {
+            color: var(--formula);
+            font-weight: 700;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+        }
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05rem;
+        }
+        .step-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-box b { color: var(--primary); }
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .warn-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+
+        details {
+            margin: 12px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        summary {
+            cursor: pointer;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: .95rem;
+            user-select: none;
+        }
+        summary:hover { background: #e2e8f0; }
+        details > div { padding: 14px 16px; }
+
+        .level { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .8rem; font-weight: 700; margin-right: 6px; }
+        .level-basic  { background: #dcfce7; color: #166534; }
+        .level-mid    { background: #dbeafe; color: #1e40af; }
+        .level-adv    { background: #f3e8ff; color: #6b21a8; }
+
+        .practice-box { border-left: 5px solid var(--warning); }
+        .summary-box  { border-left: 5px solid var(--success); }
+        .teacher-note { border-left: 5px solid var(--purple); font-size: .93rem; }
+        .teacher-note h2 { border-bottom-color: var(--purple); }
+
+        .lesson-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0 18px;
+        }
+        .lesson-nav a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: .92rem;
+            transition: background .2s;
+        }
+        .lesson-nav a:hover { background: var(--accent); }
+
+        footer { text-align: center; color: var(--text-light); font-size: .85rem; padding-top: 8px; }
+
+        .svg-wrap { text-align: center; margin: 16px 0; }
+        .svg-wrap svg { max-width: 100%; height: auto; }
+
+        @media (max-width: 600px) {
+            .container { padding: 12px 8px 30px; }
+            header { padding: 20px 14px; }
+            header h1 { font-size: 1.25rem; }
+            .card { padding: 18px 14px; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════ ШАПКА ═══════════ -->
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>🌿 Квадратные корни. Арифметический квадратный корень</h1>
+        <p class="subtitle">Глава 2, § 11</p>
+    </header>
+
+    <!-- ═══════════ БЛОК 1: ИЗУЧЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение нового</h2>
+
+        <h3>🪝 Разминка: задача о площади квадрата</h3>
+        <p>Площадь квадрата равна <span class="formula">64 см²</span>. Чему равна его сторона?</p>
+        <div class="step-box">
+            Обозначим сторону <span class="formula">x</span> см.
+            Тогда площадь: <span class="formula">x² = 64</span>.<br>
+            Корни уравнения: <span class="formula">x = 8</span> и
+            <span class="formula">x = −8</span>.<br>
+            Но длина не может быть отрицательной! Значит, сторона = <span class="formula">8 см</span>.
+        </div>
+        <p>Вот так мы пришли к понятию <strong>арифметического квадратного корня</strong> —
+           это <em>неотрицательный</em> корень. 🌱</p>
+
+        <h3>📌 Ключевые понятия</h3>
+        <table>
+            <tr><th>Понятие</th><th>Определение</th><th>Пример</th></tr>
+            <tr>
+                <td>Квадратный корень из <span class="formula">a</span></td>
+                <td>Число, квадрат которого равен <span class="formula">a</span></td>
+                <td>Корни из 64: это 8 и −8</td>
+            </tr>
+            <tr>
+                <td>Арифметический квадратный корень</td>
+                <td><strong>Неотрицательное</strong> число, квадрат которого равен
+                    <span class="formula">a</span></td>
+                <td><span class="formula">√64 = 8</span></td>
+            </tr>
+            <tr>
+                <td>Радикал</td>
+                <td>Знак <span class="formula">√</span>
+                    (от лат. <em>radix</em> — корень)</td>
+                <td>В выражении <span class="formula">√25</span> знак радикала — это
+                    <span class="formula">√</span></td>
+            </tr>
+            <tr>
+                <td>Подкоренное выражение</td>
+                <td>Выражение, стоящее под знаком радикала</td>
+                <td>В <span class="formula">√(x+3)</span> подкоренное выражение —
+                    <span class="formula">x + 3</span></td>
+            </tr>
+        </table>
+
+        <div class="formula-box">
+            <strong>Определение:</strong>
+            <span class="formula">√a = b</span> означает, что выполняются
+            <strong>два условия</strong>:<br>
+            ① <span class="formula">b ≥ 0</span> (число неотрицательное)<br>
+            ② <span class="formula">b² = a</span> (квадрат равен подкоренному выражению)
+        </div>
+
+        <div class="warn-box">
+            ⚠️ <strong>Важно:</strong> при <span class="formula">a &lt; 0</span> выражение
+            <span class="formula">√a</span> <strong>не имеет смысла</strong>,
+            потому что не существует числа, квадрат которого отрицателен.
+            Например, <span class="formula">√(−4)</span> — не существует!
+        </div>
+
+        <!-- SVG: квадрат с площадью -->
+        <div class="svg-wrap">
+            <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+                <!-- квадрат -->
+                <rect x="60" y="30" width="180" height="180" rx="4"
+                      fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+                <text x="150" y="130" text-anchor="middle"
+                      font-size="15" fill="#1e40af" font-weight="bold">S = 64 см²</text>
+                <!-- сторона -->
+                <line x1="60" y1="225" x2="240" y2="225"
+                      stroke="#dc2626" stroke-width="2" marker-start="url(#arrL)" marker-end="url(#arrR)"/>
+                <text x="150" y="248" text-anchor="middle"
+                      font-size="14" fill="#dc2626" font-weight="bold">x = √64 = 8 см</text>
+                <!-- стрелки -->
+                <defs>
+                    <marker id="arrR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#dc2626"/>
+                    </marker>
+                    <marker id="arrL" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                        <polygon points="8 0, 0 3, 8 6" fill="#dc2626"/>
+                    </marker>
+                </defs>
+                <!-- блок определения -->
+                <rect x="290" y="30" width="210" height="180" rx="12"
+                      fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="395" y="58" text-anchor="middle"
+                      font-size="14" fill="#166534" font-weight="bold">√a = b</text>
+                <text x="395" y="90" text-anchor="middle"
+                      font-size="13" fill="#166534">если:</text>
+                <text x="395" y="118" text-anchor="middle"
+                      font-size="13" fill="#166534" font-weight="bold">① b ≥ 0</text>
+                <text x="395" y="143" text-anchor="middle"
+                      font-size="13" fill="#166534" font-weight="bold">② b² = a</text>
+                <text x="395" y="178" text-anchor="middle"
+                      font-size="12" fill="#15803d">√64 = 8, т.к. 8 ≥ 0</text>
+                <text x="395" y="198" text-anchor="middle"
+                      font-size="12" fill="#15803d">и 8² = 64 ✓</text>
+            </svg>
+        </div>
+
+        <!-- Пример 1 -->
+        <h3>📘 Пример 1. Нахождение арифметических квадратных корней</h3>
+        <div class="step-box">
+            <span class="formula">√4 = 2</span>, так как
+            <span class="formula">2 ≥ 0</span> и <span class="formula">2² = 4</span> ✅
+        </div>
+        <div class="step-box">
+            <span class="formula">√1,21 = 1,1</span>, так как
+            <span class="formula">1,1 ≥ 0</span> и
+            <span class="formula">1,1² = 1,21</span> ✅
+        </div>
+        <div class="step-box">
+            <span class="formula">√0 = 0</span>, так как
+            <span class="formula">0 ≥ 0</span> и <span class="formula">0² = 0</span> ✅
+        </div>
+
+        <!-- Пример 2 -->
+        <h3>📘 Пример 2. Решение уравнения с квадратным корнем</h3>
+        <p>Решим уравнение: <span class="formula">√(5x − 1) = 7</span></p>
+
+        <div class="step-box">
+            <b>Шаг 1.</b> Из определения арифметического квадратного корня следует,
+            что подкоренное выражение равно квадрату правой части:<br>
+            <span class="formula">5x − 1 = 7²</span><br>
+            <span class="formula">5x − 1 = 49</span>
+        </div>
+        <div class="step-box">
+            <b>Шаг 2.</b> Решаем линейное уравнение:<br>
+            <span class="formula">5x = 50</span><br>
+            <span class="formula">x = 10</span>
+        </div>
+        <div class="step-box">
+            <b>Шаг 3. Проверка:</b><br>
+            <span class="formula">√(5·10 − 1) = √49 = 7</span> ✅
+        </div>
+        <div class="formula-box">
+            Ответ: <span class="formula">x = 10</span>
+        </div>
+
+        <!-- Пример 3 -->
+        <h3>📘 Пример 3. Когда выражение не имеет смысла</h3>
+        <p>Выясним, при каких выражениях корень <strong>не существует</strong>:</p>
+        <div class="step-box">
+            <span class="formula">√100 = 10</span> — имеет смысл ✅<br>
+            <span class="formula">√(−100)</span> — <strong>не имеет смысла</strong> ❌
+            (подкоренное выражение отрицательное)<br>
+            <span class="formula">−√100 = −10</span> — имеет смысл ✅
+            (минус <em>перед</em> корнем, а не под ним)<br>
+            <span class="formula">√(−10)² = √100 = 10</span> — имеет смысл ✅
+            (сначала возводим в квадрат)<br>
+            <span class="formula">√((−25)·(−4)) = √100 = 10</span> — имеет смысл ✅<br>
+            <span class="formula">√(−25·4) = √(−100)</span> — <strong>не имеет смысла</strong> ❌
+        </div>
+    </section>
+
+    <!-- ═══════════ БЛОК 2: ЗАКРЕПЛЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>Задачи из учебника. Выбери уровень и вперёд! 🚀</p>
+
+        <!-- 🟢 Базовый -->
+        <h3><span class="level level-basic">🟢 Базовый</span>
+            Задание 1 (№ 291 из учебника)</h3>
+        <p>Найдите значение корня:</p>
+        <div class="formula-box">
+            а) <span class="formula">√81</span> &nbsp;&nbsp;
+            б) <span class="formula">√36</span> &nbsp;&nbsp;
+            в) <span class="formula">√1600</span> &nbsp;&nbsp;
+            г) <span class="formula">√10000</span> &nbsp;&nbsp;
+            д) <span class="formula">√0,04</span> &nbsp;&nbsp;
+            е) <span class="formula">√0,81</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√81 = 9</span>,
+                    так как <span class="formula">9 ≥ 0</span> и
+                    <span class="formula">9² = 81</span> ✅<br>
+                    <b>б)</b> <span class="formula">√36 = 6</span>,
+                    так как <span class="formula">6 ≥ 0</span> и
+                    <span class="formula">6² = 36</span> ✅<br>
+                    <b>в)</b> <span class="formula">√1600 = 40</span>,
+                    так как <span class="formula">40 ≥ 0</span> и
+                    <span class="formula">40² = 1600</span> ✅<br>
+                    <b>г)</b> <span class="formula">√10000 = 100</span>,
+                    так как <span class="formula">100 ≥ 0</span> и
+                    <span class="formula">100² = 10000</span> ✅<br>
+                    <b>д)</b> <span class="formula">√0,04 = 0,2</span>,
+                    так как <span class="formula">0,2 ≥ 0</span> и
+                    <span class="formula">0,2² = 0,04</span> ✅<br>
+                    <b>е)</b> <span class="formula">√0,81 = 0,9</span>,
+                    так как <span class="formula">0,9 ≥ 0</span> и
+                    <span class="formula">0,9² = 0,81</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> 9; 6; 40; 100; 0,2; 0,9. Всё верно! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🔵 Средний -->
+        <h3><span class="level level-mid">🔵 Средний</span>
+            Задание 2 (№ 294 из учебника)</h3>
+        <p>Найдите значение выражения:</p>
+        <div class="formula-box">
+            а) <span class="formula">√x + √9</span> при
+            <span class="formula">x = 25</span> и при
+            <span class="formula">x = 0,36</span><br>
+            б) <span class="formula">√(4 − 2a)</span> при
+            <span class="formula">a = 2</span> и при
+            <span class="formula">a = −22,5</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√x + √9</span><br>
+                    При <span class="formula">x = 25</span>:
+                    <span class="formula">√25 + √9 = 5 + 3 = 8</span> ✅<br>
+                    При <span class="formula">x = 0,36</span>:
+                    <span class="formula">√0,36 + √9 = 0,6 + 3 = 3,6</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">√(4 − 2a)</span><br>
+                    При <span class="formula">a = 2</span>:
+                    <span class="formula">√(4 − 4) = √0 = 0</span> ✅<br>
+                    При <span class="formula">a = −22,5</span>:
+                    <span class="formula">√(4 − 2·(−22,5)) = √(4 + 45) = √49 = 7</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> а) 8 и 3,6; б) 0 и 7. Отлично! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🟣 Продвинутый -->
+        <h3><span class="level level-adv">🟣 Продвинутый</span>
+            Задание 3 (№ 307 из учебника)</h3>
+        <p>Решите уравнение:</p>
+        <div class="formula-box">
+            а) <span class="formula">√(3x − 1) = 1</span> &nbsp;&nbsp;
+            б) <span class="formula">√(6x + 4) = 2</span> &nbsp;&nbsp;
+            в) <span class="formula">√(12 − x) = 6</span> &nbsp;&nbsp;
+            г) <span class="formula">√(8x − 1) = 1</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√(3x − 1) = 1</span><br>
+                    Возводим обе части в квадрат:
+                    <span class="formula">3x − 1 = 1</span><br>
+                    <span class="formula">3x = 2 → x = 2/3</span><br>
+                    <b>Проверка:</b> <span class="formula">√(3·(2/3) − 1) = √(2 − 1) = √1 = 1</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">√(6x + 4) = 2</span><br>
+                    <span class="formula">6x + 4 = 4</span><br>
+                    <span class="formula">6x = 0 → x = 0</span><br>
+                    <b>Проверка:</b> <span class="formula">√(0 + 4) = √4 = 2</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">√(12 − x) = 6</span><br>
+                    <span class="formula">12 − x = 36</span><br>
+                    <span class="formula">−x = 24 → x = −24</span><br>
+                    <b>Проверка:</b> <span class="formula">√(12 − (−24)) = √36 = 6</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">√(8x − 1) = 1</span><br>
+                    <span class="formula">8x − 1 = 1</span><br>
+                    <span class="formula">8x = 2 → x = 0,25</span><br>
+                    <b>Проверка:</b> <span class="formula">√(8·0,25 − 1) = √(2 − 1) = √1 = 1</span> ✅
+                </div>
+                <p><strong>Ответы:</strong>
+                   а) <span class="formula">x = 2/3</span>;
+                   б) <span class="formula">x = 0</span>;
+                   в) <span class="formula">x = −24</span>;
+                   г) <span class="formula">x = 0,25</span>.
+                   Ты справился! 🎉</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- ═══════════ БЛОК 3: ПРАКТИКА ═══════════ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для ландшафтного дизайнера</h3>
+        <p>Дизайнер планирует выложить квадратную площадку из тротуарной плитки.
+           Площадь площадки — <span class="formula">12,25 м²</span>.
+           Найдите длину стороны площадки и определите, сколько погонных метров
+           бордюра нужно закупить для ограждения.</p>
+
+        <details>
+            <summary>Показать решение дизайнера</summary>
+            <div>
+                <div class="step-box">
+                    <b>Шаг 1.</b> Сторона квадрата равна арифметическому квадратному
+                    корню из площади:<br>
+                    <span class="formula">a = √S = √12,25</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 2.</b> Находим корень:<br>
+                    <span class="formula">√12,25 = 3,5</span>,
+                    так как <span class="formula">3,5² = 12,25</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>Шаг 3.</b> Сторона площадки:
+                    <span class="formula">a = 3,5 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 4.</b> Периметр (длина бордюра):<br>
+                    <span class="formula">P = 4a = 4 · 3,5 = 14 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 5. Проверка:</b><br>
+                    <span class="formula">3,5² = 12,25</span> ✅<br>
+                    <span class="formula">4 · 3,5 = 14</span> ✅
+                </div>
+                <p><strong>Ответ:</strong> сторона площадки
+                   <span class="formula">3,5 м</span>,
+                   бордюра нужно <span class="formula">14 м</span>.
+                   Дизайнер доволен! 🌳</p>
+            </div>
+        </details>
+
+        <div class="info-box">
+            🌍 <strong>Где ещё нужны квадратные корни?</strong><br>
+            • Строительство: расчёт диагоналей, проверка прямых углов<br>
+            • Физика: скорость, ускорение, время падения
+            <span class="formula">t = √(2h/g)</span><br>
+            • География: расчёт расстояния до горизонта
+            <span class="formula">d ≈ √(2Rh)</span><br>
+            • IT: алгоритмы машинного обучения, обработка изображений
+        </div>
+    </section>
+
+    <!-- ═══════════ ИТОГИ ═══════════ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul style="list-style:none;padding:0">
+            <li>✅ <strong>Квадратный корень</strong> из числа <span class="formula">a</span> —
+                это число, квадрат которого равен <span class="formula">a</span>.</li>
+            <li>✅ <strong>Арифметический квадратный корень</strong> — это
+                <em>неотрицательное</em> число, квадрат которого равен
+                <span class="formula">a</span>. Обозначается
+                <span class="formula">√a</span>.</li>
+            <li>✅ Два условия: <span class="formula">√a = b</span> означает
+                <span class="formula">b ≥ 0</span> и
+                <span class="formula">b² = a</span>.</li>
+            <li>✅ При <span class="formula">a &lt; 0</span> выражение
+                <span class="formula">√a</span> <strong>не имеет смысла</strong>.</li>
+            <li>✅ Для решения уравнения <span class="formula">√(f(x)) = c</span>
+                (где <span class="formula">c ≥ 0</span>) возводим обе части в квадрат:
+                <span class="formula">f(x) = c²</span>.</li>
+            <li>✅ Минус <em>перед</em> корнем допустим:
+                <span class="formula">−√9 = −3</span>. Минус <em>под</em> корнем — нет:
+                <span class="formula">√(−9)</span> не существует.</li>
+            <li>💡 <strong>Лайфхак:</strong> после возведения в квадрат всегда делай
+                подстановку ответа в исходное уравнение!</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════ ПОДСКАЗКА УЧИТЕЛЮ ═══════════ -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><strong>Типичные ошибки:</strong></p>
+        <ul>
+            <li>Путают квадратный корень и арифметический квадратный корень:
+                уравнение <span class="formula">x² = 25</span> имеет два корня
+                (<span class="formula">±5</span>), а
+                <span class="formula">√25 = 5</span> — только один.</li>
+            <li>Забывают, что подкоренное выражение должно быть
+                <span class="formula">≥ 0</span>.</li>
+            <li>При решении уравнений возводят в квадрат, но не проверяют,
+                что правая часть была неотрицательной.</li>
+            <li>Путают <span class="formula">√(a + b)</span> и
+                <span class="formula">√a + √b</span> — это разные вещи!</li>
+        </ul>
+        <p><strong>🪜 Подмостки для слабых учеников:</strong></p>
+        <ul>
+            <li>Дайте таблицу квадратов (1² … 20²) — пусть ищут корни по ней.</li>
+            <li>Начните с числовых примеров: <span class="formula">√16, √25, √0,49</span>,
+                потом переходите к буквенным.</li>
+            <li>Используйте цветные маркеры: один цвет для подкоренного выражения,
+                другой — для результата.</li>
+        </ul>
+        <p><strong>🚀 Вызов для сильных учеников:</strong></p>
+        <ul>
+            <li>№ 298 из учебника: определите, какие из данных корней являются
+                рациональными, а какие — иррациональными.</li>
+            <li>№ 308 из учебника: уравнения вида
+                <span class="formula">√(12 + x) − 7 = 3</span>.</li>
+            <li>№ 299 из учебника: приведите контрпример для утверждения
+                об иррациональности.</li>
+            <li>Попросите доказать: <span class="formula">√2</span> — иррациональное
+                число (связь с уроком § 10).</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-10.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-12.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, § 11)
+    </footer>
+
+</div>
+</body>
+</html>

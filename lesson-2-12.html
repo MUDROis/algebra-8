@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уравнение x² = a — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120,140,170,.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120,140,170,.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.65;
+        }
+        .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 40px; }
+
+        header {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            text-align: center;
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            margin-bottom: 12px;
+        }
+        header h1 { font-size: 1.55rem; margin-bottom: 6px; }
+        .subtitle { color: var(--text-light); font-size: .95rem; }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            padding: 26px 24px;
+            margin-bottom: 22px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .card h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .92rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+        th { background: #eff6ff; font-weight: 600; }
+
+        .formula {
+            color: var(--formula);
+            font-weight: 700;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+        }
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05rem;
+        }
+        .step-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-box b { color: var(--primary); }
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .warn-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .case-box {
+            background: #f0fdf4;
+            border: 2px solid #16a34a;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 10px 0;
+        }
+        .case-box h4 { color: #166534; margin-bottom: 6px; }
+
+        details {
+            margin: 12px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        summary {
+            cursor: pointer;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: .95rem;
+            user-select: none;
+        }
+        summary:hover { background: #e2e8f0; }
+        details > div { padding: 14px 16px; }
+
+        .level { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .8rem; font-weight: 700; margin-right: 6px; }
+        .level-basic  { background: #dcfce7; color: #166534; }
+        .level-mid    { background: #dbeafe; color: #1e40af; }
+        .level-adv    { background: #f3e8ff; color: #6b21a8; }
+
+        .practice-box { border-left: 5px solid var(--warning); }
+        .summary-box  { border-left: 5px solid var(--success); }
+        .teacher-note { border-left: 5px solid var(--purple); font-size: .93rem; }
+        .teacher-note h2 { border-bottom-color: var(--purple); }
+
+        .lesson-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0 18px;
+        }
+        .lesson-nav a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: .92rem;
+            transition: background .2s;
+        }
+        .lesson-nav a:hover { background: var(--accent); }
+
+        footer { text-align: center; color: var(--text-light); font-size: .85rem; padding-top: 8px; }
+
+        .svg-wrap { text-align: center; margin: 16px 0; }
+        .svg-wrap svg { max-width: 100%; height: auto; }
+
+        @media (max-width: 600px) {
+            .container { padding: 12px 8px 30px; }
+            header { padding: 20px 14px; }
+            header h1 { font-size: 1.25rem; }
+            .card { padding: 18px 14px; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════ ШАПКА ═══════════ -->
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>📈 Уравнение x² = a</h1>
+        <p class="subtitle">Глава 2, § 12</p>
+    </header>
+
+    <!-- ═══════════ БЛОК 1: ИЗУЧЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение нового</h2>
+
+        <h3>🪝 Разминка: парабола — старый знакомый</h3>
+        <p>Ты уже знаешь график функции <span class="formula">y = x²</span> — это
+           <strong>парабола</strong>, ветви которой направлены вверх.
+           Сегодня мы используем этот график, чтобы понять,
+           <em>сколько корней</em> имеет уравнение
+           <span class="formula">x² = a</span> в зависимости от значения
+           <span class="formula">a</span>. 🎯</p>
+
+        <h3>📌 Ключевые свойства графика y = x²</h3>
+        <table>
+            <tr><th>Свойство</th><th>Формулировка</th><th>Следствие</th></tr>
+            <tr>
+                <td>1. Проходит через начало координат</td>
+                <td>При <span class="formula">x = 0</span> получаем
+                    <span class="formula">y = 0</span></td>
+                <td>Точка (0; 0) лежит на графике</td>
+            </tr>
+            <tr>
+                <td>2. Все точки выше оси x</td>
+                <td>При <span class="formula">x ≠ 0</span> получаем
+                    <span class="formula">y > 0</span></td>
+                <td>Парабола лежит в верхней полуплоскости</td>
+            </tr>
+            <tr>
+                <td>3. Симметрия относительно оси y</td>
+                <td>Противоположным значениям <span class="formula">x</span>
+                    соответствует одно и то же <span class="formula">y</span></td>
+                <td><span class="formula">(−3)² = 3² = 9</span></td>
+            </tr>
+        </table>
+
+        <!-- SVG: парабола и три случая -->
+        <div class="svg-wrap">
+            <svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg">
+                <!-- оси -->
+                <line x1="40" y1="260" x2="580" y2="260" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="310" y1="20" x2="310" y2="290" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="585" y="265" font-size="12" fill="#64748b">x</text>
+                <text x="315" y="18" font-size="12" fill="#64748b">y</text>
+
+                <!-- парабола y = x² (масштаб: 1 ед = 30px по x, 1 ед = 25px по y) -->
+                <!-- y = x²: точки (-3,9),(-2,4),(-1,1),(0,0),(1,1),(2,4),(3,9) -->
+                <!-- в пикселях: центр (310,260), шаг 30px по x, 25px по y -->
+                <path d="M 220,35 Q 250,100 265,145 Q 280,200 290,230 Q 300,250 310,260
+                         Q 320,250 330,230 Q 340,200 355,145 Q 370,100 400,35"
+                      fill="none" stroke="#2563eb" stroke-width="2.5"/>
+
+                <!-- прямая y = a > 0 (например a=4, т.е. y=100px от оси) -->
+                <line x1="180" y1="160" x2="440" y2="160"
+                      stroke="#16a34a" stroke-width="2" stroke-dasharray="6,4"/>
+                <text x="450" y="164" font-size="13" fill="#16a34a" font-weight="bold">y = a (a > 0)</text>
+                <!-- точки пересечения -->
+                <circle cx="250" cy="160" r="5" fill="#16a34a"/>
+                <circle cx="370" cy="160" r="5" fill="#16a34a"/>
+                <text x="240" y="150" font-size="11" fill="#16a34a">x₁</text>
+                <text x="372" y="150" font-size="11" fill="#16a34a">x₂</text>
+
+                <!-- прямая y = 0 (ось x) -->
+                <circle cx="310" cy="260" r="5" fill="#f59e0b"/>
+                <text x="320" y="278" font-size="11" fill="#f59e0b">x = 0 (a = 0)</text>
+
+                <!-- подпись a < 0 -->
+                <line x1="180" y1="295" x2="440" y2="295"
+                      stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4"/>
+                <text x="450" y="299" font-size="13" fill="#dc2626" font-weight="bold">y = a (a < 0)</text>
+                <text x="310" y="310" text-anchor="middle" font-size="11" fill="#dc2626">нет пересечений → нет корней</text>
+
+                <!-- подпись параболы -->
+                <text x="415" y="50" font-size="14" fill="#2563eb" font-weight="bold">y = x²</text>
+            </svg>
+        </div>
+
+        <h3>📘 Три случая решения уравнения x² = a</h3>
+
+        <div class="case-box">
+            <h4>Случай 1: a < 0 → корней нет</h4>
+            <p>Не существует числа, квадрат которого отрицателен.<br>
+               Пример: <span class="formula">x² = −25</span> — нет решений ❌</p>
+        </div>
+
+        <div class="case-box">
+            <h4>Случай 2: a = 0 → один корень</h4>
+            <p>Единственное число, квадрат которого равен нулю, — это ноль.<br>
+               Пример: <span class="formula">x² = 0 → x = 0</span> ✅</p>
+        </div>
+
+        <div class="case-box">
+            <h4>Случай 3: a > 0 → два корня</h4>
+            <p>Прямая <span class="formula">y = a</span> пересекает параболу в двух
+               симметричных точках:<br>
+               <span class="formula">x₁ = √a</span> и
+               <span class="formula">x₂ = −√a</span><br>
+               Пример: <span class="formula">x² = 6,25 → x = ±2,5</span> ✅</p>
+        </div>
+
+        <div class="formula-box">
+            <strong>Итог:</strong> при <span class="formula">a > 0</span> уравнение
+            <span class="formula">x² = a</span> имеет два корня:
+            <span class="formula">x = √a</span> и <span class="formula">x = −√a</span>.<br>
+            При <span class="formula">a = 0</span> — один корень:
+            <span class="formula">x = 0</span>.<br>
+            При <span class="formula">a < 0</span> — корней нет.
+        </div>
+
+        <h3>📘 Пример 1. Решение уравнений</h3>
+        <div class="step-box">
+            <b>а)</b> <span class="formula">x² = 6,25</span><br>
+            <span class="formula">x = ±√6,25 = ±2,5</span> ✅<br>
+            Проверка: <span class="formula">2,5² = 6,25</span> и
+            <span class="formula">(−2,5)² = 6,25</span> ✅
+        </div>
+        <div class="step-box">
+            <b>б)</b> <span class="formula">x² = 9/4</span><br>
+            <span class="formula">x = ±√(9/4) = ±3/2 = ±1,5</span> ✅<br>
+            Проверка: <span class="formula">(3/2)² = 9/4</span> ✅
+        </div>
+        <div class="step-box">
+            <b>в)</b> <span class="formula">x² = 2</span><br>
+            <span class="formula">x = ±√2</span><br>
+            Это <em>иррациональные</em> числа:
+            <span class="formula">√2 ≈ 1,4</span>,
+            <span class="formula">−√2 ≈ −1,4</span> ✅
+        </div>
+
+        <h3>📘 Пример 2. Свойство арифметического корня</h3>
+        <div class="info-box">
+            Для любого <span class="formula">a ≥ 0</span> верно:
+            <span class="formula">(√a)² = a</span><br><br>
+            Примеры:<br>
+            <span class="formula">(√7)² = 7</span> ✅<br>
+            <span class="formula">(√25)² = 25</span> ✅<br>
+            <span class="formula">(√0)² = 0</span> ✅<br><br>
+            ⚠️ Но <span class="formula">√(−4)</span> не существует!
+        </div>
+    </section>
+
+    <!-- ═══════════ БЛОК 2: ЗАКРЕПЛЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>Задачи из учебника. Выбери уровень и вперёд! 🚀</p>
+
+        <!-- 🟢 Базовый -->
+        <h3><span class="level level-basic">🟢 Базовый</span>
+            Задание 1 (№ 312 + № 313 из учебника)</h3>
+        <p>Определите, имеет ли уравнение корни, и решите его:</p>
+        <div class="formula-box">
+            а) <span class="formula">x² = 81</span> &nbsp;&nbsp;
+            б) <span class="formula">x² = 18</span> &nbsp;&nbsp;
+            в) <span class="formula">x² = 0</span> &nbsp;&nbsp;
+            г) <span class="formula">x² = −25</span> &nbsp;&nbsp;
+            д) <span class="formula">x² = 36</span> &nbsp;&nbsp;
+            е) <span class="formula">x² = 0,49</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">x² = 81</span><br>
+                    <span class="formula">a = 81 > 0</span> → два корня:<br>
+                    <span class="formula">x = ±√81 = ±9</span> ✅<br>
+                    Проверка: <span class="formula">9² = 81</span>,
+                    <span class="formula">(−9)² = 81</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">x² = 18</span><br>
+                    <span class="formula">a = 18 > 0</span> → два корня:<br>
+                    <span class="formula">x = ±√18 = ±3√2</span> (иррациональные) ✅<br>
+                    Приближённо: <span class="formula">x ≈ ±4,24</span>
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">x² = 0</span><br>
+                    <span class="formula">a = 0</span> → один корень:<br>
+                    <span class="formula">x = 0</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">x² = −25</span><br>
+                    <span class="formula">a = −25 < 0</span> → корней нет ❌<br>
+                    (квадрат числа не может быть отрицательным)
+                </div>
+                <div class="step-box">
+                    <b>д)</b> <span class="formula">x² = 36</span><br>
+                    <span class="formula">x = ±√36 = ±6</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>е)</b> <span class="formula">x² = 0,49</span><br>
+                    <span class="formula">x = ±√0,49 = ±0,7</span> ✅<br>
+                    Проверка: <span class="formula">0,7² = 0,49</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> ±9; ±3√2; 0; нет корней; ±6; ±0,7. Всё верно! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🔵 Средний -->
+        <h3><span class="level level-mid">🔵 Средний</span>
+            Задание 2 (№ 317 из учебника)</h3>
+        <p>Решите уравнение:</p>
+        <div class="formula-box">
+            а) <span class="formula">(x − 3)² = 25</span> &nbsp;&nbsp;
+            б) <span class="formula">(x + 4)² = 9</span> &nbsp;&nbsp;
+            в) <span class="formula">(x − 6)² = 7</span> &nbsp;&nbsp;
+            г) <span class="formula">(x + 2)² = 6</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">(x − 3)² = 25</span><br>
+                    <span class="formula">x − 3 = ±5</span><br>
+                    <span class="formula">x₁ = 3 + 5 = 8</span><br>
+                    <span class="formula">x₂ = 3 − 5 = −2</span><br>
+                    <b>Проверка:</b> <span class="formula">(8−3)² = 25</span> ✅,
+                    <span class="formula">(−2−3)² = 25</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">(x + 4)² = 9</span><br>
+                    <span class="formula">x + 4 = ±3</span><br>
+                    <span class="formula">x₁ = −4 + 3 = −1</span><br>
+                    <span class="formula">x₂ = −4 − 3 = −7</span><br>
+                    <b>Проверка:</b> <span class="formula">(−1+4)² = 9</span> ✅,
+                    <span class="formula">(−7+4)² = 9</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">(x − 6)² = 7</span><br>
+                    <span class="formula">x − 6 = ±√7</span><br>
+                    <span class="formula">x₁ = 6 + √7 ≈ 6 + 2,65 ≈ 8,65</span><br>
+                    <span class="formula">x₂ = 6 − √7 ≈ 6 − 2,65 ≈ 3,35</span><br>
+                    <b>Проверка:</b> <span class="formula">(√7)² = 7</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">(x + 2)² = 6</span><br>
+                    <span class="formula">x + 2 = ±√6</span><br>
+                    <span class="formula">x₁ = −2 + √6 ≈ −2 + 2,45 ≈ 0,45</span><br>
+                    <span class="formula">x₂ = −2 − √6 ≈ −2 − 2,45 ≈ −4,45</span><br>
+                    <b>Проверка:</b> <span class="formula">(√6)² = 6</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> а) 8 и −2; б) −1 и −7;
+                   в) <span class="formula">6 ± √7</span>;
+                   г) <span class="formula">−2 ± √6</span>. Отлично! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🟣 Продвинутый -->
+        <h3><span class="level level-adv">🟣 Продвинутый</span>
+            Задание 3 (№ 323 + № 324 из учебника)</h3>
+        <p>Вычислите:</p>
+        <div class="formula-box">
+            а) <span class="formula">0,49 + 2(√0,4)²</span> &nbsp;&nbsp;
+            б) <span class="formula">(3√11)² − √6400</span> &nbsp;&nbsp;
+            в) <span class="formula">(2√6)² + (−3√2)²</span> &nbsp;&nbsp;
+            г) <span class="formula">(2 − √5)² + 4√5</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">0,49 + 2(√0,4)²</span><br>
+                    <span class="formula">(√0,4)² = 0,4</span><br>
+                    <span class="formula">0,49 + 2 · 0,4 = 0,49 + 0,8 = 1,29</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">(3√11)² − √6400</span><br>
+                    <span class="formula">(3√11)² = 9 · 11 = 99</span><br>
+                    <span class="formula">√6400 = 80</span><br>
+                    <span class="formula">99 − 80 = 19</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">(2√6)² + (−3√2)²</span><br>
+                    <span class="formula">(2√6)² = 4 · 6 = 24</span><br>
+                    <span class="formula">(−3√2)² = 9 · 2 = 18</span><br>
+                    <span class="formula">24 + 18 = 42</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">(2 − √5)² + 4√5</span><br>
+                    Раскрываем по формуле <span class="formula">(a−b)² = a² − 2ab + b²</span>:<br>
+                    <span class="formula">(2 − √5)² = 4 − 4√5 + 5 = 9 − 4√5</span><br>
+                    <span class="formula">9 − 4√5 + 4√5 = 9</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> 1,29; 19; 42; 9. Блестяще! 🏆</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- ═══════════ БЛОК 3: ПРАКТИКА ═══════════ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для архитектора: расчёт балки</h3>
+        <p>Архитектор проектирует квадратное окно площадью
+           <span class="formula">2,56 м²</span>. Нужно найти длину стороны окна
+           и длину диагонали (для установки перемычки). Также нужно проверить,
+           поместится ли окно в проём высотой <span class="formula">2 м</span>.</p>
+
+        <details>
+            <summary>Показать решение архитектора</summary>
+            <div>
+                <div class="step-box">
+                    <b>Шаг 1.</b> Сторона квадрата:<br>
+                    <span class="formula">a² = 2,56 → a = √2,56 = 1,6 м</span><br>
+                    Проверка: <span class="formula">1,6² = 2,56</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>Шаг 2.</b> Диагональ квадрата (теорема Пифагора):<br>
+                    <span class="formula">d² = a² + a² = 2a² = 2 · 2,56 = 5,12</span><br>
+                    <span class="formula">d = √5,12 ≈ 2,26 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 3.</b> Проверка высоты проёма:<br>
+                    Сторона окна = <span class="formula">1,6 м</span><br>
+                    Высота проёма = <span class="formula">2 м</span><br>
+                    <span class="formula">1,6 < 2</span> → окно помещается ✅<br>
+                    Но диагональ <span class="formula">2,26 м > 2 м</span> —
+                    при наклоне окно не пройдёт! ⚠️
+                </div>
+                <p><strong>Ответ:</strong> сторона = <span class="formula">1,6 м</span>,
+                   диагональ ≈ <span class="formula">2,26 м</span>.
+                   Окно помещается в проём только вертикально. 🏗️</p>
+            </div>
+        </details>
+
+        <div class="info-box">
+            🌍 <strong>Где ещё используется уравнение x² = a?</strong><br>
+            • Физика: расчёт скорости при свободном падении
+            <span class="formula">v² = 2gh → v = √(2gh)</span><br>
+            • Электротехника: мощность и напряжение
+            <span class="formula">P = U²/R → U = √(PR)</span><br>
+            • Астрономия: орбитальные скорости планет
+        </div>
+    </section>
+
+    <!-- ═══════════ ИТОГИ ═══════════ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul style="list-style:none;padding:0">
+            <li>✅ Уравнение <span class="formula">x² = a</span> при
+                <span class="formula">a > 0</span> имеет <strong>два корня</strong>:
+                <span class="formula">x = √a</span> и
+                <span class="formula">x = −√a</span>.</li>
+            <li>✅ При <span class="formula">a = 0</span> — один корень:
+                <span class="formula">x = 0</span>.</li>
+            <li>✅ При <span class="formula">a < 0</span> — корней нет.</li>
+            <li>✅ График <span class="formula">y = x²</span> — парабола,
+                симметричная относительно оси y, вершина в начале координат.</li>
+            <li>✅ <span class="formula">(√a)² = a</span> при
+                <span class="formula">a ≥ 0</span>.</li>
+            <li>✅ Если <span class="formula">a</span> — не полный квадрат,
+                корни иррациональны (например, <span class="formula">√2, √3, √7</span>).</li>
+            <li>💡 <strong>Лайфхак:</strong> для уравнения вида
+                <span class="formula">(f(x))² = a</span> сначала находим
+                <span class="formula">f(x) = ±√a</span>, затем решаем
+                два простых уравнения.</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════ ПОДСКАЗКА УЧИТЕЛЮ ═══════════ -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><strong>Типичные ошибки:</strong></p>
+        <ul>
+            <li>Забывают второй (отрицательный) корень: пишут только
+                <span class="formula">x = √a</span>, забывая
+                <span class="formula">x = −√a</span>.</li>
+            <li>Путают <span class="formula">√(x²)</span> и
+                <span class="formula">x</span>: на самом деле
+                <span class="formula">√(x²) = |x|</span>.</li>
+            <li>Неправильно возводят произведение в квадрат:
+                <span class="formula">(3√5)² = 9 · 5 = 45</span>,
+                а не <span class="formula">3√25</span>.</li>
+            <li>При решении <span class="formula">(x−a)² = b</span> забывают
+                раскрыть скобки с двумя знаками ±.</li>
+        </ul>
+        <p><strong>🪜 Подмостки для слабых учеников:</strong></p>
+        <ul>
+            <li>Дайте таблицу квадратов 1² … 20² для быстрого поиска.</li>
+            <li>Начните с числовых примеров:
+                <span class="formula">x² = 4, x² = 9, x² = 16</span>.</li>
+            <li>Нарисуйте параболу и прямую
+                <span class="formula">y = a</span> — визуализация помогает понять
+                количество корней.</li>
+            <li>Используйте алгоритм: «Определи знак a → запиши формулу → проверь».</li>
+        </ul>
+        <p><strong>🚀 Вызов для сильных учеников:</strong></p>
+        <ul>
+            <li>№ 316 из учебника: уравнения вида
+                <span class="formula">x³ − 11x = 0</span> (разложение на множители).</li>
+            <li>№ 324 из учебника: упрощение выражений вида
+                <span class="formula">(5+√3)² + (5−√3)²</span>.</li>
+            <li>№ 328 из учебника: постройте графики
+                <span class="formula">y = √(−x)</span> и
+                <span class="formula">y = √(10x)</span>.</li>
+            <li>Докажите, что <span class="formula">√2</span> иррационально
+                (связь с § 10).</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-11.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-13.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, § 12)
+    </footer>
+
+</div>
+</body>
+</html>

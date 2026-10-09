@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нахождение приближённых значений квадратного корня — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --purple: #7c3aed;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120,140,170,.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120,140,170,.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.65;
+        }
+        .container { max-width: 860px; margin: 0 auto; padding: 20px 16px 40px; }
+
+        header {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            text-align: center;
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            margin-bottom: 12px;
+        }
+        header h1 { font-size: 1.55rem; margin-bottom: 6px; }
+        .subtitle { color: var(--text-light); font-size: .95rem; }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            padding: 26px 24px;
+            margin-bottom: 22px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .card h3 { font-size: 1.05rem; margin: 18px 0 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .92rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+        th { background: #eff6ff; font-weight: 600; }
+
+        .formula {
+            color: var(--formula);
+            font-weight: 700;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+        }
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05rem;
+        }
+        .step-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .step-box b { color: var(--primary); }
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .warn-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 12px 0;
+        }
+        .algo-box {
+            background: #f0fdf4;
+            border: 2px solid #16a34a;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin: 14px 0;
+        }
+        .algo-box h4 { color: #166534; margin-bottom: 8px; }
+        .algo-box ol { padding-left: 20px; }
+        .algo-box li { margin: 6px 0; }
+
+        details {
+            margin: 12px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        summary {
+            cursor: pointer;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            font-weight: 600;
+            font-size: .95rem;
+            user-select: none;
+        }
+        summary:hover { background: #e2e8f0; }
+        details > div { padding: 14px 16px; }
+
+        .level { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .8rem; font-weight: 700; margin-right: 6px; }
+        .level-basic  { background: #dcfce7; color: #166534; }
+        .level-mid    { background: #dbeafe; color: #1e40af; }
+        .level-adv    { background: #f3e8ff; color: #6b21a8; }
+
+        .practice-box { border-left: 5px solid var(--warning); }
+        .summary-box  { border-left: 5px solid var(--success); }
+        .teacher-note { border-left: 5px solid var(--purple); font-size: .93rem; }
+        .teacher-note h2 { border-bottom-color: var(--purple); }
+
+        .lesson-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 28px 0 18px;
+        }
+        .lesson-nav a {
+            display: inline-block;
+            padding: 10px 18px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: .92rem;
+            transition: background .2s;
+        }
+        .lesson-nav a:hover { background: var(--accent); }
+
+        footer { text-align: center; color: var(--text-light); font-size: .85rem; padding-top: 8px; }
+
+        .svg-wrap { text-align: center; margin: 16px 0; }
+        .svg-wrap svg { max-width: 100%; height: auto; }
+
+        @media (max-width: 600px) {
+            .container { padding: 12px 8px 30px; }
+            header { padding: 20px 14px; }
+            header h1 { font-size: 1.25rem; }
+            .card { padding: 18px 14px; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════ ШАПКА ═══════════ -->
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>🔎 Нахождение приближённых значений квадратного корня</h1>
+        <p class="subtitle">Глава 2, § 13</p>
+    </header>
+
+    <!-- ═══════════ БЛОК 1: ИЗУЧЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение нового</h2>
+
+        <h3>🪝 Разминка: а что, если число не полный квадрат?</h3>
+        <p>Мы умеем находить <span class="formula">√64 = 8</span>,
+           <span class="formula">√0,49 = 0,7</span> — это полные квадраты.
+           Но что делать с <span class="formula">√2</span>,
+           <span class="formula">√7</span>, <span class="formula">√18</span>?
+           Калькулятор выдаёт бесконечную дробь. Как найти значение корня
+           <em>вручную</em>, с нужной точностью? Сегодня освоим метод
+           <strong>последовательных приближений</strong>! 🎯</p>
+
+        <h3>📌 Ключевая идея</h3>
+        <div class="info-box">
+            Чтобы найти <span class="formula">√a</span>, нужно последовательно
+            сужать интервал, в котором заключено это число:<br>
+            ① Найти два <strong>целых</strong> числа, между которыми лежит
+            <span class="formula">√a</span><br>
+            ② Уточнить <strong>десятые</strong><br>
+            ③ Уточнить <strong>сотые</strong><br>
+            ④ И так далее до нужной точности
+        </div>
+
+        <h3>📘 Пример. Находим √2 с точностью до тысячных</h3>
+
+        <div class="algo-box">
+            <h4>Алгоритм последовательных приближений</h4>
+            <ol>
+                <li>Находим целую часть: ищем <span class="formula">n</span> такое, что
+                    <span class="formula">n² ≤ a < (n+1)²</span></li>
+                <li>Уточняем десятые: возводим в квадрат
+                    <span class="formula">n,1; n,2; n,3; …</span></li>
+                <li>Уточняем сотые: возводим в квадрат
+                    <span class="formula">n,a1; n,a2; …</span></li>
+                <li>Повторяем до нужной точности</li>
+            </ol>
+        </div>
+
+        <div class="step-box">
+            <b>Шаг 1. Целая часть.</b><br>
+            <span class="formula">1² = 1 < 2</span>, а
+            <span class="formula">2² = 4 > 2</span><br>
+            Значит, <span class="formula">1 < √2 < 2</span><br>
+            Записываем: <span class="formula">√2 = 1, …</span>
+        </div>
+
+        <div class="step-box">
+            <b>Шаг 2. Десятые.</b><br>
+            Возводим в квадрат: <span class="formula">1,1² = 1,21</span>;
+            <span class="formula">1,2² = 1,44</span>;
+            <span class="formula">1,3² = 1,69</span>;
+            <span class="formula">1,4² = 1,96</span>;
+            <span class="formula">1,5² = 2,25</span><br>
+            Так как <span class="formula">1,4² = 1,96 < 2</span>, а
+            <span class="formula">1,5² = 2,25 > 2</span>,<br>
+            то <span class="formula">1,4 < √2 < 1,5</span><br>
+            Записываем: <span class="formula">√2 = 1,4 …</span>
+        </div>
+
+        <div class="step-box">
+            <b>Шаг 3. Сотые.</b><br>
+            <span class="formula">1,41² = 1,9881 < 2</span><br>
+            <span class="formula">1,42² = 2,0164 > 2</span><br>
+            Значит, <span class="formula">1,41 < √2 < 1,42</span><br>
+            Записываем: <span class="formula">√2 = 1,41 …</span>
+        </div>
+
+        <div class="step-box">
+            <b>Шаг 4. Тысячные.</b><br>
+            <span class="formula">1,414² = 1,999396 < 2</span><br>
+            <span class="formula">1,415² = 2,002225 > 2</span><br>
+            Значит, <span class="formula">1,414 < √2 < 1,415</span>
+        </div>
+
+        <div class="formula-box">
+            Ответ: <span class="formula">√2 ≈ 1,414</span>
+        </div>
+
+        <!-- SVG: сужение интервала -->
+        <div class="svg-wrap">
+            <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Уровень 1: целые -->
+                <text x="310" y="25" text-anchor="middle"
+                      font-size="13" fill="#1e40af" font-weight="bold">
+                    Шаг 1: целая часть
+                </text>
+                <line x1="60" y1="50" x2="560" y2="50" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="160" y1="42" x2="160" y2="58" stroke="#1e293b" stroke-width="2"/>
+                <line x1="460" y1="42" x2="460" y2="58" stroke="#1e293b" stroke-width="2"/>
+                <text x="160" y="72" text-anchor="middle" font-size="13" fill="#1e293b">1</text>
+                <text x="460" y="72" text-anchor="middle" font-size="13" fill="#1e293b">2</text>
+                <rect x="160" y="44" width="300" height="12" rx="3" fill="#dbeafe" opacity="0.7"/>
+                <circle cx="310" cy="50" r="5" fill="#dc2626"/>
+                <text x="310" y="38" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">√2</text>
+
+                <!-- Уровень 2: десятые -->
+                <text x="310" y="110" text-anchor="middle"
+                      font-size="13" fill="#1e40af" font-weight="bold">
+                    Шаг 2: десятые
+                </text>
+                <line x1="160" y1="135" x2="460" y2="135" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="160" y1="127" x2="160" y2="143" stroke="#1e293b" stroke-width="2"/>
+                <line x1="460" y1="127" x2="460" y2="143" stroke="#1e293b" stroke-width="2"/>
+                <text x="160" y="157" text-anchor="middle" font-size="12" fill="#1e293b">1,4</text>
+                <text x="460" y="157" text-anchor="middle" font-size="12" fill="#1e293b">1,5</text>
+                <rect x="160" y="129" width="300" height="12" rx="3" fill="#dcfce7" opacity="0.7"/>
+                <circle cx="280" cy="135" r="5" fill="#dc2626"/>
+                <text x="280" y="123" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">√2</text>
+                <text x="160" y="175" text-anchor="middle" font-size="11" fill="#64748b">1,96</text>
+                <text x="460" y="175" text-anchor="middle" font-size="11" fill="#64748b">2,25</text>
+
+                <!-- Уровень 3: сотые -->
+                <text x="310" y="210" text-anchor="middle"
+                      font-size="13" fill="#1e40af" font-weight="bold">
+                    Шаг 3: сотые
+                </text>
+                <line x1="200" y1="235" x2="420" y2="235" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="200" y1="227" x2="200" y2="243" stroke="#1e293b" stroke-width="2"/>
+                <line x1="420" y1="227" x2="420" y2="243" stroke="#1e293b" stroke-width="2"/>
+                <text x="200" y="257" text-anchor="middle" font-size="12" fill="#1e293b">1,41</text>
+                <text x="420" y="257" text-anchor="middle" font-size="12" fill="#1e293b">1,42</text>
+                <rect x="200" y="229" width="220" height="12" rx="3" fill="#fef3c7" opacity="0.7"/>
+                <circle cx="310" cy="235" r="5" fill="#dc2626"/>
+                <text x="310" y="223" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">√2</text>
+                <text x="200" y="275" text-anchor="middle" font-size="11" fill="#64748b">1,9881</text>
+                <text x="420" y="275" text-anchor="middle" font-size="11" fill="#64748b">2,0164</text>
+
+                <!-- подпись -->
+                <text x="310" y="296" text-anchor="middle"
+                      font-size="12" fill="#64748b">
+                    Интервал сужается на каждом шаге
+                </text>
+            </svg>
+        </div>
+
+        <div class="warn-box">
+            ⚠️ <strong>Важно:</strong> в практических расчётах обычно используют
+            калькулятор или таблицы. Но метод последовательных приближений помогает
+            <em>оценить</em> результат и проверить, не ошибся ли калькулятор!
+        </div>
+    </section>
+
+    <!-- ═══════════ БЛОК 2: ЗАКРЕПЛЕНИЕ ═══════════ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>Задачи из учебника. Выбери уровень и вперёд! 🚀</p>
+
+        <!-- 🟢 Базовый -->
+        <h3><span class="level level-basic">🟢 Базовый</span>
+            Задание 1 (№ 329 из учебника)</h3>
+        <p>Подберите два последовательных целых числа, между которыми заключено число:</p>
+        <div class="formula-box">
+            а) <span class="formula">√27</span> &nbsp;&nbsp;
+            б) <span class="formula">√40</span> &nbsp;&nbsp;
+            в) <span class="formula">√120</span> &nbsp;&nbsp;
+            г) <span class="formula">√9,2</span> &nbsp;&nbsp;
+            д) <span class="formula">√0,4</span> &nbsp;&nbsp;
+            е) <span class="formula">√167</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√27</span>:<br>
+                    <span class="formula">5² = 25 < 27 < 36 = 6²</span><br>
+                    Значит, <span class="formula">5 < √27 < 6</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">√40</span>:<br>
+                    <span class="formula">6² = 36 < 40 < 49 = 7²</span><br>
+                    Значит, <span class="formula">6 < √40 < 7</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">√120</span>:<br>
+                    <span class="formula">10² = 100 < 120 < 121 = 11²</span><br>
+                    Значит, <span class="formula">10 < √120 < 11</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">√9,2</span>:<br>
+                    <span class="formula">3² = 9 < 9,2 < 16 = 4²</span><br>
+                    Значит, <span class="formula">3 < √9,2 < 4</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>д)</b> <span class="formula">√0,4</span>:<br>
+                    <span class="formula">0² = 0 < 0,4 < 1 = 1²</span><br>
+                    Значит, <span class="formula">0 < √0,4 < 1</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>е)</b> <span class="formula">√167</span>:<br>
+                    <span class="formula">12² = 144 < 167 < 169 = 13²</span><br>
+                    Значит, <span class="formula">12 < √167 < 13</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> 5 и 6; 6 и 7; 10 и 11; 3 и 4; 0 и 1; 12 и 13. Всё верно! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🔵 Средний -->
+        <h3><span class="level level-mid">🔵 Средний</span>
+            Задание 2 (№ 335 из учебника)</h3>
+        <p>Сравните с нулём значение выражения:</p>
+        <div class="formula-box">
+            а) <span class="formula">√7 − 3</span> &nbsp;&nbsp;
+            б) <span class="formula">11 − √107</span> &nbsp;&nbsp;
+            в) <span class="formula">√85 − 4</span> &nbsp;&nbsp;
+            г) <span class="formula">19 − √326</span> &nbsp;&nbsp;
+            д) <span class="formula">15 − √225</span> &nbsp;&nbsp;
+            е) <span class="formula">√625 − 25</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">√7 − 3</span>:<br>
+                    Сравниваем <span class="formula">√7</span> и
+                    <span class="formula">3</span>:<br>
+                    <span class="formula">7 < 9 = 3²</span>, значит
+                    <span class="formula">√7 < 3</span><br>
+                    Следовательно, <span class="formula">√7 − 3 < 0</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">11 − √107</span>:<br>
+                    <span class="formula">107 < 121 = 11²</span>, значит
+                    <span class="formula">√107 < 11</span><br>
+                    Следовательно, <span class="formula">11 − √107 > 0</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>в)</b> <span class="formula">√85 − 4</span>:<br>
+                    <span class="formula">85 > 16 = 4²</span>, значит
+                    <span class="formula">√85 > 4</span><br>
+                    Следовательно, <span class="formula">√85 − 4 > 0</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>г)</b> <span class="formula">19 − √326</span>:<br>
+                    <span class="formula">326 < 361 = 19²</span>, значит
+                    <span class="formula">√326 < 19</span><br>
+                    Следовательно, <span class="formula">19 − √326 > 0</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>д)</b> <span class="formula">15 − √225</span>:<br>
+                    <span class="formula">√225 = 15</span><br>
+                    Следовательно, <span class="formula">15 − 15 = 0</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>е)</b> <span class="formula">√625 − 25</span>:<br>
+                    <span class="formula">√625 = 25</span><br>
+                    Следовательно, <span class="formula">25 − 25 = 0</span> ✅
+                </div>
+                <p><strong>Ответы:</strong> а) < 0; б) > 0; в) > 0; г) > 0; д) = 0; е) = 0. Отлично! ✅</p>
+            </div>
+        </details>
+
+        <!-- 🟣 Продвинутый -->
+        <h3><span class="level level-adv">🟣 Продвинутый</span>
+            Задание 3 (№ 339 из учебника)</h3>
+        <p>Свободно падающее тело в безвоздушном пространстве проходит
+           <span class="formula">S</span> м за <span class="formula">t</span> с, где
+           <span class="formula">t = √(2S/g)</span>,
+           <span class="formula">g = 10 м/с²</span>.
+           Вычислите <span class="formula">t</span> с точностью до 0,1 с, если:</p>
+        <div class="formula-box">
+            а) <span class="formula">S = 175 м</span> &nbsp;&nbsp;
+            б) <span class="formula">S = 225 м</span>
+        </div>
+
+        <details>
+            <summary>Показать решение</summary>
+            <div>
+                <div class="step-box">
+                    <b>а)</b> <span class="formula">S = 175 м</span>:<br>
+                    <span class="formula">t = √(2·175/10) = √(350/10) = √35</span><br>
+                    Оцениваем: <span class="formula">5² = 25 < 35 < 36 = 6²</span><br>
+                    Уточняем: <span class="formula">5,9² = 34,81 < 35</span>,
+                    <span class="formula">6² = 36 > 35</span><br>
+                    Значит, <span class="formula">√35 ≈ 5,9</span><br>
+                    <b>Ответ:</b> <span class="formula">t ≈ 5,9 с</span> ✅
+                </div>
+                <div class="step-box">
+                    <b>б)</b> <span class="formula">S = 225 м</span>:<br>
+                    <span class="formula">t = √(2·225/10) = √(450/10) = √45</span><br>
+                    Оцениваем: <span class="formula">6² = 36 < 45 < 49 = 7²</span><br>
+                    Уточняем: <span class="formula">6,7² = 44,89 < 45</span>,
+                    <span class="formula">6,8² = 46,24 > 45</span><br>
+                    Значит, <span class="formula">√45 ≈ 6,7</span><br>
+                    <b>Ответ:</b> <span class="formula">t ≈ 6,7 с</span> ✅
+                </div>
+                <p><strong>Проверка:</strong>
+                   <span class="formula">5,9² = 34,81 ≈ 35</span> ✅,
+                   <span class="formula">6,7² = 44,89 ≈ 45</span> ✅<br>
+                   Ты справился! 🎉</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- ═══════════ БЛОК 3: ПРАКТИКА ═══════════ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>👷 Задача для садового дизайнера</h3>
+        <p>Дизайнер планирует разбить квадратную клумбу площадью
+           <span class="formula">50 м²</span>. Нужно найти длину стороны клумбы
+           и определить, сколько погонных метров бордюра понадобится
+           для ограждения. Точность — до <span class="formula">0,1 м</span>.</p>
+
+        <details>
+            <summary>Показать решение дизайнера</summary>
+            <div>
+                <div class="step-box">
+                    <b>Шаг 1.</b> Сторона квадрата:<br>
+                    <span class="formula">a = √S = √50</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 2.</b> Оцениваем целую часть:<br>
+                    <span class="formula">7² = 49 < 50 < 64 = 8²</span><br>
+                    Значит, <span class="formula">7 < √50 < 8</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 3.</b> Уточняем десятые:<br>
+                    <span class="formula">7,0² = 49,00 < 50</span><br>
+                    <span class="formula">7,1² = 50,41 > 50</span><br>
+                    Значит, <span class="formula">7,0 < √50 < 7,1</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 4.</b> Уточняем сотые:<br>
+                    <span class="formula">7,07² = 49,9849 < 50</span><br>
+                    <span class="formula">7,08² = 50,1264 > 50</span><br>
+                    Значит, <span class="formula">√50 ≈ 7,1 м</span> (с точностью до 0,1)
+                </div>
+                <div class="step-box">
+                    <b>Шаг 5.</b> Периметр (длина бордюра):<br>
+                    <span class="formula">P = 4a = 4 · 7,1 = 28,4 м</span>
+                </div>
+                <div class="step-box">
+                    <b>Шаг 6. Проверка:</b><br>
+                    <span class="formula">7,1² = 50,41 ≈ 50</span> ✅
+                    (погрешность 0,41 м², что приемлемо при округлении до 0,1)<br>
+                    <span class="formula">4 · 7,1 = 28,4</span> ✅
+                </div>
+                <p><strong>Ответ:</strong> сторона клумбы ≈
+                   <span class="formula">7,1 м</span>,
+                   бордюра нужно ≈ <span class="formula">28,4 м</span>.
+                   Дизайнер доволен! 🌳</p>
+            </div>
+        </details>
+
+        <div class="info-box">
+            🌍 <strong>Где нужны приближённые значения корней?</strong><br>
+            • Строительство: расчёт диагоналей, сторон по площади<br>
+            • Физика: время падения
+            <span class="formula">t = √(2h/g)</span>, период маятника
+            <span class="formula">T = 2π√(l/g)</span><br>
+            • География: расстояние до горизонта
+            <span class="formula">d ≈ √(2Rh)</span><br>
+            • IT: алгоритмы машинного обучения, графика, шифрование
+        </div>
+    </section>
+
+    <!-- ═══════════ ИТОГИ ═══════════ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul style="list-style:none;padding:0">
+            <li>✅ <strong>Метод последовательных приближений:</strong>
+                находим целую часть → десятые → сотые → тысячные.</li>
+            <li>✅ На каждом шаге ищем два числа, между которыми лежит
+                <span class="formula">√a</span>: одно даёт квадрат меньше
+                <span class="formula">a</span>, другое — больше.</li>
+            <li>✅ Для сравнения выражений вида
+                <span class="formula">√a − b</span> сравниваем
+                <span class="formula">a</span> и <span class="formula">b²</span>:<br>
+                если <span class="formula">a > b²</span>, то
+                <span class="formula">√a > b</span>, и наоборот.</li>
+            <li>✅ В практических расчётах используем калькулятор,
+                но метод приближений помогает оценить результат.</li>
+            <li>✅ Чем больше знаков точности, тем уже интервал
+                и точнее результат.</li>
+            <li>💡 <strong>Лайфхак:</strong> чтобы быстро оценить
+                <span class="formula">√a</span>, найди ближайшие полные квадраты.
+                Например, <span class="formula">√50</span> — между
+                <span class="formula">√49 = 7</span> и
+                <span class="formula">√64 = 8</span>, ближе к 7.</li>
+        </ul>
+    </section>
+
+    <!-- ═══════════ ПОДСКАЗКА УЧИТЕЛЮ ═══════════ -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><strong>Типичные ошибки:</strong></p>
+        <ul>
+            <li>При сравнении <span class="formula">√a</span> и
+                <span class="formula">b</span> забывают возвести
+                <span class="formula">b</span> в квадрат.</li>
+            <li>Неправильно определяют направление неравенства для
+                отрицательных чисел.</li>
+            <li>Округляют промежуточные результаты слишком рано,
+                теряя точность.</li>
+            <li>Путают <span class="formula">√(a+b)</span> и
+                <span class="formula">√a + √b</span>.</li>
+        </ul>
+        <p><strong>🪜 Подмостки для слабых учеников:</strong></p>
+        <ul>
+            <li>Дайте таблицу квадратов 1² … 20² для быстрой ориентировки.</li>
+            <li>Начните с полных квадратов:
+                <span class="formula">√16, √25, √36</span>, потом переходите
+                к неполным.</li>
+            <li>Используйте числовую прямую: отмечайте интервалы
+                и сужайте их визуально.</li>
+            <li>Разрешите калькулятор для проверки, но требуйте
+                ручную оценку.</li>
+        </ul>
+        <p><strong>🚀 Вызов для сильных учеников:</strong></p>
+        <ul>
+            <li>№ 330 из учебника: найдите цифры разрядов для
+                <span class="formula">√3, √5, √6</span>.</li>
+            <li>№ 338 из учебника: формула стороны правильного восьмиугольника
+                <span class="formula">a₈ = R√(2−√2)</span>.</li>
+            <li>№ 340 из учебника: период колебаний маятника
+                <span class="formula">T = 2π√(l/g)</span>.</li>
+            <li>№ 343 из учебника: упростите
+                <span class="formula">√(x²) + x</span> при
+                <span class="formula">x ≥ 0</span> и при
+                <span class="formula">x < 0</span>.</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-12.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-14.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, § 13)
+    </footer>
+
+</div>
+</body>
+</html>
