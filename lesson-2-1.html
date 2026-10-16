@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Действительные числа — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #fbfaf5;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: var(--bg);
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+            color: var(--text);
+        }
+
+        .subtitle {
+            color: var(--light-text);
+            font-size: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.15rem;
+            margin: 18px 0 10px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 14px;
+            border-radius: 8px;
+            margin: 14px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 14px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 18px 0;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        details {
+            margin-top: 10px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 10px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.2rem; }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .lesson-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            color: var(--light-text);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.3rem; }
+            .card { padding: 14px; }
+            .formula { font-size: 1rem; padding: 10px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 6px; }
+            .lesson-nav { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>🔢 Действительные числа</h1>
+        <p class="subtitle">Урок 10 • Глава 2, §10 <span class="ready-badge">✅ урок готов</span></p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3>🪝 Разминка: Что между числами?</h3>
+        <p>Ты знаешь целые числа: ..., -2, -1, 0, 1, 2, ... Ты знаешь дроби: 1/2, 3/4, -5/7. Но что находится между 1 и 2? Между 1.4 и 1.5? Между 1.41 и 1.42? Оказывается, чисел бесконечно больше, чем мы думаем! Сегодня мы откроем целый мир <b>иррациональных чисел</b> — тех, которые нельзя записать в виде обычной дроби. 🌟</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Рациональное число</b></td>
+                <td>Число, которое можно записать в виде дроби m/n, где m — целое, n — натуральное. Или как конечную/периодическую десятичную дробь.</td>
+            </tr>
+            <tr>
+                <td><b>Иррациональное число</b></td>
+                <td>Число, которое НЕЛЬЗЯ записать в виде дроби m/n. Записывается как бесконечная НЕпериодическая десятичная дробь.</td>
+            </tr>
+            <tr>
+                <td><b>Действительное число</b></td>
+                <td>Любое рациональное ИЛИ иррациональное число. Все числа на числовой прямой.</td>
+            </tr>
+            <tr>
+                <td><b>Бесконечная периодическая дробь</b></td>
+                <td>Десятичная дробь, где цифры повторяются (например, 0.333... = 0.(3)). Это рациональное число.</td>
+            </tr>
+            <tr>
+                <td><b>Бесконечная непериодическая дробь</b></td>
+                <td>Десятичная дробь без повторяющегося паттерна (например, 1.41421356...). Это иррациональное число.</td>
+            </tr>
+            <tr>
+                <td><b>Множество R</b></td>
+                <td>Множество всех действительных чисел (от лат. realis — действительный).</td>
+            </tr>
+            <tr>
+                <td><b>Взаимно однозначное соответствие</b></td>
+                <td>Каждому действительному числу соответствует одна точка на прямой, и наоборот.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Какие числа бывают?</b><br>
+            • <b>Рациональные:</b> можно записать как m/n (целые, конечные десятичные, периодические)<br>
+            • <b>Иррациональные:</b> нельзя записать как m/n (непериодические бесконечные)<br>
+            • <b>Действительные:</b> рациональные + иррациональные = все числа на прямой
+        </div>
+
+        <div class="svg-container">
+            <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Числовая прямая: рациональные и иррациональные числа</text>
+
+                <line x1="50" y1="100" x2="550" y2="100" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow)"/>
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e293b" />
+                    </marker>
+                </defs>
+
+                <line x1="100" y1="95" x2="100" y2="105" stroke="#1e293b" stroke-width="2"/>
+                <text x="100" y="125" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">0</text>
+
+                <line x1="200" y1="95" x2="200" y2="105" stroke="#1e293b" stroke-width="2"/>
+                <text x="200" y="125" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">1</text>
+
+                <line x1="300" y1="95" x2="300" y2="105" stroke="#1e293b" stroke-width="2"/>
+                <text x="300" y="125" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">2</text>
+
+                <line x1="400" y1="95" x2="400" y2="105" stroke="#1e293b" stroke-width="2"/>
+                <text x="400" y="125" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">3</text>
+
+                <line x1="500" y1="95" x2="500" y2="105" stroke="#1e293b" stroke-width="2"/>
+                <text x="500" y="125" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">4</text>
+
+                <circle cx="241" cy="100" r="5" fill="#dc2626"/>
+                <text x="241" y="75" font-family="sans-serif" font-size="13" fill="#dc2626" font-weight="bold" text-anchor="middle">√2 ≈ 1.414</text>
+                <text x="241" y="60" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle">(иррациональное)</text>
+
+                <circle cx="414" cy="100" r="5" fill="#9333ea"/>
+                <text x="414" y="75" font-family="sans-serif" font-size="13" fill="#9333ea" font-weight="bold" text-anchor="middle">π ≈ 3.14159</text>
+                <text x="414" y="60" font-family="sans-serif" font-size="11" fill="#9333ea" text-anchor="middle">(иррациональное)</text>
+
+                <circle cx="150" cy="100" r="5" fill="#16a34a"/>
+                <text x="150" y="145" font-family="sans-serif" font-size="12" fill="#16a34a" font-weight="bold" text-anchor="middle">1/2 = 0.5</text>
+                <text x="150" y="160" font-family="sans-serif" font-size="10" fill="#16a34a" text-anchor="middle">(рациональное)</text>
+
+                <circle cx="167" cy="100" r="5" fill="#16a34a"/>
+                <text x="167" y="145" font-family="sans-serif" font-size="12" fill="#16a34a" font-weight="bold" text-anchor="middle">1/3 ≈ 0.333</text>
+
+                <rect x="50" y="175" width="15" height="15" fill="#16a34a" rx="3"/>
+                <text x="70" y="188" font-family="sans-serif" font-size="12" fill="#1e293b">Рациональные</text>
+
+                <rect x="200" y="175" width="15" height="15" fill="#dc2626" rx="3"/>
+                <text x="220" y="188" font-family="sans-serif" font-size="12" fill="#1e293b">Иррациональные</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Как отличить рациональное от иррационального?</b><br>
+            • Если десятичная дробь <b>конечная</b> (0.5, 1.25) или <b>периодическая</b> (0.333..., 0.1666...) → <b>рациональное</b><br>
+            • Если десятичная дробь <b>бесконечная и непериодическая</b> (1.41421356..., 3.14159265...) → <b>иррациональное</b>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Примеры иррациональных чисел</b><br>
+            • √2 = 1.41421356... (корень из 2)<br>
+            • √3 = 1.73205081... (корень из 3)<br>
+            • π = 3.14159265... (число пи, отношение длины окружности к диаметру)<br>
+            • 0.101001000100001... (нули между единицами увеличиваются)<br>
+            • 2.71828182... (число e, основание натурального логарифма)
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Формула длины отрезка на числовой прямой</b><br>
+            Если A(x₁) и B(x₂) — точки на числовой прямой, то расстояние между ними:
+        </div>
+
+        <div class="formula">
+            AB = |x₂ - x₁|
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 5: Сравнение действительных чисел</b><br>
+            Действительные числа сравнивают так же, как конечные десятичные дроби — по разрядам слева направо.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 6: Действия над действительными числами</b><br>
+            Действительные числа можно складывать, вычитать, умножать и делить (кроме деления на ноль). В практических задачах иррациональные числа заменяют приближёнными значениями.
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника (§10, упражнения 268–288).</p>
+
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№268 из учебника)</h3>
+            <p>Приведите пример:</p>
+            <p>а) рационального числа;</p>
+            <p>б) иррационального числа.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Вспоминаем определения. Рациональное число можно записать как дробь m/n. Иррациональное — нельзя.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Примеры рациональных чисел:<br>
+                    • Целые: <i>5, -3, 0</i><br>
+                    • Конечные десятичные: <i>0.5, 1.25, -2.75</i><br>
+                    • Периодические: <i>0.(3) = 1/3, 0.1(6) = 1/6</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Примеры иррациональных чисел:<br>
+                    • <i>√2 = 1.41421356...</i><br>
+                    • <i>π = 3.14159265...</i><br>
+                    • <i>√7 = 2.64575131...</i>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    а) Рациональное: <i>3/4 = 0.75</i> (или любое другое)<br>
+                    б) Иррациональное: <i>√2 ≈ 1.41421356...</i> (или любое другое)<br>
+                    <b>Проверка:</b> 3/4 можно записать как дробь ✓. √2 нельзя записать как дробь ✓
+                </div>
+            </details>
+        </div>
+
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 2 (№269 из учебника)</h3>
+            <p>Верно ли, что:</p>
+            <p>а) каждое рациональное число является действительным;</p>
+            <p>б) каждое действительное число является рациональным;</p>
+            <p>в) каждое иррациональное число является действительным;</p>
+            <p>г) каждое действительное число является иррациональным?</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Вспоминаем: действительные числа = рациональные + иррациональные.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Анализируем каждое утверждение:<br>
+                    а) <i>Рациональное ⊂ Действительное</i> → <b>ВЕРНО</b> ✓<br>
+                    б) <i>Действительное ⊄ Рациональное</i> → <b>НЕВЕРНО</b> ✗ (есть иррациональные)<br>
+                    в) <i>Иррациональное ⊂ Действительное</i> → <b>ВЕРНО</b> ✓<br>
+                    г) <i>Действительное ⊄ Иррациональное</i> → <b>НЕВЕРНО</b> ✗ (есть рациональные)
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    а) Да ✓<br>
+                    б) Нет ✗ (например, √2 — действительное, но не рациональное)<br>
+                    в) Да ✓<br>
+                    г) Нет ✗ (например, 1/2 — действительное, но не иррациональное)
+                </div>
+            </details>
+        </div>
+
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 3 (№270 из учебника)</h3>
+            <p>Среди чисел -1/3; 0; 0.25; -2.(3); 0.818118111... (число единиц, разделяющих их восьмёрки, каждый раз увеличивается на одну); 4.(251); 2√17; π укажите рациональные и иррациональные.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Анализируем каждое число по определению.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Рациональные числа (можно записать как дробь или периодическая десятичная):<br>
+                    • <i>-1/3</i> — обычная дробь ✓<br>
+                    • <i>0</i> — целое число ✓<br>
+                    • <i>0.25</i> — конечная десятичная ✓<br>
+                    • <i>-2.(3) = -2.333...</i> — периодическая ✓<br>
+                    • <i>4.(251) = 4.251251251...</i> — периодическая ✓
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Иррациональные числа (непериодические бесконечные):<br>
+                    • <i>0.818118111...</i> — паттерн меняется (количество единиц растёт), периодичности нет ✓<br>
+                    • <i>2√17</i> — √17 иррационально, умножение на 2 не делает его рациональным ✓<br>
+                    • <i>π</i> — классическое иррациональное число ✓
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    <b>Рациональные:</b> -1/3; 0; 0.25; -2.(3); 4.(251)<br>
+                    <b>Иррациональные:</b> 0.818118111...; 2√17; π<br>
+                    <b>Проверка:</b> Все рациональные можно записать как m/n ✓. Все иррациональные — бесконечные непериодические ✓
+                </div>
+            </details>
+        </div>
+
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 4 (№272 из учебника)</h3>
+            <p>Сравните:</p>
+            <p>а) 7.653... и 7.563...;</p>
+            <p>б) 0.123... и 0.114...;</p>
+            <p>в) -48.075... и -48.275...;</p>
+            <p>г) -1.444... и -1.456....</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Сравниваем по разрядам слева направо (как обычные десятичные дроби).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> а) 7.653... и 7.563...<br>
+                    Целые части равны (7 = 7). Смотрим на десятые: 6 > 5. Значит, <i>7.653... > 7.563...</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> б) 0.123... и 0.114...<br>
+                    Целые части равны (0 = 0). Десятые равны (1 = 1). Смотрим на сотые: 2 > 1. Значит, <i>0.123... > 0.114...</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> в) -48.075... и -48.275...<br>
+                    Оба отрицательные. Целые части равны (-48 = -48). Десятые: 0 < 2. Но для отрицательных чисел: чем меньше модуль, тем больше число. Значит, <i>-48.075... > -48.275...</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 5:</b> г) -1.444... и -1.456...<br>
+                    Оба отрицательные. Целые части равны (-1 = -1). Десятые равны (4 = 4). Сотые: 4 < 5. Для отрицательных: <i>-1.444... > -1.456...</i>
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b><br>
+                    а) 7.653... > 7.563...<br>
+                    б) 0.123... > 0.114...<br>
+                    в) -48.075... > -48.275...<br>
+                    г) -1.444... > -1.456...<br>
+                    <b>Проверка:</b> Все сравнения выполнены по разрядам ✓
+                </div>
+            </details>
+        </div>
+
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 5 (№283 из учебника)</h3>
+            <p>Является ли рациональным или иррациональным числом сумма a + b, где a = 1.323223222... (группы цифр, состоящие из одной, двух, троек двоек и т.д., разделяются тройками) и b = 2.313113111... (группы цифр, состоящие из одной, двух, троек единиц и т.д., разделяются тройками)?</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Проанализируем структуру чисел a и b.<br>
+                    <i>a = 1.323223222...</i> — после каждой тройки двоек идёт тройка (три тройки подряд: 333), затем четыре двойки, затем снова тройка, и т.д.<br>
+                    <i>b = 2.313113111...</i> — аналогично, но с единицами и тройками.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Сложим a и b поразрядно:<br>
+                    <i>a = 1.32322322233332222...</i><br>
+                    <i>b = 2.31311311133331111...</i><br>
+                    <i>a + b = 3.63633633366663333...</i>
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проанализируем результат. В сумме чередуются группы шестёрок и троек, причём длина групп растёт. Это непериодическая бесконечная десятичная дробь.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Вывод: сумма a + b — иррациональное число, так как её десятичная запись бесконечна и непериодична.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> Сумма a + b — <b>иррациональное число</b>.<br>
+                    <b>Проверка:</b> Если бы сумма была рациональной, то b = (a+b) - a было бы разностью иррационального и иррационального, что могло бы быть рациональным. Но в данном случае структура суммы явно непериодична ✓
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3>📐 Задача для архитектора</h3>
+        <p>Ты проектируешь квадратную комнату площадью 50 м². Найди длину стороны комнаты (это будет √50) и вычисли периметр комнаты с точностью до 0.01 м. Является ли длина стороны рациональным числом?</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Площадь квадрата S = a², где a — сторона. Значит, a = √S = √50.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Упрощаем: √50 = √(25·2) = 5√2.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Так как √2 ≈ 1.41421356..., то a = 5 · 1.41421356... ≈ 7.0710678... м.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Периметр: P = 4a = 4 · 7.0710678... ≈ 28.28 м (округляем до 0.01).
+            </div>
+            <div class="solution-step">
+                <b>Шаг 5:</b> Является ли a рациональным? √50 = 5√2. Поскольку √2 иррационально, а 5 — рационально, их произведение иррационально. Значит, a — иррациональное число.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> Сторона комнаты ≈ <b>7.07 м</b>, периметр ≈ <b>28.28 м</b>. Длина стороны — <b>иррациональное число</b>.<br>
+                <b>Проверка:</b> 7.07² ≈ 49.98 ≈ 50 ✓. 4 · 7.07 = 28.28 ✓
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Рациональные числа:</b> можно записать как m/n (конечные или периодические десятичные).</li>
+            <li><b>Иррациональные числа:</b> нельзя записать как m/n (бесконечные непериодические десятичные).</li>
+            <li><b>Действительные числа (R):</b> рациональные + иррациональные = все точки числовой прямой.</li>
+            <li><b>Примеры иррациональных:</b> √2, √3, π, e, 0.1010010001...</li>
+            <li><b>Формула длины отрезка:</b> AB = |x₂ - x₁|.</li>
+            <li><b>Сравнение:</b> поразрядно, как обычные десятичные дроби.</li>
+            <li>💡 <b>Лайфхак:</b> если в десятичной записи цифры не повторяются периодически — число иррационально.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Путаница в определениях:</i> ученики часто думают, что все бесконечные дроби иррациональны. Напоминайте: периодические — рациональны!</li>
+            <li><i>√4 = 2:</i> ученики считают √4 иррациональным, потому что «корень». Напоминайте: √4 = 2 — рациональное!</li>
+            <li><i>Сравнение отрицательных:</i> забывают, что для отрицательных чисел «больше» то, у которого модуль меньше.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте таблицу-шпаргалку: «Периодическая → рациональное, непериодическая → иррациональное».</li>
+            <li>Используйте цветовое кодирование: рациональные — зелёным, иррациональные — красным.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Попросите их доказать иррациональность √2 методом от противного (как в учебнике, стр. 65-66).</li>
+            <li>Задача №284: если a, b, a-b — рациональные и a ≠ b, то a+b — рациональное. Докажите.</li>
+            <li>Исследуйте: сумма двух иррациональных всегда иррациональна? (Нет: √2 + (-√2) = 0 — рационально!)</li>
+        </ul>
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-10.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-11.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, §10, стр. 64–71)
+    </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Представление дроби в виде суммы дробей — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1> Представление дроби в виде суммы дробей</h1>
+        <p class="subtitle">Урок 9 • Глава 1, §3 (дополнительный материал)</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3> Разминка: Зачем это нужно?</h3>
+        <p>Представь, что ты делишь пиццу между друзьями. Один хочет 1/2, другой — 1/3. Сколько пиццы они съедят вместе? Можно сложить дроби: 1/2 + 1/3 = 5/6. А можно ли сделать наоборот — представить одну дробь в виде суммы нескольких? Да! Например, 5/6 = 1/2 + 1/3. Это умение помогает в интегралах, физике и даже в программировании!</p>
+
+        <h3> Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Разложение дроби</b></td>
+                <td>Представление дроби в виде суммы или разности нескольких дробей с меньшими знаменателями.</td>
+            </tr>
+            <tr>
+                <td><b>Простейшие дроби</b></td>
+                <td>Дроби вида 1/n (например, 1/2, 1/3, 1/4), из которых складывается исходная дробь.</td>
+            </tr>
+            <tr>
+                <td><b>Общий знаменатель</b></td>
+                <td>Наименьшее общее кратное (НОК) знаменателей, к которому приводят дроби при сложении.</td>
+            </tr>
+            <tr>
+                <td><b>Алгоритм разложения</b></td>
+                <td>Последовательность шагов: разложить знаменатель на множители, подобрать дроби, проверить сложением.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Основная идея</b><br>
+            Любую правильную дробь можно представить в виде суммы или разности простейших дробей (дробей вида 1/n).
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">a</span><span class="den">b</span></span> = <span class="fraction"><span class="num">1</span><span class="den">n₁</span></span> + <span class="fraction"><span class="num">1</span><span class="den">n₂</span></span> + ... + <span class="fraction"><span class="num">1</span><span class="den">nₖ</span></span>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Алгоритм разложения</b><br>
+            1. Разложи знаменатель на простые множители.<br>
+            2. Подбери простейшие дроби, знаменатели которых — делители исходного знаменателя.<br>
+            3. Проверь: сложи полученные дроби и сравни с исходной.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Проверка</b><br>
+            Всегда проверяй результат: сложи полученные дроби. Если сумма равна исходной дроби — разложение верное.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Пример разложения 5/6 -->
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Пример: 5/6 = 1/2 + 1/3</text>
+
+                <!-- Original fraction -->
+                <rect x="50" y="50" width="500" height="60" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="300" y="85" font-family="sans-serif" font-size="18" fill="#dc2626" text-anchor="middle" font-weight="bold">Исходная дробь: 5/6</text>
+
+                <!-- Arrow -->
+                <text x="300" y="140" font-family="sans-serif" font-size="24" fill="#2563eb" text-anchor="middle">↓</text>
+
+                <!-- Decomposition -->
+                <rect x="50" y="160" width="500" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="300" y="195" font-family="sans-serif" font-size="18" fill="#16a34a" text-anchor="middle" font-weight="bold">Разложение: 1/2 + 1/3</text>
+
+                <!-- Verification -->
+                <rect x="50" y="240" width="500" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="300" y="270" font-family="sans-serif" font-size="14" fill="#2563eb" text-anchor="middle">Проверка: 1/2 + 1/3 = 3/6 + 2/6 = 5/6 ✓</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Когда это полезно</b><br>
+            • При интегрировании (в старших классах)<br>
+            • При решении задач на движение и работу<br>
+            • В программировании при работе с дробями<br>
+            • Для понимания структуры рациональных чисел
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2> Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи на разложение дробей.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1</h3>
+            <p>Представь дробь 3/4 в виде суммы простейших дробей.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Разложим знаменатель: 4 = 2 × 2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Подбираем простейшие дроби. Попробуем 1/2 + 1/4.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверяем: 1/2 + 1/4 = 2/4 + 1/4 = 3/4. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 3/4 = 1/2 + 1/4 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 2</h3>
+            <p>Представь дробь 7/12 в виде суммы простейших дробей.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Разложим знаменатель: 12 = 2 × 2 × 3.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Подбираем дроби. Попробуем 1/3 + 1/4.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверяем: 1/3 + 1/4 = 4/12 + 3/12 = 7/12. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 7/12 = 1/3 + 1/4 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3</h3>
+            <p>Представь дробь 11/30 в виде суммы простейших дробей.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Разложим знаменатель: 30 = 2 × 3 × 5.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Подбираем дроби. Попробуем 1/5 + 1/6.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверяем: 1/5 + 1/6 = 6/30 + 5/30 = 11/30. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 11/30 = 1/5 + 1/6 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 4</h3>
+            <p>Представь дробь 5/8 в виде суммы простейших дробей.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Разложим знаменателя: 8 = 2 × 2 × 2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Подбираем дроби. Попробуем 1/2 + 1/8.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверяем: 1/2 + 1/8 = 4/8 + 1/8 = 5/8. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 5/8 = 1/2 + 1/8 ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2> Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> Представь 2/5 в виде суммы простейших дробей.</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> Представь 3/8 в виде суммы простейших дробей.</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> Представь 4/9 в виде суммы простейших дробей.</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>4.</b> Представь 13/20 в виде суммы простейших дробей.</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> Представь 7/15 в виде суммы простейших дробей.</p>
+        </div>
+        <div class="task-box">
+            <p><b>6.</b> Представь 19/24 в виде суммы простейших дробей.</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>7.</b> Представь 17/36 в виде суммы простейших дробей.</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> Представь 23/40 в виде суммы простейших дробей.</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> Представь 29/42 в виде суммы простейших дробей.</p>
+        </div>
+
+        <details>
+            <summary> Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. 2/5 = 1/3 + 1/15 (проверка: 5/15 + 1/15 = 6/15 = 2/5 ✓)<br>
+                2. 3/8 = 1/4 + 1/8 (проверка: 2/8 + 1/8 = 3/8 ✓)<br>
+                3. 4/9 = 1/3 + 1/9 (проверка: 3/9 + 1/9 = 4/9 ✓)<br>
+                4. 13/20 = 1/4 + 2/5 (проверка: 5/20 + 8/20 = 13/20 ✓)<br>
+                5. 7/15 = 1/5 + 1/4 + 1/60 (проверка: 12/60 + 15/60 + 1/60 = 28/60 = 7/15 ✓)<br>
+                6. 19/24 = 1/2 + 1/4 + 1/24 (проверка: 12/24 + 6/24 + 1/24 = 19/24 ✓)<br>
+                7. 17/36 = 1/3 + 1/9 + 1/36 (проверка: 12/36 + 4/36 + 1/36 = 17/36 ✓)<br>
+                8. 23/40 = 1/2 + 1/20 + 1/40 (проверка: 20/40 + 2/40 + 1/40 = 23/40 ✓)<br>
+                9. 29/42 = 1/2 + 4/21 (проверка: 21/42 + 8/42 = 29/42 ✓)
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3> Задача для программиста</h3>
+        <p>Ты пишешь программу для калькулятора дробей. Пользователь вводит дробь 5/12, а программа должна показать её в виде суммы простейших дробей. Как это сделать?</p>
+
+        <details>
+            <summary>Показать решение программиста</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Разложим знаменатель: 12 = 2 × 2 × 3.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Подбираем дроби. Попробуем 1/4 + 1/6.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Проверяем: 1/4 + 1/6 = 3/12 + 2/12 = 5/12. Верно!
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> 5/12 = 1/4 + 1/6. Программа должна искать комбинации простейших дробей, знаменатели которых являются делителями исходного знаменателя. ✅
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Разложение дроби</b> — представление дроби в виде суммы простейших дробей (вида 1/n).</li>
+            <li><b>Алгоритм:</b> разложить знаменатель → подобрать дроби → проверить сложением.</li>
+            <li><b>Проверка:</b> сложи полученные дроби — должна получиться исходная дробь.</li>
+            <li><b>Применение:</b> интегралы, физика, программирование, понимание структуры чисел.</li>
+            <li>💡 <b>Лайфхак:</b> начинай с самой большой простейшей дроби (с наименьшим знаменателем), потом добавляй меньшие.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Неправильная проверка:</i> ученики складывают дроби, но не приводят к общему знаменателю. Требуйте всегда показывать приведение.</li>
+            <li><i>Пропуск вариантов:</i> подобрали первую комбинацию и остановились. Объясните, что разложений может быть несколько.</li>
+            <li><i>Потеря единицы:</i> при разложении 1 = 1/2 + 1/3 + 1/6 забывают проверить сумму.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте таблицу делителей для знаменателей до 30.</li>
+            <li>Начните с дробей с маленькими знаменателями (4, 6, 8, 9, 10, 12).</li>
+            <li>Используйте цветные маркеры: каждая простая дробь — свой цвет.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Докажите, что любую правильную дробь можно представить в виде суммы простейших дробей.</li>
+            <li>Найдите все возможные разложения дроби 5/12.</li>
+            <li>Исследуйте, как количество разложений зависит от знаменателя.</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-1-8.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-1-10.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 1, §3)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+
+</div>
+
+</body>
+</html>

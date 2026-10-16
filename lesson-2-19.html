@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преобразование двойных радикалов — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1> Преобразование двойных радикалов</h1>
+        <p class="subtitle">Урок 19 • Глава 2, §6 (дополнительный материал)</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3> Разминка: Что такое двойной радикал?</h3>
+        <p>Двойной радикал — это выражение, содержащее корень из суммы или разности корней. Например, √(5 + 2√6). На первый взгляд кажется, что его нельзя упростить. Но если заметить, что 5 + 2√6 = (√3 + √2)², то √(5 + 2√6) = √3 + √2. Волшебство? Нет, математика!</p>
+
+        <h3> Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Двойной радикал</b></td>
+                <td>Выражение вида √(a ± 2√b), которое можно представить как √x ± √y.</td>
+            </tr>
+            <tr>
+                <td><b>Выделение полного квадрата</b></td>
+                <td>Преобразование подкоренного выражения к виду (√x ± √y)².</td>
+            </tr>
+            <tr>
+                <td><b>Формула вложенного корня</b></td>
+                <td>√(a + 2√b) = √x + √y, где x + y = a и xy = b.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Основная формула</b><br>
+            Если a + 2√b = (√x + √y)², то √(a + 2√b) = √x + √y, где x + y = a и xy = b.
+        </div>
+
+        <div class="formula">
+            √(a + 2√b) = √x + √y, где x + y = a, xy = b
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Алгоритм преобразования</b><br>
+            1. Представь подкоренное выражение в виде (√x + √y)² = x + y + 2√(xy).<br>
+            2. Найди x и y из системы: x + y = a, xy = b.<br>
+            3. Извлеки корень: √(a + 2√b) = √x + √y.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Пример</b><br>
+            √(5 + 2√6): x + y = 5, xy = 6. Решаем систему: x = 3, y = 2. Значит √(5 + 2√6) = √3 + √2.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Пример преобразования двойного радикала -->
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Пример: √(5 + 2√6) = √3 + √2</text>
+
+                <!-- Step 1 -->
+                <rect x="50" y="50" width="500" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="300" y="80" font-family="sans-serif" font-size="16" fill="#dc2626" text-anchor="middle" font-weight="bold">√(5 + 2√6)</text>
+
+                <!-- Arrow -->
+                <text x="300" y="130" font-family="sans-serif" font-size="24" fill="#2563eb" text-anchor="middle">↓</text>
+
+                <!-- Step 2 -->
+                <rect x="50" y="150" width="500" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="300" y="180" font-family="sans-serif" font-size="16" fill="#2563eb" text-anchor="middle" font-weight="bold">= √((√3 + √2)²)</text>
+
+                <!-- Arrow -->
+                <text x="300" y="230" font-family="sans-serif" font-size="24" fill="#16a34a" text-anchor="middle">↓</text>
+
+                <!-- Step 3 -->
+                <rect x="50" y="250" width="500" height="50" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="300" y="280" font-family="sans-serif" font-size="16" fill="#16a34a" text-anchor="middle" font-weight="bold">= √3 + √2</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Проверка</b><br>
+            Всегда проверяй: возведи результат в квадрат и сравни с исходным подкоренным выражением.
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2> Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи на преобразование двойных радикалов.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1</h3>
+            <p>Упростите: √(7 + 4√3)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Представим подкоренное выражение в виде (√x + √y)² = x + y + 2√(xy).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Имеем: x + y = 7, 2√(xy) = 4√3, значит √(xy) = 2√3, xy = 12.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Решаем систему: x + y = 7, xy = 12. Получаем x = 4, y = 3.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Значит √(7 + 4√3) = √4 + √3 = 2 + √3.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(7 + 4√3) = 2 + √3 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 2</h3>
+            <p>Упростите: √(11 + 2√18)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Представим подкоренное выражение в виде (√x + √y)² = x + y + 2√(xy).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Имеем: x + y = 11, 2√(xy) = 2√18, значит √(xy) = √18, xy = 18.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Решаем систему: x + y = 11, xy = 18. Получаем x = 9, y = 2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Значит √(11 + 2√18) = √9 + √2 = 3 + √2.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(11 + 2√18) = 3 + √2 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3</h3>
+            <p>Упростите: √(8 - 2√15)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Представим подкоренное выражение в виде (√x - √y)² = x + y - 2√(xy).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Имеем: x + y = 8, 2√(xy) = 2√15, значит √(xy) = √15, xy = 15.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Решаем систему: x + y = 8, xy = 15. Получаем x = 5, y = 3.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Значит √(8 - 2√15) = √5 - √3.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(8 - 2√15) = √5 - √3 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 4</h3>
+            <p>Упростите: √(9 + 4√5)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Представим подкоренное выражение в виде (√x + √y)² = x + y + 2√(xy).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Имеем: x + y = 9, 2√(xy) = 4√5, значит √(xy) = 2√5, xy = 20.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Решаем систему: x + y = 9, xy = 20. Получаем x = 5, y = 4.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Значит √(9 + 4√5) = √5 + √4 = √5 + 2.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(9 + 4√5) = 2 + √5 ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2> Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> Упростите: √(5 + 2√6)</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> Упростите: √(7 + 2√10)</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> Упростите: √(9 + 6√2)</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>4.</b> Упростите: √(13 + 2√30)</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> Упростите: √(6 - 2√5)</p>
+        </div>
+        <div class="task-box">
+            <p><b>6.</b> Упростите: √(10 + 2√21)</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>7.</b> Упростите: √(15 + 2√56)</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> Упростите: √(12 - 2√35)</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> Упростите: √(17 + 2√72)</p>
+        </div>
+
+        <details>
+            <summary> Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. √(5 + 2√6) = √3 + √2<br>
+                2. √(7 + 2√10) = √5 + √2<br>
+                3. √(9 + 6√2) = √6 + √3<br>
+                4. √(13 + 2√30) = √10 + √3<br>
+                5. √(6 - 2√5) = √5 - 1<br>
+                6. √(10 + 2√21) = √7 + √3<br>
+                7. √(15 + 2√56) = √8 + √7 = 2√2 + √7<br>
+                8. √(12 - 2√35) = √7 - √5<br>
+                9. √(17 + 2√72) = √9 + √8 = 3 + 2√2
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3> Задача для математика</h3>
+        <p>Докажите, что √(2 + √3) можно представить в виде (√6 + √2)/2.</p>
+
+        <details>
+            <summary>Показать решение математика</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Умножим подкоренное выражение на 2: 2(2 + √3) = 4 + 2√3.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Представим 4 + 2√3 в виде (√x + √y)² = x + y + 2√(xy).
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Имеем: x + y = 4, xy = 3. Решаем систему: x = 3, y = 1.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Значит 4 + 2√3 = (√3 + 1)², и √(4 + 2√3) = √3 + 1.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 5:</b> Возвращаемся к исходному: √(2 + √3) = (√3 + 1)/√2 = (√6 + √2)/2.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> √(2 + √3) = (√6 + √2)/2 ✅
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Формула:</b> √(a + 2√b) = √x + √y, где x + y = a, xy = b.</li>
+            <li><b>Алгоритм:</b> представить в виде (√x ± √y)² → найти x и y → извлечь корень.</li>
+            <li><b>Проверка:</b> возвести результат в квадрат и сравнить с исходным выражением.</li>
+            <li><b>Применение:</b> упрощение выражений, решение уравнений, тригонометрия.</li>
+            <li>💡 <b>Лайфхак:</b> если подкоренное выражение имеет вид a ± 2√b, попробуй найти два числа, сумма которых равна a, а произведение — b.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Неверное представление:</i> ученики пытаются представить √(a + √b) вместо √(a + 2√b). Объясните, что коэффициент 2 обязателен.</li>
+            <li><i>Ошибки в системе:</i> неправильно решают систему x + y = a, xy = b. Требуйте проверки.</li>
+            <li><i>Пропуск проверки:</i> не проверяют результат возведением в квадрат.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте готовые пары (x, y) для типовых случаев: (3,2), (4,3), (5,2), (5,3).</li>
+            <li>Начните с простых примеров с малыми числами.</li>
+            <li>Используйте цветные маркеры: x и y — разными цветами.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Докажите, что √(a + 2√b) = √x + √y, где x и y — корни уравнения t² - at + b = 0.</li>
+            <li>Упростите √(1 + √(1 + √(1 + ...))) (бесконечный вложенный корень).</li>
+            <li>Исследуйте, когда √(a + 2√b) можно представить в виде √x + √y с целыми x и y.</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-18.html">⬅️ Предыдущий урок</a>
+        <a href="index.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, §6)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+
+</div>
+
+</body>
+</html>

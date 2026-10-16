@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квадратный корень из степени — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1> Квадратный корень из степени</h1>
+        <p class="subtitle">Урок 16 • Глава 2, §5</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3> Разминка: Что такое степень?</h3>
+        <p>Степень — это краткая запись умножения числа на само себя. Например, 2³ = 2 × 2 × 2 = 8. А что будет, если извлечь квадратный корень из степени? Например, √(2⁴) = √16 = 4. Интересно, что 4 = 2². То есть √(2⁴) = 2². Здесь показатель степени разделился пополам!</p>
+
+        <h3> Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Степень</b></td>
+                <td>Выражение aⁿ, где a — основание, n — показатель. Показатель может быть любым целым числом.</td>
+            </tr>
+            <tr>
+                <td><b>Квадратный корень из степени</b></td>
+                <td>√(aⁿ), где n — чётное число. Результат зависит от знака основания.</td>
+            </tr>
+            <tr>
+                <td><b>Модуль числа</b></td>
+                <td>Расстояние от числа до нуля на числовой прямой. |a| = a, если a ≥ 0, и |a| = -a, если a < 0.</td>
+            </tr>
+            <tr>
+                <td><b>Чётный показатель</b></td>
+                <td>Показатель степени, который делится на 2 без остатка (2, 4, 6, 8...).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Основная формула</b><br>
+            При чётном показателе n: √(aⁿ) = |a|^(n/2)
+        </div>
+
+        <div class="formula">
+            √(aⁿ) = |a|<sup>n/2</sup>, где n — чётное число
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Почему модуль?</b><br>
+            При чётном показателе aⁿ всегда неотрицательно (aⁿ ≥ 0). Поэтому √(aⁿ) тоже неотрицательно. Чтобы результат всегда был положительным, берём модуль основания.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Примеры</b><br>
+            • √(3⁴) = √(81) = 9 = 3² = |3|²<br>
+            • √((-3)⁴) = √(81) = 9 = |-3|² = 3²<br>
+            • √(2⁶) = √(64) = 8 = 2³ = |2|³
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Сравнение корня из степени и степени из корня -->
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Корень из степени vs Степень из корня</text>
+
+                <!-- Left: root of power -->
+                <rect x="50" y="50" width="250" height="100" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="175" y="80" font-family="sans-serif" font-size="14" fill="#dc2626" text-anchor="middle" font-weight="bold">√(aⁿ) = |a|^(n/2)</text>
+                <text x="175" y="110" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">При n = 4: √(a⁴) = |a|²</text>
+                <text x="175" y="135" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">При n = 6: √(a⁶) = |a|³</text>
+
+                <!-- Right: power of root -->
+                <rect x="300" y="50" width="250" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="425" y="80" font-family="sans-serif" font-size="14" fill="#16a34a" text-anchor="middle" font-weight="bold">(√a)ⁿ = a^(n/2)</text>
+                <text x="425" y="110" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">При n = 2: (√a)² = a (при a ≥ 0)</text>
+                <text x="425" y="135" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">При n = 4: (√a)⁴ = a² (при a ≥ 0)</text>
+
+                <!-- Note -->
+                <text x="300" y="180" font-family="sans-serif" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="bold">В чем разница?</text>
+                <text x="300" y="210" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">√(aⁿ) — корень из степени (a может быть отрицательным)</text>
+                <text x="300" y="235" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">(√a)ⁿ — степень из корня (a должно быть ≥ 0)</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Важное отличие</b><br>
+            • √(aⁿ) — подкоренное выражение aⁿ всегда ≥ 0, поэтому a может быть любым числом.<br>
+            • (√a)ⁿ — подкоренное выражение a должно быть ≥ 0, поэтому a ≥ 0.
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2> Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи на квадратный корень из степени.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1</h3>
+            <p>Вычислите: √(5⁴)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Показатель n = 4 — чётное. Применяем формулу: √(5⁴) = |5|^(4/2) = |5|² = 5².
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Вычисляем: 5² = 25.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: √(5⁴) = √(625) = 25. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(5⁴) = 25 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 2</h3>
+            <p>Вычислите: √((-4)⁶)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Показатель n = 6 — чётное. Применяем формулу: √((-4)⁶) = |-4|^(6/2) = |-4|³ = 4³.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Вычисляем: 4³ = 64.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: √((-4)⁶) = √(4096) = 64. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √((-4)⁶) = 64 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3</h3>
+            <p>Упростите выражение: √(x⁸), где x — любое число.</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Показатель n = 8 — чётное. Применяем формулу: √(x⁸) = |x|^(8/2) = |x|⁴.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Поскольку |x|⁴ = x⁴ (чётная степень убирает знак), получаем: √(x⁸) = x⁴.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(x⁸) = x⁴ ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 4</h3>
+            <p>Вычислите: √(2¹⁰)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Показатель n = 10 — чётное. Применяем формулу: √(2¹⁰) = |2|^(10/2) = 2⁵.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Вычисляем: 2⁵ = 32.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: √(2¹⁰) = √(1024) = 32. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √(2¹⁰) = 32 ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИES -->
+    <section class="card">
+        <h2> Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> Вычислите: √(7²)</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> Вычислите: √(3⁶)</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> Вычислите: √((-5)⁴)</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>4.</b> Вычислите: √(2⁸)</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> Вычислите: √((-3)⁸)</p>
+        </div>
+        <div class="task-box">
+            <p><b>6.</b> Упростите: √(x¹²)</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>7.</b> Вычислите: √(5¹²)</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> Упростите: √(a¹⁰), где a — любое число</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> Докажите, что √(a²ⁿ) = |a|ⁿ для любого целого n</p>
+        </div>
+
+        <details>
+            <summary> Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. √(7²) = |7| = 7<br>
+                2. √(3⁶) = |3|³ = 27<br>
+                3. √((-5)⁴) = |-5|² = 25<br>
+                4. √(2⁸) = |2|⁴ = 16<br>
+                5. √((-3)⁸) = |-3|⁴ = 81<br>
+                6. √(x¹²) = |x|⁶ = x⁶<br>
+                7. √(5¹²) = |5|⁶ = 15625<br>
+                8. √(a¹⁰) = |a|⁵<br>
+                9. √(a²ⁿ) = |a|^(2n/2) = |a|ⁿ ✓
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3> Задача для физика</h3>
+        <p>Энергия тела вычисляется по формуле E = mc², где m — масса, c — скорость света. Если c = 3 × 10⁸ м/с, чему равно c²?</p>
+
+        <details>
+            <summary>Показать решение физика</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> c² = (3 × 10⁸)² = 9 × 10¹⁶ м²/с².
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Теперь найдём √(c²) = √(9 × 10¹⁶) = 3 × 10⁸ = c.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> √(c²) = c. Это показывает, что квадратный корень из квадрата числа равен самому числу (если оно положительное). ✅
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Формула:</b> √(aⁿ) = |a|^(n/2), где n — чётное число.</li>
+            <li><b>Модуль:</b> берём модуль основания, чтобы результат всегда был неотрицательным.</li>
+            <li><b>Отличие от (√a)ⁿ:</b> в √(aⁿ) основание может быть отрицательным, в (√a)ⁿ — только неотрицательным.</li>
+            <li><b>Проверка:</b> всегда проверяй вычислением степени и корня.</li>
+            <li>💡 <b>Лайфхак:</b> показатель степени при извлечении квадратного корня делится пополам.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Пропуск модуля:</i> ученики пишут √(aⁿ) = a^(n/2) без модуля. Объясните, что результат всегда неотрицательный.</li>
+            <li><i>Путаница с (√a)ⁿ:</i> подменяют одну формулу другой. Подчёркивайте разницу в области определения.</li>
+            <li><i>Неверная проверка:</i> проверяют только арифметически, не подставляя исходное выражение.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте таблицу степеней для чисел 2, 3, 4, 5 (до 6-й степени).</li>
+            <li>Начните с конкретных чисел, потом переходите к переменным.</li>
+            <li>Используйте цветные маркеры: основание — одним цветом, показатель — другим.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Докажите, что √(a²ⁿ) = |a|ⁿ для любого целого n.</li>
+            <li>Исследуйте, что происходит при нечётном показателе (√(a³)).</li>
+            <li>Сравните √(aⁿ) и (√a)ⁿ для разных значений a и n.</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-15.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-17.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, §5)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+
+</div>
+
+</body>
+</html>

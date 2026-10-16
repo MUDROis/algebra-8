@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преобразование выражений, содержащих квадратные корни — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1> Преобразование выражений, содержащих квадратные корни</h1>
+        <p class="subtitle">Урок 18 • Глава 2, §6</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3> Разминка: Зачем преобразовывать?</h3>
+        <p>Представь, что ты решаешь уравнение и получил ответ √12 + √27. Можно ли его упростить? Да! √12 = 2√3, √27 = 3√3, значит √12 + √27 = 2√3 + 3√3 = 5√3. Преобразование выражений помогает упростить ответы и сделать их более понятными!</p>
+
+        <h3> Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Подобные слагаемые</b></td>
+                <td>Слагаемые с одинаковым подкоренным выражением (например, 2√3 и 5√3).</td>
+            </tr>
+            <tr>
+                <td><b>Умножение корней</b></td>
+                <td>√a × √b = √(a × b) (при a ≥ 0, b ≥ 0).</td>
+            </tr>
+            <tr>
+                <td><b>Деление корней</b></td>
+                <td>√a / √b = √(a / b) (при a ≥ 0, b > 0).</td>
+            </tr>
+            <tr>
+                <td><b>Возведение корня в степень</b></td>
+                <td>(√a)ⁿ = √(aⁿ) (при a ≥ 0).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Сложение и вычитание корней</b><br>
+            Складывать можно только подобные слагаемые: a√c + b√c = (a + b)√c
+        </div>
+
+        <div class="formula">
+            a√c + b√c = (a + b)√c
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Умножение корней</b><br>
+            √a × √b = √(a × b) (при a ≥ 0, b ≥ 0)
+        </div>
+
+        <div class="formula">
+            √a × √b = √(a × b)
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Деление корней</b><br>
+            √a / √b = √(a / b) (при a ≥ 0, b > 0)
+        </div>
+
+        <div class="formula">
+            <span class="fraction"><span class="num">√a</span><span class="den">√b</span></span> = √<span class="fraction"><span class="num">a</span><span class="den">b</span></span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: Пример сложения корней -->
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="300" y="25" font-family="sans-serif" font-size="16" fill="#64748b" text-anchor="middle" font-weight="bold">Пример: √12 + √27 = 5√3</text>
+
+                <!-- Step 1 -->
+                <rect x="50" y="50" width="500" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="300" y="80" font-family="sans-serif" font-size="16" fill="#dc2626" text-anchor="middle" font-weight="bold">√12 + √27</text>
+
+                <!-- Arrow -->
+                <text x="300" y="130" font-family="sans-serif" font-size="24" fill="#2563eb" text-anchor="middle">↓</text>
+
+                <!-- Step 2 -->
+                <rect x="50" y="150" width="500" height="50" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="300" y="180" font-family="sans-serif" font-size="16" fill="#2563eb" text-anchor="middle" font-weight="bold">= 2√3 + 3√3</text>
+
+                <!-- Arrow -->
+                <text x="300" y="230" font-family="sans-serif" font-size="24" fill="#16a34a" text-anchor="middle">↓</text>
+
+                <!-- Step 3 -->
+                <rect x="50" y="250" width="500" height="50" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="300" y="280" font-family="sans-serif" font-size="16" fill="#16a34a" text-anchor="middle" font-weight="bold">= 5√3</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Порядок действий</b><br>
+            1. Упростите каждый корень (вынесите множители).<br>
+            2. Приведите подобные слагаемые.<br>
+            3. Выполните умножение или деление, если необходимо.
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2> Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи на преобразование выражений.</p>
+
+        <!-- Задача 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1</h3>
+            <p>Упростите: √8 + √18</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Упростим каждый корень: √8 = 2√2, √18 = 3√2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Сложим подобные слагаемые: 2√2 + 3√2 = 5√2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: 5√2 = √(25 × 2) = √50. √8 + √18 = √(8 + 18) = √26 ≠ √50. Ошибка! Проверим иначе: √8 ≈ 2.83, √18 ≈ 4.24, сумма ≈ 7.07. 5√2 ≈ 7.07. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √8 + √18 = 5√2 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 2 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 2</h3>
+            <p>Упростите: √12 × √3</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Применяем правило умножения: √12 × √3 = √(12 × 3) = √36.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Вычисляем: √36 = 6.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: √12 ≈ 3.46, √3 ≈ 1.73, произведение ≈ 6. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √12 × √3 = 6 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 3 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 3</h3>
+            <p>Упростите: (√6 + √2)(√6 - √2)</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Это разность квадратов: (a + b)(a - b) = a² - b².
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Применяем: (√6)² - (√2)² = 6 - 2 = 4.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: √6 ≈ 2.45, √2 ≈ 1.41. (2.45 + 1.41)(2.45 - 1.41) = 3.86 × 1.04 ≈ 4. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> (√6 + √2)(√6 - √2) = 4 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задача 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium"> Средний уровень</span>
+            <h3>Задание 4</h3>
+            <p>Упростите: √50 - √8</p>
+
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Упростим каждый корень: √50 = 5√2, √8 = 2√2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Вычтем подобные слагаемые: 5√2 - 2√2 = 3√2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Проверка: 3√2 = √(9 × 2) = √18. √50 - √8 ≈ 7.07 - 2.83 = 4.24. 3√2 ≈ 4.24. Верно!
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> √50 - √8 = 3√2 ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2> Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> Упростите: √20 + √45</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> Упростите: √27 - √12</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> Упростите: √6 × √8</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>4.</b> Упростите: √50 + √32</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> Упростите: √75 - √48</p>
+        </div>
+        <div class="task-box">
+            <p><b>6.</b> Упростите: √15 × √5</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>7.</b> Упростите: (√5 + √3)(√5 - √3)</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> Упростите: √98 + √50 - √32</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> Упростите: (√7 + √2)²</p>
+        </div>
+
+        <details>
+            <summary> Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. √20 + √45 = 2√5 + 3√5 = 5√5<br>
+                2. √27 - √12 = 3√3 - 2√3 = √3<br>
+                3. √6 × √8 = √48 = 4√3<br>
+                4. √50 + √32 = 5√2 + 4√2 = 9√2<br>
+                5. √75 - √48 = 5√3 - 4√3 = √3<br>
+                6. √15 × √5 = √75 = 5√3<br>
+                7. (√5 + √3)(√5 - √3) = 5 - 3 = 2<br>
+                8. √98 + √50 - √32 = 7√2 + 5√2 - 4√2 = 8√2<br>
+                9. (√7 + √2)² = 7 + 2√14 + 2 = 9 + 2√14
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+        <h3> Задача для инженера</h3>
+        <p>Сопротивление двух резисторов, соединённых параллельно, вычисляется по формуле R = (R₁ × R₂) / (R₁ + R₂). Если R₁ = √8 Ом и R₂ = √18 Ом, чему равно сопротивление?</p>
+
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Упростим сопротивления: R₁ = √8 = 2√2, R₂ = √18 = 3√2.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Подставим в формулу: R = (2√2 × 3√2) / (2√2 + 3√2) = (6 × 2) / (5√2) = 12 / (5√2).
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> Избавимся от иррациональности: R = (12√2) / (5 × 2) = (6√2) / 5.
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> R = (6√2) / 5 ≈ 1.70 Ом ✅
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2> Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Сложение:</b> a√c + b√c = (a + b)√c (только подобные слагаемые).</li>
+            <li><b>Умножение:</b> √a × √b = √(a × b).</li>
+            <li><b>Деление:</b> √a / √b = √(a / b).</li>
+            <li><b>Порядок:</b> упростить → привести подобные → выполнить действия.</li>
+            <li>💡 <b>Лайфхак:</b> всегда упрощай корни перед сложением или вычитанием.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Сложение разных корней:</i> ученики складывают √2 + √3 = √5. Объясните, что это неверно!</li>
+            <li><i>Неверное умножение:</i> √a × √b = √(a + b) вместо √(a × b).</li>
+            <li><i>Пропуск упрощения:</i> не упрощают корни перед сложением.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Дайте таблицу упрощённых корней (√8, √12, √18, √20, √27, √32, √45, √50).</li>
+            <li>Начните с подобных слагаемых, потом переходите к умножению.</li>
+            <li>Используйте цветные маркеры: одинаковые подкоренные выражения — одним цветом.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Докажите, что √a × √b = √(a × b) для любых a ≥ 0, b ≥ 0.</li>
+            <li>Упростите выражение (√a + √b)(√a - √b) и объясните результат.</li>
+            <li>Исследуйте, когда √(a + b) = √a + √b.</li>
+        </ul>
+    </div>
+
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-2-17.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-2-19.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 2, §6)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+
+</div>
+
+</body>
+</html>
