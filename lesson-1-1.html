@@ -290,6 +290,23 @@
             transform: translateY(-2px);
         }
     </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Урок 1 • Глава 1, §1">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Рациональные дроби — Алгебра 8 класс">
+<meta property="og:description" content="Урок 1 • Глава 1, §1">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/lesson-1-1.html">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Рациональные дроби — Алгебра 8 класс">
+<meta name="twitter:description" content="Урок 1 • Глава 1, §1">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/lesson-1-1.html">
 </head>
 <body>
 
@@ -418,7 +435,8 @@
                 <span class="fraction"><span class="num">5</span><span class="den">a(a - 9)</span></span>
             </div>
 
-            <details>
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="Все числа, кроме 0 и 9. (Можно записать: a ≠ 0, a ≠ 9). Проверка: Если подставить a = 0, знаменатель станет 0 — ошибка! Если a = 9, знаменатель тоже 0 — ошибка! Если a = 1, знаменатель равен -8 — всё работает! ✅"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
                 <summary>Показать подробное решение</summary>
                 <div class="solution-step">
                     <b>Шаг 1:</b> Вспоминаем главное правило. Дробь имеет смысл, только если знаменатель не равен нулю.<br>
@@ -448,7 +466,8 @@
                 <span class="fraction"><span class="num">(x - 2)² - 25</span><span class="den">2x + 6</span></span> = 0
             </div>
 
-            <details>
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="x = 7. Проверка: Подставим x = 7: числитель = (7-2)² - 25 = 25 - 25 = 0. Знаменатель = 2(7) + 6 = 20. Дробь 0 / 20 = 0. Всё верно! ✅"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
                 <summary>Показать подробное решение</summary>
                 <div class="solution-step">
                     <b>Шаг 1:</b> По второму правилу, дробь равна нулю, когда числитель равен нулю, а знаменатель НЕ равен нулю.
@@ -518,7 +537,8 @@
         </div>
         <p>Где <i>U</i> — напряжение, а <i>R</i> — сопротивление в омах. Если знаменатель обратится в ноль, микросхема сгорит! Найди «аварийные» значения сопротивления <i>R</i>, при которых систему включать нельзя.</p>
 
-        <details>
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="Систему нельзя включать при сопротивлении R = 0 и R = 4 Ома. Отлично, ты спас оборудование от поломки! 🛡️"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
             <summary>Показать решение инженера</summary>
             <div class="solution-step">
                 <b>Шаг 1:</b> Составляем уравнение для «аварийного» режима (знаменатель равен нулю):<br>
@@ -585,5 +605,10 @@
 
 </div>
 
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
 </body>
 </html>

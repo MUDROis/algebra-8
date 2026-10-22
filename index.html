@@ -292,6 +292,23 @@
             .btn { width: 100%; text-align: center; }
         }
     </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Рациональные дроби, квадратные корни, уравнения и системы, неравенства, функции и степени — вся программа года на одной странице">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Алгебра 8 класс — Интерактивный курс">
+<meta property="og:description" content="Рациональные дроби, квадратные корни, уравнения и системы, неравенства, функции и степени — вся программа года на одной странице">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Алгебра 8 класс — Интерактивный курс">
+<meta name="twitter:description" content="Рациональные дроби, квадратные корни, уравнения и системы, неравенства, функции и степени — вся программа года на одной странице">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/">
 </head>
 <body>
 
@@ -299,9 +316,11 @@
 
     <header>
         <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
-        <h1>Алгебра 8 класс</h1>
+        <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;"><img class="course-logo" src="assets/logo.png" alt="Логотип курса «Алгебра 8 класс»"><h1 style="margin:0;">Алгебра 8 класс</h1></div>
         <p class="subtitle">Рациональные дроби, квадратные корни, уравнения и системы, неравенства, функции и степени — вся программа года на одной странице</p>
     </header>
+<div style="background:#fff;padding:16px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08);border-radius:8px;"><input id="course-search" type="search" placeholder="Поиск по курсу…"></div>
+
 
     <!-- ГЛАВА I -->
     <div class="chapter">
@@ -710,5 +729,10 @@
     document.querySelector('.chapter').classList.add('active');
 </script>
 
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
 </body>
 </html>

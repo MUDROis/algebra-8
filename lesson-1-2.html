@@ -282,6 +282,23 @@
             transform: translateY(-2px);
         }
     </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Урок 2 • Глава 1, §2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Основное свойство дроби. Сокращение дробей — Алгебра 8 класс">
+<meta property="og:description" content="Урок 2 • Глава 1, §2">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/lesson-1-2.html">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Основное свойство дроби. Сокращение дробей — Алгебра 8 класс">
+<meta name="twitter:description" content="Урок 2 • Глава 1, §2">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/lesson-1-2.html">
 </head>
 <body>
 
@@ -395,7 +412,8 @@
                 <span class="fraction"><span class="num">4a²</span><span class="den">6ac</span></span>
             </div>
 
-            <details>
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="2a3c. Проверка: Если a=3, c=2, то исходная: 36 / 36 = 1. Новая: 6 / 6 = 1. Всё верно! ✅"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
                 <summary>Показать подробное решение</summary>
                 <div class="solution-step">
                     <b>Шаг 1:</b> Вспоминаем, что сокращение — это деление числителя и знаменателя на их общий множитель. Ищем, что есть и «сверху», и «снизу».
@@ -426,7 +444,8 @@
                 <span class="fraction"><span class="num">x - 1</span><span class="den">x(1 - x)</span></span>
             </div>
 
-            <details>
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="- 1x (или -1x). Проверка: Если x=2, исходная: 1 / (2·(-1)) = -0.5. Новая: -1 / 2 = -0.5. Отлично, ты справился! ✅"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
                 <summary>Показать подробное решение</summary>
                 <div class="solution-step">
                     <b>Шаг 1:</b> Смотрим на скобки. В числителе <i>(x - 1)</i>, а в знаменателе <i>(1 - x)</i>. Они похожи, но знаки разные. Это не общий множитель в чистом виде!
@@ -458,7 +477,8 @@
                 y = <span class="fraction"><span class="num">x² - 25</span><span class="den">x - 5</span></span>
             </div>
 
-            <details>
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="Прямая y = x + 5 с выколотой точкой (5; 10). Вывод: График функции — это прямая, но с «дыркой» там, где знаменатель исходной дроби обращается в ноль. 🕳️"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
                 <summary>Показать подробное решение</summary>
                 <div class="solution-step">
                     <b>Шаг 1:</b> Определяем область определения. Знаменатель не равен нулю: <i>x - 5 ≠ 0</i>, значит <i>x ≠ 5</i>.
@@ -522,7 +542,8 @@
         </div>
         <p>Где <i>S</i> — площадь зоны посадки. Твой чип работает медленно с громоздкими формулами. Упрости формулу для внутреннего кода и найди «аварийное» значение <i>S</i>, при котором дрон зависнет (делитель станет нулём).</p>
 
-        <details>
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи ответ" data-answer="Для чипа пишем простую формулу α = (S + 4) / 2. Аварийное значение: S = 4 (при этой площади дрон не сможет рассчитать угол, нужно менять зону посадки). Отличная оптимизация! 🚀"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+<details>
             <summary>Показать решение инженера</summary>
             <div class="solution-step">
                 <b>Шаг 1:</b> Ищем «аварийное» значение. Знаменатель не должен быть равен нулю:<br>
@@ -592,5 +613,10 @@
 
 </div>
 
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
 </body>
 </html>
