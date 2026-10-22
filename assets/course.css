@@ -10,6 +10,19 @@
 #course-search:focus{box-shadow:0 0 0 3px rgba(37,99,235,.2);}
 .lesson-item.hidden{display:none !important;}
 
+/* Виджет «Содержание курса» на главной */
+.contents-widget{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.contents-widget h2{margin:0 0 12px;font-size:1.25rem;}
+.contents-widget details{border:1px solid #e2e8f0;border-radius:10px;margin-bottom:8px;overflow:hidden;}
+.contents-widget summary{cursor:pointer;font-weight:600;padding:10px 14px;background:#f8fafc;list-style:none;}
+.contents-widget summary::-webkit-details-marker{display:none;}
+.contents-widget .cw-body{padding:6px 14px 12px;}
+.contents-widget .cw-section{font-weight:600;color:#2563eb;margin:10px 0 4px;font-size:.95rem;}
+.contents-widget ul{list-style:none;padding-left:0;margin:0;}
+.contents-widget li{padding:2px 0;color:#475569;}
+.contents-widget a{color:#334155;text-decoration:none;}
+.contents-widget a:hover{color:#2563eb;text-decoration:underline;}
+
 .check-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;}
 .check-input{flex:1 1 160px;padding:7px 12px;font-family:inherit;font-size:.95em;border:2px solid #cbd5e1;border-radius:8px;background:#fff;outline:none;}
 .check-input:focus{border-color:#2563eb;}
@@ -33,7 +46,7 @@ h2[id]{scroll-margin-top:16px;}
 }
 
 @media print{
-  .toolbar,#course-search,.toc-sidebar,.course-logo,.btn{display:none !important;}
+  .toolbar,#course-search,.toc-sidebar,.course-logo,.btn,.contents-widget{display:none !important;}
   .card,header,footer,.chapter{box-shadow:none !important;border:1px solid #ccc !important;page-break-inside:avoid;}
   details{display:block !important;}
   body{background:#fff !important;}

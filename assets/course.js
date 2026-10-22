@@ -59,6 +59,73 @@
     }
   }
 
+  function initContentsWidget() {
+    var chapters = document.querySelectorAll('.chapter');
+    if (!chapters.length) return;
+
+    var widget = document.createElement('div');
+    widget.className = 'contents-widget';
+    var title = document.createElement('h2');
+    title.textContent = '📑 Содержание курса';
+    widget.appendChild(title);
+
+    chapters.forEach(function (chapter) {
+      var h2 = chapter.querySelector('.chapter-header h2');
+      if (!h2) return;
+      var det = document.createElement('details');
+      det.open = true;
+      var sum = document.createElement('summary');
+      sum.textContent = h2.textContent;
+      det.appendChild(sum);
+
+      var body = document.createElement('div');
+      body.className = 'cw-body';
+      var sections = chapter.querySelectorAll('.section');
+      sections.forEach(function (section) {
+        var st = section.querySelector('.section-title');
+        if (!st) return;
+        var stDiv = document.createElement('div');
+        stDiv.className = 'cw-section';
+        stDiv.textContent = st.textContent;
+        body.appendChild(stDiv);
+
+        var ul = document.createElement('ul');
+        var items = section.querySelectorAll('.lesson-item');
+        items.forEach(function (item) {
+          var a = item.querySelector('a.btn[href]');
+          var ltitle = item.querySelector('.lesson-title');
+          var num = item.querySelector('.lesson-number');
+          var li = document.createElement('li');
+          if (a) {
+            var link = document.createElement('a');
+            link.href = a.getAttribute('href');
+            var label = (num ? num.textContent + ' ' : '') + (ltitle ? ltitle.textContent : '');
+            link.textContent = label.replace(/\s+/g, ' ').trim();
+            li.appendChild(link);
+          } else {
+            li.textContent = (ltitle ? ltitle.textContent : '').replace(/\s+/g, ' ').trim();
+          }
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+      });
+
+      det.appendChild(body);
+      widget.appendChild(det);
+    });
+
+    // вставить после поиска или в начало контейнера
+    var container = document.querySelector('.container');
+    var search = document.getElementById('course-search');
+    if (container) {
+      if (search && search.closest('.container')) {
+        search.closest('div').after(widget);
+      } else {
+        container.prepend(widget);
+      }
+    }
+  }
+
   function initSelfCheck() {
     var core = window.CourseAnswerCore;
     if (!core) return;
@@ -90,6 +157,7 @@
   window.Course = {
     init: function () {
       renderKatexIfPresent();
+      initContentsWidget();
       initSearch();
       initToc();
       initSelfCheck();
