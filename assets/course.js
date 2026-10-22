@@ -59,6 +59,53 @@
     }
   }
 
+  function initContentsSidebar() {
+    var chapters = document.querySelectorAll('.chapter');
+    if (!chapters.length) return;
+    var toc = document.createElement('div');
+    toc.className = 'toc-sidebar';
+    var h3 = document.createElement('h3');
+    h3.textContent = 'Содержание';
+    toc.appendChild(h3);
+    var seen = {};
+    chapters.forEach(function (ch) {
+      var ht = ch.querySelector('.chapter-header h2');
+      if (!ht) return;
+      var det = document.createElement('details');
+      det.open = true;
+      var sum = document.createElement('summary');
+      sum.textContent = ht.textContent;
+      det.appendChild(sum);
+      var body = document.createElement('div');
+      ch.querySelectorAll('.section').forEach(function (sec) {
+        var st = sec.querySelector('.section-title');
+        if (st) {
+          var d = document.createElement('div');
+          d.className = 'cw-section';
+          d.textContent = st.textContent;
+          body.appendChild(d);
+        }
+        sec.querySelectorAll('.lesson-item').forEach(function (item) {
+          var a = item.querySelector('a.btn[href]');
+          if (!a) return;
+          var href = a.getAttribute('href');
+          if (seen[href]) return;
+          seen[href] = true;
+          var lt = item.querySelector('.lesson-title');
+          var num = item.querySelector('.lesson-number');
+          var label = (num ? num.textContent + ' ' : '') + (lt ? lt.textContent : '');
+          var link = document.createElement('a');
+          link.href = href;
+          link.textContent = label.replace(/\s+/g, ' ').trim();
+          body.appendChild(link);
+        });
+      });
+      det.appendChild(body);
+      toc.appendChild(det);
+    });
+    document.body.appendChild(toc);
+  }
+
   function initSelfCheck() {
     var core = window.CourseAnswerCore;
     if (!core) return;
@@ -90,6 +137,7 @@
   window.Course = {
     init: function () {
       renderKatexIfPresent();
+      initContentsSidebar();
       initSearch();
       initToc();
       initSelfCheck();

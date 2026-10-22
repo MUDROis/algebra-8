@@ -30,6 +30,10 @@ h2[id]{scroll-margin-top:16px;}
   .toc-sidebar a{display:block;padding:4px 8px;margin:2px 0;color:#1e293b;text-decoration:none;border-left:3px solid transparent;border-radius:0 6px 6px 0;}
   .toc-sidebar a:hover{background:#e0f2fe;}
   .toc-sidebar a.active{background:#e0f2fe;border-left-color:#2563eb;font-weight:700;}
+  .toc-sidebar details{border-top:1px solid #e2e8f0;margin-top:6px;}
+  .toc-sidebar summary{cursor:pointer;font-weight:700;font-size:.85rem;padding:4px 0;color:#1e293b;list-style:none;}
+  .toc-sidebar summary::-webkit-details-marker{display:none;}
+  .toc-sidebar .cw-section{font-weight:600;color:#2563eb;font-size:.85rem;margin:8px 0 2px;}
 }
 
 @media print{
