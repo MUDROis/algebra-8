@@ -30,6 +30,7 @@
   }
 
   function initToc() {
+    if (document.querySelector('.chapter')) return;
     var headings = Array.prototype.slice.call(document.querySelectorAll('h2'))
       .filter(function (h) { return !h.closest || !h.closest('.chapter-header'); });
     if (headings.length < 2) return;
@@ -137,7 +138,6 @@
   window.Course = {
     init: function () {
       renderKatexIfPresent();
-      initContentsSidebar();
       initSearch();
       initToc();
       initSelfCheck();
