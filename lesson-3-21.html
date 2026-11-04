@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формула корней квадратного уравнения — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Урок 21 • Глава 3, §7">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Формула корней квадратного уравнения — Алгебра 8 класс">
+<meta property="og:description" content="Урок 21 • Глава 3, §7">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/lesson-3-21.html">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Формула корней квадратного уравнения — Алгебра 8 класс">
+<meta name="twitter:description" content="Урок 21 • Глава 3, §7">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/lesson-3-21.html">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1> Формула корней квадратного уравнения</h1>
+        <p class="subtitle">Урок 21 • Глава 3, §7</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс». Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3>🪝 Разминка: полное квадратное уравнение — новый противник</h3>
+        <p>На уроке 20 ты расправился с неполными квадратными уравнениями. Но в жизни чаще встречаются <b>полные</b>: все три коэффициента отличны от нуля. Например, площадь прямоугольной площадки со сторонами x и (x + 3) метра описывается уравнением <b>x² + 3x − 154 = 0</b> — и ни один коэффициент не равен нулю. Как такое решить? Учебник (п. 21) показывает путь: решить уравнение <b>7x² − 6x − 1 = 0</b> методом <i>выделения квадрата двучлена</i>.</p>
+        <details>
+            <summary>Как решает учебник: выделение квадрата двучлена</summary>
+            <div class="solution-step">Разделим обе части на 7: x² − (6/7)x − (1/7) = 0 — приведённое квадратное уравнение.</div>
+            <div class="solution-step">Представим разность x² − (6/7)x в виде x² − 2·(3/7)x, прибавим к ней (3/7)² и тут же вычтем его: x² − 2·(3/7)x + (3/7)² − (3/7)² − 1/7 = 0.</div>
+            <div class="solution-step">Первые три слагаемых — квадрат двучлена: (x − 3/7)² = (3/7)² + 1/7 = 9/49 + 7/49 = 16/49.</div>
+            <div class="solution-step">Отсюда x − 3/7 = ±4/7, то есть x = 3/7 + 4/7 = 1 или x = 3/7 − 4/7 = −1/7. Уравнение имеет два корня: <b>−1/7 и 1</b>.</div>
+        </details>
+        <p>Способ рабочий, но громоздкий: каждый раз делить, подбирать дроби, возводить их в квадрат… Поэтому поступают по-инженерному: <b>решают уравнение ax² + bx + c = 0 в общем виде один раз</b> и получают готовую <b>формулу корней</b>. Подставляй коэффициенты — получай ответ. Проверим её на нашем уравнении: a = 7, b = −6, c = −1. Считаем <b>дискриминант</b>: D = (−6)² − 4·7·(−1) = 36 + 28 = 64, √64 = 8, и корни x = (6 ± 8)/14: это −1/7 и 1 — те же самые, но без выделения квадрата! Сегодня научимся делать это с любым квадратным уравнением.</p>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Дискриминант</b></td>
+                <td>Число D = b² − 4ac, которое вычисляют по коэффициентам квадратного уравнения. «Discriminare» по-латыни — «различать»: по знаку D различают, сколько корней у уравнения.</td>
+            </tr>
+            <tr>
+                <td><b>Формула корней квадратного уравнения</b></td>
+                <td>Формула x = (−b ± √D)/(2a), где D = b² − 4ac. В учебнике она обозначена (I). Работает для любого квадратного уравнения, если D ≥ 0.</td>
+            </tr>
+            <tr>
+                <td><b>Полное квадратное уравнение</b></td>
+                <td>Уравнение ax² + bx + c = 0, у которого все коэффициенты a, b, c отличны от нуля. Именно для него формула корней главная.</td>
+            </tr>
+            <tr>
+                <td><b>Выделение квадрата двучлена</b></td>
+                <td>Приём: из трёхчлена получают квадрат суммы или разности «плюс остаток». Так выводится формула корней, но считать им каждый раз неудобно.</td>
+            </tr>
+            <tr>
+                <td><b>Формула (II) с D₁</b></td>
+                <td>Удобная формула для уравнений с чётным вторым коэффициентом b = 2k: x = (−k ± √D₁)/a, где D₁ = k² − ac.</td>
+            </tr>
+            <tr>
+                <td><b>Приближённые корни</b></td>
+                <td>Если √D не извлекается точно, корни вычисляют с калькулятором и округляют до нужной точности (например, до 0,01).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Дискриминант (учебник, п. 21).</b><br>
+            Для квадратного уравнения ax² + bx + c = 0 (a ≠ 0) число D = b² − 4ac называют <b>дискриминантом</b> квадратного уравнения. Знак D определяется числителем, ведь 4a² &gt; 0 всегда — а значит, именно D решает судьбу корней.
+        </div>
+
+        <div class="formula">
+            D = b² − 4ac
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Формула корней (формула I).</b><br>
+            Если D ≥ 0, корни уравнения ax² + bx + c = 0 находят по формуле:
+        </div>
+        <div class="formula">
+            x = <span class="fraction"><span class="num">−b ± √D</span><span class="den">2a</span></span>, &nbsp; где D = b² − 4ac
+        </div>
+        <div class="rule-box">
+            <b>Откуда берётся формула.</b> Разделим ax² + bx + c = 0 на a: получим x² + (b/a)x + (c/a) = 0. Выделим квадрат двучлена: прибавим и вычтем (b/(2a))². Получим (x + b/(2a))² = (b² − 4ac)/(4a²), то есть (x + b/(2a))² = D/(4a²). Слева — квадрат числа, справа — дробь со знаменателем 4a² &gt; 0. Дальше всё решает знак D.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: анатомия формулы корней -->
+            <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrSky" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0ea5e9"/></marker>
+                    <marker id="arrRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+                    <marker id="arrGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
+                    <marker id="arrBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker>
+                </defs>
+                <text x="350" y="24" font-family="sans-serif" font-size="15" fill="#64748b" text-anchor="middle" font-weight="bold">Анатомия формулы корней квадратного уравнения</text>
+                <text x="205" y="110" font-family="'Courier New', monospace" font-size="32" fill="#1e293b" text-anchor="middle" font-weight="bold">x =</text>
+                <text x="330" y="82" font-family="'Courier New', monospace" font-size="30" fill="#dc2626" text-anchor="middle" font-weight="bold">−b ± √D</text>
+                <line x1="262" y1="96" x2="398" y2="96" stroke="#dc2626" stroke-width="3"/>
+                <text x="330" y="130" font-family="'Courier New', monospace" font-size="28" fill="#dc2626" text-anchor="middle" font-weight="bold">2a</text>
+                <rect x="15" y="60" width="150" height="48" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+                <text x="90" y="80" font-family="sans-serif" font-size="13" fill="#0287c7" text-anchor="middle" font-weight="bold">−b — меняет</text>
+                <text x="90" y="98" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">знак коэффициента b</text>
+                <line x1="265" y1="78" x2="170" y2="80" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arrSky)"/>
+                <rect x="490" y="45" width="195" height="48" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="587" y="65" font-family="sans-serif" font-size="13" fill="#dc2626" text-anchor="middle" font-weight="bold">√D — корень из</text>
+                <text x="587" y="83" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">дискриминанта D = b² − 4ac</text>
+                <line x1="393" y1="70" x2="487" y2="68" stroke="#dc2626" stroke-width="2" marker-end="url(#arrRed)"/>
+                <rect x="15" y="150" width="195" height="48" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="112" y="170" font-family="sans-serif" font-size="13" fill="#16a34a" text-anchor="middle" font-weight="bold">знак ± даёт</text>
+                <text x="112" y="188" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">сразу ДВА корня</text>
+                <line x1="330" y1="94" x2="215" y2="172" stroke="#16a34a" stroke-width="2" marker-end="url(#arrGreen)"/>
+                <rect x="490" y="150" width="195" height="48" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="587" y="170" font-family="sans-serif" font-size="13" fill="#2563eb" text-anchor="middle" font-weight="bold">2a — удвоенный</text>
+                <text x="587" y="188" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">первый коэффициент a</text>
+                <line x1="352" y1="122" x2="487" y2="172" stroke="#2563eb" stroke-width="2" marker-end="url(#arrBlue)"/>
+                <text x="350" y="228" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Сначала вычисли D, потом подставляй всё в формулу — по порядку.</text>
+            </svg>
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Три случая дискриминанта.</b><br>
+            • <b>D &gt; 0</b> — уравнение имеет <b>два корня</b>: x₁ = (−b − √D)/(2a) и x₂ = (−b + √D)/(2a);<br>
+            • <b>D = 0</b> — уравнение имеет <b>один корень</b>: x = −b/(2a);<br>
+            • <b>D &lt; 0</b> — уравнение <b>не имеет корней</b>: дробь D/(4a²) отрицательна, а квадрат двучлена слева отрицательным быть не может.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Алгоритм (синяя рамка учебника).</b><br>
+            При решении квадратного уравнения по формуле (I) целесообразно поступать так:<br>
+            1) вычислить дискриминант и сравнить его с нулём;<br>
+            2) если дискриминант положителен или равен нулю — воспользоваться формулой корней; если дискриминант отрицателен — записать, что корней нет.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 5: При D = 0 формула (I) тоже работает.</b><br>
+            Подставим D = 0 в формулу: x = (−b ± √0)/(2a) = −b/(2a). Получился тот самый единственный корень. Поэтому достаточно запомнить одну формулу — с «±».
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 6: Чётный второй коэффициент — формула (II).</b><br>
+            Если уравнение имеет вид ax² + 2kx + c = 0 (второй коэффициент чётный: b = 2k), то при D₁ ≥ 0 его корни находят по формуле x = (−k ± √D₁)/a, где D₁ = k² − ac. Если D₁ &lt; 0 — корней нет. Числа получаются меньше, считать легче.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 7: Сначала — стандартный вид!</b><br>
+            Формула работает только для уравнения ax² + bx + c = 0. Если слагаемые перепутаны (1 − 18p + 81p² = 0) или уравнение не доведено до нуля (5x² = 9x + 2), сначала приведи его к стандартному виду и выпиши коэффициенты: a — при x², b — при x, c — свободный член.
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: три случая дискриминанта -->
+            <svg viewBox="0 0 700 325" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#475569"/></marker>
+                </defs>
+                <rect x="215" y="15" width="270" height="36" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="39" font-family="sans-serif" font-size="16" fill="#1e293b" text-anchor="middle" font-weight="bold">ax² + bx + c = 0, где a ≠ 0</text>
+                <line x1="350" y1="51" x2="350" y2="72" stroke="#475569" stroke-width="2" marker-end="url(#arrG)"/>
+                <rect x="200" y="78" width="300" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                <text x="350" y="95" font-family="sans-serif" font-size="13" fill="#64748b" text-anchor="middle">Вычисли дискриминант:</text>
+                <text x="350" y="112" font-family="'Courier New', monospace" font-size="16" fill="#dc2626" text-anchor="middle" font-weight="bold">D = b² − 4ac</text>
+                <line x1="350" y1="118" x2="120" y2="164" stroke="#475569" stroke-width="2" marker-end="url(#arrG)"/>
+                <line x1="350" y1="118" x2="350" y2="164" stroke="#475569" stroke-width="2" marker-end="url(#arrG)"/>
+                <line x1="350" y1="118" x2="580" y2="164" stroke="#475569" stroke-width="2" marker-end="url(#arrG)"/>
+                <text x="212" y="138" font-family="sans-serif" font-size="14" fill="#16a34a" text-anchor="middle" font-weight="bold">D &gt; 0</text>
+                <text x="368" y="145" font-family="sans-serif" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="bold">D = 0</text>
+                <text x="490" y="138" font-family="sans-serif" font-size="14" fill="#dc2626" text-anchor="middle" font-weight="bold">D &lt; 0</text>
+                <rect x="10" y="170" width="210" height="88" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="115" y="196" font-family="sans-serif" font-size="16" fill="#16a34a" text-anchor="middle" font-weight="bold">ДВА корня</text>
+                <text x="115" y="220" font-family="'Courier New', monospace" font-size="14" fill="#1e293b" text-anchor="middle">x = (−b ± √D)/(2a)</text>
+                <text x="115" y="244" font-family="sans-serif" font-size="12.5" fill="#64748b" text-anchor="middle">x₁ и x₂ — разные числа</text>
+                <rect x="245" y="170" width="210" height="88" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="196" font-family="sans-serif" font-size="16" fill="#2563eb" text-anchor="middle" font-weight="bold">ОДИН корень</text>
+                <text x="350" y="220" font-family="'Courier New', monospace" font-size="14" fill="#1e293b" text-anchor="middle">x = −b/(2a)</text>
+                <text x="350" y="244" font-family="sans-serif" font-size="12.5" fill="#64748b" text-anchor="middle">(корень x₁ = x₂)</text>
+                <rect x="480" y="170" width="210" height="88" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="585" y="196" font-family="sans-serif" font-size="16" fill="#dc2626" text-anchor="middle" font-weight="bold">КОРНЕЙ НЕТ</text>
+                <text x="585" y="220" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">√D не существует</text>
+                <text x="585" y="244" font-family="sans-serif" font-size="12.5" fill="#64748b" text-anchor="middle">(квадрат ≥ 0, а D &lt; 0)</text>
+                <line x1="115" y1="258" x2="115" y2="270" stroke="#16a34a" stroke-width="1.5"/>
+                <line x1="350" y1="258" x2="350" y2="270" stroke="#2563eb" stroke-width="1.5"/>
+                <line x1="585" y1="258" x2="585" y2="270" stroke="#dc2626" stroke-width="1.5"/>
+                <rect x="10" y="272" width="210" height="42" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <text x="115" y="289" font-family="sans-serif" font-size="12.5" fill="#16a34a" text-anchor="middle" font-weight="bold">№ 531 а) 2x² + 3x + 1 = 0</text>
+                <text x="115" y="306" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">D = 9 − 8 = 1 &gt; 0</text>
+                <rect x="245" y="272" width="210" height="42" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <text x="350" y="289" font-family="sans-serif" font-size="12.5" fill="#2563eb" text-anchor="middle" font-weight="bold">№ 531 в) 9x² + 6x + 1 = 0</text>
+                <text x="350" y="306" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">D = 36 − 36 = 0</text>
+                <rect x="480" y="272" width="210" height="42" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <text x="585" y="289" font-family="sans-serif" font-size="12.5" fill="#dc2626" text-anchor="middle" font-weight="bold">№ 531 б) 2x² + x + 2 = 0</text>
+                <text x="585" y="306" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">D = 1 − 16 = −15 &lt; 0</text>
+            </svg>
+        </div>
+
+        <h3>🎯 Устная проверка (№ 531 из учебника)</h3>
+        <p>Вычислите дискриминант квадратного уравнения и укажите число его корней. Рассуждай так: подставь a, b и c в формулу D = b² − 4ac, аккуратно следи за знаками и сравни результат с нулём.</p>
+        <details>
+            <summary>Показать ответы устного задания</summary>
+            <div class="solution-step"><b>а) 2x² + 3x + 1 = 0</b> — D = 3² − 4·2·1 = 9 − 8 = 1 &gt; 0: <b>два корня</b> (это −1/2 и −1).</div>
+            <div class="solution-step"><b>б) 2x² + x + 2 = 0</b> — D = 1² − 4·2·2 = 1 − 16 = −15 &lt; 0: <b>корней нет</b>.</div>
+            <div class="solution-step"><b>в) 9x² + 6x + 1 = 0</b> — D = 6² − 4·9·1 = 36 − 36 = 0: <b>один корень</b> (это −1/3).</div>
+            <div class="solution-step"><b>г) x² + 5x − 6 = 0</b> — D = 5² − 4·1·(−6) = 25 + 24 = 49 &gt; 0: <b>два корня</b> (это −6 и 1).</div>
+        </details>
+
+        <h3>📐 Работаем с формулой: примеры из учебника</h3>
+
+        <p><b>Пример 1 (из учебника).</b> Решим уравнение 12x² + 7x + 1 = 0.<br>
+        Найдём дискриминант: D = 7² − 4·12·1 = 49 − 48 = 1, D &gt; 0 — два корня. Применим формулу корней: √1 = 1, значит, x = (−7 ± 1)/24. Отсюда x₁ = (−7 − 1)/24 = −8/24 = −1/3 и x₂ = (−7 + 1)/24 = −6/24 = −1/4. <b>Ответ: −1/3; −1/4.</b></p>
+        <p><b>Пример 2 (из учебника).</b> Решим уравнение x² − 12x + 36 = 0.<br>
+        Имеем D = (−12)² − 4·1·36 = 144 − 144 = 0 — один корень. По формуле: x = (12 − √0)/2 = 12/2 = 6. <b>Ответ: 6.</b></p>
+        <p><b>Пример 3 (из учебника).</b> Решим уравнение 7x² − 25x + 23 = 0.<br>
+        Имеем D = (−25)² − 4·7·23 = 625 − 644 = −19, D &lt; 0. <b>Ответ: корней нет.</b></p>
+        <p><b>Пример 4 (из учебника, формула II).</b> Решим уравнение 9x² − 14x + 5 = 0.<br>
+        Второй коэффициент чётный: −14 = 2k, то есть k = −7. Считаем D₁ = k² − ac = (−7)² − 9·5 = 49 − 45 = 4 ≥ 0. По формуле (II): x = (−k ± √D₁)/a = (7 ± 2)/9, откуда x₁ = 5/9 и x₂ = 1. <b>Ответ: 5/9; 1.</b></p>
+
+        <div class="rule-box">
+            <b>Правило 8: Проверка.</b> Найденные корни подставляй в ИСХОДНОЕ уравнение — каждый по очереди. Для Примера 1: 12·(−1/3)² + 7·(−1/3) + 1 = 4/3 − 7/3 + 1 = 0 ✅ и 12·(−1/4)² + 7·(−1/4) + 1 = 3/4 − 7/4 + 1 = 0 ✅.
+        </div>
+
+        <div class="rule-box">
+            <b>⚠️ Ловушки формулы.</b> 1) Знак «−b»: если b = −25, в числителе стоит −(−25) = +25 — знак меняется. 2) b² всегда неотрицательно: (−25)² = 625, а не −625. 3) Дели на 2a ВЕСЬ числитель: дробь (−b ± √D)/(2a), а не только −b. 4) Если c &lt; 0, то −4ac = плюс — самая частая ошибка в дискриминанте.
+        </div>
+
+        <p>Геометрический смысл: корни уравнения ax² + bx + c = 0 — это абсциссы точек пересечения параболы y = ax² + bx + c с осью x. Дискриминант «различает», сколько таких точек: две, одна или ни одной.</p>
+
+        <div class="svg-container">
+            <!-- SVG: параболы и число корней -->
+            <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+                <text x="115" y="26" font-family="sans-serif" font-size="15" fill="#1e293b" text-anchor="middle" font-weight="bold">y = x² − 4x + 3</text>
+                <line x1="47" y1="185" x2="180" y2="185" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="183,185 175,181 175,189" fill="#475569"/>
+                <line x1="115" y1="255" x2="115" y2="78" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="115,75 111,83 119,83" fill="#475569"/>
+                <text x="191" y="189" font-family="sans-serif" font-size="12" fill="#64748b">x</text>
+                <text x="101" y="86" font-family="sans-serif" font-size="12" fill="#64748b">y</text>
+                <path d="M 85 149 Q 115 245 145 149" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+                <circle cx="115" cy="197" r="3.5" fill="#2563eb"/>
+                <circle cx="100" cy="185" r="4.5" fill="#dc2626"/>
+                <circle cx="130" cy="185" r="4.5" fill="#dc2626"/>
+                <text x="100" y="207" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle" font-weight="bold">1</text>
+                <text x="130" y="207" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle" font-weight="bold">3</text>
+                <text x="115" y="248" font-family="sans-serif" font-size="13.5" fill="#16a34a" text-anchor="middle" font-weight="bold">D = 4 &gt; 0 — два корня</text>
+                <text x="115" y="268" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">x² − 4x + 3 = 0: x = 1; x = 3</text>
+                <text x="355" y="26" font-family="sans-serif" font-size="15" fill="#1e293b" text-anchor="middle" font-weight="bold">y = x² − 4x + 4</text>
+                <line x1="287" y1="185" x2="420" y2="185" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="423,185 415,181 415,189" fill="#475569"/>
+                <line x1="355" y1="255" x2="355" y2="78" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="355,75 351,83 359,83" fill="#475569"/>
+                <text x="431" y="189" font-family="sans-serif" font-size="12" fill="#64748b">x</text>
+                <text x="341" y="86" font-family="sans-serif" font-size="12" fill="#64748b">y</text>
+                <path d="M 325 137 Q 355 233 385 137" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+                <circle cx="355" cy="185" r="4.5" fill="#dc2626"/>
+                <text x="365" y="207" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="start" font-weight="bold">2</text>
+                <text x="355" y="248" font-family="sans-serif" font-size="13.5" fill="#2563eb" text-anchor="middle" font-weight="bold">D = 0 — один корень</text>
+                <text x="355" y="268" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">x² − 4x + 4 = 0: x = 2</text>
+                <text x="595" y="26" font-family="sans-serif" font-size="15" fill="#1e293b" text-anchor="middle" font-weight="bold">y = x² − 4x + 6</text>
+                <line x1="527" y1="185" x2="660" y2="185" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="663,185 655,181 655,189" fill="#475569"/>
+                <line x1="595" y1="255" x2="595" y2="78" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="595,75 591,83 599,83" fill="#475569"/>
+                <text x="671" y="189" font-family="sans-serif" font-size="12" fill="#64748b">x</text>
+                <text x="581" y="86" font-family="sans-serif" font-size="12" fill="#64748b">y</text>
+                <path d="M 565 113 Q 595 209 625 113" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+                <circle cx="595" cy="161" r="3.5" fill="#2563eb"/>
+                <text x="595" y="248" font-family="sans-serif" font-size="13.5" fill="#dc2626" text-anchor="middle" font-weight="bold">D = −8 &lt; 0 — корней нет</text>
+                <text x="595" y="268" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">x² − 4x + 6 = 0</text>
+                <text x="350" y="292" font-family="sans-serif" font-size="12.5" fill="#64748b" text-anchor="middle" font-style="italic">Вершина всех трёх парабол: x₀ = −b/(2a) = 2 — меняется только свободный член c</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника (§ 7, п. 21). Порядок один: стандартный вид → коэффициенты a, b, c → дискриминант D → формула корней → проверка.</p>
+
+        <!-- Задание 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№ 532 а)</h3>
+            <p>Решите уравнение: 3x² − 7x + 4 = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 1 и 4/3" data-answer="x = 1; x = 4/3"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Коэффициенты: a = 3, b = −7, c = 4. Все отличны от нуля — полное квадратное уравнение.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Дискриминант: D = (−7)² − 4·3·4 = 49 − 48 = 1. D &gt; 0 — уравнение имеет два корня.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> √1 = 1. По формуле x = (−b ± √D)/(2a) = (7 ± 1)/6: x₁ = (7 − 1)/6 = 6/6 = 1, x₂ = (7 + 1)/6 = 8/6 = 4/3 = 1⅔.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 3·1² − 7·1 + 4 = 0 ✅; 3·(4/3)² − 7·(4/3) + 4 = 16/3 − 28/3 + 12/3 = 0 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> x₁ = 1; x₂ = 4/3 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 2 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 2 (№ 532 б)</h3>
+            <p>Решите уравнение: 5x² − 8x + 3 = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 0,6 и 1" data-answer="x = 0,6; x = 1"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Коэффициенты: a = 5, b = −8, c = 3.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D = (−8)² − 4·5·3 = 64 − 60 = 4 &gt; 0 — два корня, √4 = 2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> x = (8 ± 2)/10: x₁ = (8 − 2)/10 = 6/10 = 0,6, x₂ = (8 + 2)/10 = 10/10 = 1.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 5·(0,6)² − 8·0,6 + 3 = 1,8 − 4,8 + 3 = 0 ✅; 5·1 − 8 + 3 = 0 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> x₁ = 0,6; x₂ = 1 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 3 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 3 (№ 532 г)</h3>
+            <p>Решите уравнение: 2y² − 9y + 10 = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 2 и 2,5" data-answer="y = 2; y = 2,5"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Коэффициенты: a = 2, b = −9, c = 10 (переменная y — это не важно, формула та же).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D = (−9)² − 4·2·10 = 81 − 80 = 1 &gt; 0 — два корня, √1 = 1.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> y = (9 ± 1)/4: y₁ = (9 − 1)/4 = 8/4 = 2, y₂ = (9 + 1)/4 = 10/4 = 2,5.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 2·2² − 9·2 + 10 = 8 − 18 + 10 = 0 ✅; 2·(2,5)² − 9·2,5 + 10 = 12,5 − 22,5 + 10 = 0 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> y₁ = 2; y₂ = 2,5 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 4 (№ 533 г)</h3>
+            <p>Решите уравнение: 1 − 18p + 81p² = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 1/9" data-answer="p = 1/9"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Приведём к стандартному виду: 81p² − 18p + 1 = 0. Теперь коэффициенты: a = 81, b = −18, c = 1. (Осторожно: a — это коэффициент при p², то есть 81, а не 1!)
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D = (−18)² − 4·81·1 = 324 − 324 = 0 — один корень.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> p = −b/(2a) = 18/162 = 1/9. (По формуле (II): b = 2k = −18, k = −9, D₁ = 81 − 81 = 0, p = 9/81 = 1/9 — тот же ответ.)
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 1 − 18·(1/9) + 81·(1/81) = 1 − 2 + 1 = 0 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> p = 1/9 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 5 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 5 (№ 532 ж)</h3>
+            <p>Решите уравнение: y² − 10y − 24 = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -2 и 12" data-answer="y = -2; y = 12"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Коэффициенты: a = 1, b = −10, c = −24.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D = (−10)² − 4·1·(−24) = 100 + 96 = 196 &gt; 0 — два корня. Не забудь: c = −24, поэтому −4ac = +96!
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> √196 = 14. y = (10 ± 14)/2: y₁ = (10 − 14)/2 = −4/2 = −2, y₂ = (10 + 14)/2 = 24/2 = 12.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> (−2)² − 10·(−2) − 24 = 4 + 20 − 24 = 0 ✅; 12² − 10·12 − 24 = 144 − 120 − 24 = 0 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> y₁ = −2; y₂ = 12 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 6 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 6 (№ 533 б)</h3>
+            <p>Решите уравнение: −y² + 3y + 5 = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -1,19 и 4,19" data-answer="y = -1,19; y = 4,19"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Умножим обе части на −1 (знак у всех слагаемых сменится, а корни не изменятся): y² − 3y − 5 = 0. Так удобнее: a = 1, b = −3, c = −5.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D = (−3)² − 4·1·(−5) = 9 + 20 = 29 &gt; 0 — два корня.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> Число 29 не извлекается как точный квадрат: √29 ≈ 5,385 (проверь калькулятором). y = (3 ± √29)/2: y₁ = (3 − 5,385)/2 ≈ −1,19, y₂ = (3 + 5,385)/2 ≈ 4,19.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> −(4,1926)² + 3·4,1926 + 5 ≈ −17,578 + 12,578 + 5 ≈ 0 ✅ (для y₁ ≈ −1,19 — так же)
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> y₁ = (3 − √29)/2 ≈ −1,19; y₂ = (3 + √29)/2 ≈ 4,19 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 7 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 7 (№ 537 а, формула II)</h3>
+            <p>Решите уравнение, используя формулу (II): 3x² − 14x + 16 = 0</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 2 и 8/3" data-answer="x = 2; x = 8/3"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Второй коэффициент чётный: −14 = 2k, значит k = −7. Уравнение имеет вид ax² + 2kx + c = 0.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D₁ = k² − ac = (−7)² − 3·16 = 49 − 48 = 1 ≥ 0 — корни есть.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> x = (−k ± √D₁)/a = (7 ± 1)/3: x₁ = (7 − 1)/3 = 6/3 = 2, x₂ = (7 + 1)/3 = 8/3 = 2⅔.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 3·2² − 14·2 + 16 = 12 − 28 + 16 = 0 ✅; 3·(8/3)² − 14·(8/3) + 16 = 64/3 − 112/3 + 48/3 = 0 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> x₁ = 2; x₂ = 8/3 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 8 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 8 (№ 540 а)</h3>
+            <p>Решите уравнение: 5x² = 9x + 2</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -0,2 и 2" data-answer="x = -0,2; x = 2"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Приведём к стандартному виду — перенесём 9x + 2 влево: 5x² − 9x − 2 = 0. Коэффициенты: a = 5, b = −9, c = −2.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> D = (−9)² − 4·5·(−2) = 81 + 40 = 121 &gt; 0 — два корня, √121 = 11.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> x = (9 ± 11)/10: x₁ = (9 − 11)/10 = −2/10 = −0,2, x₂ = (9 + 11)/10 = 20/10 = 2.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 5·(−0,2)² = 0,2 и 9·(−0,2) + 2 = 0,2 — обе части равны ✅; 5·2² = 20 и 9·2 + 2 = 20 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> x₁ = −0,2; x₂ = 2 ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2>🏋️ Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно и проверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> (№ 532 д) Решите уравнение: 5y² − 6y + 1 = 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> (№ 539 в) Решите уравнение: 5x² + 9x + 4 = 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> (№ 533 а) Решите уравнение: 14x² − 5x − 1 = 0</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>4.</b> (№ 532 е) Решите уравнение: 4x² + x − 33 = 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> (№ 538 а) Решите уравнение: 8x² − 14x + 5 = 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>6.</b> (№ 539 б) Решите уравнение: 3x² − 8x + 5 = 0</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>7.</b> (№ 539 з) Решите уравнение: 100x² − 160x + 63 = 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> (№ 545 а) Решите уравнение 5x² − x − 1 = 0 и укажите приближённые значения корней с точностью до 0,01.</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> (№ 548 а) Решите уравнение x² − 8x + 9 = 0 и укажите приближённые значения корней с точностью до 0,01 (воспользуйтесь калькулятором).</p>
+        </div>
+
+        <details>
+            <summary>✅ Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. y = 1; y = 0,2 (D = 36 − 20 = 16)<br>
+                2. x = −1; x = −0,8 (D = 81 − 80 = 1)<br>
+                3. x = 0,5; x = −1/7 (D = 25 + 56 = 81)<br>
+                4. x = −3; x = 2,75 (D = 1 + 528 = 529, √529 = 23)<br>
+                5. x = 0,5; x = 1,25 (D = 196 − 160 = 36)<br>
+                6. x = 1; x = 5/3 = 1⅔ (D = 64 − 60 = 4)<br>
+                7. x = 0,7; x = 0,9 (D = 25600 − 25200 = 400)<br>
+                8. D = 21, √21 ≈ 4,583: x ≈ 0,56; x ≈ −0,36<br>
+                9. D = 64 − 36 = 28, √28 ≈ 5,292: x ≈ 1,35; x ≈ 6,65
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+
+        <h3>⚽ Задача для спортивного инженера</h3>
+        <p>Футболист пробивает штрафной, и высота полёта мяча меняется по закону h(t) = 20t − 5t², где t — время в секундах, h — высота в метрах (g ≈ 10 м/с²). В какие моменты времени мяч окажется на высоте 15 м?</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи два времени в секундах" data-answer="t = 1 с и t = 3 с"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Подставим h = 15 в закон полёта: 20t − 5t² = 15. Перенесём всё влево: −5t² + 20t − 15 = 0.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Умножим обе части на −1 и разделим на 5: t² − 4t + 3 = 0. Коэффициенты: a = 1, b = −4, c = 3.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> D = (−4)² − 4·1·3 = 16 − 12 = 4 &gt; 0 — два корня. √4 = 2, t = (4 ± 2)/2: t₁ = (4 − 2)/2 = 1, t₂ = (4 + 2)/2 = 3.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Оба корня имеют смысл! Мяч пролетает отметку 15 м дважды: на подъёме (через 1 с) и на спуске (через 3 с).
+            </div>
+            <div class="solution-step check-step">
+                <b>Проверка:</b> h(1) = 20·1 − 5·1² = 15 м ✅; h(3) = 20·3 − 5·3² = 60 − 45 = 15 м ✅
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> через 1 с (вверх) и через 3 с (вниз) ✅
+            </div>
+        </details>
+
+        <h3>🖥 Задача для IT-дизайнера</h3>
+        <p>Дизайнер интерфейсов готовит баннер для сайта: его ширина на 3 см больше высоты, а площадь равна 40 см². Найдите размеры баннера.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Например: высота и ширина в см" data-answer="высота 5 см, ширина 8 см"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение дизайнера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Пусть высота равна x см, тогда ширина равна (x + 3) см. Площадь: x·(x + 3) = 40.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Раскроем скобки и перенесём всё влево: x² + 3x − 40 = 0. Коэффициенты: a = 1, b = 3, c = −40.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> D = 3² − 4·1·(−40) = 9 + 160 = 169 &gt; 0 — два корня. √169 = 13, x = (−3 ± 13)/2: x₁ = (−3 − 13)/2 = −8, x₂ = (−3 + 13)/2 = 5.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Корень x = −8 не подходит по смыслу задачи: высота не может быть отрицательной. Значит, высота 5 см, а ширина 5 + 3 = 8 см.
+            </div>
+            <div class="solution-step check-step">
+                <b>Проверка:</b> 5 · 8 = 40 см² ✅; ширина 8 на 3 больше высоты 5 ✅
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> высота — 5 см, ширина — 8 см ✅
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Дискриминант:</b> D = b² − 4ac для уравнения ax² + bx + c = 0 (a ≠ 0). «Различитель»: по знаку D различают число корней.</li>
+            <li><b>Формула корней (I):</b> x = (−b ± √D)/(2a) при D ≥ 0. Она работает для любого квадратного уравнения — и полного, и неполного.</li>
+            <li><b>Три случая:</b> D &gt; 0 — два корня; D = 0 — один корень x = −b/(2a); D &lt; 0 — корней нет.</li>
+            <li><b>Алгоритм:</b> стандартный вид → a, b, c → D = b² − 4ac → сравнить с нулём → формула или «корней нет».</li>
+            <li><b>Чётный b = 2k:</b> формула (II): D₁ = k² − ac, x = (−k ± √D₁)/a — числа мельче, считать проще.</li>
+            <li><b>Неточный корень:</b> если √D не извлекается, вычисляй приближённо с калькулятором и округляй до нужной точности.</li>
+            <li><b>Проверка:</b> подставь каждый корень в исходное уравнение — должно получиться верное равенство.</li>
+            <li>💡 <b>Лайфхак:</b> b² не зависит от знака b: (−25)² = 625. А вот при c &lt; 0 слагаемое −4ac становится положительным — не потеряй эти плюсы в дискриминанте.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Знак «−b»:</i> при b = −7 ученики пишут в числителе −7 вместо −(−7) = 7. Отрабатывайте подстановку с отрицательными b отдельно.</li>
+            <li><i>Ошибка в −4ac:</i> при c &lt; 0 произведение −4ac положительно, а при b &lt; 0 квадрат (−b)² положителен. Потеря этих плюсов — причина № 1 «пропавших» корней.</li>
+            <li><i>Деление только числителя:</i> запись x = −b ± √D/2a без скобок ведёт к ошибке. Требуйте дробную черту под всем числителем.</li>
+            <li><i>«Корни» из отрицательного числа:</i> при D &lt; 0 пишут ±√(−19). Напомните: квадрат числа не бывает отрицательным.</li>
+            <li><i>Пропуск стандартного вида:</i> в уравнении 1 − 18p + 81p² = 0 берут a = 1, b = −18, c = 81, хотя a = 81 — коэффициент при p².</li>
+            <li><i>Раннее округление:</i> при неточном √D округляйте только окончательный ответ, иначе погрешность растёт.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Алгоритм-памятка из четырёх шагов: стандартный вид → выпиши a, b, c → вычисли D = b² − 4ac → сравни с нулём и примени формулу.</li>
+            <li>Карточка-шпаргалка с формулой (I) на парте; b подчёркивайте голубым, 4ac — красным, как в схеме урока.</li>
+            <li>Начинайте с уравнений, где D — точный квадрат (№ 532), и лишь затем переходите к №№ 533, 545 с иррациональными корнями.</li>
+            <li>Повторите таблицу квадратов до 20² = 400 — это ускоряет вычисление D в разы.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>Задача-исследование № 552: сравните корни уравнений ax² + bx + c = 0 и cx² + bx + a = 0. Например, x² − 5x + 6 = 0 имеет корни 2 и 3, а 6x² − 5x + 1 = 0 — корни 1/2 и 1/3. Гипотеза: корни «перевёрнутого» уравнения обратны исходным. Проверьте на 2x² − 13x + 6 = 0 и 6x² − 13x + 2 = 0 и докажите её.</li>
+            <li>№ 553: существует ли значение a, при котором уравнение x² − ax + a − 4 = 0 не имеет корней или имеет один корень? Ответ: нет — D = a² − 4a + 16 = (a − 2)² + 12 &gt; 0 при любом a, поэтому корней всегда два.</li>
+            <li>№ 547: решите уравнение x² = 0,5x + 3 сначала графически, затем по формуле (ответ: 2 и −1,5; D = 12,25 — точный квадрат 3,5²). Сравните оба способа.</li>
+            <li>№ 536 б: при каких значениях x трёхчлены 3x² − 4x + 3 и x² + x + 1 принимают равные значения? (Ответ: x = 1/2 и x = 2.)</li>
+        </ul>
+    </div>
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-3-20.html">⬅️ Предыдущий урок</a>
+        <a href="index.html">Следующий урок ➡️</a>
+    </nav>
+
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §7)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
+</body>
+</html>
