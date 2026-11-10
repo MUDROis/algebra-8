@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Теорема Виета — Алгебра 8 класс</title>
+    <style>
+
+:root {
+    --primary: #2563eb;
+    --accent: #0ea5e9;
+    --formula: #dc2626;
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --light-text: #64748b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    background-color: #fbfaf5;
+    background-image:
+        linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: #ffffff;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid var(--primary);
+    border-radius: 6px;
+    text-align: center;
+    color: var(--text);
+}
+.course-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+.subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+.legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+h3 {
+    color: var(--text);
+    font-size: 1.2rem;
+    margin: 20px 0 12px;
+}
+
+p { margin-bottom: 12px; }
+
+.terms-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.95rem;
+}
+.terms-table th, .terms-table td {
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    text-align: left;
+}
+.terms-table th {
+    background-color: #f1f5f9;
+    color: var(--primary);
+    font-weight: 600;
+}
+.terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+.rule-box {
+    background-color: #eff6ff;
+    border-left: 5px solid var(--primary);
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.formula {
+    background-color: #fef2f2;
+    border: 2px dashed var(--formula);
+    color: var(--formula);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 16px;
+    border-radius: 12px;
+    margin: 16px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.fraction {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.fraction .num {
+    border-bottom: 2px solid currentColor;
+    padding: 0 4px 2px;
+    display: block;
+}
+.fraction .den {
+    padding: 2px 4px 0;
+    display: block;
+}
+.formula .fraction { color: var(--formula); }
+.formula .fraction .num { border-bottom-color: var(--formula); }
+
+.svg-container {
+    text-align: center;
+    margin: 20px 0;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+.svg-container svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.task-level {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 8px;
+}
+.level-basic { background-color: var(--success); }
+.level-medium { background-color: var(--primary); }
+.level-hard { background-color: #9333ea; }
+
+.task-box {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+details {
+    margin-top: 12px;
+    border-top: 1px dashed #cbd5e1;
+    padding-top: 12px;
+}
+summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "🔍"; }
+details[open] summary::before { content: "💡"; }
+
+.solution-step {
+    background: #ffffff;
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 0 8px 8px 0;
+}
+.check-step {
+    background: #f0fdf4;
+    border-left: 3px solid var(--success);
+    color: var(--success);
+    font-weight: 600;
+}
+
+.practice-box {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 2px solid var(--warning);
+}
+.practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+.summary-box {
+    background: #f0fdf4;
+    border: 2px solid var(--success);
+}
+.summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+.summary-box ul { padding-left: 20px; }
+.summary-box li { margin-bottom: 8px; }
+
+.teacher-note {
+    background: #eff6ff;
+    border: 2px dashed var(--primary);
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+.teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+.values-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-family: 'Courier New', monospace;
+}
+.values-table th, .values-table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    text-align: center;
+}
+.values-table th {
+    background-color: #f1f5f9;
+    color: var(--primary);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+footer .legal {
+    font-size: 0.85em;
+    color: #95a5a6;
+}
+
+@media (max-width: 600px) {
+    .container { padding: 10px; }
+    header h1 { font-size: 1.4rem; }
+    .card { padding: 16px; }
+    .formula { font-size: 1rem; padding: 12px; }
+    .terms-table { font-size: 0.85rem; }
+    .terms-table th, .terms-table td { padding: 8px; }
+}
+
+.lesson-nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 24px 0 8px;
+}
+
+.lesson-nav a {
+    background: var(--bg);
+    border: 1px solid #e2e8f0;
+    color: var(--primary);
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.lesson-nav a:hover {
+    background: #f1f5f9;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Урок 23 • Глава 3, §7">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Теорема Виета — Алгебра 8 класс">
+<meta property="og:description" content="Урок 23 • Глава 3, §7">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/lesson-3-23.html">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Теорема Виета — Алгебра 8 класс">
+<meta name="twitter:description" content="Урок 23 • Глава 3, §7">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/lesson-3-23.html">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>Теорема Виета</h1>
+        <p class="subtitle">Урок 23 • Глава 3, §7</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 7, п. 23). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3>🪝 Разминка: уравнение с секретом</h3>
+        <p>Реши простое приведённое квадратное уравнение <b>x² − 7x + 10 = 0</b> — и ты увидишь нечто любопытное. Используй формулу корней из урока 21.</p>
+        <details>
+            <summary>Реши уравнение и посмотри на корни</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Коэффициенты: a = 1, b = −7, c = 10. Дискриминант: D = (−7)² − 4·1·10 = 49 − 40 = 9. D &gt; 0 — два корня.</div>
+            <div class="solution-step"><b>Шаг 2:</b> √9 = 3. По формуле x = (−b ± √D)/(2a) = (7 ± 3)/2: x₁ = (7 − 3)/2 = 2, x₂ = (7 + 3)/2 = 5.</div>
+            <div class="solution-step"><b>Проверка:</b> 2² − 7·2 + 10 = 4 − 14 + 10 = 0 ✅; 5² − 7·5 + 10 = 25 − 35 + 10 = 0 ✅</div>
+            <div class="solution-step check-step"><b>Ответ:</b> x₁ = 2; x₂ = 5 ✅</div>
+        </details>
+        <p>А теперь — главное наблюдение. Сложи корни: <b>2 + 5 = 7</b>. Перемножь их: <b>2 · 5 = 10</b>. Сравни с коэффициентами уравнения x² − 7x + 10 = 0. Сумма корней <b>7</b> — это второй коэффициент с противоположным знаком (−(−7) = 7), а произведение <b>10</b> — это свободный член! Случайность? Нет — это <b>теорема Виета</b>, и мы её сейчас докажем.</p>
+
+        <div class="svg-container">
+            <!-- SVG: схема наблюдения для x^2 - 7x + 10 = 0 -->
+            <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrV" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker>
+                    <marker id="arrR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+                </defs>
+                <rect x="20" y="20" width="560" height="40" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="300" y="46" font-family="'Courier New', monospace" font-size="20" fill="#dc2626" text-anchor="middle" font-weight="bold">x² − 7x + 10 = 0</text>
+                <text x="80" y="80" font-family="sans-serif" font-size="13" fill="#64748b" text-anchor="middle">коэффициент p = −7</text>
+                <text x="490" y="80" font-family="sans-serif" font-size="13" fill="#64748b" text-anchor="middle">свободный член q = 10</text>
+                <rect x="60" y="120" width="180" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="150" y="146" font-family="'Courier New', monospace" font-size="15" fill="#2563eb" text-anchor="middle" font-weight="bold">x₁ + x₂ = 2 + 5 = 7</text>
+                <rect x="360" y="120" width="180" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="450" y="146" font-family="'Courier New', monospace" font-size="15" fill="#2563eb" text-anchor="middle" font-weight="bold">x₁ · x₂ = 2 · 5 = 10</text>
+                <line x1="150" y1="120" x2="80" y2="92" stroke="#2563eb" stroke-width="2" marker-end="url(#arrV)"/>
+                <line x1="450" y1="120" x2="490" y2="92" stroke="#dc2626" stroke-width="2" marker-end="url(#arrR)"/>
+                <text x="150" y="186" font-family="sans-serif" font-size="12.5" fill="#2563eb" text-anchor="middle">= −p = −(−7) = 7 ✅</text>
+                <text x="450" y="186" font-family="sans-serif" font-size="12.5" fill="#dc2626" text-anchor="middle">= q = 10 ✅</text>
+                <text x="300" y="210" font-family="sans-serif" font-size="12.5" fill="#475569" text-anchor="middle" font-style="italic">Сумма корней = −p, произведение корней = q</text>
+            </svg>
+        </div>
+
+        <h3>📜 Формулировка теоремы Виета</h3>
+        <p>Уравнение x² + px + q = 0 (старший коэффициент равен 1) называется <b>приведённым квадратным уравнением</b>. Для него и формулируется теорема.</p>
+
+        <div class="rule-box">
+            <b>ТЕОРЕМА.</b> Сумма корней приведённого квадратного уравнения равна второму коэффициенту, взятому с противоположным знаком, а произведение корней равно свободному члену.
+        </div>
+
+        <div class="formula">
+            x₁ + x₂ = −p,&nbsp;&nbsp;&nbsp; x₁ · x₂ = q
+        </div>
+
+        <h3>🔬 Доказательство теоремы</h3>
+        <p>Рассмотрим приведённое квадратное уравнение x² + px + q = 0. Его дискриминант D = p² − 4q. Пусть D &gt; 0 — тогда уравнение имеет два корня, которые находятся по формуле корней (урок 21):</p>
+
+        <div class="formula">
+            x<span sub="1">₁</span> = <span class="fraction"><span class="num">−p − √D</span><span class="den">2</span></span> ,&nbsp;&nbsp;&nbsp; x<span sub="2">₂</span> = <span class="fraction"><span class="num">−p + √D</span><span class="den">2</span></span>
+        </div>
+
+        <div class="rule-box">
+            <b>Шаг 1. Сумма корней.</b> Сложим x₁ и x₂:<br>
+            x₁ + x₂ = <span class="fraction"><span class="num">−p − √D</span><span class="den">2</span></span> + <span class="fraction"><span class="num">−p + √D</span><span class="den">2</span></span> = <span class="fraction"><span class="num">(−p − √D) + (−p + √D)</span><span class="den">2</span></span> = <span class="fraction"><span class="num">−2p</span><span class="den">2</span></span> = −p.<br>
+            Слагаемые −√D и +√D взаимно уничтожились, осталось −2p/2 = −p.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 2. Произведение корней.</b> Применим формулу разности квадратов (a − b)(a + b) = a² − b² к числителям:<br>
+            x₁ · x₂ = <span class="fraction"><span class="num">−p − √D</span><span class="den">2</span></span> · <span class="fraction"><span class="num">−p + √D</span><span class="den">2</span></span> = <span class="fraction"><span class="num">(−p)² − (√D)²</span><span class="den">4</span></span> = <span class="fraction"><span class="num">p² − D</span><span class="den">4</span></span>.<br>
+            Вспомним, что D = p² − 4q, поэтому p² − D = p² − (p² − 4q) = 4q. Тогда <span class="fraction"><span class="num">p² − D</span><span class="den">4</span></span> = <span class="fraction"><span class="num">4q</span><span class="den">4</span></span> = q.
+        </div>
+        <div class="solution-step check-step">
+            <b>Вывод:</b> x₁ + x₂ = −p и x₁ · x₂ = q. Теорема доказана. ○
+        </div>
+
+        <div class="rule-box">
+            <b>А что если D = 0?</b> В этом случае уравнение имеет один корень (точнее — два <b>равных</b> корня). Если условиться считать, что при D = 0 корни x₁ и x₂ совпадают и вычисляются по той же формуле x = (−p ± √D)/2 (где √D = 0), то теорема Виета остаётся верной и в этом случае. Например, для x² − 6x + 9 = 0: единственный корень x = 3, и формально x₁ + x₂ = 3 + 3 = 6 = −(−6), x₁ · x₂ = 3 · 3 = 9.
+        </div>
+
+        <h3>🌍 Обобщение на произвольное квадратное уравнение</h3>
+        <p>А что если уравнение не приведённое, то есть a ≠ 1? Пусть ax² + bx + c = 0 имеет корни x₁ и x₂. Разделим обе части на a (a ≠ 0) — получим равносильное <b>приведённое</b> уравнение:</p>
+
+        <div class="formula">
+            x² + <span class="fraction"><span class="num">b</span><span class="den">a</span></span> x + <span class="fraction"><span class="num">c</span><span class="den">a</span></span> = 0
+        </div>
+
+        <p>Здесь p = b/a и q = c/a. Применяя теорему Виета к этому приведённому уравнению, получаем важнейшую формулу:</p>
+
+        <div class="formula">
+            x₁ + x₂ = −<span class="fraction"><span class="num">b</span><span class="den">a</span></span> ,&nbsp;&nbsp;&nbsp; x₁ · x₂ = <span class="fraction"><span class="num">c</span><span class="den">a</span></span>
+        </div>
+
+        <p>Это и есть <b>теорема Виета для произвольного квадратного уравнения</b> ax² + bx + c = 0: сумма корней равна −b/a, а произведение равно c/a.</p>
+
+        <h3>🔄 Теорема, обратная теореме Виета</h3>
+        <p>Теорема Виета говорит: «если x₁ и x₂ — корни, то их сумма и произведение равны таким-то числам». А обратная теорема идёт в другую сторону: «если у двух чисел такие сумма и произведение, то они — корни уравнения». Это чрезвычайно полезно для <b>проверки</b> найденных корней и для их <b>подбора</b>.</p>
+
+        <div class="rule-box">
+            <b>ТЕОРЕМА (обратная).</b> Если числа m и n таковы, что их сумма равна −p, а произведение равно q, то эти числа являются корнями уравнения x² + px + q = 0.
+        </div>
+
+        <div class="rule-box">
+            <b>Доказательство.</b> По условию m + n = −p и mn = q. Подставим p = −(m + n) и q = mn в уравнение x² + px + q = 0:<br>
+            x² − (m + n)x + mn = 0.<br>
+            Проверим, что m — корень: подставим x = m: m² − (m + n)m + mn = m² − m² − mn + mn = 0 ✅.<br>
+            Аналогично для x = n: n² − (m + n)n + mn = n² − mn − n² + mn = 0 ✅.<br>
+            Значит, m и n — корни уравнения. Теорема доказана. ○
+        </div>
+
+        <h3>📐 Примеры из учебника</h3>
+
+        <p><b>Пример 1.</b> Найдём сумму и произведение корней уравнения 3x² − 5x + 2 = 0.</p>
+        <div class="rule-box">
+            <b>Решение.</b> Сначала убедимся, что корни есть. Дискриминант D = (−5)² − 4·3·2 = 25 − 24 = 1 &gt; 0 — корни существуют. Применим теорему Виета для общего уравнения ax² + bx + c = 0, где a = 3, b = −5, c = 2:<br>
+            x₁ + x₂ = −b/a = −(−5)/3 = <b>5/3</b>; &nbsp; x₁ · x₂ = c/a = <b>2/3</b>.<br>
+            (Проверка через формулу корней: x = (5 ± 1)/6 → x₁ = 4/6 = 2/3, x₂ = 6/6 = 1; сумма 2/3 + 1 = 5/3 ✅, произведение 2/3 · 1 = 2/3 ✅.)
+        </div>
+
+        <p><b>Пример 2.</b> Решим уравнение x² + 3x − 40 = 0 и выполним проверку по теореме, обратной теореме Виета.</p>
+        <div class="rule-box">
+            <b>Решение.</b> D = 3² − 4·1·(−40) = 9 + 160 = 169, √169 = 13. x = (−3 ± 13)/2 → x₁ = −8, x₂ = 5.<br>
+            <b>Проверка по обратной теореме.</b> В уравнении x² + 3x − 40 = 0: p = 3, q = −40. Должно быть: x₁ + x₂ = −p = −3 и x₁ · x₂ = q = −40.<br>
+            Сумма: −8 + 5 = −3 ✅. Произведение: −8 · 5 = −40 ✅. Корни найдены правильно.
+        </div>
+
+        <p><b>Пример 3.</b> Найдём подбором корни уравнения x² − x − 12 = 0.</p>
+        <div class="rule-box">
+            <b>Решение.</b> Сначала проверим, что корни есть: D = (−1)² − 4·1·(−12) = 1 + 48 = 49 &gt; 0 ✅.<br>
+            По теореме Виета: x₁ + x₂ = −(−1) = 1, x₁ · x₂ = −12.<br>
+            Если корни целые, то они — делители числа −12: ±1, ±2, ±3, ±4, ±6, ±12. Подберём пару, чьё произведение равно −12, а сумма равна 1. Подходит пара <b>−3 и 4</b>: (−3)·4 = −12 ✅ и (−3) + 4 = 1 ✅. По обратной теореме Виета эти числа — корни уравнения x² − x − 12 = 0.
+        </div>
+
+        <h3>🧑‍🏫 Франсуа Виет (1540—1603)</h3>
+        <div class="rule-box">
+            <b>Франсуа Виет (1540—1603)</b> — выдающийся французский математик, по профессии юрист. Ввёл систему алгебраических символов, разработал основы элементарной алгебры. Был одним из первых, кто стал обозначать числа буквами, что существенно развило теорию уравнений.<br><br>
+            Современники называли его «отцом алгебры». По легенде, во время войны Франции с Испанией Виет расшифровал секретный шифр испанского короля, состоявший из 500 знаков, — и тем самым помог французам читать перехваченные депеши. Испанский король жаловался Папе Римскому, что «французский математик расшифровал его секрет с помощью дьявольской магии».<br><br>
+            Теорема, которую мы изучаем, была сформулирована Виетом в 1591 году в трактате <i>«Введение в аналитическое искусство»</i>.
+        </div>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Приведённое квадратное уравнение</b></td>
+                <td>Уравнение вида x² + px + q = 0, где старший коэффициент равен 1. Любое квадратное уравнение ax² + bx + c = 0 можно сделать приведённым, разделив на a.</td>
+            </tr>
+            <tr>
+                <td><b>Теорема Виета (прямая)</b></td>
+                <td>Сумма корней приведённого уравнения x² + px + q = 0 равна −p, а их произведение равно q. Для общего уравнения: сумма = −b/a, произведение = c/a.</td>
+            </tr>
+            <tr>
+                <td><b>Теорема, обратная теореме Виета</b></td>
+                <td>Если сумма двух чисел равна −p, а их произведение равно q, то эти числа — корни уравнения x² + px + q = 0. Используется для проверки и подбора корней.</td>
+            </tr>
+            <tr>
+                <td><b>Подбор корней</b></td>
+                <td>Способ нахождения целых корней: выписываем делители свободного члена q и выбираем те, чья сумма равна −p. По обратной теореме Виета они и есть корни.</td>
+            </tr>
+            <tr>
+                <td><b>Проверка по обратной теореме</b></td>
+                <td>Найдя корни, проверяем: их сумма должна быть −b/a, произведение — c/a. Если сходится — корни верные (в уравнении, составленном правильно).</td>
+            </tr>
+            <tr>
+                <td><b>Признак знаков корней</b></td>
+                <td>Если произведение корней &lt; 0 — знаки разные. Если &gt; 0 — знаки одинаковые, а по знаку суммы определяем, какие именно (положительные или отрицательные).</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Теорема Виета только для уравнений, имеющих корни.</b><br>
+            Прежде чем применять теорему, убедись, что D ≥ 0. Если D &lt; 0 — корней нет, и говорить об их сумме и произведении бессмысленно. Алгоритм: найти D → если D ≥ 0 → применить теорему.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Для общего уравнения — дели на a.</b><br>
+            В уравнении ax² + bx + c = 0: сумма корней = −b/a, произведение = c/a. Частая ошибка — написать −b вместо −b/a или c вместо c/a. Для <b>приведённого</b> уравнения (a = 1) формула упрощается до x₁ + x₂ = −p, x₁·x₂ = q.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Подбор корней — через делители q.</b><br>
+            Чтобы подобрать целые корни уравнения x² + px + q = 0: 1) выпиши все делители числа q (положительные и отрицательные); 2) выбери пару (m, n) с произведением mn = q; 3) проверь, что m + n = −p; 4) по обратной теореме Виета m и n — корни.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Проверка — обязательна.</b><br>
+            Решив уравнение по формуле корней, всегда проверяй ответ по теореме Виета: сложи и перемножь найденные корни, сравни с −b/a и c/a. Это занимает 10 секунд и ловит ошибки в вычислениях дискриминанта и корня.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 5: Знаки корней — по знакам p и q.</b><br>
+            В уравнении x² + px + q = 0: если q &lt; 0 — корни разных знаков. Если q &gt; 0 и p &lt; 0 — оба корня положительные. Если q &gt; 0 и p &gt; 0 — оба корня отрицательные.
+        </div>
+
+        <h3>🚦 Признак знаков корней</h3>
+        <p>По теореме Виета можно, <b>не решая уравнения</b>, определить знаки его корней — если они существуют. Смотрим на знаки произведения q и суммы −p.</p>
+        <table class="terms-table">
+            <tr>
+                <th>Произведение корней (q или c/a)</th>
+                <th>Сумма корней (−p или −b/a)</th>
+                <th>Знаки корней</th>
+                <th>Пояснение</th>
+            </tr>
+            <tr>
+                <td>q &lt; 0</td>
+                <td>—</td>
+                <td><b>разные знаки</b></td>
+                <td>Произведение отрицательно, значит один корень &gt; 0, другой &lt; 0. Знак суммы подскажет, у какого модуль больше.</td>
+            </tr>
+            <tr>
+                <td>q &gt; 0</td>
+                <td>−p &gt; 0</td>
+                <td><b>оба положительные</b></td>
+                <td>Произведение и сумма положительны — оба корня &gt; 0.</td>
+            </tr>
+            <tr>
+                <td>q &gt; 0</td>
+                <td>−p &lt; 0</td>
+                <td><b>оба отрицательные</b></td>
+                <td>Произведение &gt; 0, сумма &lt; 0 — оба корня &lt; 0.</td>
+            </tr>
+            <tr>
+                <td>q = 0</td>
+                <td>—</td>
+                <td><b>один корень = 0</b></td>
+                <td>Свободный член равен 0 → один из корней 0, второй равен −p.</td>
+            </tr>
+        </table>
+
+        <div class="svg-container">
+            <!-- SVG: блок-схема применения теоремы Виета -->
+            <svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrV2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#475569"/></marker>
+                </defs>
+                <text x="350" y="24" font-family="sans-serif" font-size="15" fill="#64748b" text-anchor="middle" font-weight="bold">Как применять теорему Виета</text>
+                <rect x="180" y="40" width="340" height="48" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="350" y="60" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">Дано: ax² + bx + c = 0</text>
+                <text x="350" y="78" font-family="sans-serif" font-size="11.5" fill="#dc2626" text-anchor="middle">шаг 1: найди D = b² − 4ac</text>
+                <line x1="350" y1="90" x2="350" y2="108" stroke="#475569" stroke-width="2" marker-end="url(#arrV2)"/>
+                <polygon points="350,110 460,150 350,190 240,150" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                <text x="350" y="146" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">D ≥ 0?</text>
+                <text x="350" y="164" font-family="sans-serif" font-size="11.5" fill="#f59e0b" text-anchor="middle">(есть корни?)</text>
+                <line x1="460" y1="150" x2="540" y2="150" stroke="#475569" stroke-width="2" marker-end="url(#arrV2)"/>
+                <text x="500" y="142" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle" font-weight="bold">НЕТ</text>
+                <rect x="540" y="130" width="140" height="44" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="610" y="156" font-family="sans-serif" font-size="12.5" fill="#1e293b" text-anchor="middle">корней нет</text>
+                <line x1="350" y1="190" x2="350" y2="210" stroke="#475569" stroke-width="2" marker-end="url(#arrV2)"/>
+                <text x="362" y="204" font-family="sans-serif" font-size="11" fill="#16a34a" text-anchor="start" font-weight="bold">ДА</text>
+                <rect x="120" y="216" width="460" height="44" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="242" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">шаг 2: примени теорему Виета: x₁ + x₂ = −b/a, x₁·x₂ = c/a</text>
+                <line x1="350" y1="262" x2="350" y2="278" stroke="#475569" stroke-width="2" marker-end="url(#arrV2)"/>
+                <rect x="120" y="284" width="460" height="44" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="310" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">шаг 3: реши уравнение по формуле корней (урок 21)</text>
+                <line x1="350" y1="330" x2="350" y2="346" stroke="#475569" stroke-width="2" marker-end="url(#arrV2)"/>
+                <rect x="120" y="352" width="460" height="44" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="350" y="378" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">шаг 4: проверь по обратной теореме: суммы и произведения совпали?</text>
+                <line x1="350" y1="398" x2="350" y2="414" stroke="#475569" stroke-width="2" marker-end="url(#arrV2)"/>
+                <rect x="120" y="420" width="460" height="44" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+                <text x="350" y="446" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle">✓ корни найдены верно</text>
+                <text x="350" y="472" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle" font-style="italic">Если корни целые — их можно не считать по формуле, а подобрать (шаг 3 → подбор)</text>
+            </svg>
+        </div>
+
+        <h3>🎯 Устная проверка: сумма и произведение</h3>
+        <p>Не решая уравнение, назови сумму и произведение его корней. Помни: сначала — теорема Виета, формула — потом!</p>
+        <p><b>а)</b> (№ 578а) x² − 37x + 27 = 0 &nbsp;&nbsp; <b>б)</b> (№ 578б) y² + 41y − 371 = 0 &nbsp;&nbsp; <b>в)</b> (№ 578в) x² − 210x = 0</p>
+        <p><b>г)</b> (№ 578г) y² − 19 = 0 &nbsp;&nbsp; <b>д)</b> (№ 578д) 2x² − 9x − 10 = 0 &nbsp;&nbsp; <b>е)</b> (№ 578е) 5x² + 12x + 7 = 0</p>
+        <details>
+            <summary>Показать ответы</summary>
+            <div class="solution-step"><b>а)</b> a = 1: сумма = 37, произведение = 27.</div>
+            <div class="solution-step"><b>б)</b> a = 1: сумма = −41, произведение = −371.</div>
+            <div class="solution-step"><b>в)</b> a = 1, q = 0: сумма = 210, произведение = 0.</div>
+            <div class="solution-step"><b>г)</b> a = 1: сумма = 0, произведение = −19.</div>
+            <div class="solution-step"><b>д)</b> a = 2: сумма = −(−9)/2 = 4,5, произведение = −10/2 = −5.</div>
+            <div class="solution-step"><b>е)</b> a = 5: сумма = −12/5, произведение = 7/5.</div>
+        </details>
+
+        <div class="rule-box">
+            <b>⚠️ Ловушки теоремы Виета.</b> 1) Применяют к уравнению без корней (D &lt; 0) — сначала проверь D. 2) В общем уравнении забывают делить на a: пишут сумму −b вместо −b/a. 3) Путают знаки: сумма = −p (с минусом!), а произведение = q (без минуса). 4) При подборе корней забывают отрицательные делители: для q = −12 делители ±1, ±2, ±3, ±4, ±6, ±12. 5) Обратная теорема проверяет только правильность вычисления корней, но не правильность составления уравнения.
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника (§ 7, п. 23, №№ 578–590). План: найди D → если D ≥ 0, примени теорему Виета → реши или подбери корни → проверь по обратной теореме.</p>
+
+        <!-- Задание 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№ 578а,б)</h3>
+            <p>Найдите сумму и произведение корней уравнения:<br>
+            а) x² − 37x + 27 = 0; &nbsp; б) y² + 41y − 371 = 0.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи суммы и произведения" data-answer="37 27 -41 -371"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать решение</summary>
+                <div class="solution-step"><b>а)</b> Уравнение приведённое (a = 1), p = −37, q = 27. По теореме Виета: x₁ + x₂ = −p = <b>37</b>, x₁ · x₂ = q = <b>27</b>.</div>
+                <div class="solution-step"><b>б)</b> Уравнение приведённое, p = 41, q = −371. По теореме Виета: y₁ + y₂ = −p = <b>−41</b>, y₁ · y₂ = q = <b>−371</b>.</div>
+                <div class="solution-step check-step"><b>Замечание:</b> D = 37² − 4·27 = 1369 − 108 = 1261 &gt; 0 ✅ и D = 41² + 4·371 = 1681 + 1484 = 3165 &gt; 0 ✅ — корни существуют, теорема применима.</div>
+            </details>
+        </div>
+
+        <!-- Задание 2 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 2 (№ 578д,е)</h3>
+            <p>Найдите сумму и произведение корней уравнения:<br>
+            д) 2x² − 9x − 10 = 0; &nbsp; е) 5x² + 12x + 7 = 0.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи суммы и произведения" data-answer="4.5 -5 -2.4 1.4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать решение</summary>
+                <div class="solution-step"><b>д)</b> a = 2, b = −9, c = −10. D = 81 + 80 = 161 &gt; 0. По теореме Виета для общего уравнения: x₁ + x₂ = −b/a = 9/2 = <b>4,5</b>, x₁ · x₂ = c/a = −10/2 = <b>−5</b>.</div>
+                <div class="solution-step"><b>е)</b> a = 5, b = 12, c = 7. D = 144 − 140 = 4 &gt; 0. x₁ + x₂ = −12/5 = <b>−2,4</b>, x₁ · x₂ = 7/5 = <b>1,4</b>.</div>
+                <div class="solution-step check-step"><b>Важно:</b> в общем уравнении обязательно делим на a. Если бы забыли — получили бы сумму −9 вместо 4,5 и т. д.</div>
+            </details>
+        </div>
+
+        <!-- Задание 3 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 3 (№ 579а)</h3>
+            <p>Решите уравнение x² − 2x − 9 = 0 и выполните проверку по теореме, обратной теореме Виета.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи оба корня" data-answer="1 10 1 10"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> D = (−2)² − 4·1·(−9) = 4 + 36 = 40. √40 = 2√10.</div>
+                <div class="solution-step"><b>Шаг 2:</b> x = (2 ± 2√10)/2 = 1 ± √10. То есть x₁ = 1 + √10 ≈ 4,162, x₂ = 1 − √10 ≈ −2,162.</div>
+                <div class="solution-step"><b>Шаг 3 (проверка по обратной теореме):</b> в уравнении p = −2, q = −9. Должно быть x₁ + x₂ = 2 и x₁ · x₂ = −9.</div>
+                <div class="solution-step">Сумма: (1 + √10) + (1 − √10) = 2 ✅.</div>
+                <div class="solution-step">Произведение: (1 + √10)(1 − √10) = 1 − 10 = −9 ✅ (разность квадратов!).</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x₁ = 1 + √10, x₂ = 1 − √10 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 4 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 4 (№ 580а)</h3>
+            <p>Найдите корни уравнения x² − 15x − 16 = 0 и выполните проверку по теореме, обратной теореме Виета.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи оба корня" data-answer="-1 16"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> D = (−15)² − 4·1·(−16) = 225 + 64 = 289. √289 = 17.</div>
+                <div class="solution-step"><b>Шаг 2:</b> x = (15 ± 17)/2 → x₁ = (15 − 17)/2 = −1, x₂ = (15 + 17)/2 = 16.</div>
+                <div class="solution-step"><b>Шаг 3 (проверка):</b> p = −15, q = −16. Должно быть: сумма = 15, произведение = −16.</div>
+                <div class="solution-step">Сумма: −1 + 16 = 15 ✅. Произведение: −1 · 16 = −16 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x₁ = −1, x₂ = 16 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 5 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 5 (№ 580в)</h3>
+            <p>Найдите корни уравнения 12x² − 4x − 1 = 0 и выполните проверку по теореме, обратной теореме Виета.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи оба корня" data-answer="-1 6 1 2"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> a = 12, b = −4, c = −1. D = (−4)² − 4·12·(−1) = 16 + 48 = 64. √64 = 8.</div>
+                <div class="solution-step"><b>Шаг 2:</b> x = (4 ± 8)/(2·12) = (4 ± 8)/24 → x₁ = (4 − 8)/24 = −4/24 = <b>−1/6</b>, x₂ = (4 + 8)/24 = 12/24 = <b>1/2</b>.</div>
+                <div class="solution-step"><b>Шаг 3 (проверка):</b> сумма должна быть −b/a = 4/12 = 1/3, произведение c/a = −1/12.</div>
+                <div class="solution-step">Сумма: −1/6 + 1/2 = −1/6 + 3/6 = 2/6 = 1/3 ✅. Произведение: (−1/6)·(1/2) = −1/12 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x₁ = −1/6, x₂ = 1/2 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 6 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 6 (№ 581а,в)</h3>
+            <p>Найдите подбором корни уравнения:<br>
+            а) x² − 9x + 20 = 0; &nbsp; в) y² + y − 56 = 0.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи корни обоих уравнений" data-answer="4 5 -8 7"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подбор корней</summary>
+                <div class="solution-step"><b>а)</b> p = −9, q = 20. Делим q = 20: пары (1, 20), (2, 10), (4, 5). Сумма должна быть 9. Подходит (4, 5): 4 + 5 = 9 ✅, 4 · 5 = 20 ✅. Корни: 4 и 5.</div>
+                <div class="solution-step"><b>в)</b> p = 1, q = −56. Сумма = −1, произведение = −56 → корни разных знаков. Делители 56: 1, 2, 4, 7, 8, 14, 28, 56. Подходит пара (−8, 7): (−8) · 7 = −56 ✅, (−8) + 7 = −1 ✅. Корни: −8 и 7.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> а) 4 и 5; в) −8 и 7 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 7 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 7 (№ 582а,б)</h3>
+            <p>Найдите подбором корни уравнения:<br>
+            а) x² + 16x + 63 = 0; &nbsp; б) z² + 2z − 48 = 0.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи корни обоих уравнений" data-answer="-9 -7 -8 6"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подбор корней</summary>
+                <div class="solution-step"><b>а)</b> p = 16, q = 63 &gt; 0. Сумма = −16, произведение = 63 → оба корня отрицательные. Делители 63: 1, 3, 7, 9, 21, 63. Пара (−7, −9): (−7) · (−9) = 63 ✅, (−7) + (−9) = −16 ✅. Корни: −7 и −9.</div>
+                <div class="solution-step"><b>б)</b> p = 2, q = −48 &lt; 0 → корни разных знаков. Делители 48: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48. Пара (−8, 6): (−8) · 6 = −48 ✅, (−8) + 6 = −2 ✅. Корни: −8 и 6.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> а) −7 и −9; б) −8 и 6 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 8 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 8 (№ 583)</h3>
+            <p>В уравнении x² + px − 35 = 0 один из корней равен 7. Найдите другой корень и коэффициент p.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи корень и p" data-answer="-5 -2"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> По теореме Виета: x₁ · x₂ = q = −35. Подставим x₁ = 7: 7 · x₂ = −35 → x₂ = <b>−5</b>.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Также по теореме: x₁ + x₂ = −p. Подставим оба корня: 7 + (−5) = 2 = −p → p = <b>−2</b>.</div>
+                <div class="solution-step"><b>Проверка:</b> уравнение x² − 2x − 35 = 0. D = 4 + 140 = 144, √144 = 12, x = (2 ± 12)/2 → x₁ = −5, x₂ = 7 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x₂ = −5, p = −2 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 9 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 9 (№ 584)</h3>
+            <p>Один из корней уравнения x² − 13x + q = 0 равен 12,5. Найдите другой корень и коэффициент q.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи корень и q" data-answer="0.5 6.25"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> По теореме Виета: x₁ + x₂ = 13 (так как p = −13). Подставим x₁ = 12,5 = 25/2: 25/2 + x₂ = 13 → x₂ = 13 − 25/2 = 26/2 − 25/2 = <b>1/2</b> = 0,5.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Произведение: x₁ · x₂ = q. q = (25/2) · (1/2) = <b>25/4</b> = 6,25.</div>
+                <div class="solution-step"><b>Проверка:</b> уравнение x² − 13x + 25/4 = 0 → 4x² − 52x + 25 = 0. D = 2704 − 400 = 2304 = 48². x = (52 ± 48)/8 → x₁ = 100/8 = 12,5 ✅, x₂ = 4/8 = 0,5 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x₂ = 0,5; q = 6,25 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 10 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 10 (№ 585)</h3>
+            <p>Один из корней уравнения 5x² + bx + 24 = 0 равен 8. Найдите другой корень и коэффициент b.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи корень и b" data-answer="0.6 -43"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> В общем уравнении ax² + bx + c = 0: x₁ · x₂ = c/a = 24/5. Подставим x₁ = 8: 8 · x₂ = 24/5 → x₂ = 24/5 ÷ 8 = 24/40 = <b>3/5</b> = 0,6.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Сумма: x₁ + x₂ = −b/a → 8 + 3/5 = 43/5 = −b/5 → b = <b>−43</b>.</div>
+                <div class="solution-step"><b>Проверка:</b> уравнение 5x² − 43x + 24 = 0. D = 1849 − 480 = 1369 = 37². x = (43 ± 37)/10 → x₁ = 80/10 = 8 ✅, x₂ = 6/10 = 0,6 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x₂ = 0,6; b = −43 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 11 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 11 (№ 587)</h3>
+            <p>Разность корней квадратного уравнения x² − 12x + q = 0 равна 2. Найдите q.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи q" data-answer="35"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> По теореме Виета: x₁ + x₂ = 12, x₁ · x₂ = q. Также из условия: x₁ − x₂ = 2 (считаем, что x₁ &gt; x₂).</div>
+                <div class="solution-step"><b>Шаг 2:</b> Сложим и вычтем: (x₁ + x₂) + (x₁ − x₂) = 12 + 2 → 2x₁ = 14 → x₁ = 7. Тогда x₂ = 12 − 7 = 5.</div>
+                <div class="solution-step"><b>Шаг 3:</b> q = x₁ · x₂ = 7 · 5 = <b>35</b>.</div>
+                <div class="solution-step"><b>Проверка:</b> уравнение x² − 12x + 35 = 0. D = 144 − 140 = 4, √4 = 2. x = (12 ± 2)/2 → x₁ = 7, x₂ = 5. Разность 7 − 5 = 2 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> q = 35 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 12 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 12 (№ 589)</h3>
+            <p>Разность квадратов корней уравнения x² + 2x + q = 0 равна 12. Найдите q.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи q" data-answer="-8"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> По теореме Виета: x₁ + x₂ = −2, x₁ · x₂ = q.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Разложим разность квадратов: x₁² − x₂² = (x₁ − x₂)(x₁ + x₂) = (x₁ − x₂)·(−2) = 12 → x₁ − x₂ = −6.</div>
+                <div class="solution-step"><b>Шаг 3:</b> Система: x₁ + x₂ = −2 и x₁ − x₂ = −6. Сложим: 2x₁ = −8 → x₁ = −4. Тогда x₂ = −2 − (−4) = 2.</div>
+                <div class="solution-step"><b>Шаг 4:</b> q = x₁ · x₂ = (−4) · 2 = <b>−8</b>.</div>
+                <div class="solution-step"><b>Проверка:</b> уравнение x² + 2x − 8 = 0. D = 4 + 32 = 36, √36 = 6. x = (−2 ± 6)/2 → x₁ = −4, x₂ = 2. Разность квадратов: (−4)² − 2² = 16 − 4 = 12 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> q = −8 ✅</div>
+            </details>
+        </div>
+
+        <!-- Задание 13 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 13 (№ 590)</h3>
+            <p>Известно, что сумма квадратов корней уравнения x² − 3x + a = 0 равна 65. Найдите a.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи a" data-answer="-28"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> По теореме Виета: x₁ + x₂ = 3, x₁ · x₂ = a.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Сумму квадратов выразим через сумму и произведение: x₁² + x₂² = (x₁ + x₂)² − 2x₁x₂ = 9 − 2a.</div>
+                <div class="solution-step"><b>Шаг 3:</b> По условию: 9 − 2a = 65 → 2a = 9 − 65 = −56 → a = <b>−28</b>.</div>
+                <div class="solution-step"><b>Проверка:</b> уравнение x² − 3x − 28 = 0. D = 9 + 112 = 121 = 11². x = (3 ± 11)/2 → x₁ = 7, x₂ = −4. Сумма квадратов: 49 + 16 = 65 ✅.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> a = −28 ✅</div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2>🏋️ Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно по теореме Виета и сверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> (№ 578в,г) Найдите сумму и произведение корней: в) x² − 210x = 0; г) y² − 19 = 0.</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> (№ 578ж,з) Найдите сумму и произведение корней: ж) −z² + z = 0; з) 3x² − 10 = 0.</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> (№ 580г,д,е) Найдите корни и проверьте по обратной теореме: г) t² − 6 = 0; д) 5x² − 18x = 0; е) 2y² − 41 = 0.</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>4.</b> (№ 581б,г) Найдите подбором корни: б) y² + 11y − 12 = 0; г) z² − 19z + 88 = 0.</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> (№ 586) Один из корней уравнения 10x² − 33x + c = 0 равен 5,3. Найдите другой корень и коэффициент c.</p>
+        </div>
+        <div class="task-box">
+            <p><b>6.</b> (№ 588) Разность корней квадратного уравнения x² + x + c = 0 равна 6. Найдите c.</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>7.</b> (№ 591а,б,в) Не решая уравнения, выясните, имеет ли оно корни, и если имеет, то определите их знаки: а) x² + 7x − 1 = 0; б) x² − 7x + 1 = 0; в) 5x² + 17x + 16 = 0.</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> (№ 592а,б) Докажите, что уравнение не может иметь корни одинаковых знаков: а) 3x² + 113x − 7 = 0; б) 5x² − 291x − 16 = 0.</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> (№ 593) Уравнение x² + 5x + m = 0 имеет корни x₁ и x₂. Найдите m, если: а) сумма квадратов корней равна 35; б) сумма кубов корней равна 40.</p>
+        </div>
+        <div class="task-box">
+            <p><b>10.</b> (№ 594а,в,е) При каких значениях x верно равенство: а) (3x + 1)² = 3x + 1; в) (3x + 1)² = (2x − 5)²; е) (6x + 3)² = (x − 4)²?</p>
+        </div>
+
+        <details>
+            <summary>✅ Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. в) сумма 210, произведение 0; г) сумма 0, произведение −19.<br>
+                2. ж) уравнение приводится к z² − z = 0: сумма 1, произведение 0; з) сумма 0, произведение −10/3.<br>
+                3. г) t = ±√6 (сумма 0, произведение −6 ✅); д) x = 0 и x = 18/5 (сумма 18/5, произведение 0 ✅); е) y = ±√(41/2) = ±√82/2 (сумма 0, произведение −41/2 ✅).<br>
+                4. б) y₁ = −12, y₂ = 1 ((−12)·1 = −12 ✅, (−12)+1 = −11 ✅); г) z₁ = 8, z₂ = 11 (8·11 = 88 ✅, 8+11 = 19 ✅).<br>
+                5. x₂ = −2, c = −106 (по теореме Виета: сумма корней = −b/a = 33/10, значит 5,3 + x₂ = 3,3 → x₂ = −2; произведение корней = c/a, то есть 5,3·(−2) = −10,6 = c/10 → c = <b>−106</b>; проверка: 10x² − 33x − 106 = 0, D = 1089 + 4240 = 5329 = 73², x = (33 ± 73)/20 → x₁ = 5,3, x₂ = −2 ✅).<br>
+                6. c = −35/4 = −8,75 (x₁ + x₂ = −1, x₁ − x₂ = 6 → x₁ = 5/2, x₂ = −7/2; c = 5/2·(−7/2) = −35/4).<br>
+                7. а) D = 53 &gt; 0, q = −1 &lt; 0 → корни разных знаков; б) D = 45 &gt; 0, q = 1 &gt; 0 и сумма 7 &gt; 0 → оба положительные; в) D = 289 − 320 = −31 &lt; 0 → корней нет.<br>
+                8. а) c/a = −7/3 &lt; 0 → произведение корней отрицательно → корни разных знаков → одинаковых быть не может. б) c/a = −16/5 &lt; 0 → аналогично, корни разных знаков.<br>
+                9. а) m = −5 (x₁² + x₂² = (x₁+x₂)² − 2x₁x₂ = 25 − 2m = 35 → m = −5; при m = −5 D = 45 &gt; 0 ✅); б) формально m = 11 (x₁³ + x₂³ = (x₁+x₂)((x₁+x₂)² − 3x₁x₂) = −5·(25 − 3m) = 40 → 25 − 3m = −8 → m = 11), но при m = 11 D = 25 − 44 = −19 &lt; 0 — действительных корней нет. Значит, для действительных корней такого m не существует.<br>
+                10. а) x = 0 или x = −1/3 (9x² + 3x = 0 → 3x(3x + 1) = 0); в) x = 4/5 или x = −6 (5x² + 26x − 24 = 0, D = 1156 = 34²); е) x = 1/7 или x = −7/5 (35x² + 44x − 7 = 0, D = 2916 = 54²).
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+
+        <h3>🚀 Задача для криптоаналитика</h3>
+        <p>В разведке перехватили шифр: противник использует два «ключевых числа» a и b таких, что их сумма равна 15, а произведение равно 36. Помоги криптоаналитику восстановить числа — и он построит уравнение, корнями которого они являются.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи оба числа" data-answer="3 12"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение криптоаналитика</summary>
+            <div class="solution-step"><b>Шаг 1:</b> По теореме, обратной теореме Виета, числа m и n с суммой −p и произведением q являются корнями уравнения x² + px + q = 0.</div>
+            <div class="solution-step"><b>Шаг 2:</b> Сумма a + b = 15 = −p → p = −15. Произведение a · b = 36 = q.</div>
+            <div class="solution-step"><b>Шаг 3:</b> Уравнение: x² − 15x + 36 = 0. Его корни — искомые числа.</div>
+            <div class="solution-step"><b>Шаг 4:</b> Подбором: делители 36 — это 1, 2, 3, 4, 6, 9, 12, 18, 36. Пара (3, 12): 3 + 12 = 15 ✅, 3 · 12 = 36 ✅. По обратной теореме Виета: 3 и 12 — корни.</div>
+            <div class="solution-step check-step"><b>Ответ:</b> ключевые числа 3 и 12 ✅</div>
+        </details>
+
+        <h3>💼 Задача для разработчика онлайн-тестов</h3>
+        <p>Разработчик составляет тест по математике: ему нужно квадратное уравнение с целыми корнями 6 и 8. Составь это уравнение, используя теорему, обратную теореме Виета. В ответ введи коэффициенты p и q.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи p и q" data-answer="-14 48"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение разработчика</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Корни x₁ = 6, x₂ = 8. По теореме Виета для уравнения x² + px + q = 0: p = −(x₁ + x₂) = −(6 + 8) = −14, q = x₁ · x₂ = 48.</div>
+            <div class="solution-step"><b>Шаг 2:</b> Уравнение: <b>x² − 14x + 48 = 0</b>.</div>
+            <div class="solution-step"><b>Проверка:</b> D = 196 − 192 = 4, √4 = 2. x = (14 ± 2)/2 → x₁ = 6, x₂ = 8 ✅.</div>
+            <div class="solution-step check-step"><b>Ответ:</b> x² − 14x + 48 = 0 (можно умножить на любой множитель: 2x² − 28x + 96 = 0 и т. п.) ✅</div>
+        </details>
+
+        <h3>🎨 Бонус: составь своё уравнение</h3>
+        <p>Придумай два целых числа, найди их сумму S и произведение P. Тогда уравнение <b>x² − S·x + P = 0</b> имеет эти числа корнями. Так, для чисел 5 и 9: S = 14, P = 45 → уравнение x² − 14x + 45 = 0. Проверь: 5 + 9 = 14 ✅, 5 · 9 = 45 ✅.</p>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Теорема Виета (прямая):</b> для приведённого уравнения x² + px + q = 0 с корнями x₁ и x₂ верно: <b>x₁ + x₂ = −p</b>, <b>x₁ · x₂ = q</b>.</li>
+            <li><b>Для общего уравнения:</b> ax² + bx + c = 0 → x₁ + x₂ = −b/a, x₁ · x₂ = c/a. Делим коэффициенты на a!</li>
+            <li><b>Обратная теорема:</b> если m + n = −p и mn = q, то m и n — корни уравнения x² + px + q = 0. Основа для подбора и проверки.</li>
+            <li><b>Подбор целых корней:</b> выписываем делители q, выбираем пару с суммой −p. По обратной теореме — это корни.</li>
+            <li><b>Признак знаков:</b> q &lt; 0 → корни разных знаков; q &gt; 0 и −p &gt; 0 → оба положительные; q &gt; 0 и −p &lt; 0 → оба отрицательные.</li>
+            <li><b>Перед применением теоремы — проверь D:</b> если D &lt; 0, корней нет, теорема неприменима.</li>
+            <li><b>Формулы для симметричных выражений:</b> x₁² + x₂² = (x₁+x₂)² − 2x₁x₂; x₁³ + x₂³ = (x₁+x₂)((x₁+x₂)² − 3x₁x₂); x₁² − x₂² = (x₁−x₂)(x₁+x₂).</li>
+            <li>💡 <b>Лайфхак:</b> если корни «красивые» (целые) — сначала попробуй подобрать по теореме Виета, и только потом считай по формуле корней. Это экономит время на контрольной.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Применяют теорему к уравнению без корней:</i> для x² + 7x + 13 = 0 (D = 49 − 52 = −3 &lt; 0) пишут «сумма = −7, произведение = 13», хотя корней нет. Сначала D — потом теорема.</li>
+            <li><i>Забывают делить на a:</i> в 3x² − 5x + 2 = 0 пишут сумму 5 вместо 5/3. Формула −b/a — обязательна.</li>
+            <li><i>Путают знаки в теореме:</i> пишут x₁ + x₂ = p (без минуса). Запоминайте как мнемонику: «сумма = −p» (минус от "переходит в сумму"), «произведение = q» (свободный член как есть).</li>
+            <li><i>В № 587–588 путают разность и сумму:</i> используют x₁ + x₂ там, где дана разность x₁ − x₂, и получают неверный знак q. Полезно вводить вспомогательную переменную d = x₁ − x₂.</li>
+            <li><i>В № 593 не видят формулы:</i> не вспоминают, что x₁² + x₂² = (x₁+x₂)² − 2x₁x₂ — это тождество, связывающее квадраты с суммой и произведением.</li>
+            <li><i>При подборе корней забывают отрицательные делители:</i> для q = 12 рассматривают только 1, 2, 3, 4, 6, 12 — но не −1, −2, …. Для x² + 7x + 12 = 0 корни −3 и −4.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Карточка-шаблон: «Уравнение …, a = …, b = …, c = …»; «D = b² − 4ac = …»; «если D ≥ 0: сумма = −b/a = …, произведение = c/a = …».</li>
+            <li>Начинайте с приведённых уравнений (a = 1): x² − 5x + 6 = 0, x² + 7x + 12 = 0 — корни целые, легко подбираются.</li>
+            <li>Таблицу «Признак знаков корней» распечатайте как памятку: по ней можно за 5 секунд ответить, какие знаки у корней, не решая уравнение.</li>
+            <li>Решайте № 583–586 в парах: один называет теорему Виета, другой подставляет известный корень. Это закрепляет связку «один корень известен → найди второй через произведение».</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>№ 591: попросите учеников доказать критерий знаков корней через теорему Виета: «произведение &lt; 0 ⟺ корни разных знаков».</li>
+            <li>№ 593: свяжите с тождествами x₁² + x₂² = (x₁+x₂)² − 2x₁x₂ и x₁³ + x₂³ = (x₁+x₂)³ − 3x₁x₂(x₁+x₂). Пусть выведут второе из первого.</li>
+            <li>№ 594: обсудите, почему нельзя сокращать обе части уравнения (3x + 1)² = 3x + 1 на (3x + 1) — теряется корень x = −1/3. Надёжнее перенести всё в одну сторону и разложить на множители.</li>
+            <li>Покажите связь с квадратным трёхчленом (§ 8, п. 24, который следует дальше): теорема Виета понадобится для разложения ax² + bx + c = a(x − x₁)(x − x₂).</li>
+        </ul>
+    </div>
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-3-22.html">⬅️ Предыдущий урок</a>
+        <a href="index.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §7)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
+</body>
+</html>
