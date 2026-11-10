@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решение задач — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Урок 22 • Глава 3, §7">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Решение задач — Алгебра 8 класс">
+<meta property="og:description" content="Урок 22 • Глава 3, §7">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/lesson-3-22.html">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Решение задач — Алгебра 8 класс">
+<meta name="twitter:description" content="Урок 22 • Глава 3, §7">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/lesson-3-22.html">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>Решение задач</h1>
+        <p class="subtitle">Урок 22 • Глава 3, §7</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 7, п. 22). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3>🪝 Разминка: уравнение-сюрприз</h3>
+        <p>Прежде чем решать задачи, разомнёмся. Вот уравнение: <b>x² + 4x − 192 = 0</b>. Реши его по формуле корней из урока 21 — и узнаешь, в какой неожиданной задаче оно спрятано.</p>
+        <details>
+            <summary>Реши уравнение и сверь ответ</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Коэффициенты: a = 1, b = 4, c = −192. Дискриминант: D = 4² − 4·1·(−192) = 16 + 768 = 784. D &gt; 0 — два корня.</div>
+            <div class="solution-step"><b>Шаг 2:</b> √784 = 28. По формуле x = (−b ± √D)/(2a) = (−4 ± 28)/2: x₁ = (−4 − 28)/2 = −16, x₂ = (−4 + 28)/2 = 12.</div>
+            <div class="solution-step"><b>Проверка:</b> (−16)² + 4·(−16) − 192 = 256 − 64 − 192 = 0 ✅; 12² + 4·12 − 192 = 144 + 48 − 192 = 0 ✅</div>
+            <div class="solution-step check-step"><b>Ответ:</b> x₁ = −16; x₂ = 12 ✅</div>
+        </details>
+        <p>Запомни это уравнение — через минуту ты встретишь его внутри геометрической задачи! Учебник (п. 22) начинается с важного заявления: <b>многие задачи в математике, физике, технике решаются с помощью квадратных уравнений</b>. План всегда один: перевести текст задачи на язык алгебры, решить уравнение и осмыслить результат. Такой перевод называют построением <b>математической модели</b> задачи.</p>
+
+        <h3>📐 Разбор задач из учебника</h3>
+
+        <p><b>Задача 1 (из учебника).</b> Найдём катеты прямоугольного треугольника, если известно, что один из них на 4 см меньше другого, а гипотенуза равна 20 см.</p>
+        <div class="rule-box">
+            <b>Шаг 1. Вводим переменную.</b> Пусть меньший катет равен x см. Тогда больший катет равен (x + 4) см. Обе неизвестные величины выражены через одну переменную x.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 2. Составляем уравнение — модель задачи.</b> По теореме Пифагора квадрат гипотенузы равен сумме квадратов катетов, то есть x² + (x + 4)² = 20².<br>
+            Упростим: x² + x² + 8x + 16 = 400, откуда 2x² + 8x − 384 = 0, а после деления на 2: x² + 4x − 192 = 0. Узнаёшь? Это уравнение из разминки!
+        </div>
+        <div class="rule-box">
+            <b>Шаг 3. Решаем уравнение.</b> D = 4² − 4·1·(−192) = 16 + 768 = 784, √784 = 28, x = (−4 ± 28)/2: x₁ = −16, x₂ = 12.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 4. Отбираем корни по смыслу задачи.</b> По смыслу задачи значение x должно быть <b>положительным</b> числом: длина катета не может быть отрицательной. Этому условию удовлетворяет только второй корень, то есть число 12.
+        </div>
+        <div class="solution-step check-step">
+            <b>Ответ:</b> 12 см, 16 см ✅ <span style="font-weight: 400;">(проверка: 12² + 16² = 144 + 256 = 400 = 20² — теорема Пифагора сходится)</span>
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: прямоугольный треугольник к Задаче 1 -->
+            <svg viewBox="0 0 460 285" xmlns="http://www.w3.org/2000/svg">
+                <text x="230" y="24" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">К задаче 1: катеты x и (x + 4), гипотенуза 20 см</text>
+                <path d="M 60 240 L 236 240 L 60 108 Z" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+                <path d="M 76 240 L 76 224 L 60 224" fill="none" stroke="#475569" stroke-width="1.5"/>
+                <text x="148" y="264" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">катет (x + 4) см</text>
+                <text x="34" y="178" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold" transform="rotate(-90 34 178)">катет x см</text>
+                <text x="150" y="122" font-family="sans-serif" font-size="13" fill="#dc2626" text-anchor="middle" font-weight="bold">гипотенуза</text>
+                <text x="150" y="140" font-family="sans-serif" font-size="13" fill="#dc2626" text-anchor="middle" font-weight="bold">20 см</text>
+                <text x="356" y="190" font-family="sans-serif" font-size="12.5" fill="#64748b" text-anchor="middle">12² + 16² = 400</text>
+                <text x="356" y="208" font-family="sans-serif" font-size="12.5" fill="#64748b" text-anchor="middle">= 20² ✓</text>
+                <text x="230" y="280" font-family="'Courier New', monospace" font-size="13.5" fill="#dc2626" text-anchor="middle" font-weight="bold">x² + (x + 4)² = 20²  →  x² + 4x − 192 = 0</text>
+            </svg>
+        </div>
+
+        <p><b>Задача 2 (из учебника).</b> Тело брошено вертикально вверх с начальной скоростью 40 м/с. Через сколько секунд оно окажется на высоте 60 м?</p>
+        <div class="rule-box">
+            <b>Шаг 1. Физика подсказывает модель.</b> Из курса физики известно, что если не учитывать сопротивление воздуха, то высота h (м), на которой брошенное вертикально вверх тело окажется через t (с), может быть найдена по формуле:
+        </div>
+        <div class="formula">
+            h = v<sub>0</sub>t − <span class="fraction"><span class="num">gt²</span><span class="den">2</span></span>
+        </div>
+        <p>где v₀ (м/с) — начальная скорость, а g — ускорение свободного падения, приближённо равное 10 м/с².</p>
+        <div class="rule-box">
+            <b>Шаг 2. Подставляем данные.</b> Подставив значения h = 60 и v₀ = 40 в формулу, получим 60 = 40t − 5t². Отсюда 5t² − 40t + 60 = 0, то есть t² − 8t + 12 = 0.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 3. Решаем уравнение.</b> D = (−8)² − 4·1·12 = 64 − 48 = 16, √16 = 4, t = (8 ± 4)/2: t₁ = 2, t₂ = 6.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 4. Осмысливаем оба корня.</b> Условию задачи удовлетворяют <b>оба</b> найденных корня! На рисунке дан график зависимости h от t, где h = 40t − 5t². Из графика видно: тело в течение первых 4 с поднимается вверх до высоты 80 м, а затем начинает падать. На высоте 60 м от земли оно оказывается дважды: через 2 с после бросания (на подъёме) и через 6 с (на спуске).
+        </div>
+        <div class="solution-step check-step">
+            <b>Проверка:</b> h(2) = 40·2 − 5·2² = 80 − 20 = 60 ✅; h(6) = 40·6 − 5·6² = 240 − 180 = 60 ✅
+        </div>
+        <div class="solution-step check-step">
+            <b>Ответ:</b> на высоте 60 м тело окажется через 2 с и через 6 с ✅
+        </div>
+
+        <div class="svg-container">
+            <!-- SVG: график h = 40t - 5t^2 (Рис. 22 из учебника) -->
+            <svg viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg">
+                <line x1="105" y1="52" x2="105" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="160" y1="52" x2="160" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="215" y1="52" x2="215" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="270" y1="52" x2="270" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="325" y1="52" x2="325" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="380" y1="52" x2="380" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="435" y1="52" x2="435" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="490" y1="52" x2="490" y2="260" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="234" x2="490" y2="234" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="208" x2="490" y2="208" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="182" x2="490" y2="182" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="156" x2="490" y2="156" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="130" x2="490" y2="130" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="78" x2="490" y2="78" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="50" y1="52" x2="490" y2="52" stroke="#e8edf3" stroke-width="1"/>
+                <line x1="44" y1="260" x2="508" y2="260" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="516,260 506,255 506,265" fill="#475569"/>
+                <line x1="50" y1="266" x2="50" y2="46" stroke="#475569" stroke-width="1.5"/>
+                <polygon points="50,38 45,48 55,48" fill="#475569"/>
+                <text x="44" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">0</text>
+                <text x="105" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">1</text>
+                <text x="160" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">2</text>
+                <text x="215" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">3</text>
+                <text x="270" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">4</text>
+                <text x="325" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">5</text>
+                <text x="380" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">6</text>
+                <text x="435" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">7</text>
+                <text x="490" y="276" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">8</text>
+                <text x="42" y="238" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">10</text>
+                <text x="42" y="212" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">20</text>
+                <text x="42" y="186" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">30</text>
+                <text x="42" y="160" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">40</text>
+                <text x="42" y="134" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">50</text>
+                <text x="42" y="108" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">60</text>
+                <text x="42" y="82" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">70</text>
+                <text x="42" y="56" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">80</text>
+                <text x="502" y="278" font-family="sans-serif" font-size="12" fill="#64748b" font-style="italic">t, с</text>
+                <text x="56" y="46" font-family="sans-serif" font-size="12" fill="#64748b" font-style="italic">h, м</text>
+                <line x1="50" y1="104" x2="490" y2="104" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="7 5"/>
+                <text x="58" y="98" font-family="sans-serif" font-size="11.5" fill="#dc2626" font-weight="bold">60 м</text>
+                <polyline points="50,260 77.5,211.3 105,169 132.5,133.3 160,104 187.5,81.3 215,65 242.5,55.3 270,52 297.5,55.3 325,65 352.5,81.3 380,104 407.5,133.3 435,169 462.5,211.3 490,260" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="270" cy="52" r="3.5" fill="#2563eb"/>
+                <text x="278" y="48" font-family="sans-serif" font-size="11" fill="#2563eb" font-weight="bold">максимум 80 м</text>
+                <circle cx="160" cy="104" r="4.5" fill="#dc2626"/>
+                <circle cx="380" cy="104" r="4.5" fill="#dc2626"/>
+                <text x="168" y="130" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">t₁ = 2</text>
+                <text x="392" y="130" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="end" font-weight="bold">t₂ = 6</text>
+                <text x="270" y="294" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle" font-style="italic">График h = 40t − 5t²: тело оказывается на высоте 60 м дважды — при t = 2 с и t = 6 с</text>
+            </svg>
+        </div>
+
+        <h3>📚 Ключевые термины</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Определение простым языком</th>
+            </tr>
+            <tr>
+                <td><b>Математическая модель</b></td>
+                <td>Уравнение, которое описывает задачу на языке алгебры: «Пусть x — …, тогда …». Решив модель, возвращаемся к смыслу задачи.</td>
+            </tr>
+            <tr>
+                <td><b>Отбор корней по смыслу задачи</b></td>
+                <td>Проверка каждого корня уравнения: может ли такая величина существовать? Длина, время и число предметов не бывают отрицательными. Лишние корни отбрасывают.</td>
+            </tr>
+            <tr>
+                <td><b>Теорема Пифагора</b></td>
+                <td>В прямоугольном треугольнике квадрат гипотенузы равен сумме квадратов катетов: c² = a² + b². Самый частый источник квадратных уравнений в геометрии.</td>
+            </tr>
+            <tr>
+                <td><b>Закон движения</b></td>
+                <td>Формула h = v₀t − gt²/2 — высота тела, брошенного вертикально вверх со скоростью v₀, через время t (g ≈ 10 м/с²).</td>
+            </tr>
+            <tr>
+                <td><b>Два подходящих корня</b></td>
+                <td>Если оба корня имеют смысл (тело проходит высоту дважды: на подъёме и на спуске), в ответе пишут оба числа.</td>
+            </tr>
+            <tr>
+                <td><b>Задача «каждый с каждым»</b></td>
+                <td>Если участников n и каждый встречается с каждым один раз, встреч будет n(n − 1)/2. Работает для партий, матчей и рукопожатий.</td>
+            </tr>
+        </table>
+
+        <h3>⚠️ Главные правила</h3>
+
+        <div class="rule-box">
+            <b>Правило 1: Алгоритм решения задачи с помощью квадратного уравнения.</b><br>
+            1) Прочитай условие, выдели данные и вопрос;<br>
+            2) введи переменную («Пусть x — …») и вырази через неё остальные величины;<br>
+            3) составь уравнение по условию (используй формулу: площадь, теорема Пифагора, закон движения);<br>
+            4) приведи уравнение к виду ax² + bx + c = 0 и реши через дискриминант;<br>
+            5) отбери корни по смыслу задачи, сделай проверку и запиши ответ на вопрос задачи.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 2: Отбор корней — обязательный шаг.</b><br>
+            В геометрических задачах длины положительны (x &gt; 0), время неотрицательно (t ≥ 0), число людей, рядов и команд — натуральное. Корень, который «не существует в жизни», отбрасывают, даже если он красиво получился.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 3: Оба корня могут подойти.</b>
+            Если по смыслу годятся оба корня, в ответе указывают оба значения (в задаче про высоту тело проходит отметку 60 м дважды: при t₁ = 2 и t₂ = 6).
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 4: Проверяют по условию, а не только в уравнении.</b>
+            Подставь найденные числа в исходную ситуацию: площадь сходится? сумма верна? треугольник с такими сторонами существует? Уравнение могло быть составлено неверно — проверка по условию это поймает.
+        </div>
+
+        <div class="rule-box">
+            <b>Правило 5: Ответ — на вопрос задачи.</b>
+            Уравнение даёт обычно вспомогательную величину x. Если спрашивали длину изгороди — это периметр, сложи все стороны! Если спрашивали оба числа — назови оба. Не останавливайся на найденном x.
+        </div>
+
+        <h3>🧰 Типовые модели: из текста — в уравнение</h3>
+        <table class="terms-table">
+            <tr>
+                <th>Ситуация в задаче</th>
+                <th>Уравнение-модель</th>
+            </tr>
+            <tr>
+                <td>Одно число на k больше другого, их произведение равно P</td>
+                <td>x(x + k) = P</td>
+            </tr>
+            <tr>
+                <td>Сумма двух чисел равна s, произведение равно P</td>
+                <td>x(s − x) = P</td>
+            </tr>
+            <tr>
+                <td>Стороны прямоугольника отличаются на k, площадь равна S</td>
+                <td>x(x + k) = S</td>
+            </tr>
+            <tr>
+                <td>Периметр прямоугольника равен P, площадь равна S</td>
+                <td>x(P/2 − x) = S</td>
+            </tr>
+            <tr>
+                <td>Каждый с каждым: n участников, всего N встреч</td>
+                <td>n(n − 1)/2 = N</td>
+            </tr>
+            <tr>
+                <td>Тело брошено вверх со скоростью v₀, высота h</td>
+                <td>v₀t − 5t² = h</td>
+            </tr>
+            <tr>
+                <td>Прямоугольный треугольник: катеты и гипотенуза</td>
+                <td>x² + (выражение второго катета)² = (гипотенуза)²</td>
+            </tr>
+        </table>
+
+        <div class="svg-container">
+            <!-- SVG: алгоритм решения задачи -->
+            <svg viewBox="0 0 700 444" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrF" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#475569"/></marker>
+                </defs>
+                <text x="350" y="24" font-family="sans-serif" font-size="15" fill="#64748b" text-anchor="middle" font-weight="bold">Алгоритм: от текста задачи — к ответу</text>
+                <rect x="120" y="40" width="460" height="44" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="66" font-family="sans-serif" font-size="13.5" fill="#1e293b" text-anchor="middle">1. Прочитай условие: выдели данные и вопрос</text>
+                <line x1="350" y1="86" x2="350" y2="102" stroke="#475569" stroke-width="2" marker-end="url(#arrF)"/>
+                <rect x="120" y="108" width="460" height="44" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="134" font-family="sans-serif" font-size="13.5" fill="#1e293b" text-anchor="middle">2. Введи переменную: «Пусть x — …», вырази остальные величины</text>
+                <line x1="350" y1="154" x2="350" y2="170" stroke="#475569" stroke-width="2" marker-end="url(#arrF)"/>
+                <rect x="120" y="176" width="460" height="44" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="202" font-family="sans-serif" font-size="13.5" fill="#1e293b" text-anchor="middle">3. Составь уравнение по условию — это модель задачи</text>
+                <line x1="350" y1="222" x2="350" y2="238" stroke="#475569" stroke-width="2" marker-end="url(#arrF)"/>
+                <rect x="120" y="244" width="460" height="44" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="350" y="270" font-family="sans-serif" font-size="13.5" fill="#1e293b" text-anchor="middle">4. Реши уравнение: D = b² − 4ac, x = (−b ± √D)/(2a)</text>
+                <text x="584" y="270" font-family="sans-serif" font-size="11.5" fill="#dc2626" text-anchor="start">← формула урока 21</text>
+                <line x1="350" y1="290" x2="350" y2="306" stroke="#475569" stroke-width="2" marker-end="url(#arrF)"/>
+                <rect x="120" y="312" width="460" height="44" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5"/>
+                <text x="350" y="338" font-family="sans-serif" font-size="13.5" fill="#1e293b" text-anchor="middle">5. Отбери корни по смыслу задачи</text>
+                <text x="584" y="338" font-family="sans-serif" font-size="11.5" fill="#16a34a" text-anchor="start">← главный шаг!</text>
+                <line x1="350" y1="358" x2="350" y2="374" stroke="#475569" stroke-width="2" marker-end="url(#arrF)"/>
+                <rect x="120" y="380" width="460" height="44" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="350" y="406" font-family="sans-serif" font-size="13.5" fill="#1e293b" text-anchor="middle">6. Проверь по условию и запиши ответ на вопрос задачи</text>
+                <text x="350" y="440" font-family="sans-serif" font-size="12.5" fill="#dc2626" text-anchor="middle" font-style="italic">Шаг 5 — главный: он отличает решение задачи от простого решения уравнения</text>
+            </svg>
+        </div>
+
+        <h3>🎯 Устная проверка: составь уравнение</h3>
+        <p>Пока без решения! Прочитай условие, введи переменную и составь уравнение. Рассуждай так: «Пусть x — меньшее число (ширина, сторона), тогда … — большее». Сверь модель с ответом.</p>
+        <p><b>а)</b> (№ 557) Произведение двух натуральных чисел, одно из которых на 6 больше другого, равно 187.</p>
+        <p><b>б)</b> (№ 558) Длина прямоугольника на 4 см больше ширины, а площадь равна 60 см².</p>
+        <p><b>в)</b> (№ 560) Периметр прямоугольника равен 62 м, а площадь равна 210 м².</p>
+        <p><b>г)</b> (№ 562) Произведение двух последовательных натуральных чисел больше их суммы на 109.</p>
+        <details>
+            <summary>Показать уравнения-модели</summary>
+            <div class="solution-step"><b>а)</b> Пусть меньшее число x, тогда большее (x + 6): <b>x(x + 6) = 187</b>.</div>
+            <div class="solution-step"><b>б)</b> Пусть ширина x см, тогда длина (x + 4) см: <b>x(x + 4) = 60</b>.</div>
+            <div class="solution-step"><b>в)</b> Пусть меньшая сторона x м. Полупериметр 62 : 2 = 31 м — сумма смежных сторон, значит вторая сторона (31 − x) м: <b>x(31 − x) = 210</b>.</div>
+            <div class="solution-step"><b>г)</b> Пусть первое число x, тогда второе (x + 1): <b>x(x + 1) = (x + x + 1) + 109</b>, то есть x² + x = 2x + 110.</div>
+        </details>
+
+        <div class="rule-box">
+            <b>⚠️ Ловушки текстовых задач.</b> 1) Площадь треугольника — это ПОЛОВИНА произведения катетов: S = ab/2, не забывай делить на 2. 2) В турнирных задачах каждая пара встречается один раз — делим n(n − 1)/2. 3) Уравнение даёт сторону, а спрашивают изгородь или периметр — не забудь удвоить сумму. 4) За x удобнее брать МЕНЬШУЮ величину — тогда остальные выражаются со знаком «+». 5) Ответ — это не x, а то, о чём спрашивали: оба катета, оба числа, периметр. 6) В задачах про высоту иногда подходят ОБА корня — не отбрасывай их по привычке.
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем задачи из учебника (§ 7, п. 22, №№ 557–570). План один: пусть x → уравнение → дискриминант → отбор корней → ответ на вопрос задачи.</p>
+
+        <!-- Задание 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№ 557)</h3>
+            <p>Произведение двух натуральных чисел, одно из которых на 6 больше другого, равно 187. Найдите эти числа.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи два числа" data-answer="Числа 11 и 17"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть меньшее число равно x, тогда большее равно (x + 6). Произведение: x(x + 6) = 187.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Раскроем скобки и приведём к стандартному виду: x² + 6x − 187 = 0.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> D = 6² − 4·1·(−187) = 36 + 748 = 784, √784 = 28. x = (−6 ± 28)/2: x₁ = (−6 − 28)/2 = −17, x₂ = (−6 + 28)/2 = 11.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> По смыслу задачи числа натуральные, поэтому x = 11. Большее число: 11 + 6 = 17.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 11 · 17 = 187 ✅; 17 − 11 = 6 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 11 и 17 ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 2 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 2 (№ 558)</h3>
+            <p>Найдите периметр прямоугольника, длина которого на 4 см больше ширины, а площадь равна 60 см².</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи периметр в см" data-answer="Периметр 32 см"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть ширина равна x см, тогда длина равна (x + 4) см. Площадь: x(x + 4) = 60.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> x² + 4x − 60 = 0. D = 4² − 4·1·(−60) = 16 + 240 = 256, √256 = 16.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> x = (−4 ± 16)/2: x₁ = −10, x₂ = 6. Длина не бывает отрицательной, значит ширина 6 см, а длина 6 + 4 = 10 см.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Спрашивали периметр! P = 2·(6 + 10) = 2·16 = 32 см.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 6 · 10 = 60 см² ✅; 10 − 6 = 4 см ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> периметр равен 32 см ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 3 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 3 (№ 559)</h3>
+            <p>Огородный участок, имеющий форму прямоугольника, одна сторона которого на 10 м больше другой, требуется обнести изгородью. Определите длину изгороди, если известно, что площадь участка равна 1200 м².</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи длину изгороди в м" data-answer="Длина изгороди 140 м"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть меньшая сторона участка равна x м, тогда большая равна (x + 10) м. Площадь: x(x + 10) = 1200.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> x² + 10x − 1200 = 0. D = 10² − 4·1·(−1200) = 100 + 4800 = 4900, √4900 = 70.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> x = (−10 ± 70)/2: x₁ = −40, x₂ = 30. По смыслу x &gt; 0, значит стороны участка 30 м и 40 м.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Изгородь идёт по границе участка, то есть её длина равна периметру: 2·(30 + 40) = 2·70 = 140 м.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 30 · 40 = 1200 м² ✅; 40 − 30 = 10 м ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> длина изгороди 140 м ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 4 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 4 (№ 560)</h3>
+            <p>Периметр прямоугольника равен 62 м. Найдите его стороны, если площадь прямоугольника равна 210 м².</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи две стороны в м" data-answer="Стороны 10 м и 21 м"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть меньшая сторона равна x м. Полупериметр 62 : 2 = 31 м — это сумма смежных сторон, поэтому вторая сторона равна (31 − x) м.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Площадь: x(31 − x) = 210, отсюда 31x − x² = 210, то есть x² − 31x + 210 = 0.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> D = (−31)² − 4·1·210 = 961 − 840 = 121, √121 = 11. x = (31 ± 11)/2: x₁ = 10, x₂ = 21.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Оба корня дают одну и ту же пару сторон: при x = 10 вторая сторона 21 м, при x = 21 — вторая 10 м. Стороны прямоугольника 10 м и 21 м.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 2·(10 + 21) = 62 м ✅; 10 · 21 = 210 м² ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> стороны равны 10 м и 21 м ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 5 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 5 (№ 561)</h3>
+            <p>Найдите катеты прямоугольного треугольника, если известно, что их сумма равна 23 см, а площадь данного треугольника равна 60 см².</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи два катета в см" data-answer="Катеты 8 см и 15 см"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть один катет равен x см, тогда другой равен (23 − x) см. Помни: площадь прямоугольного треугольника — половина произведения катетов!
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> x(23 − x)/2 = 60, отсюда 23x − x² = 120, то есть x² − 23x + 120 = 0.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> D = (−23)² − 4·1·120 = 529 − 480 = 49, √49 = 7. x = (23 ± 7)/2: x₁ = 8, x₂ = 15.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Оба корня подходят: катеты 8 см и 15 см (при x = 15 второй катет 23 − 15 = 8 — та же пара).
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 8 + 15 = 23 см ✅; 8 · 15 : 2 = 60 см² ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> катеты равны 8 см и 15 см ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 6 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 6 (№ 565)</h3>
+            <p>В прямоугольном треугольнике один из катетов на 3 см меньше гипотенузы, а другой на 6 см меньше гипотенузы. Найдите гипотенузу.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи гипотенузу в см" data-answer="Гипотенуза 15 см"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть гипотенуза равна x см. Тогда катеты равны (x − 3) см и (x − 6) см. По теореме Пифагора: (x − 3)² + (x − 6)² = x².
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> Раскроем скобки: x² − 6x + 9 + x² − 12x + 36 = x². Перенесём всё влево: x² − 18x + 45 = 0.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> D = (−18)² − 4·1·45 = 324 − 180 = 144, √144 = 12. x = (18 ± 12)/2: x₁ = 3, x₂ = 15.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Отбор по смыслу: при x = 3 катеты были бы 0 и −3 см — так не бывает. Значит, гипотенуза 15 см, а катеты 12 см и 9 см.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 12² + 9² = 144 + 81 = 225 = 15² ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> гипотенуза равна 15 см ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 7 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 7 (№ 566)</h3>
+            <p>В кинотеатре число мест в ряду на 8 больше числа рядов. Сколько рядов в кинотеатре, если всего в нём имеется 884 места?</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи число рядов" data-answer="26 рядов"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть в кинотеатре x рядов, тогда мест в каждом ряду (x + 8). Всего мест: x(x + 8) = 884.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> x² + 8x − 884 = 0. D = 8² − 4·1·(−884) = 64 + 3536 = 3600, √3600 = 60.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> x = (−8 ± 60)/2: x₁ = −34, x₂ = 26. Число рядов — натуральное, значит x = 26.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Рядов 26, мест в ряду 26 + 8 = 34.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 26 · 34 = 884 ✅; 34 − 26 = 8 ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 26 рядов ✅
+                </div>
+            </details>
+        </div>
+
+        <!-- Задание 8 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Продвинутый уровень</span>
+            <h3>Задание 8 (№ 570)</h3>
+            <p>При розыгрыше первенства школы по футболу было сыграно 36 матчей, причём каждая команда сыграла с каждой по одному разу. Сколько команд участвовало в розыгрыше?</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Введи число команд" data-answer="9 команд"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step">
+                    <b>Шаг 1:</b> Пусть участвовало n команд. Каждая сыграла с каждой по одному разу, значит матчей n(n − 1)/2 (у каждой пары — один матч).
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 2:</b> n(n − 1)/2 = 36, отсюда n² − n = 72, то есть n² − n − 72 = 0.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 3:</b> D = (−1)² − 4·1·(−72) = 1 + 288 = 289, √289 = 17. n = (1 ± 17)/2: n₁ = −8, n₂ = 9.
+                </div>
+                <div class="solution-step">
+                    <b>Шаг 4:</b> Число команд — натуральное, значит n = 9.
+                </div>
+                <div class="solution-step check-step">
+                    <b>Проверка:</b> 9 · 8 : 2 = 36 матчей ✅
+                </div>
+                <div class="solution-step check-step">
+                    <b>Ответ:</b> 9 команд ✅
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2>🏋️ Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно по алгоритму и сверь ответы!</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> (№ 562) Произведение двух последовательных натуральных чисел больше их суммы на 109. Найдите эти числа.</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> (№ 563) Площадь доски прямоугольной формы равна 4500 см². Доску распилили на две части, одна из которых представляет собой квадрат, а другая — прямоугольник. Найдите сторону получившегося квадрата, если длина отпиленного прямоугольника равна 120 см.</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>3.</b> (№ 569) Число диагоналей p выпуклого многоугольника вычисляется по формуле p = n(n − 3)/2, где n — число сторон. В каком выпуклом многоугольнике диагоналей на 25 больше, чем сторон?</p>
+        </div>
+        <div class="task-box">
+            <p><b>4.</b> (№ 567) Старинная задача. Стая обезьян забавляется. Восьмая часть их в квадрате резвится в лесу. Остальные двенадцать кричат на вершине холма. Скажи мне, сколько всего обезьян?</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> (№ 571) В шахматном турнире было сыграно 45 партий. Определите число участников турнира, если известно, что каждый участник сыграл с каждым по одной партии.</p>
+        </div>
+
+        <h3>🟣 Продвинутый уровень</h3>
+        <div class="task-box">
+            <p><b>6.</b> (№ 572) От прямоугольного листа картона, длина которого равна 60 см, а ширина — 40 см, отрезали по углам равные квадраты и из оставшейся части склеили открытую коробку. Найдите сторону квадрата, если известно, что площадь основания коробки равна 800 см².</p>
+        </div>
+        <div class="task-box">
+            <p><b>7.</b> (№ 564) От прямоугольного листа картона длиной 26 см отрезали с двух сторон квадраты, сторона каждого из которых равна ширине листа. Площадь оставшейся части равна 80 см². Найдите ширину листа картона. Покажите, что задача имеет два решения.</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> (№ 568) Старинная задача. Квадрат пятой части обезьян, уменьшенной на 3, спрятался в гроте. Одна обезьяна, влезшая на дерево, была видна. Сколько было обезьян?</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> (№ 573) Найдите три последовательных целых числа, сумма квадратов которых равна 869.</p>
+        </div>
+
+        <details>
+            <summary>✅ Показать ответы для самопроверки</summary>
+            <div class="solution-step check-step">
+                <b>Ответы:</b><br>
+                1. Числа 11 и 12 (x² − x − 110 = 0, D = 441; проверка: 132 − 23 = 109 ✅)<br>
+                2. Сторона квадрата 30 см (x² + 120x − 4500 = 0, D = 32400; проверка: 30 · 150 = 4500 ✅)<br>
+                3. Десятиугольник, n = 10 (n² − 5n − 50 = 0, D = 225; проверка: 35 − 10 = 25 ✅)<br>
+                4. 16 или 48 обезьян (x² − 64x + 768 = 0, D = 1024; подходят оба корня! 4 + 12 = 16 ✅; 36 + 12 = 48 ✅)<br>
+                5. 10 участников (n² − n − 90 = 0, D = 361; проверка: 10 · 9 : 2 = 45 ✅)<br>
+                6. Сторона квадрата 10 см ((60 − 2x)(40 − 2x) = 800, D = 900; корень x = 40 невозможен: 2x &gt; ширины листа)<br>
+                7. Ширина 5 см или 8 см (w² − 13w + 40 = 0, D = 9; оба решения верны: 16·5 = 80 ✅ и 10·8 = 80 ✅)<br>
+                8. 50 обезьян (x² − 55x + 250 = 0, D = 2025; корень x = 5 отбрасываем: пятая часть минус 3 — отрицательна)<br>
+                9. Числа 16, 17, 18 или −18, −17, −16 (x² + 2x − 288 = 0, D = 1156; оба корня — целые числа, подходят оба!)
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+
+        <h3>🚀 Задача для инженера-испытателя</h3>
+        <p>Инженер испытывает катапульту для запуска метеозонда: макет взлетает вертикально вверх со скоростью 30 м/с. Высота полёта меняется по закону h(t) = 30t − 5t², где t — время в секундах, h — высота в метрах (g ≈ 10 м/с²). В какие моменты времени зонд окажется на высоте 40 м?</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи два времени в секундах" data-answer="t = 2 с и t = 4 с"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение инженера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Подставим h = 40 в закон полёта: 30t − 5t² = 40. Перенесём всё влево: −5t² + 30t − 40 = 0.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> Умножим обе части на −1 и разделим на 5: t² − 6t + 8 = 0. Коэффициенты: a = 1, b = −6, c = 8.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> D = (−6)² − 4·1·8 = 36 − 32 = 4 &gt; 0 — два корня. √4 = 2, t = (6 ± 2)/2: t₁ = 2, t₂ = 4.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Оба корня имеют смысл! Зонд проходит отметку 40 м дважды: на подъёме (через 2 с) и на спуске (через 4 с). Максимальная высота — 45 м на третьей секунде, поэтому 40 м реально достижимы.
+            </div>
+            <div class="solution-step check-step">
+                <b>Проверка:</b> h(2) = 30·2 − 5·2² = 60 − 20 = 40 м ✅; h(4) = 30·4 − 5·4² = 120 − 80 = 40 м ✅
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> через 2 с (вверх) и через 4 с (вниз) ✅
+            </div>
+        </details>
+
+        <h3>💼 Задача для продюсера онлайн-школы</h3>
+        <p>Продюсер набирает учебные группы на курс математики: в каждой группе учеников на 3 больше, чем самих групп, а всего записалось 130 человек. Сколько групп набралось и сколько в каждой учеников?</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введи число групп и учеников" data-answer="10 групп по 13 учеников"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение продюсера</summary>
+            <div class="solution-step">
+                <b>Шаг 1:</b> Пусть групп x, тогда учеников в каждой группе (x + 3). Всего записалось: x(x + 3) = 130.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 2:</b> x² + 3x − 130 = 0. D = 3² − 4·1·(−130) = 9 + 520 = 529 &gt; 0, √529 = 23.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 3:</b> x = (−3 ± 23)/2: x₁ = −13, x₂ = 10. Число групп — натуральное, значит x = 10.
+            </div>
+            <div class="solution-step">
+                <b>Шаг 4:</b> Групп 10, учеников в каждой 10 + 3 = 13.
+            </div>
+            <div class="solution-step check-step">
+                <b>Проверка:</b> 10 · 13 = 130 человек ✅; 13 − 10 = 3 ✅
+            </div>
+            <div class="solution-step check-step">
+                <b>Ответ:</b> 10 групп по 13 учеников ✅
+            </div>
+        </details>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Схема решения:</b> текст задачи → переменная x → уравнение-модель → дискриминант → отбор корней → ответ на вопрос задачи.</li>
+            <li><b>«Пусть x — …»:</b> за x обычно берут меньшую неизвестную величину; остальные выражают через неё со знаком «+» или «−».</li>
+            <li><b>Источники уравнений:</b> теорема Пифагора (c² = a² + b²), площадь (S = ab, у треугольника S = ab/2), периметр (P = 2(a + b)), закон движения h = v₀t − 5t², формула турнира n(n − 1)/2.</li>
+            <li><b>Отбор корней:</b> длина &gt; 0, время ≥ 0, число предметов — натуральное. Корень, не имеющий смысла, отбрасывают.</li>
+            <li><b>Оба корня подходят:</b> если тело проходит высоту дважды (подъём и спуск) или обе конфигурации возможны — в ответе два числа.</li>
+            <li><b>Проверка по условию:</b> подставь ответ в исходную ситуацию (площадь, сумма, равенство сторон) — уравнение могло быть составлено неверно.</li>
+            <li><b>Ответ — не x:</b> если спрашивали изгородь — считай периметр; если спрашивали два числа — назови оба.</li>
+            <li>💡 <b>Лайфхак:</b> сначала реши уравнение «в числах», а потом интерпретируй. Дискриминант и формула корней из урока 21 работают одинаково и в геометрии, и в физике, и в бизнесе.</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Нет отбора корней:</i> в ответ пишут оба корня, включая отрицательный (№ 557: −17 и 11). Отрабатывайте вопрос: «Может ли длина быть −16?»</li>
+            <li><i>Наоборот, зря отброшен второй корень:</i> в задачах, где оба корня имеют смысл (№ 567 и № 573, задачи про высоту), ученики отбрасывают второй корень по привычке. Учите перечитывать условие: «сколько всего», «целые числа».</li>
+            <li><i>Ответ = x:</i> найдя x = 30 (№ 559), ученик пишет «30 м» вместо длины изгороди 140 м. Требуйте в конце перечитать вопрос задачи.</li>
+            <li><i>Площадь треугольника:</i> забывают делить на 2 (№ 561): уравнение x(23 − x) = 60 вместо x(23 − x)/2 = 60 — корни не подойдут, и это хороший сигнал к поиску ошибки в модели.</li>
+            <li><i>Турниры:</i> пишут n² = 36 вместо n(n − 1)/2 = 36. Объясните комбинаторный смысл: n команд × (n − 1) соперников, и каждый матч посчитан дважды.</li>
+            <li><i>Периметр:</i> путают полупериметр с периметром (№ 560): 62 — это 2(a + b), поэтому сумма смежных сторон 31, а не 62.</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Карточка-шаблон из шести строк: «Пусть x — …»; «Тогда … — …»; «По условию …» (уравнение); «Решаю: D = …»; «Отбор: x &gt; 0, значит …»; «Ответ: …».</li>
+            <li>Начинайте с задач № 557, № 558, где уравнение имеет вид x(x + k) = P — самая простая модель.</li>
+            <li>Таблицу «Типовые модели» из блока 1 распечатайте как памятку: ученик находит ситуацию-близнец и берёт готовую заготовку уравнения.</li>
+            <li>Чертите рисунок к каждой геометрической задаче (прямоугольник, треугольник, лист с вырезами) — модель становится очевидной.</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>№ 564: докажите, что задача имеет два решения, и начертите оба случая в масштабе 1:2 (остаток 16 × 5 и 10 × 8).</li>
+            <li>№ 572: свяжите коробку с рисунком из учебника (лист 60 × 40, вырезы x); объясните, почему корень x = 40 невозможен физически, хотя и подходит уравнению.</li>
+            <li>№ 573: обнаружьте оба множества ответов (16, 17, 18 и −18, −17, −16) и объясните, почему слово «целых» в условии меняет всё.</li>
+            <li>Старинные задачи № 567 и № 568 — из трактата Бхаскары (Индия, XII век): сравните ответы обеих задач и обсудите, почему в № 568 корень x = 5 «не выживает» по смыслу.</li>
+        </ul>
+    </div>
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-3-21.html">⬅️ Предыдущий урок</a>
+        <a href="index.html">Следующий урок ➡️</a>
+    </nav>
+
+
+    <footer>
+        📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §7)
+        <p class="legal">© 2019–2026 ИП Громова Анна Александровна, ОГРНИП: 319237500156762, ИНН: 236507001744</p>
+        <p class="legal">Лицензия № Л035-01218-23/01091451 <a href="https://xn--80aaagnrcpdkofpu2ae0iuf.xn--p1ai/" target="_blank" rel="noopener">Интерактивная школа «МУДРО»</a></p>
+    </footer>
+
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
+</body>
+</html>
