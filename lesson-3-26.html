@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решение дробных рациональных уравнений — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Решение дробных рациональных уравнений</h1>
+            <p class="subtitle">Урок 26 • Глава 3, §9</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 9, п. 26). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Мы уже умеем решать целые уравнения (где обе части — целые выражения). Но что делать, если в уравнении появляются дроби с переменной в знаменателе? Такие уравнения называются <strong>дробными рациональными</strong>.</p>
+            
+            <div class="formula-box">
+                Главное правило:<br>
+                На ноль делить НЕЛЬЗЯ!<br>
+                Поэтому любой знаменатель, содержащий переменную, не должен обращаться в ноль.
+            </div>
+
+            <h3>🛠 Алгоритм решения дробного рационального уравнения</h3>
+            <div class="step-box">
+                <strong>Шаг 1.</strong> Найти <strong>ОДЗ</strong> (область допустимых значений): определить, при каких значениях переменной знаменатели обращаются в ноль, и <em>исключить</em> эти значения.<br><br>
+                <strong>Шаг 2.</strong> Найти <strong>общий знаменатель</strong> всех дробей, входящих в уравнение.<br><br>
+                <strong>Шаг 3.</strong> Умножить <strong>обе части</strong> уравнения на этот общий знаменатель. Мы получим целое уравнение, равносильное исходному (при условии соблюдения ОДЗ).<br><br>
+                <strong>Шаг 4.</strong> Решить полученное целое уравнение и <strong>проверить</strong> каждый найденный корень: не обращает ли он в ноль общий знаменатель? Если обращает — это <em>посторонний корень</em>, его нужно вычеркнуть.
+            </div>
+
+            <div class="svg-container">
+                <!-- Визуализация ОДЗ и постороннего корня на числовой прямой -->
+                <svg viewBox="0 0 400 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Ось -->
+                    <line x1="20" y1="60" x2="380" y2="60" stroke="#1e293b" stroke-width="2" />
+                    <polygon points="380,60 370,55 370,65" fill="#1e293b" />
+                    <text x="385" y="65" font-family="sans-serif" font-size="16" fill="#1e293b" font-style="italic">x</text>
+
+                    <!-- Метки -->
+                    <line x1="80" y1="55" x2="80" y2="65" stroke="#1e293b" stroke-width="2" />
+                    <text x="75" y="85" font-family="sans-serif" font-size="14" fill="#1e293b">-2</text>
+
+                    <line x1="160" y1="55" x2="160" y2="65" stroke="#1e293b" stroke-width="2" />
+                    <text x="155" y="85" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+
+                    <line x1="240" y1="55" x2="240" y2="65" stroke="#1e293b" stroke-width="2" />
+                    <text x="235" y="85" font-family="sans-serif" font-size="14" fill="#1e293b">2</text>
+
+                    <line x1="280" y1="55" x2="280" y2="65" stroke="#1e293b" stroke-width="2" />
+                    <text x="275" y="85" font-family="sans-serif" font-size="14" fill="#1e293b">3</text>
+
+                    <!-- Выколотые точки (ОДЗ) -->
+                    <circle cx="80" cy="60" r="6" fill="#ffffff" stroke="#dc2626" stroke-width="3" />
+                    <text x="50" y="40" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">ОДЗ: x ≠ -2</text>
+
+                    <circle cx="160" cy="60" r="6" fill="#ffffff" stroke="#dc2626" stroke-width="3" />
+                    <text x="150" y="40" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">x ≠ 0</text>
+
+                    <circle cx="240" cy="60" r="6" fill="#ffffff" stroke="#dc2626" stroke-width="3" />
+                    <text x="210" y="40" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">x ≠ 2</text>
+
+                    <!--Valid root -->
+                    <circle cx="280" cy="60" r="7" fill="#16a34a" />
+                    <text x="272" y="35" font-family="sans-serif" font-size="14" fill="#16a34a" font-weight="bold">Корень: x = 3 ✅</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Числовая прямая: красные «выколотые» точки — значения, запрещённые ОДЗ. Зелёная точка — допустимый корень.</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: <strong>сначала всегда пиши ОДЗ!</strong></p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №631(б). Реши уравнение: x² / (x - 4) = (5x - 6) / (x - 4)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. <strong>ОДЗ:</strong> знаменатель не равен нулю: x - 4 ≠ 0, следовательно, <strong>x ≠ 4</strong>.</p>
+                    <p>2. Умножим обе части уравнения на общий знаменатель (x - 4):<br>
+                    x² = 5x - 6</p>
+                    <p>3. Перенесём всё в левую часть и решим квадратное уравнение:<br>
+                    x² - 5x + 6 = 0.<br>
+                    По теореме Виета: x₁ = 2, x₂ = 3.</p>
+                    <p>4. <strong>Проверка по ОДЗ:</strong> ни 2, ни 3 не равны 4. Оба корня подходят.</p>
+                    <p><em>Проверка подстановкой:</em><br>
+                    При x = 2: 4 / (-2) = (10 - 6) / (-2) → -2 = -2. Верно! ✅<br>
+                    При x = 3: 9 / (-1) = (15 - 6) / (-1) → -9 = -9. Верно! ✅</p>
+                    <p><strong>Ответ:</strong> 2; 3.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №632(г). Реши уравнение: 10 / (2x - 3) = x - 1</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. <strong>ОДЗ:</strong> 2x - 3 ≠ 0, следовательно, <strong>x ≠ 1,5</strong>.</p>
+                    <p>2. Умножим обе части на (2x - 3):<br>
+                    10 = (x - 1)(2x - 3)</p>
+                    <p>3. Раскроем скобки и приведём к стандартному виду:<br>
+                    10 = 2x² - 3x - 2x + 3<br>
+                    2x² - 5x - 7 = 0</p>
+                    <p>4. Найдём дискриминант: D = (-5)² - 4 · 2 · (-7) = 25 + 56 = 81.<br>
+                    x = (5 ± √81) / (2 · 2) = (5 ± 9) / 4.<br>
+                    x₁ = 14 / 4 = 3,5;  x₂ = -4 / 4 = -1.</p>
+                    <p>5. <strong>Проверка по ОДЗ:</strong> 3,5 ≠ 1,5 и -1 ≠ 1,5. Оба корня подходят.</p>
+                    <p><strong>Ответ:</strong> -1; 3,5.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> Пример 3 из учебника: 2 / (x² - 4) - 1 / (x² - 2x) = (4 - x) / (x² + 2x)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Разложим все знаменатели на множители:<br>
+                    x² - 4 = (x - 2)(x + 2)<br>
+                    x² - 2x = x(x - 2)<br>
+                    x² + 2x = x(x + 2)</p>
+                    <p>2. <strong>ОДЗ:</strong> x ≠ 2, x ≠ -2, x ≠ 0.</p>
+                    <p>3. Общий знаменатель: <strong>x(x - 2)(x + 2)</strong>. Умножим на него обе части уравнения:<br>
+                    2 · x - 1 · (x + 2) = (4 - x)(x - 2)</p>
+                    <p>4. Раскроем скобки:<br>
+                    2x - x - 2 = 4x - 8 - x² + 2x<br>
+                    x - 2 = -x² + 6x - 8</p>
+                    <p>5. Перенесём всё влево:<br>
+                    x² - 5x + 6 = 0.<br>
+                    По теореме Виета: x₁ = 2, x₂ = 3.</p>
+                    <p>6. <strong>Проверка по ОДЗ:</strong><br>
+                    x = 2 — <span style="color: var(--formula); font-weight: bold;">посторонний корень</span> (обращает знаменатель в ноль, см. ОДЗ). ❌<br>
+                    x = 3 — подходит. ✅</p>
+                    <p><strong>Ответ:</strong> 3.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни</h2>
+            <p>🚀 <strong>Навигация и логистика:</strong> Моторная лодка прошла 24 км по течению реки и 24 км против течения, затратив на весь путь 3,5 часа. Скорость течения реки равна 2 км/ч. Найди собственную скорость лодки.</p>
+            
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Пусть <strong>x</strong> (км/ч) — собственная скорость лодки. Тогда:<br>
+                    Скорость по течению: (x + 2) км/ч. Время: 24 / (x + 2) ч.<br>
+                    Скорость против течения: (x - 2) км/ч. Время: 24 / (x - 2) ч.</p>
+                    <p>2. Составим уравнение по условию (сумма времён равна 3,5 ч):<br>
+                    24 / (x + 2) + 24 / (x - 2) = 3,5</p>
+                    <p>3. <strong>ОДЗ:</strong> x ≠ -2 и x ≠ 2. (Физический смысл также требует x > 2).</p>
+                    <p>4. Представим 3,5 как дробь 7/2. Общий знаменатель: 2(x - 2)(x + 2). Умножим на него обе части:<br>
+                    24 · 2(x - 2) + 24 · 2(x + 2) = 7(x - 2)(x + 2)<br>
+                    48x - 96 + 48x + 96 = 7(x² - 4)<br>
+                    96x = 7x² - 28</p>
+                    <p>5. Приведём к стандартному виду:<br>
+                    7x² - 96x - 28 = 0.</p>
+                    <p>6. Найдём дискриминант: D = (-96)² - 4 · 7 · (-28) = 9216 + 784 = 10000.<br>
+                    √D = 100.<br>
+                    x = (96 ± 100) / 14.<br>
+                    x₁ = 196 / 14 = 14;<br>
+                    x₂ = -4 / 14 = -2/7.</p>
+                    <p>7. <strong>Проверка:</strong> x = -2/7 не подходит по физическому смыслу (скорость не может быть отрицательной) и не входит в ОДЗ задачи. x = 14 подходит.</p>
+                    <p><strong>Ответ:</strong> собственная скорость лодки равна 14 км/ч.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Дробное рациональное уравнение содержит переменную в знаменателе.</li>
+                <li><strong>ОДЗ — это закон.</strong> Его нужно находить до начала решения, чтобы потом отсеять посторонние корни.</li>
+                <li>При умножении на общий знаменатель мы переходим к <em>целому</em> уравнению, но множество корней может расшириться. Поэтому проверка (или сверка с ОДЗ) обязательна!</li>
+                <li>Никогда не сокращай слагаемые в числителе и знаменателе — сокращать можно только <strong>множители</strong>.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Самая распространённая ошибка учеников на этом уроке — забывание проверить корни на принадлежность ОДЗ, что приводит к записи постороннего корня в ответ. Рекомендуется требовать от учеников писать «ОДЗ: ...» отдельной строкой в начале решения каждого дробного уравнения. Также обратите внимание на ошибку при переносе: при умножении на общий знаменатель каждое слагаемое умножается целиком, ученики часто забывают умножить свободный член (как в №632г).</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-25.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §9).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+</body>
+</html>
