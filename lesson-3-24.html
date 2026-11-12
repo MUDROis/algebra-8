@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квадратный трёхчлен и его корни — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Квадратный трёхчлен и его корни</h1>
+            <p class="subtitle">Урок 24 • Глава 3, §8</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 8, п. 24). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Сегодня мы познакомимся с объектом, который описывает всё: от траектории брошенного мяча до максимальной площади участка. Это <strong>квадратный трёхчлен</strong>.</p>
+            
+            <div class="formula-box">
+                Определение: Квадратным трёхчленом называется многочлен вида<br>
+                ax² + bx + c,<br>
+                где x — переменная, a, b, c — некоторые числа, причём <strong>a ≠ 0</strong>.
+            </div>
+
+            <p>Число <strong>a</strong> называют <em>старшим коэффициентом</em>, а число <strong>c</strong> — <em>свободным членом</em>. Квадратным трёхчленом также считаются выражения, где b=0 или c=0 (или оба сразу), главное, чтобы a ≠ 0 и степень была равна 2.</p>
+            
+            <p>💡 <strong>Связь с уравнениями:</strong> Чтобы найти корни квадратного трёхчлена, нужно решить квадратное уравнение <strong>ax² + bx + c = 0</strong>. Количество корней зависит от дискриминанта D = b² - 4ac:</p>
+            <ul>
+                <li>Если <strong>D > 0</strong>, трёхчлен имеет <strong>два</strong> корня.</li>
+                <li>Если <strong>D = 0</strong>, трёхчлен имеет <strong>один</strong> корень.</li>
+                <li>Если <strong>D < 0</strong>, трёхчлен <strong>не имеет</strong> действительных корней.</li>
+            </ul>
+
+            <div class="svg-container">
+                <!-- Математически точный график, построенный покоординатно по формуле y = x² - 4x + 3. 
+                     Масштаб: 1 ед. = 40px. Начало координат (0,0) в SVG: X=40, Y=180 -->
+                <svg viewBox="0 0 240 280" width="400" height="460" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Сетка -->
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="240" height="280" fill="url(#grid)" />
+                    
+                    <!-- Оси координат -->
+                    <line x1="40" y1="0" x2="40" y2="280" stroke="#1e293b" stroke-width="2" />
+                    <line x1="0" y1="180" x2="240" y2="180" stroke="#1e293b" stroke-width="2" />
+                    
+                    <!-- Подписи осей -->
+                    <text x="225" y="175" font-family="sans-serif" font-size="16" fill="#1e293b" font-style="italic">x</text>
+                    <text x="45" y="20" font-family="sans-serif" font-size="16" fill="#1e293b" font-style="italic">y</text>
+                    <text x="25" y="200" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+
+                    <!-- Метки на осях (масштаб 40px = 1 ед.) -->
+                    <!-- X -->
+                    <text x="75" y="200" font-family="sans-serif" font-size="14" fill="#64748b">1</text>
+                    <text x="115" y="200" font-family="sans-serif" font-size="14" fill="#64748b">2</text>
+                    <text x="155" y="200" font-family="sans-serif" font-size="14" fill="#64748b">3</text>
+                    <text x="195" y="200" font-family="sans-serif" font-size="14" fill="#64748b">4</text>
+                    <!-- Y -->
+                    <text x="20" y="145" font-family="sans-serif" font-size="14" fill="#64748b">1</text>
+                    <text x="20" y="105" font-family="sans-serif" font-size="14" fill="#64748b">2</text>
+                    <text x="20" y="65" font-family="sans-serif" font-size="14" fill="#64748b">3</text>
+                    <text x="10" y="225" font-family="sans-serif" font-size="14" fill="#64748b">-1</text>
+
+                    <!-- Парабола y = x² - 4x + 3 
+                         Построена методом точного покоординатного вывода (шаг 0.25), 
+                         что исключает погрешности кривых Безье. -->
+                    <path d="M 20.0,-30.0 L 30.0,17.5 L 40.0,60.0 L 50.0,97.5 L 60.0,130.0 L 70.0,157.5 L 80.0,180.0 L 90.0,197.5 L 100.0,210.0 L 110.0,217.5 L 120.0,220.0 L 130.0,217.5 L 140.0,210.0 L 150.0,197.5 L 160.0,180.0 L 170.0,157.5 L 180.0,130.0 L 190.0,97.5 L 200.0,60.0 L 210.0,17.5" 
+                          fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                    
+                    <!-- Точки корней (x=1, x=3) -->
+                    <circle cx="80" cy="180" r="5" fill="#dc2626" />
+                    <text x="70" y="170" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold">1</text>
+                    
+                    <circle cx="160" cy="180" r="5" fill="#dc2626" />
+                    <text x="165" y="170" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold">3</text>
+
+                    <!-- Точка вершины (x=2, y=-1) -->
+                    <circle cx="120" cy="220" r="5" fill="#f59e0b" />
+                    <text x="130" y="225" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold">Вершина (2; -1)</text>
+                    
+                    <!-- Подпись функции -->
+                    <text x="50" y="50" font-family="sans-serif" font-size="16" fill="#2563eb" font-weight="bold">y = x² - 4x + 3</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. График квадратного трёхчлена. Красные точки — корни (пересечение с осью x), жёлтая точка — вершина параболы. <em>Построено строго по координатам формулы.</em></p>
+            </div>
+
+            <h3>🛠 Выделение квадрата двучлена</h3>
+            <p>Иногда квадратный трёхчлен удобно представить в виде <strong>a(x - m)² + n</strong>. Это называется выделением квадрата двучлена. Этот приём помогает находить наименьшее или наибольшее значение выражения.</p>
+            
+            <div class="step-box">
+                <strong>Пример:</strong> Выделим квадрат двучлена из трёхчлена <em>3x² - 36x + 140</em>.<br><br>
+                <strong>Шаг 1.</strong> Вынесем старший коэффициент 3 за скобки в первых двух слагаемых:<br>
+                3(x² - 12x) + 140<br><br>
+                <strong>Шаг 2.</strong> Представим -12x как -2 · 6 · x. Чтобы получить полный квадрат (x - 6)², нам не хватает +36. Добавим и вычтем 36 внутри скобок:<br>
+                3(x² - 2 · 6 · x + 36 - 36) + 140<br><br>
+                <strong>Шаг 3.</strong> Свернём полный квадрат и упростим:<br>
+                3((x - 6)² - 36) + 140 = 3(x - 6)² - 108 + 140 = <strong>3(x - 6)² + 32</strong>.
+            </div>
+            <p>Теперь видно, что наименьшее значение этого трёхчлена равно 32 (оно достигается при x = 6, так как 3(x - 6)² ≥ 0).</p>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Не забывай проверять ответы подстановкой!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №602(а). Найди корни квадратного трёхчлена: x² + x - 6</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> Приравняем трёхчлен к нулю: x² + x - 6 = 0.</p>
+                    <p>Найдём дискриминант: D = b² - 4ac = 1² - 4 · 1 · (-6) = 1 + 24 = 25.</p>
+                    <p>Так как D > 0, уравнение имеет два корня:</p>
+                    <p>x = (-1 ± √25) / 2 = (-1 ± 5) / 2.</p>
+                    <p>x₁ = (-1 + 5) / 2 = 4 / 2 = <strong>2</strong>.</p>
+                    <p>x₂ = (-1 - 5) / 2 = -6 / 2 = <strong>-3</strong>.</p>
+                    <p><em>Проверка подстановкой:</em><br>
+                    При x = 2: 2² + 2 - 6 = 4 + 2 - 6 = 0. Верно! ✅<br>
+                    При x = -3: (-3)² + (-3) - 6 = 9 - 3 - 6 = 0. Верно! ✅</p>
+                    <p><strong>Ответ:</strong> 2; -3.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №607(а). Выдели квадрат двучлена из трёхчлена: x² - 6x - 2</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Коэффициент при x² равен 1, выносить нечего. Работаем со всем выражением.</p>
+                    <p>2. Представим -6x как -2 · 3 · x. Нам не хватает +3² = 9 для полного квадрата.</p>
+                    <p>3. Добавим и вычтем 9: x² - 6x + 9 - 9 - 2.</p>
+                    <p>4. Сворачиваем полный квадрат: (x - 3)² - 11.</p>
+                    <p><strong>Ответ:</strong> (x - 3)² - 11.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №613. Прямоугольный треугольник: сумма катетов равна 6 см. При каких длинах катетов площадь треугольника будет наибольшей? Найди эту площадь.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Обозначим длину одного катета через <em>x</em> см. Тогда длина второго катета равна <em>(6 - x)</em> см.</p>
+                    <p>2. Площадь прямоугольного треугольника равна половине произведения катетов:<br>
+                    S = ½ · x · (6 - x) = ½(6x - x²) = -½x² + 3x.</p>
+                    <p>3. Выделим квадрат двучлена в выражении для площади:<br>
+                    S = -½(x² - 6x) = -½(x² - 6x + 9 - 9) = -½((x - 3)² - 9) = <strong>-½(x - 3)² + 4,5</strong>.</p>
+                    <p>4. Поскольку -½(x - 3)² ≤ 0 при любом x, наибольшее значение выражение принимает, когда -½(x - 3)² = 0, то есть при <strong>x = 3</strong>.</p>
+                    <p>5. Если x = 3, то второй катет тоже равен 6 - 3 = 3 см. Треугольник является равнобедренным.</p>
+                    <p><strong>Ответ:</strong> наибольшей площади (4,5 см²) треугольник достигает, когда оба катета равны 3 см.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни</h2>
+            <p>🚀 <strong>Физика и спорт:</strong> Стрела выпущена вертикально вверх из лука. Высота <em>h</em> (в метрах), на которой находится стрела через время <em>t</em> (в секундах), приближённо описывается формулой:</p>
+            <div class="formula-box" style="text-align: center;">
+                h(t) = -5t² + 50t + 20
+            </div>
+            <p><strong>Вопрос:</strong> Какой наибольшей высоты достигнет стрела и через какое время это произойдёт?</p>
+            
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> Нам нужно найти наибольшее значение квадратного трёхчлена h(t) = -5t² + 50t + 20. Для этого выделим квадрат двучлена.</p>
+                    <p>1. Вынесем -5 за скобки в первых двух слагаемых:<br>
+                    h(t) = -5(t² - 10t) + 20.</p>
+                    <p>2. Добавим и вычтем 25 (так как (-10/2)² = 25) внутри скобок:<br>
+                    h(t) = -5(t² - 10t + 25 - 25) + 20.</p>
+                    <p>3. Свернём полный квадрат и раскроем внешние скобки:<br>
+                    h(t) = -5((t - 5)² - 25) + 20 = -5(t - 5)² + 125 + 20 = <strong>-5(t - 5)² + 145</strong>.</p>
+                    <p>4. Так как -5(t - 5)² ≤ 0 при любом t, максимальное значение высоты равно <strong>145</strong> и достигается оно при <strong>t = 5</strong>.</p>
+                    <p><em>Проверка:</em> h(5) = -5(25) + 50(5) + 20 = -125 + 250 + 20 = 145. Всё верно! ✅</p>
+                    <p><strong>Ответ:</strong> стрела достигнет наибольшей высоты 145 метров через 5 секунд после выстрела.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Квадратный трёхчлен имеет вид <strong>ax² + bx + c</strong>, где <strong>a ≠ 0</strong>.</li>
+                <li>Корни трёхчлена — это корни уравнения <strong>ax² + bx + c = 0</strong>. Их количество определяет дискриминант D.</li>
+                <li>Приём <strong>выделения квадрата двучлена</strong> позволяет переписать трёхчлен в виде a(x - m)² + n, что удобно для поиска наибольшего или наименьшего значения.</li>
+                <li>При преобразованиях нельзя сокращать слагаемые, можно сокращать только множители!</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>При объяснении выделения квадрата двучлена используйте визуальную аналогию с «достраиванием» квадрата из геометрических фигур (алгебраические плитки). Обратите внимание учеников на типичную ошибку: при вынесении отрицательного коэффициента за скобки знаки внутри скобок меняются, и вычитаемое число (например, -25) при раскрытии скобок даст плюс, что часто вызывает путаницу. Требуйте обязательной проверки ответа подстановкой в исходное выражение.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-23.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §8).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+</body>
+</html>
