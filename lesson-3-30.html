@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Графический способ решения систем уравнений — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Графический способ решения систем уравнений</h1>
+            <p class="subtitle">Урок 30 • Глава 3, §10</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 10, п. 30). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Мы уже умеем решать системы линейных уравнений алгебраически (подстановкой и сложением). Но что делать, если одно из уравнений системы нелинейное (например, содержит $x^2$ или $1/x$)? Здесь на помощь приходит <strong>графический способ</strong>!</p>
+            
+            <div class="formula-box">
+                Решить систему уравнений графически — это значит найти координаты общих точек пересечения графиков этих уравнений.
+            </div>
+
+            <h3>🛠 Алгоритм графического решения</h3>
+            <div class="step-box">
+                <strong>Шаг 1.</strong> Вырази переменную $y$ через $x$ в каждом уравнении системы (если это возможно и удобно).<br><br>
+                <strong>Шаг 2.</strong> Построй графики полученных функций в <strong>одной и той же</strong> системе координат.<br><br>
+                <strong>Шаг 3.</strong> Найди координаты точек пересечения графиков. Эти пары чисел $(x; y)$ и будут <strong>решением</strong> системы. Если графики не пересекаются, система не имеет решений.
+            </div>
+
+            <div class="svg-container">
+                <!-- Математически точный график системы y = x² и y = x + 2
+                     Масштаб: 1 ед. = 40px. Начало координат (0,0) в SVG: X=160, Y=240 -->
+                <svg viewBox="0 0 320 320" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Сетка -->
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="320" height="320" fill="url(#grid)" />
+                    
+                    <!-- Оси координат -->
+                    <line x1="160" y1="0" x2="160" y2="320" stroke="#1e293b" stroke-width="2" />
+                    <line x1="0" y1="240" x2="320" y2="240" stroke="#1e293b" stroke-width="2" />
+                    
+                    <!-- Подписи осей -->
+                    <text x="305" y="235" font-family="sans-serif" font-size="16" fill="#1e293b" font-style="italic">x</text>
+                    <text x="165" y="20" font-family="sans-serif" font-size="16" fill="#1e293b" font-style="italic">y</text>
+                    <text x="145" y="260" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+
+                    <!-- Метки на осях -->
+                    <text x="195" y="260" font-family="sans-serif" font-size="14" fill="#64748b">1</text>
+                    <text x="235" y="260" font-family="sans-serif" font-size="14" fill="#64748b">2</text>
+                    <text x="120" y="260" font-family="sans-serif" font-size="14" fill="#64748b">-1</text>
+                    
+                    <text x="140" y="205" font-family="sans-serif" font-size="14" fill="#64748b">1</text>
+                    <text x="140" y="165" font-family="sans-serif" font-size="14" fill="#64748b">2</text>
+                    <text x="130" y="85" font-family="sans-serif" font-size="14" fill="#64748b">4</text>
+
+                    <!-- Парабола y = x² (построена по точкам: (-2,4), (-1,1), (0,0), (1,1), (2,4)) -->
+                    <path d="M 80,80 L 120,200 L 160,240 L 200,200 L 240,80" 
+                          fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                    <text x="250" y="90" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold">y = x²</text>
+
+                    <!-- Прямая y = x + 2 (построена по точкам: (-2,0), (-1,1), (0,2), (2,4)) -->
+                    <line x1="80" y1="240" x2="240" y2="80" stroke="#dc2626" stroke-width="3" />
+                    <text x="250" y="230" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold">y = x + 2</text>
+
+                    <!-- Точки пересечения -->
+                    <circle cx="120" cy="200" r="5" fill="#f59e0b" />
+                    <text x="70" y="190" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold">(-1; 1)</text>
+
+                    <circle cx="240" cy="80" r="5" fill="#f59e0b" />
+                    <text x="250" y="70" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold">(2; 4)</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Графическое решение системы. Жёлтые точки — точные координаты пересечения параболы и прямой.</p>
+            </div>
+
+            <div class="step-box" style="border-left-color: var(--warning); background: #fffbeb;">
+                <strong>⚠️ Важное предупреждение:</strong><br>
+                Графический способ часто даёт лишь <strong>приближённые</strong> значения корней (например, $x \approx 1,7$). Его главная суперсила — не в поиске точного ответа, а в возможности быстро определить <strong>количество решений</strong> системы или оценить, где примерно находятся корни, прежде чем применять сложные алгебраические методы.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: при проверке подставляй значения в <strong>исходную</strong> систему!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №696. Является ли пара чисел решением системы: $x + y^2 = 5$, $6x + 5y = -4$? Пары: а) $(-2; 1)$; б) $(1; -2)$.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> Будем поочерёдно подставлять пары в оба уравнения системы.</p>
+                    <p><strong>а)</strong> Пара $(-2; 1)$, то есть $x = -2, y = 1$.<br>
+                    1-е уравнение: $-2 + 1^2 = -2 + 1 = -1$. Но $-1 \neq 5$. Первое уравнение не выполняется.<br>
+                    <em>Вывод:</em> Нет, не является решением. ❌</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+                    <p><strong>б)</strong> Пара $(1; -2)$, то есть $x = 1, y = -2$.<br>
+                    1-е уравнение: $1 + (-2)^2 = 1 + 4 = 5$. Верно! ✅<br>
+                    2-е уравнение: $6 \cdot 1 + 5 \cdot (-2) = 6 - 10 = -4$. Верно! ✅<br>
+                    <em>Вывод:</em> Да, пара $(1; -2)$ является решением системы.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №697. Реши графически систему: $y - x = 0$, $2x - y + 3 = 0$.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Выразим $y$ через $x$ в каждом уравнении:<br>
+                    Из первого: $y = x$.<br>
+                    Из второго: $y = 2x + 3$.</p>
+                    <p>2. Построим графики в одной системе координат:<br>
+                    • $y = x$ — прямая, проходящая через начало координат $(0; 0)$ и точку $(1; 1)$.<br>
+                    • $y = 2x + 3$ — прямая, проходящая через точки $(0; 3)$ и $(-1; 1)$.</p>
+                    <p>3. Найдём точку пересечения. Видно, что прямые пересекаются в точке с координатами $x = -3, y = -3$.</p>
+                    <p><em>Алгебраическая проверка:</em><br>
+                    Если $x = -3$, то $y = -3$ (по первому уравнению).<br>
+                    Подставим во второе: $2(-3) - (-3) + 3 = -6 + 3 + 3 = 0$. Всё верно! ✅</p>
+                    <p><strong>Ответ:</strong> $(-3; -3)$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №699. Реши графически систему: $x^2 - 4 = 0$, $y^2 - 9 = 0$.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Проанализируем каждое уравнение отдельно:<br>
+                    • $x^2 - 4 = 0 \Rightarrow x^2 = 4 \Rightarrow x = 2$ или $x = -2$. Графиком этого уравнения являются <strong>две вертикальные прямые</strong>, параллельные оси $y$.<br>
+                    • $y^2 - 9 = 0 \Rightarrow y^2 = 9 \Rightarrow y = 3$ или $y = -3$. Графиком этого уравнения являются <strong>две горизонтальные прямые</strong>, параллельные оси $x$.</p>
+                    <p>2. Построим эти четыре прямые в одной системе координат. Они образуют прямоугольник.</p>
+                    <p>3. Найдём точки пересечения вертикальных и горизонтальных прямых. Их ровно четыре:<br>
+                    • Пересечение $x = 2$ и $y = 3$ даёт точку <strong>$(2; 3)$</strong>.<br>
+                    • Пересечение $x = 2$ и $y = -3$ даёт точку <strong>$(2; -3)$</strong>.<br>
+                    • Пересечение $x = -2$ и $y = 3$ даёт точку <strong>$(-2; 3)$</strong>.<br>
+                    • Пересечение $x = -2$ и $y = -3$ даёт точку <strong>$(-2; -3)$</strong>.</p>
+                    <p><strong>Ответ:</strong> система имеет четыре решения: $(2; 3)$, $(2; -3)$, $(-2; 3)$, $(-2; -3)$.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Авиамоделирование и безопасность:</strong> Дрон летит по параболической траектории, описываемой уравнением $y = -0.5x^2 + 4$ (где $x$ и $y$ — координаты в метрах, $y$ — высота). Одновременно с этим, лазерный луч системы безопасности описывается прямой линией $y = x + 1$.<br>
+            <strong>Вопрос:</strong> Пересекутся ли траектории дрона и луча? Если да, то в каких точках (координатах) это произойдёт? (Реши графически или алгебраически для проверки).</p>
+            
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Составим систему уравнений:<br>
+                    $\begin{cases} y = -0.5x^2 + 4 \\ y = x + 1 \end{cases}$</p>
+                    <p>2. Чтобы найти точки пересечения, приравняем правые части (или вычтем одно уравнение из другого):<br>
+                    $-0.5x^2 + 4 = x + 1$</p>
+                    <p>3. Приведём уравнение к стандартному виду, умножив всё на $-2$ для удобства:<br>
+                    $x^2 - 8 = -2x - 2$<br>
+                    $x^2 + 2x - 6 = 0$</p>
+                    <p>4. Найдём дискриминант: $D = 2^2 - 4 \cdot 1 \cdot (-6) = 4 + 24 = 28$.<br>
+                    Так как $D > 0$, уравнение имеет два корня, а значит, графики <strong>пересекаются в двух точках</strong>.<br>
+                    $x = \frac{-2 \pm \sqrt{28}}{2} = -1 \pm \sqrt{7}$.<br>
+                    $\sqrt{7} \approx 2.65$.<br>
+                    $x_1 \approx 1.65$, $x_2 \approx -3.65$.</p>
+                    <p>5. Найдём соответствующие $y$ (по формуле $y = x + 1$):<br>
+                    $y_1 \approx 1.65 + 1 = 2.65$<br>
+                    $y_2 \approx -3.65 + 1 = -2.65$</p>
+                    <p><strong>Вывод для инженера:</strong> Да, траектории пересекаются приблизительно в точках $(1.65; 2.65)$ и $(-3.65; -2.65)$. Графический метод позволил бы нам быстро прикинуть эти координаты, глядя на чертёж, прежде чем запускать точные расчёты.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Графический способ</strong> решения системы — это построение графиков всех уравнений в одной системе координат и поиск координат их точек пересечения.</li>
+                <li>Этот метод идеально подходит для определения <strong>количества решений</strong> системы (0, 1, 2 или более).</li>
+                <li>Если точка пересечения не попадает точно в узел координатной сетки, графический метод даёт лишь <strong>приближённое</strong> значение корня.</li>
+                <li>Уравнение вида $x^2 = a$ (при $a>0$) задаёт на плоскости <strong>две параллельные вертикальные прямые</strong>, а не одну точку.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Главная ловушка этого урока — ученики начинают верить, что графический метод всегда даёт точный ответ. Обязательно продемонстрируйте систему, где пересечение происходит «между клетками» (например, $y=x^2$ и $y=2$), и попросите учеников оценить корень на глаз ($\approx 1.4$), а затем проверьте его алгебраически ($\sqrt{2}$). Это наглядно покажет ограничения метода. Также обратите внимание на задачу №699: многие забывают, что $x^2-4=0$ — это две прямые, а не одна, и находят только половину точек пересечения.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-29.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §10).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
