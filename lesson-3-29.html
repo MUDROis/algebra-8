@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Исследование систем двух линейных уравнений с двумя переменными — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <style>
+        /* Дополнительные стили для SVG-графиков */
+        .grid-line { stroke: #e2e8f0; stroke-width: 1; }
+        .axis { stroke: #1e293b; stroke-width: 2; }
+        .line-1 { stroke: #2563eb; stroke-width: 3; }
+        .line-2 { stroke: #dc2626; stroke-width: 3; }
+        .line-2-dashed { stroke: #dc2626; stroke-width: 3; stroke-dasharray: 6, 4; }
+        .label { font-family: sans-serif; font-size: 12px; fill: #64748b; }
+        .title { font-family: sans-serif; font-size: 14px; fill: #1e293b; font-weight: bold; text-anchor: middle; }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Исследование систем двух линейных уравнений с двумя переменными</h1>
+            <p class="subtitle">Урок 29 • Глава 3, §10</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 10, п. 29). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! В 7 классе мы уже решали системы линейных уравнений графическим методом, методом подстановки и методом сложения. Сегодня мы сделаем шаг назад, чтобы посмотреть на систему <strong>в целом</strong>, не решая её. Мы научимся определять количество решений системы, просто взглянув на её коэффициенты!</p>
+            
+            <p>Рассмотрим общую запись системы двух линейных уравнений:</p>
+            <div class="formula-box" style="text-align: center;">
+                $\begin{cases} a_1x + b_1y = c_1 \\ a_2x + b_2y = c_2 \end{cases}$
+            </div>
+
+            <p>Графиком каждого уравнения этой системы является <strong>прямая</strong>. Взаимное расположение двух прямых на плоскости может быть только в трёх случаях. От этого и зависит количество решений системы:</p>
+
+            <div class="svg-container">
+                <!-- Случай 1: Прямые пересекаются (1 решение) -->
+                <svg viewBox="0 0 100 100" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="50" x2="100" y2="50" class="axis" />
+                    <line x1="50" y1="0" x2="50" y2="100" class="axis" />
+                    <!-- y = x (M 10,90 L 90,10) -->
+                    <line x1="10" y1="90" x2="90" y2="10" class="line-1" />
+                    <!-- y = -x (M 10,10 L 90,90) -->
+                    <line x1="10" y1="10" x2="90" y2="90" class="line-2" />
+                    <circle cx="50" cy="50" r="4" fill="#f59e0b" />
+                    <text x="50" y="15" class="title">1 решение</text>
+                    <text x="55" y="45" class="label" fill="#f59e0b" font-weight="bold">(x; y)</text>
+                </svg>
+
+                <!-- Случай 2: Прямые параллельны (0 решений) -->
+                <svg viewBox="0 0 100 100" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="50" x2="100" y2="50" class="axis" />
+                    <line x1="50" y1="0" x2="50" y2="100" class="axis" />
+                    <!-- y = x (M 10,90 L 90,10) -->
+                    <line x1="10" y1="90" x2="90" y2="10" class="line-1" />
+                    <!-- y = x + 20 (M 10,70 L 70,10) -->
+                    <line x1="10" y1="70" x2="70" y2="10" class="line-2" />
+                    <text x="50" y="15" class="title">0 решений</text>
+                </svg>
+
+                <!-- Случай 3: Прямые совпадают (бесконечно много решений) -->
+                <svg viewBox="0 0 100 100" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="50" x2="100" y2="50" class="axis" />
+                    <line x1="50" y1="0" x2="50" y2="100" class="axis" />
+                    <!-- y = x (M 10,90 L 90,10) -->
+                    <line x1="10" y1="90" x2="90" y2="10" class="line-1" />
+                    <!-- Та же прямая, но пунктиром -->
+                    <line x1="10" y1="90" x2="90" y2="10" class="line-2-dashed" />
+                    <text x="50" y="15" class="title">∞ решений</text>
+                </svg>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center;">Рис. 1. Три случая взаимного расположения прямых, соответствующие трём типам решений системы.</p>
+
+            <h3>🛠 Алгебраический критерий (Правило пропорций)</h3>
+            <p>Чтобы не строить графики каждый раз, математики вывели простое правило, сравнивающее отношения коэффициентов при $x$, $y$ и свободных членах:</p>
+            
+            <div class="step-box">
+                <strong>Сравниваем отношения:</strong> $\frac{a_1}{a_2}$, $\frac{b_1}{b_2}$ и $\frac{c_1}{c_2}$<br><br>
+                1️⃣ Если $\frac{a_1}{a_2} \neq \frac{b_1}{b_2}$, то прямые <strong>пересекаются</strong>. Система имеет <strong>одно решение</strong>.<br><br>
+                2️⃣ Если $\frac{a_1}{a_2} = \frac{b_1}{b_2} \neq \frac{c_1}{c_2}$, то прямые <strong>параллельны</strong>. Система <strong>не имеет решений</strong>.<br><br>
+                3️⃣ Если $\frac{a_1}{a_2} = \frac{b_1}{b_2} = \frac{c_1}{c_2}$, то прямые <strong>совпадают</strong>. Система имеет <strong>бесконечно много решений</strong>.
+            </div>
+            <p>⚠️ <strong>Важно:</strong> Если какой-то коэффициент равен нулю, правило пропорций применять нельзя (на ноль делить нельзя!). В этом случае проще выразить одну переменную через другую или построить график.</p>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Всегда приводи уравнения системы к стандартному виду $ax + by = c$ перед сравнением!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №687(а, в). Не решая систему, определи, сколько она имеет решений: 
+                <br>а) $\begin{cases} 2x - y = 3 \\ 4x - 2y = 1 \end{cases}$ 
+                <br>в) $\begin{cases} x + 3y = 5 \\ 2x + 6y = 10 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p><strong>а)</strong> Выпишем коэффициенты: $a_1=2, b_1=-1, c_1=3$ и $a_2=4, b_2=-2, c_2=1$.<br>
+                    Найдём отношения:<br>
+                    $\frac{a_1}{a_2} = \frac{2}{4} = \frac{1}{2}$<br>
+                    $\frac{b_1}{b_2} = \frac{-1}{-2} = \frac{1}{2}$<br>
+                    $\frac{c_1}{c_2} = \frac{3}{1} = 3$<br>
+                    Так как $\frac{1}{2} = \frac{1}{2} \neq 3$, прямые параллельны.<br>
+                    <strong>Ответ:</strong> система не имеет решений. ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+                    <p><strong>в)</strong> Коэффициенты: $a_1=1, b_1=3, c_1=5$ и $a_2=2, b_2=6, c_2=10$.<br>
+                    Найдём отношения:<br>
+                    $\frac{a_1}{a_2} = \frac{1}{2}$<br>
+                    $\frac{b_1}{b_2} = \frac{3}{6} = \frac{1}{2}$<br>
+                    $\frac{c_1}{c_2} = \frac{5}{10} = \frac{1}{2}$<br>
+                    Так как $\frac{1}{2} = \frac{1}{2} = \frac{1}{2}$, прямые совпадают.<br>
+                    <strong>Ответ:</strong> система имеет бесконечно много решений. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №689. При каком значении параметра $a$ система уравнений $\begin{cases} 3x + ay = 6 \\ 6x + 4y = 10 \end{cases}$ не имеет решений?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Система не имеет решений, если прямые параллельны. Это выполняется при условии:<br>
+                    $\frac{a_1}{a_2} = \frac{b_1}{b_2} \neq \frac{c_1}{c_2}$</p>
+                    <p>2. Подставим коэффициенты из нашей системы:<br>
+                    $\frac{3}{6} = \frac{a}{4} \neq \frac{6}{10}$</p>
+                    <p>3. Проверим вторую часть неравенства: $\frac{3}{6} = \frac{1}{2}$, а $\frac{6}{10} = \frac{3}{5}$. Условие $\frac{1}{2} \neq \frac{3}{5}$ выполняется.</p>
+                    <p>4. Решим уравнение для нахождения $a$:<br>
+                    $\frac{1}{2} = \frac{a}{4}$<br>
+                    Умножим обе части на 4: $a = 2$.</p>
+                    <p><em>Проверка:</em> При $a=2$ система имеет вид $\begin{cases} 3x + 2y = 6 \\ 6x + 4y = 10 \end{cases}$. Если первое уравнение умножить на 2, получим $6x + 4y = 12$, что противоречит второму уравнению ($6x + 4y = 10$). Решений нет. ✅</p>
+                    <p><strong>Ответ:</strong> при $a = 2$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> Исследуй систему уравнений, предварительно упростив её: $\begin{cases} x(x + 2) - x^2 = 2y \\ x - y = 1 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Упростим первое уравнение системы, раскрыв скобки:<br>
+                    $x^2 + 2x - x^2 = 2y$<br>
+                    $2x = 2y$<br>
+                    Разделим на 2 и перенесём $y$ влево: $x - y = 0$.</p>
+                    <p>2. Перепишем систему в стандартном виде:<br>
+                    $\begin{cases} x - y = 0 \\ x - y = 1 \end{cases}$</p>
+                    <p>3. Выпишем коэффициенты: $a_1=1, b_1=-1, c_1=0$ и $a_2=1, b_2=-1, c_2=1$.</p>
+                    <p>4. Найдём отношения:<br>
+                    $\frac{a_1}{a_2} = \frac{1}{1} = 1$<br>
+                    $\frac{b_1}{b_2} = \frac{-1}{-1} = 1$<br>
+                    $\frac{c_1}{c_2} = \frac{0}{1} = 0$</p>
+                    <p>5. Так как $1 = 1 \neq 0$, прямые параллельны.<br>
+                    <strong>Ответ:</strong> система не имеет решений. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни</h2>
+            <p>🚀 <strong>Экономика и тарифы:</strong> Ты выбираешь тарифный план мобильного оператора. <br>
+            • Тариф «Старт»: абонентская плата 200 ₽ в месяц + 2 ₽ за каждую минуту разговора.<br>
+            • Тариф «Профи»: абонентская плата 300 ₽ в месяц + 2 ₽ за каждую минуту разговора.<br>
+            Составь математическую модель (систему уравнений) для стоимости $y$ в зависимости от минут $x$. Имеет ли эта система решение? Что это означает в реальной жизни?</p>
+            
+            <details>
+                <summary>Показать математическую модель и вывод</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Составим уравнения для каждого тарифа:<br>
+                    «Старт»: $y = 2x + 200 \Rightarrow 2x - y = -200$<br>
+                    «Профи»: $y = 2x + 300 \Rightarrow 2x - y = -300$</p>
+                    <p>2. Получаем систему:<br>
+                    $\begin{cases} 2x - y = -200 \\ 2x - y = -300 \end{cases}$</p>
+                    <p>3. Исследуем систему через коэффициенты:<br>
+                    $\frac{a_1}{a_2} = \frac{2}{2} = 1$<br>
+                    $\frac{b_1}{b_2} = \frac{-1}{-1} = 1$<br>
+                    $\frac{c_1}{c_2} = \frac{-200}{-300} = \frac{2}{3}$</p>
+                    <p>4. Так как $1 = 1 \neq \frac{2}{3}$, система <strong>не имеет решений</strong>.</p>
+                    <p><strong>Вывод для жизни:</strong> Графики этих тарифов – параллельные прямые. Они никогда не пересекутся. Это означает, что <em>не существует</em> такого количества минут, при котором стоимость обоих тарифов станет одинаковой. Тариф «Старт» всегда будет дешевле на 100 ₽, независимо от времени разговора.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Система двух линейных уравнений может иметь <strong>одно решение</strong> (прямые пересекаются), <strong>не иметь решений</strong> (прямые параллельны) или иметь <strong>бесконечно много решений</strong> (прямые совпадают).</li>
+                <li>Для быстрого анализа используй <strong>правило пропорций</strong>: сравни отношения $\frac{a_1}{a_2}$, $\frac{b_1}{b_2}$ и $\frac{c_1}{c_2}$.</li>
+                <li>Перед сравнением коэффициентов <strong>всегда</strong> приводи уравнения системы к стандартному виду $ax + by = c$.</li>
+                <li>Если какой-либо коэффициент равен нулю, правило пропорций не применяется – используй метод подстановки или графический метод.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Ученики часто совершают две типичные ошибки: 1) забывают привести уравнение к стандартному виду перед сравнением (например, сравнивают коэффициенты в $y = 2x + 1$ и $4x - 2y = 5$ напрямую, не перенеся $x$); 2) путают условия параллельности и совпадения прямых. Рекомендуется дать ученикам «ловушку»: систему, где одно уравнение записано как $y = kx + b$, а другое как $ax + by = c$, и попросить сначала унифицировать запись. Обсуждение задачи с тарифами отлично закрепляет понимание того, что «нет решений» – это не ошибка, а важный практический вывод.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-28.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §10).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
