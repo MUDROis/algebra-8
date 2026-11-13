@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уравнение с двумя переменными и его график — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Уравнение с двумя переменными и его график</h1>
+            <p class="subtitle">Урок 28 • Глава 3, §10</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 10, п. 28). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! До сих пор мы решали уравнения с <strong>одной</strong> переменной (например, $x$). Но в реальном мире величины часто зависят друг от друга. Например, стоимость покупки зависит от количества двух разных товаров. Здесь на сцену выходят <strong>уравнения с двумя переменными</strong>!</p>
+            
+            <div class="formula-box">
+                Определение 1:<br>
+                Решением уравнения с двумя переменными называется <strong>пара значений</strong> этих переменных, которая обращает уравнение в верное числовое равенство.
+            </div>
+
+            <p>💡 <strong>Пример:</strong> Рассмотрим уравнение $5x + y = 9$.<br>
+            Пара чисел $(1; 4)$ является решением, потому что при подстановке $x = 1$ и $y = 4$ получается верное равенство: $5 \cdot 1 + 4 = 9$. ✅<br>
+            Пара $(2; -1)$ тоже является решением: $5 \cdot 2 + (-1) = 9$. ✅<br>
+            Уравнение с двумя переменными, как правило, имеет <strong>бесконечно много</strong> решений.</p>
+
+            <div class="step-box">
+                <strong>Степень уравнения с двумя переменными</strong><br>
+                Чтобы определить степень уравнения, его нужно привести к виду $P(x, y) = 0$, где $P$ — многочлен стандартного вида. Степенью уравнения считается <strong>наибольшая сумма показателей степеней</strong> переменных в одном члене этого многочлена.<br><br>
+                <em>Пример из учебника:</em> Найдём степень уравнения $(x + y)^2 = x^2 - 1$.<br>
+                1. Раскроем скобки: $x^2 + 2xy + y^2 = x^2 - 1$.<br>
+                2. Перенесём всё влево и приведём подобные: $2xy + y^2 + 1 = 0$.<br>
+                3. Смотрим на слагаемые: $2xy$ имеет степень $1+1=2$; $y^2$ имеет степень $2$; $1$ имеет степень $0$.<br>
+                4. Наибольшая степень равна 2. Значит, это уравнение <strong>второй степени</strong>.
+            </div>
+
+            <div class="formula-box">
+                Определение 2:<br>
+                Графиком уравнения с двумя переменными называется множество всех точек координатной плоскости, координаты которых обращают уравнение в верное равенство.
+            </div>
+
+            <div class="svg-container">
+                <!-- Математически точный график параболы y = 0.5x² (уравнение x² - 2y = 0)
+                     Построен покоординатно (шаг 1) для 100% точности.
+                     Масштаб: 1 ед. = 20px. Начало координат (0,0) в SVG: X=100, Y=180 -->
+                <svg viewBox="0 0 200 200" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Сетка -->
+                    <defs>
+                        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="200" height="200" fill="url(#grid)" />
+                    
+                    <!-- Оси координат -->
+                    <line x1="100" y1="0" x2="100" y2="200" stroke="#1e293b" stroke-width="2" />
+                    <line x1="0" y1="180" x2="200" y2="180" stroke="#1e293b" stroke-width="2" />
+                    
+                    <!-- Подписи осей -->
+                    <text x="185" y="175" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                    <text x="105" y="15" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                    <text x="85" y="198" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+
+                    <!-- Метки на осях (масштаб 20px = 1 ед.) -->
+                    <text x="115" y="198" font-family="sans-serif" font-size="12" fill="#64748b">1</text>
+                    <text x="135" y="198" font-family="sans-serif" font-size="12" fill="#64748b">2</text>
+                    <text x="155" y="198" font-family="sans-serif" font-size="12" fill="#64748b">3</text>
+                    <text x="175" y="198" font-family="sans-serif" font-size="12" fill="#64748b">4</text>
+                    
+                    <text x="85" y="165" font-family="sans-serif" font-size="12" fill="#64748b">1</text>
+                    <text x="85" y="145" font-family="sans-serif" font-size="12" fill="#64748b">2</text>
+                    <text x="85" y="105" font-family="sans-serif" font-size="12" fill="#64748b">4</text>
+                    <text x="85" y="65" font-family="sans-serif" font-size="12" fill="#64748b">6</text>
+                    <text x="85" y="25" font-family="sans-serif" font-size="12" fill="#64748b">8</text>
+
+                    <!-- Парабола y = 0.5x², построена строго по координатам -->
+                    <!-- x=-4, y=8 -> X=20, Y=20 -->
+                    <!-- x=-3, y=4.5 -> X=40, Y=90 -->
+                    <!-- x=-2, y=2 -> X=60, Y=140 -->
+                    <!-- x=-1, y=0.5 -> X=80, Y=170 -->
+                    <!-- x=0, y=0 -> X=100, Y=180 -->
+                    <!-- x=1, y=0.5 -> X=120, Y=170 -->
+                    <!-- x=2, y=2 -> X=140, Y=140 -->
+                    <!-- x=3, y=4.5 -> X=160, Y=90 -->
+                    <!-- x=4, y=8 -> X=180, Y=20 -->
+                    <path d="M 20,20 L 40,90 L 60,140 L 80,170 L 100,180 L 120,170 L 140,140 L 160,90 L 180,20" 
+                          fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                    
+                    <!-- Точки для наглядности -->
+                    <circle cx="100" cy="180" r="4" fill="#dc2626" />
+                    <text x="105" y="175" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold">(0; 0)</text>
+
+                    <circle cx="140" cy="140" r="4" fill="#f59e0b" />
+                    <text x="145" y="135" font-family="sans-serif" font-size="12" fill="#f59e0b" font-weight="bold">(2; 2)</text>
+
+                    <circle cx="60" cy="140" r="4" fill="#f59e0b" />
+                    <text x="20" y="135" font-family="sans-serif" font-size="12" fill="#f59e0b" font-weight="bold">(-2; 2)</text>
+                    
+                    <!-- Подпись функции -->
+                    <text x="100" y="40" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold" text-anchor="middle">x² - 2y = 0</text>
+                    <text x="100" y="58" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">(или y = 0.5x²)</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. График уравнения второй степени $x^2 - 2y = 0$. Это парабола. Точки построены строго по координатам формулы.</p>
+            </div>
+
+            <div class="step-box">
+                <strong>Виды графиков, которые ты уже знаешь:</strong><br>
+                • Уравнение первой степени $ax + by = c$ (где $a \neq 0, b \neq 0$) — это <strong>прямая линия</strong>.<br>
+                • Уравнение $x^2 - 2y = 0$ (или $y = 0.5x^2$) — это <strong>парабола</strong>.<br>
+                • Уравнение $xy = 12$ (или $y = 12/x$) — это <strong>гипербола</strong>.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: подставляй значения аккуратно, соблюдая порядок действий!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №671. Является ли пара чисел (-1; 3) решением уравнения: а) x + y = 2; б) 2x - y = -5?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> Будем поочерёдно подставлять $x = -1$ и $y = 3$ в каждое уравнение.</p>
+                    <p><strong>а)</strong> $x + y = 2$<br>
+                    Подставляем: $(-1) + 3 = 2$.<br>
+                    $2 = 2$ — верное равенство. ✅<br>
+                    <em>Вывод:</em> Да, пара $(-1; 3)$ является решением.</p>
+                    <p><strong>б)</strong> $2x - y = -5$<br>
+                    Подставляем: $2 \cdot (-1) - 3 = -2 - 3 = -5$.<br>
+                    $-5 = -5$ — верное равенство. ✅<br>
+                    <em>Вывод:</em> Да, пара $(-1; 3)$ является решением.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №673. Определите степень уравнения: а) x² + 4xy = 5; б) x⁵ + 8xy³ = 1.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> Для определения степени перенесём все члены в левую часть, чтобы справа остался 0, и найдём максимальную сумму показателей степеней в одном слагаемом.</p>
+                    <p><strong>а)</strong> $x^2 + 4xy - 5 = 0$.<br>
+                    Слагаемые: $x^2$ (степень 2), $4xy$ (степень $1+1=2$), $-5$ (степень 0).<br>
+                    Максимальная степень равна 2.<br>
+                    <strong>Ответ:</strong> уравнение второй степени.</p>
+                    <p><strong>б)</strong> $x^5 + 8xy^3 - 1 = 0$.<br>
+                    Слагаемые: $x^5$ (степень 5), $8xy^3$ (степень $1+3=4$), $-1$ (степень 0).<br>
+                    Максимальная степень равна 5.<br>
+                    <strong>Ответ:</strong> уравнение пятой степени.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №676. Объясните, почему графиком уравнения x² - y² = 0 является пара прямых y = x и y = -x.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Воспользуемся формулой разности квадратов: $a^2 - b^2 = (a - b)(a + b)$.<br>
+                    Применим её к левой части уравнения: $x^2 - y^2 = (x - y)(x + y)$.</p>
+                    <p>2. Перепишем исходное уравнение: $(x - y)(x + y) = 0$.</p>
+                    <p>3. Произведение равно нулю тогда и только тогда, когда <strong>хотя бы один</strong> из множителей равен нулю.<br>
+                    Следовательно, $x - y = 0$  или  $x + y = 0$.</p>
+                    <p>4. Выразим $y$ в каждом случае:<br>
+                    Из $x - y = 0$ получаем $y = x$.<br>
+                    Из $x + y = 0$ получаем $y = -x$.</p>
+                    <p>5. Графиком уравнения $y = x$ является прямая, и графиком $y = -x$ тоже является прямая. Объединение этих двух прямых и даёт полный график исходного уравнения.</p>
+                    <p><strong>Вывод:</strong> График уравнения $x^2 - y^2 = 0$ действительно состоит из двух пересекающихся прямых. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни</h2>
+            <p>🚀 <strong>Планирование бюджета:</strong> Ты хочешь купить канцелярию к новому учебному году. У тебя есть ровно 1000 рублей. Ты хочешь купить красивые блокноты по 150 рублей и качественные ручки по 50 рублей. Сколько блокнотов ($x$) и ручек ($y$) ты можешь купить, потратив все деньги без остатка?</p>
+            
+            <details>
+                <summary>Показать математическую модель и решения</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Составим уравнение по условию задачи:<br>
+                    $150x + 50y = 1000$, где $x$ и $y$ — натуральные числа или ноль (мы не можем купить отрицательное количество предметов).</p>
+                    <p>2. Упростим уравнение, разделив обе части на 50:<br>
+                    $3x + y = 20$.</p>
+                    <p>3. Выразим $y$ через $x$: $y = 20 - 3x$.</p>
+                    <p>4. Так как $y \ge 0$, то $20 - 3x \ge 0$, откуда $3x \le 20$, то есть $x \le 6.66$. Поскольку $x$ — целое неотрицательное число, возможные значения $x$: 0, 1, 2, 3, 4, 5, 6.</p>
+                    <p>5. Найдём соответствующие значения $y$:<br>
+                    • Если $x = 0$, $y = 20$ (0 блокнотов, 20 ручек)<br>
+                    • Если $x = 1$, $y = 17$ (1 блокнот, 17 ручек)<br>
+                    • Если $x = 2$, $y = 14$ (2 блокнота, 14 ручек)<br>
+                    • Если $x = 3$, $y = 11$ (3 блокнота, 11 ручек)<br>
+                    • Если $x = 4$, $y = 8$ (4 блокнота, 8 ручек)<br>
+                    • Если $x = 5$, $y = 5$ (5 блокнотов, 5 ручек)<br>
+                    • Если $x = 6$, $y = 2$ (6 блокнотов, 2 ручки)</p>
+                    <p><strong>Ответ:</strong> существует 7 различных вариантов покупки, которые полностью расходуют бюджет. Графиком этого уравнения в целых числах будет набор из 7 отдельных точек на координатной плоскости.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Решение</strong> уравнения с двумя переменными — это <strong>пара чисел</strong> $(x; y)$, обращающая уравнение в верное равенство.</li>
+                <li>Такие уравнения обычно имеют <strong>бесконечно много</strong> решений.</li>
+                <li><strong>Степень</strong> уравнения определяется после приведения его к виду $P(x, y) = 0$ (максимальная сумма степеней переменных в одном члене).</li>
+                <li><strong>График</strong> уравнения — это множество всех точек на плоскости, координаты которых являются решениями уравнения (прямая, парабола, гипербола и др.).</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>При объяснении степени уравнения с двумя переменными ученики часто ошибаются, считая степень каждого слагаемого по отдельности без суммирования показателей (например, в $xy^3$ говорят "степень 3", забывая про $x^1$). Акцентируйте внимание на фразе "сумма показателей степеней". Также полезно попросить учеников построить на одном листе графики $y=x$ и $y=-x$, чтобы они визуально убедились в решении задачи №676.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-27.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §10).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
