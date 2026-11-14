@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решение задач с помощью систем уравнений — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Решение задач с помощью систем уравнений</h1>
+            <p class="subtitle">Урок 32 • Глава 3, §10</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 10, п. 32). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! В реальной жизни мы редко сталкиваемся с задачами, где есть только одна неизвестная величина. Чаще всего условий несколько, и неизвестных тоже две. Именно здесь на помощь приходит <strong>алгебраический метод решения текстовых задач</strong> через составление систем уравнений.</p>
+            
+            <div class="formula-box">
+                Главный секрет успеха:<br>
+                Текст задачи → Математическая модель (система) → Решение → Проверка на «здравый смысл»!
+            </div>
+
+            <h3>🛠 Универсальный алгоритм решения</h3>
+            <div class="svg-container">
+                <svg viewBox="0 0 540 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Блок 1 -->
+                    <rect x="10" y="40" width="120" height="50" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+                    <text x="70" y="65" font-family="sans-serif" font-size="13" fill="#0ea5e9" font-weight="bold" text-anchor="middle">1. Ввод</text>
+                    <text x="70" y="82" font-family="sans-serif" font-size="13" fill="#0ea5e9" font-weight="bold" text-anchor="middle">переменных</text>
+
+                    <!-- Стрелка 1 -->
+                    <line x1="130" y1="65" x2="145" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- Блок 2 -->
+                    <rect x="150" y="40" width="120" height="50" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+                    <text x="210" y="65" font-family="sans-serif" font-size="13" fill="#0ea5e9" font-weight="bold" text-anchor="middle">2. Составление</text>
+                    <text x="210" y="82" font-family="sans-serif" font-size="13" fill="#0ea5e9" font-weight="bold" text-anchor="middle">системы</text>
+
+                    <!-- Стрелка 2 -->
+                    <line x1="270" y1="65" x2="285" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- Блок 3 -->
+                    <rect x="290" y="40" width="120" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                    <text x="350" y="65" font-family="sans-serif" font-size="13" fill="#dc2626" font-weight="bold" text-anchor="middle">3. Решение</text>
+                    <text x="350" y="82" font-family="sans-serif" font-size="13" fill="#dc2626" font-weight="bold" text-anchor="middle">системы</text>
+
+                    <!-- Стрелка 3 -->
+                    <line x1="410" y1="65" x2="425" y2="65" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- Блок 4 -->
+                    <rect x="430" y="40" width="100" height="50" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                    <text x="480" y="65" font-family="sans-serif" font-size="13" fill="#16a34a" font-weight="bold" text-anchor="middle">4. Анализ</text>
+                    <text x="480" y="82" font-family="sans-serif" font-size="13" fill="#16a34a" font-weight="bold" text-anchor="middle">ответа</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Четыре шага от текста задачи к правильному ответу.</p>
+            </div>
+
+            <h3>📖 Разбор примеров из учебника</h3>
+            
+            <p><strong>Задача 1.</strong> <em>Елена покупала чашки по 500 р. и по 2000 р. Она утверждает, что купила 20 чашек за 25 500 р., отдав за них все купюры. Катя говорит, что такого не может быть. Кто прав?</em></p>
+            <div class="step-box">
+                <strong>Решение:</strong><br>
+                1. Пусть <strong>x</strong> — количество чашек по 500 р., а <strong>y</strong> — количество чашек по 2000 р.<br>
+                2. Составим систему по условиям (всего 20 чашек, общая сумма 25 500 р.):<br>
+                $\begin{cases} x + y = 20 \\ 500x + 2000y = 25500 \end{cases}$<br>
+                3. Решим систему. Разделим второе уравнение на 500:<br>
+                $\begin{cases} x + y = 20 \\ x + 4y = 51 \end{cases}$<br>
+                Вычтем первое из второго: $3y = 31 \Rightarrow y = 10\frac{1}{3}$.<br>
+                4. <strong>Анализ ответа:</strong> Количество чашек должно выражаться <strong>натуральным числом</strong>. Число $10\frac{1}{3}$ таковым не является. <br>
+                <strong>Вывод:</strong> Права Катя, такая покупка невозможна. ✅
+            </div>
+
+            <p><strong>Задача 2.</strong> <em>Чашка и блюдце стоили вместе 680 р. После того как чашка подешевела на 20%, а блюдце подорожало на 10%, они стали стоить вместе 580 р. Найдите первоначальную цену чашки и блюдца.</em></p>
+            <div class="step-box">
+                <strong>Решение:</strong><br>
+                1. Пусть <strong>x</strong> (р.) — первоначальная цена чашки, <strong>y</strong> (р.) — цена блюдца.<br>
+                2. Новая цена чашки: $x - 0.2x = 0.8x$. Новая цена блюдца: $y + 0.1y = 1.1y$.<br>
+                3. Система уравнений:<br>
+                $\begin{cases} x + y = 680 \\ 0.8x + 1.1y = 580 \end{cases}$<br>
+                4. Решим методом подстановки. Из первого уравнения: $x = 680 - y$. Подставим во второе:<br>
+                $0.8(680 - y) + 1.1y = 580$<br>
+                $544 - 0.8y + 1.1y = 580$<br>
+                $0.3y = 36 \Rightarrow y = 120$.<br>
+                Тогда $x = 680 - 120 = 560$.<br>
+                5. <strong>Проверка:</strong> $560 + 120 = 680$. $0.8 \cdot 560 + 1.1 \cdot 120 = 448 + 132 = 580$. Всё сходится! ✅<br>
+                <strong>Ответ:</strong> чашка стоила 560 р., блюдце — 120 р.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: <strong>всегда проверяй, имеет ли твой ответ физический или житейский смысл!</strong></p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №719. Было продано 42 л брусничного и грушевого сока. Брусничного сока было продано в 2,5 раза меньше, чем грушевого. Сколько литров грушевого сока было продано?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Пусть <strong>x</strong> (л) — количество грушевого сока, <strong>y</strong> (л) — количество брусничного сока.</p>
+                    <p>2. Составим систему:<br>
+                    $\begin{cases} x + y = 42 \\ x = 2.5y \end{cases}$</p>
+                    <p>3. Подставим $x$ из второго уравнения в первое:<br>
+                    $2.5y + y = 42$<br>
+                    $3.5y = 42$<br>
+                    $y = 42 : 3.5 = 12$.</p>
+                    <p>4. Найдём $x$: $x = 2.5 \cdot 12 = 30$.</p>
+                    <p>5. <strong>Проверка:</strong> $30 + 12 = 42$. $30 : 12 = 2.5$. Всё верно! ✅</p>
+                    <p><strong>Ответ:</strong> 30 литров грушевого сока.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №724. В кошельке лежат 92 рубля мелочью: пятирублёвые и двухрублёвые монеты. Сколько пятирублёвых и сколько двухрублёвых монет было в кошельке, если всего было 28 монет?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Пусть <strong>x</strong> — количество пятирублёвых монет, <strong>y</strong> — количество двухрублёвых монет.</p>
+                    <p>2. Составим систему (всего монет 28, общая сумма 92 р.):<br>
+                    $\begin{cases} x + y = 28 \\ 5x + 2y = 92 \end{cases}$</p>
+                    <p>3. Выразим $y$ из первого уравнения: $y = 28 - x$. Подставим во второе:<br>
+                    $5x + 2(28 - x) = 92$<br>
+                    $5x + 56 - 2x = 92$<br>
+                    $3x = 36 \Rightarrow x = 12$.</p>
+                    <p>4. Найдём $y$: $y = 28 - 12 = 16$.</p>
+                    <p>5. <strong>Проверка:</strong> $12 + 16 = 28$ монет. $5 \cdot 12 + 2 \cdot 16 = 60 + 32 = 92$ рубля. Всё верно! ✅</p>
+                    <p><strong>Ответ:</strong> 12 пятирублёвых и 16 двухрублёвых монет.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №727. Найти все двузначные числа, которые в два раза больше суммы своих цифр.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Пусть <strong>x</strong> — цифра десятков, <strong>y</strong> — цифра единиц. Само двузначное число записывается как <strong>$10x + y$</strong>.</p>
+                    <p>2. По условию число в 2 раза больше суммы цифр:<br>
+                    $10x + y = 2(x + y)$</p>
+                    <p>3. Раскроем скобки и упростим:<br>
+                    $10x + y = 2x + 2y$<br>
+                    $8x = y$</p>
+                    <p>4. <strong>Анализ ограничений:</strong> $x$ и $y$ — это цифры. Значит, $x \in \{1, 2, ..., 9\}$ (число двузначное, поэтому $x \neq 0$), а $y \in \{0, 1, ..., 9\}$.</p>
+                    <p>5. Единственный вариант, при котором $8x = y$ и $y \le 9$, это $x = 1$, тогда $y = 8$.</p>
+                    <p>6. Искомое число: $10 \cdot 1 + 8 = 18$.</p>
+                    <p><em>Проверка:</em> Сумма цифр: $1 + 8 = 9$. $9 \cdot 2 = 18$. Совпадает с самим числом! ✅</p>
+                    <p><strong>Ответ:</strong> 18.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Организация киберспортивного турнира:</strong> Школе нужно закупить периферию для компьютерного клуба. Мышь стоит 1500 р., клавиатура — 3000 р. Общий бюджет составляет 24 000 р., и нужно закупить ровно 11 комплектов (мышь + клавиатура считаются отдельно). Сколько мышей и сколько клавиатур можно купить, чтобы полностью израсходовать бюджет?</p>
+            
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Пусть <strong>x</strong> — количество мышей, <strong>y</strong> — количество клавиатур.</p>
+                    <p>2. Составим систему:<br>
+                    $\begin{cases} x + y = 11 \\ 1500x + 3000y = 24000 \end{cases}$</p>
+                    <p>3. Упростим второе уравнение, разделив его на 1500:<br>
+                    $\begin{cases} x + y = 11 \\ x + 2y = 16 \end{cases}$</p>
+                    <p>4. Вычтем первое уравнение из второго:<br>
+                    $(x + 2y) - (x + y) = 16 - 11$<br>
+                    $y = 5$.</p>
+                    <p>5. Найдём $x$: $x = 11 - 5 = 6$.</p>
+                    <p>6. <strong>Проверка:</strong> $6 + 5 = 11$ предметов. $1500 \cdot 6 + 3000 \cdot 5 = 9000 + 15000 = 24000$ р. Бюджет израсходован точно! ✅</p>
+                    <p><strong>Ответ:</strong> 6 мышей и 5 клавиатур.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Решение текстовой задачи всегда начинается с <strong>обозначения переменных</strong> ($x$ и $y$).</li>
+                <li>Внимательно читай условие: «подешевело на 20%» значит умножить на <strong>0.8</strong>, а «подорожало на 10%» — умножить на <strong>1.1</strong>.</li>
+                <li>Для двузначных чисел используй формулу: <strong>$10x + y$</strong>, где $x$ — десятки, $y$ — единицы.</li>
+                <li><strong>Финальный шаг — самый важный:</strong> всегда проверяй, имеет ли полученный ответ смысл в контексте задачи (например, количество людей или предметов не может быть дробным или отрицательным).</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Самая частая ошибка учеников на этом уроке — остановка на шаге 3 (нашли $x$ и $y$ и сразу пишут ответ). Обязательно требуйте от учеников писать фразу «Проверка по смыслу задачи» или «Анализ ответа». Разбор Задачи 1 (про чашки) идеально подходит для этого: математически система решена верно, но жизненный контекст делает ответ невозможным. Это отличный момент для развития критического мышления.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-31.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §10).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
