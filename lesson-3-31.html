@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгебраический способ решения систем уравнений — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Алгебраический способ решения систем уравнений</h1>
+            <p class="subtitle">Урок 31 • Глава 3, §10</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 10, п. 31). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Графический способ удобен для оценки количества решений, но он часто даёт лишь приближённые ответы. Для получения <strong>точных</strong> координат мы используем <strong>алгебраический способ</strong>. Он включает два основных метода: <em>метод подстановки</em> и <em>метод сложения</em>.</p>
+            
+            <h3>🛠 Метод подстановки (для систем с уравнением 1-й и 2-й степени)</h3>
+            <div class="step-box">
+                <strong>Алгоритм:</strong><br>
+                1️⃣ Вырази одну переменную через другую из уравнения <strong>первой степени</strong>.<br>
+                2️⃣ Подставь полученное выражение в уравнение <strong>второй степени</strong>.<br>
+                3️⃣ Реши полученное уравнение с одной переменной.<br>
+                4️⃣ Найди соответствующие значения второй переменной, подставив найденные корни в выражение из шага 1.
+            </div>
+
+            <p><strong>Пример 1 (из учебника):</strong> Реши систему $\begin{cases} x^2 - 3xy - 2y = 2 \\ x + 2y = 1 \end{cases}$</p>
+            <div class="step-box">
+                1. Из второго уравнения выразим $x$: <strong>$x = 1 - 2y$</strong>.<br>
+                2. Подставим это в первое уравнение:<br>
+                $(1 - 2y)^2 - 3(1 - 2y)y - 2y = 2$<br>
+                3. Раскроем скобки и упростим:<br>
+                $1 - 4y + 4y^2 - 3y + 6y^2 - 2y = 2$<br>
+                $10y^2 - 9y - 1 = 0$<br>
+                4. Решим квадратное уравнение (D = 81 - 4·10·(-1) = 121):<br>
+                $y_1 = 1$, $y_2 = -0.1$<br>
+                5. Найдём $x$ по формуле $x = 1 - 2y$:<br>
+                Если $y_1 = 1$, то $x_1 = 1 - 2(1) = -1$.<br>
+                Если $y_2 = -0.1$, то $x_2 = 1 - 2(-0.1) = 1.2$.<br>
+                <strong>Ответ:</strong> $(-1; 1)$ и $(1.2; -0.1)$. ✅
+            </div>
+
+            <h3>🛠 Метод сложения (для систем с двумя уравнениями 2-й степени)</h3>
+            <div class="step-box">
+                <strong>Идея:</strong> Умножить уравнения на такие числа, чтобы коэффициенты при одной из переменных (обычно $x^2$ или $y^2$) стали противоположными. Затем почленно сложить уравнения, чтобы исключить эту переменную.
+            </div>
+
+            <p><strong>Пример 3 (из учебника):</strong> Реши систему $\begin{cases} x^2 - 2y^2 + x = -6 \\ x^2 - 3y^2 = -11 \end{cases}$</p>
+            <div class="step-box">
+                1. Умножим первое уравнение на 3, а второе на $-2$, чтобы уравнять коэффициенты при $y^2$ до $-6$ и $+6$:<br>
+                $\begin{cases} 3x^2 - 6y^2 + 3x = -18 \\ -2x^2 + 6y^2 = 22 \end{cases}$<br>
+                2. Почленно сложим левые и правые части:<br>
+                $(3x^2 - 2x^2) + (-6y^2 + 6y^2) + 3x = -18 + 22$<br>
+                $x^2 + 3x = 4 \Rightarrow x^2 + 3x - 4 = 0$<br>
+                3. Решим уравнение (по теореме Виета): $x_1 = -4$, $x_2 = 1$.<br>
+                4. Подставим $x$ во второе исходное уравнение ($3y^2 = x^2 + 11$):<br>
+                • Если $x = -4$: $3y^2 = 16 + 11 = 27 \Rightarrow y^2 = 9 \Rightarrow y = \pm 3$.<br>
+                • Если $x = 1$: $3y^2 = 1 + 11 = 12 \Rightarrow y^2 = 4 \Rightarrow y = \pm 2$.<br>
+                <strong>Ответ:</strong> $(-4; 3)$, $(-4; -3)$, $(1; 2)$, $(1; -2)$. ✅
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: при методе подстановки удобнее выражать ту переменную, коэффициент при которой равен 1 или -1.</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №702(а). Реши систему методом подстановки: $\begin{cases} y^2 - x = -1 \\ x = y + 3 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Переменная $x$ уже выражена: $x = y + 3$.</p>
+                    <p>2. Подставим в первое уравнение:<br>
+                    $y^2 - (y + 3) = -1$<br>
+                    $y^2 - y - 3 + 1 = 0$<br>
+                    $y^2 - y - 2 = 0$</p>
+                    <p>3. По теореме Виета: $y_1 = 2$, $y_2 = -1$.</p>
+                    <p>4. Найдём $x$:<br>
+                    Если $y = 2$, то $x = 2 + 3 = 5$.<br>
+                    Если $y = -1$, то $x = -1 + 3 = 2$.</p>
+                    <p><em>Проверка:</em> Для $(5; 2)$: $2^2 - 5 = 4 - 5 = -1$. Верно! ✅</p>
+                    <p><strong>Ответ:</strong> $(5; 2)$ и $(2; -1)$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №704(а). Реши систему: $\begin{cases} x - y = 3 \\ xy = -2 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Выразим $x$ из первого уравнения: $x = y + 3$.</p>
+                    <p>2. Подставим во второе уравнение:<br>
+                    $(y + 3)y = -2$<br>
+                    $y^2 + 3y + 2 = 0$</p>
+                    <p>3. По теореме Виета: $y_1 = -1$, $y_2 = -2$.</p>
+                    <p>4. Найдём $x$:<br>
+                    Если $y = -1$, то $x = -1 + 3 = 2$.<br>
+                    Если $y = -2$, то $x = -2 + 3 = 1$.</p>
+                    <p><em>Проверка:</em> Для $(1; -2)$: $1 \cdot (-2) = -2$. Верно! ✅</p>
+                    <p><strong>Ответ:</strong> $(2; -1)$ и $(1; -2)$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №707(а). Реши систему методом сложения: $\begin{cases} 2x + y^2 = 9 \\ x - y^2 = 3 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Заметим, что коэффициенты при $y^2$ уже противоположные ($+1$ и $-1$). Почленно сложим уравнения:<br>
+                    $(2x + x) + (y^2 - y^2) = 9 + 3$<br>
+                    $3x = 12 \Rightarrow x = 4$.</p>
+                    <p>2. Подставим $x = 4$ во второе уравнение:<br>
+                    $4 - y^2 = 3$<br>
+                    $y^2 = 1 \Rightarrow y = \pm 1$.</p>
+                    <p>3. Получаем две пары решений.<br>
+                    <em>Проверка:</em> Для $(4; -1)$: $2(4) + (-1)^2 = 8 + 1 = 9$. Верно! ✅</p>
+                    <p><strong>Ответ:</strong> $(4; 1)$ и $(4; -1)$.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Авиамоделирование и безопасность:</strong> Два дрона движутся в одной вертикальной плоскости. Траектория первого описывается параболой $y = x^2 - 4$, а второго — прямой линией $x + y = 2$ (координаты в метрах).<br>
+            <strong>Вопрос:</strong> Существуют ли точки пересечения их траекторий (риск столкновения)? Если да, найди их точные координаты алгебраическим методом.</p>
+            
+            <details>
+                <summary>Показать пошаговое решение и график</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Составим систему уравнений:<br>
+                    $\begin{cases} y = x^2 - 4 \\ x + y = 2 \end{cases}$</p>
+                    <p>2. Выразим $y$ из второго уравнения: $y = 2 - x$.</p>
+                    <p>3. Подставим в первое уравнение:<br>
+                    $2 - x = x^2 - 4$<br>
+                    $x^2 + x - 6 = 0$</p>
+                    <p>4. Решим квадратное уравнение (по теореме Виета):<br>
+                    $x_1 = -3$, $x_2 = 2$.</p>
+                    <p>5. Найдём соответствующие $y$ по формуле $y = 2 - x$:<br>
+                    Если $x = -3$, то $y = 2 - (-3) = 5$.<br>
+                    Если $x = 2$, то $y = 2 - 2 = 0$.</p>
+                    <p><strong>Вывод:</strong> Траектории пересекаются в двух точках: <strong>$(-3; 5)$</strong> и <strong>$(2; 0)$</strong>. Операторам дронов необходимо скорректировать курс! ⚠️</p>
+                    
+                    <div class="svg-container" style="margin-top: 20px;">
+                        <!-- Математически точный график пересечения y = x² - 4 и y = -x + 2
+                             Масштаб: 1 ед. = 30px. Начало координат (0,0) в SVG: X=150, Y=150 -->
+                        <svg viewBox="0 0 300 300" width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Сетка -->
+                            <defs>
+                                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="300" height="300" fill="url(#grid)" />
+                            
+                            <!-- Оси -->
+                            <line x1="150" y1="0" x2="150" y2="300" stroke="#1e293b" stroke-width="2" />
+                            <line x1="0" y1="150" x2="300" y2="150" stroke="#1e293b" stroke-width="2" />
+                            
+                            <!-- Подписи осей -->
+                            <text x="285" y="145" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                            <text x="155" y="20" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                            <text x="135" y="170" font-family="sans-serif" font-size="14" fill="#1e293b">0</text>
+
+                            <!-- Парабола y = x² - 4 (точки: x=-3,y=5; x=-2,y=0; x=0,y=-4; x=2,y=0; x=3,y=5) -->
+                            <!-- X = 150 + 30*x, Y = 150 - 30*y -->
+                            <path d="M 60,0 L 90,150 L 150,270 L 210,150 L 240,0" 
+                                  fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                            <text x="245" y="30" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="bold">y = x² - 4</text>
+
+                            <!-- Прямая y = -x + 2 (точки: x=-3,y=5 и x=2,y=0) -->
+                            <line x1="60" y1="0" x2="210" y2="150" stroke="#dc2626" stroke-width="3" />
+                            <text x="215" y="145" font-family="sans-serif" font-size="14" fill="#dc2626" font-weight="bold">x + y = 2</text>
+
+                            <!-- Точки пересечения -->
+                            <circle cx="60" cy="0" r="5" fill="#f59e0b" />
+                            <text x="10" y="15" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold">(-3; 5)</text>
+
+                            <circle cx="210" cy="150" r="5" fill="#f59e0b" />
+                            <text x="220" y="170" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold">(2; 0)</text>
+                        </svg>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Точки пересечения траекторий (жёлтые точки), рассчитанные алгебраически и подтверждённые графически.</p>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Метод подстановки</strong> идеален, когда одна из переменных легко выражается из линейного уравнения.</li>
+                <li><strong>Метод сложения</strong> эффективен, когда можно подобрать множители для уничтожения одной из переменных (особенно $x^2$ или $y^2$).</li>
+                <li>Система, содержащая уравнение второй степени, может иметь <strong>0, 1, 2, 3 или 4</strong> решения (как в Примере 3).</li>
+                <li>Всегда проверяй найденные пары чисел <strong>подстановкой в исходную систему</strong>, чтобы избежать ошибок при раскрытии скобок.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Типичная ошибка учеников при методе подстановки: подставив выражение для $x$ в первое уравнение, они пытаются найти $y$, а затем <strong>забывают</strong> найти обратное значение $x$, записывая в ответ только одну координату. Акцентируйте внимание на шаге 4 алгоритма. При методе сложения обратите внимание на случай, когда после сложения получается уравнение вида $y^2 = -5$ (решений нет) или $y^2 = 9$ (даёт сразу два значения $y$ для одного $x$, что увеличивает количество пар решений, как в Примере 3).</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-30.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, §10).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
