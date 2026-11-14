@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Уравнения с параметром — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Уравнения с параметром</h1>
+            <p class="subtitle">Урок 33 • Глава 3 (Дополнительный материал)</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (Глава 3, дополнительный материал). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! До сих пор мы решали уравнения, где все числа были известны. Но в реальной науке и инженерии часто встречаются ситуации, когда некоторые коэффициенты не заданы конкретными числами, а обозначены буквами. Такие буквы называются <strong>параметрами</strong>.</p>
+            
+            <div class="formula-box">
+                Определение:<br>
+                Параметр — это буква, которая обозначает фиксированное, но произвольное число. Переменная (обычно x) — это то, что мы ищем.
+            </div>
+
+            <p>💡 <strong>Простой пример:</strong> Уравнение $ax = 5$.<br>
+            Здесь $x$ — неизвестное, а $a$ — параметр. Чтобы его решить, мы не можем просто разделить на $a$, не подумав! Ведь параметр $a$ может оказаться равен нулю, а на ноль делить нельзя.</p>
+
+            <div class="step-box">
+                <strong>Что значит «решить уравнение с параметром»?</strong><br>
+                Это значит для <strong>любого</strong> допустимого значения параметра найти множество корней уравнения или доказать, что при этом значении параметра корней нет.
+            </div>
+
+            <h3>🛠 Алгоритм исследования</h3>
+            <div class="svg-container">
+                <svg viewBox="0 0 560 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+                        </marker>
+                    </defs>
+                    
+                    <!-- Блок 1 -->
+                    <rect x="10" y="50" width="140" height="50" rx="8" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+                    <text x="80" y="70" font-family="sans-serif" font-size="12" fill="#0ea5e9" font-weight="bold" text-anchor="middle">1. Привести к виду</text>
+                    <text x="80" y="88" font-family="sans-serif" font-size="12" fill="#0ea5e9" font-weight="bold" text-anchor="middle">A(x)·x = B(x)</text>
+
+                    <!-- Стрелка 1 -->
+                    <line x1="150" y1="75" x2="165" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- Блок 2 -->
+                    <rect x="170" y="50" width="140" height="50" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                    <text x="240" y="70" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold" text-anchor="middle">2. Найти «опасные»</text>
+                    <text x="240" y="88" font-family="sans-serif" font-size="12" fill="#dc2626" font-weight="bold" text-anchor="middle">значения (A(x)=0)</text>
+
+                    <!-- Стрелка 2 -->
+                    <line x1="310" y1="75" x2="325" y2="75" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                    <!-- Блок 3 -->
+                    <rect x="330" y="50" width="220" height="50" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                    <text x="440" y="70" font-family="sans-serif" font-size="12" fill="#16a34a" font-weight="bold" text-anchor="middle">3. Рассмотреть случаи:</text>
+                    <text x="440" y="88" font-family="sans-serif" font-size="12" fill="#16a34a" font-weight="bold" text-anchor="middle">A(x) = 0 и A(x) ≠ 0</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Универсальный алгоритм решения линейных уравнений с параметром.</p>
+            </div>
+
+            <h3>📖 Разбор примеров из учебника</h3>
+            
+            <p><strong>Пример 1.</strong> Решим уравнение $bx - 3x = b^3 - 3b^2 + 4b - 12$ с параметром $b$.</p>
+            <div class="step-box">
+                <strong>Решение:</strong><br>
+                1. Вынесем $x$ за скобки в левой части:<br>
+                $(b - 3)x = b^3 - 3b^2 + 4b - 12$<br>
+                2. Разложим правую часть на множители способом группировки:<br>
+                $b^3 - 3b^2 + 4b - 12 = b^2(b - 3) + 4(b - 3) = (b - 3)(b^2 + 4)$<br>
+                3. Уравнение принимает вид: <strong>$(b - 3)x = (b - 3)(b^2 + 4)$</strong>.<br>
+                4. <strong>Исследуем случаи:</strong><br>
+                • <strong>Случай 1:</strong> $b - 3 \neq 0$, то есть $b \neq 3$. Делим обе части на $(b - 3)$:<br>
+                $x = \frac{(b - 3)(b^2 + 4)}{b - 3} \Rightarrow \mathbf{x = b^2 + 4}$.<br>
+                • <strong>Случай 2:</strong> $b - 3 = 0$, то есть $b = 3$. Подставляем в уравнение:<br>
+                $0 \cdot x = 0 \cdot (3^2 + 4) \Rightarrow 0 \cdot x = 0$.<br>
+                Это верное равенство при <strong>любом</strong> $x$.<br><br>
+                <strong>Ответ:</strong> если $b \neq 3$, то $x = b^2 + 4$; если $b = 3$, то $x$ — любое число. ✅
+            </div>
+
+            <p><strong>Пример 2.</strong> Решим уравнение $ax^2 + (a - 1)x - (a - 1)^2 = 0$ с параметром $a$.</p>
+            <div class="step-box">
+                <strong>Решение:</strong><br>
+                1. <strong>Случай 1:</strong> $a = 0$. Уравнение становится линейным:<br>
+                $0 \cdot x^2 + (0 - 1)x - (0 - 1)^2 = 0 \Rightarrow -x - 1 = 0 \Rightarrow \mathbf{x = -1}$.<br>
+                2. <strong>Случай 2:</strong> $a \neq 0$. Уравнение является квадратным. Найдём дискриминант:<br>
+                $D = (a - 1)^2 - 4 \cdot a \cdot (-(a - 1)^2) = (a - 1)^2 + 4a(a - 1)^2 = (a - 1)^2(1 + 4a)$.<br>
+                3. Анализируем $D$: поскольку $(a - 1)^2 \ge 0$, знак $D$ зависит от $(1 + 4a)$.<br>
+                • Если $1 + 4a < 0$ (то есть $a < -0.25$), то $D < 0$, корней нет.<br>
+                • Если $a = -0.25$, то $D = 0$, один корень: $x = \frac{-(a - 1)}{2a} = \frac{-(-1.25)}{-0.5} = -2.5$.<br>
+                • Если $a > -0.25$ и $a \neq 0$, то $D > 0$, два корня: $x = \frac{-(a - 1) \pm |a - 1|\sqrt{1 + 4a}}{2a}$.<br>
+                <strong>Ответ:</strong> при $a = 0$: $x = -1$; при $a < -0.25$: корней нет; при $a = -0.25$: один корень $x = -2.5$; при $a > -0.25$ и $a \neq 0$: два корня по формуле. ✅
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. <strong>Главное правило:</strong> всегда начинай с поиска значений параметра, при которых коэффициент при переменной обращается в ноль!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №733. Реши уравнение с параметром $b$: $bx + 2x = 3b + 6$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Вынесем $x$ за скобки в левой части и разложим правую часть:<br>
+                    $x(b + 2) = 3(b + 2)$</p>
+                    <p>2. <strong>Исследуем случаи:</strong><br>
+                    • <strong>Случай 1:</strong> $b + 2 \neq 0$, то есть $b \neq -2$. Делим обе части на $(b + 2)$:<br>
+                    $x = \frac{3(b + 2)}{b + 2} \Rightarrow \mathbf{x = 3}$.<br>
+                    • <strong>Случай 2:</strong> $b + 2 = 0$, то есть $b = -2$. Подставляем:<br>
+                    $x \cdot 0 = 3 \cdot 0 \Rightarrow 0 \cdot x = 0$.<br>
+                    Уравнение верно при любом $x$.</p>
+                    <p><strong>Ответ:</strong> если $b \neq -2$, то $x = 3$; если $b = -2$, то $x$ — любое число. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №735. Реши уравнение с параметром $a$: $ax - 2x = a^3 - 2a^2 - 9a + 18$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Вынесем $x$ за скобки слева: $x(a - 2) = a^3 - 2a^2 - 9a + 18$.</p>
+                    <p>2. Разложим правую часть способом группировки:<br>
+                    $a^3 - 2a^2 - 9a + 18 = a^2(a - 2) - 9(a - 2) = (a - 2)(a^2 - 9) = (a - 2)(a - 3)(a + 3)$.</p>
+                    <p>3. Уравнение принимает вид: <strong>$x(a - 2) = (a - 2)(a - 3)(a + 3)$</strong>.</p>
+                    <p>4. <strong>Исследуем случаи:</strong><br>
+                    • Если $a - 2 \neq 0$ ($a \neq 2$), делим на $(a - 2)$: $x = (a - 3)(a + 3) = \mathbf{a^2 - 9}$.<br>
+                    • Если $a - 2 = 0$ ($a = 2$), получаем $0 \cdot x = 0$, значит, $x$ — любое число.</p>
+                    <p><strong>Ответ:</strong> если $a \neq 2$, то $x = a^2 - 9$; если $a = 2$, то $x$ — любое число. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №738(в). При каком значении параметра $t$ уравнение $tx^2 - 6x + 1 = 0$ имеет единственный корень?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. <strong>Случай 1:</strong> $t = 0$. Уравнение становится линейным:<br>
+                    $0 \cdot x^2 - 6x + 1 = 0 \Rightarrow -6x = -1 \Rightarrow \mathbf{x = \frac{1}{6}}$.<br>
+                    В этом случае корень <strong>единственный</strong>. Значит, $t = 0$ нам подходит!</p>
+                    <p>2. <strong>Случай 2:</strong> $t \neq 0$. Уравнение квадратное. Оно имеет единственный корень, когда дискриминант $D = 0$.<br>
+                    $D = (-6)^2 - 4 \cdot t \cdot 1 = 36 - 4t$.<br>
+                    Приравниваем к нулю: $36 - 4t = 0 \Rightarrow 4t = 36 \Rightarrow \mathbf{t = 9}$.</p>
+                    <p>3. <strong>Итоговый анализ:</strong> уравнение имеет ровно один корень в двух случаях: когда оно вырождается в линейное ($t = 0$) и когда у квадратного уравнения нулевой дискриминант ($t = 9$).</p>
+                    <p><strong>Ответ:</strong> при $t = 0$ и $t = 9$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Программирование и алгоритмы:</strong> Ты пишешь функцию на Python, которая решает уравнение $kx = 10$ для расчёта траектории дрона. Если ты просто напишешь `x = 10 / k`, программа «упадёт» с ошибкой <em>ZeroDivisionError</em>, когда $k = 0$.<br>
+            <strong>Вопрос:</strong> Как должен выглядеть алгоритм (псевдокод), чтобы программа корректно обрабатывала <strong>все</strong> возможные значения параметра $k$?</p>
+            
+            <details>
+                <summary>Показать алгоритм и объяснение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>Алгоритм должен явно проверять «опасное» значение параметра перед выполнением деления:</p>
+                    <div class="formula-box" style="background: #1e293b; color: #e2e8f0; border-left-color: #0ea5e9;">
+                        if k == 0:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print("Решений нет (или x - любое число, в зависимости от правой части)")<br>
+                        else:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;x = 10 / k<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print("Единственный корень: x =", x)
+                    </div>
+                    <p><strong>Вывод:</strong> Математическое исследование случаев ($k = 0$ и $k \neq 0$) — это не просто абстрактная теория, а основа написания устойчивого, безошибочного кода в IT! ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Параметр</strong> — это фиксированное, но неизвестное нам число. Мы должны дать ответ для <em>любого</em> его значения.</li>
+                <li>Никогда не дели на выражение с параметром, не проверив сначала случай, когда это выражение <strong>равно нулю</strong>.</li>
+                <li>Если уравнение содержит $x^2$ с параметром при нём (например, $ax^2$), обязательно рассмотри случай $a = 0$ отдельно, так как уравнение перестаёт быть квадратным.</li>
+                <li>Ответ в задачах с параметром всегда формулируется как набор условий: «Если параметр равен..., то...; если параметр не равен..., то...».</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Самая распространённая ошибка учеников при решении уравнений с параметром — автоматическое деление на выражение с параметром без анализа случая равенства его нулю (например, сразу писать $x = 3$ для уравнения $(b-3)x = 3(b-3)$). Рекомендуется требовать от учеников писать фразу «Рассмотрим два случая: коэффициент равен нулю и не равен нулю» перед каждым таким шагом. Задача №738 отлично демонстрирует, что «единственный корень» у уравнения с $x^2$ может быть не только при $D=0$, но и при вырождении в линейное уравнение.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-32.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава 3, дополнительный материал).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
