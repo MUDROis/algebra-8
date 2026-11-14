@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Числовые неравенства — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Числовые неравенства</h1>
+            <p class="subtitle">Урок 34 • Глава IV, §11</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 11, п. 34). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Мы всю жизнь интуитивно понимаем, что 5 больше 3, а -2 меньше 0. Но в серьёзной математике интуиции недостаточно. Нам нужно <strong>строгое, универсальное определение</strong>, которое работает для любых чисел: дробей, иррациональных и отрицательных.</p>
+            
+            <div class="formula-box">
+                Основное определение:<br>
+                Число <strong>a больше</strong> числа <strong>b</strong> (пишут a > b), если их разность <strong>a - b</strong> является <strong>положительным</strong> числом.<br>
+                Число <strong>a меньше</strong> числа <strong>b</strong> (пишут a < b), если их разность <strong>a - b</strong> является <strong>отрицательным</strong> числом.<br>
+                Числа <strong>равны</strong> (a = b), если <strong>a - b = 0</strong>.
+            </div>
+
+            <p>💡 <strong>Геометрический смысл:</strong> На координатной прямой большее число всегда изображается точкой, лежащей <strong>правее</strong>, а меньшее — <strong>левее</strong>.</p>
+
+            <div class="svg-container">
+                <!-- Математически точная числовая прямая, демонстрирующая a > b -->
+                <svg viewBox="0 0 400 120" width="100%" height="120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Ось -->
+                    <line x1="20" y1="60" x2="380" y2="60" stroke="#1e293b" stroke-width="2" />
+                    <polygon points="380,60 370,55 370,65" fill="#1e293b" />
+                    <text x="385" y="65" font-family="sans-serif" font-size="16" fill="#1e293b" font-style="italic">x</text>
+
+                    <!-- Точка b -->
+                    <circle cx="120" cy="60" r="5" fill="#2563eb" />
+                    <text x="120" y="85" font-family="sans-serif" font-size="16" fill="#2563eb" font-weight="bold" text-anchor="middle">b</text>
+
+                    <!-- Точка a -->
+                    <circle cx="280" cy="60" r="5" fill="#dc2626" />
+                    <text x="280" y="85" font-family="sans-serif" font-size="16" fill="#dc2626" font-weight="bold" text-anchor="middle">a</text>
+
+                    <!-- Стрелка разности -->
+                    <line x1="130" y1="40" x2="270" y2="40" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow-orange)" marker-start="url(#arrow-orange-start)"/>
+                    <text x="200" y="35" font-family="sans-serif" font-size="14" fill="#f59e0b" font-weight="bold" text-anchor="middle">a - b > 0</text>
+
+                    <defs>
+                        <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#f59e0b" />
+                        </marker>
+                        <marker id="arrow-orange-start" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                            <path d="M 10 0 L 0 5 L 10 10 z" fill="#f59e0b" />
+                        </marker>
+                    </defs>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Геометрическая интерпретация: точка <em>a</em> правее точки <em>b</em>, поэтому разность <em>a - b</em> положительна.</p>
+            </div>
+
+            <h3>🛠 Как доказывать неравенства?</h3>
+            <p>Чтобы доказать, что выражение <strong>A</strong> больше выражения <strong>B</strong>, нужно выполнить всего один универсальный алгоритм:</p>
+            <div class="step-box">
+                <strong>Алгоритм доказательства:</strong><br>
+                1️⃣ Составить разность <strong>A - B</strong>.<br>
+                2️⃣ Упростить полученное выражение (раскрыть скобки, привести подобные, выделить полный квадрат).<br>
+                3️⃣ Сделать вывод о знаке разности: если <strong>A - B > 0</strong>, то неравенство <strong>A > B</strong> верно.
+            </div>
+
+            <p><strong>Пример из учебника:</strong> Докажем, что для любых положительных чисел $a$ и $b$ верно неравенство $\frac{a+b}{2} \ge \sqrt{ab}$ (среднее арифметическое не меньше среднего геометрического).</p>
+            <div class="step-box">
+                <strong>Доказательство:</strong><br>
+                1. Составим разность: $\frac{a+b}{2} - \sqrt{ab}$.<br>
+                2. Приведём к общему знаменателю: $\frac{a + b - 2\sqrt{ab}}{2}$.<br>
+                3. Заметим, что числитель — это формула квадрата разности: $\frac{(\sqrt{a} - \sqrt{b})^2}{2}$.<br>
+                4. Сделаем вывод: квадрат любого действительного числа неотрицателен, то есть $(\sqrt{a} - \sqrt{b})^2 \ge 0$. Знаменатель 2 > 0. Следовательно, вся дробь $\ge 0$.<br>
+                <strong>Вывод:</strong> Разность неотрицательна, значит, $\frac{a+b}{2} \ge \sqrt{ab}$. ✅ (Равенство достигается только при $a = b$).
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: при доказательстве мы всегда работаем с <strong>разностью</strong>!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №838. Сравните числа a и b, если: а) a - b = -0,001; б) a - b = 4,3.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> Используем основное определение через знак разности.</p>
+                    <p><strong>а)</strong> Дано: $a - b = -0,001$.<br>
+                    Так как $-0,001 < 0$ (число отрицательное), то по определению <strong>a < b</strong>. ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+                    <p><strong>б)</strong> Дано: $a - b = 4,3$.<br>
+                    Так как $4,3 > 0$ (число положительное), то по определению <strong>a > b</strong>. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №842(б). Докажите, что при любом значении p верно неравенство: (7p - 1)(7p + 1) < 49p²</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство:</strong></p>
+                    <p>1. Составим разность левой и правой части: $(7p - 1)(7p + 1) - 49p^2$.</p>
+                    <p>2. Упростим выражение, применив формулу разности квадратов $(x-y)(x+y) = x^2 - y^2$:<br>
+                    $(49p^2 - 1) - 49p^2$</p>
+                    <p>3. Приведём подобные слагаемые:<br>
+                    $49p^2 - 1 - 49p^2 = -1$.</p>
+                    <p>4. Сделаем вывод: так как $-1 < 0$ при любом значении $p$, исходная разность отрицательна.<br>
+                    <strong>Следовательно,</strong> $(7p - 1)(7p + 1) < 49p^2$ верно для любого $p$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №850(а). Используя выделение квадрата двучлена, докажите неравенство: a² - 6a + 14 > 0 при любом a.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство:</strong></p>
+                    <p>1. Нам нужно доказать, что выражение $a^2 - 6a + 14$ всегда положительно.</p>
+                    <p>2. Выделим полный квадрат двучлена. Для этого представим $-6a$ как $-2 \cdot 3 \cdot a$, и добавим-вычтем $3^2 = 9$:<br>
+                    $a^2 - 6a + 14 = (a^2 - 6a + 9) - 9 + 14$</p>
+                    <p>3. Свернём полный квадрат и сложим числа:<br>
+                    $(a - 3)^2 + 5$</p>
+                    <p>4. Сделаем вывод: квадрат любого действительного числа неотрицателен, то есть $(a - 3)^2 \ge 0$.<br>
+                    Прибавив к неотрицательному числу 5, мы гарантированно получим число, большее или равное 5.<br>
+                    Так как $5 > 0$, то и $(a - 3)^2 + 5 > 0$ при любом $a$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Финансовая грамотность и тарифы:</strong> Ты выбираешь тарифный план для мобильного интернета. <br>
+            • Тариф «Старт»: абонентская плата 300 ₽ + 5 ₽ за каждый гигабайт сверх пакета.<br>
+            • Тариф «Профи»: абонентская плата 450 ₽ + 2 ₽ за каждый гигабайт сверх пакета.<br>
+            <strong>Вопрос:</strong> При каком количестве сверхлимитных гигабайт ($x$) тариф «Старт» станет выгоднее (дешевле) тарифа «Профи»? Реши с помощью метода разности.</p>
+            
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Запишем стоимость каждого тарифа как выражение от $x$:<br>
+                    Стоимость «Старт»: $A = 300 + 5x$<br>
+                    Стоимость «Профи»: $B = 450 + 2x$</p>
+                    <p>2. Нам нужно доказать, что $A < B$. Составим разность $A - B$ и потребуем, чтобы она была меньше нуля:<br>
+                    $(300 + 5x) - (450 + 2x) < 0$</p>
+                    <p>3. Упростим разность:<br>
+                    $300 + 5x - 450 - 2x < 0$<br>
+                    $3x - 150 < 0$</p>
+                    <p>4. Решим полученное простейшее неравенство:<br>
+                    $3x < 150$<br>
+                    $x < 50$</p>
+                    <p><strong>Вывод для жизни:</strong> Если ты тратишь менее 50 ГБ сверх пакета, тариф «Старт» математически гарантированно дешевле. Если ровно 50 ГБ — стоимость одинакова (разность равна 0). Если больше 50 ГБ, выгоднее «Профи». Метод разности дал нам точную границу!</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Фундаментальное определение: <strong>a > b</strong> означает, что разность <strong>a - b > 0</strong>.</li>
+                <li>На координатной прямой большее число всегда находится <strong>правее</strong>.</li>
+                <li>Универсальный метод доказательства неравенств: составить разность левой и правой части, упростить её и определить знак.</li>
+                <li>Приём <strong>выделения полного квадрата</strong> — мощный инструмент для доказательства того, что выражение всегда положительно (или всегда отрицательно).</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Самая распространённая ловушка для учеников на этом этапе — перенос свойств из уравнений в неравенства без проверки. Например, ученики могут ошибочно полагать, что если $a > b$, то обязательно $a^2 > b^2$ (что неверно для отрицательных чисел, например, $-2 > -5$, но $4 < 25$). Акцентируйте внимание на том, что метод разности ($A - B$) является <em>единственным универсальным</em> способом, который работает всегда, без исключений. Задача №850 отлично тренирует навык выделения полного квадрата, который критически важен для темы «Квадратичная функция».</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-3-33.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава IV, §11).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
