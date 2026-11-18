@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Сложение и умножение числовых неравенств — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .example-block {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .example-block h4 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Сложение и умножение числовых неравенств</h1>
+            <p class="subtitle">Урок 36 • Глава IV, §11</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 11, п. 36). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! На прошлом уроке мы изучили свойства отдельных неравенств. Сегодня мы сделаем мощный шаг вперёд — научимся <strong>складывать и умножать</strong> неравенства друг с другом! Это позволит нам оценивать значения сложных выражений, когда мы знаем только приблизительные границы входящих в них величин.</p>
+            
+            <div class="theorem-box">
+                <strong>Теорема 5 (почленное сложение):</strong><br>
+                Если <strong>a &lt; b</strong> и <strong>c &lt; d</strong>, то <strong>a + c &lt; b + d</strong>.
+            </div>
+            <div class="proof-box">
+                <strong>Доказательство:</strong> Прибавим к обеим частям неравенства a &lt; b число c:<br>
+                a + c &lt; b + c.<br>
+                Прибавим к обеим частям неравенства c &lt; d число b:<br>
+                b + c &lt; b + d.<br>
+                По <strong>Теореме 2</strong> (транзитивность) из неравенств a + c &lt; b + c и b + c &lt; b + d следует:<br>
+                <strong>a + c &lt; b + d</strong>. ∎
+            </div>
+            <p>💡 <strong>Правило:</strong> Верные неравенства одного знака можно почленно складывать — получится верное неравенство.</p>
+
+            <div class="theorem-box">
+                <strong>Теорема 6 (почленное умножение):</strong><br>
+                Если <strong>a &lt; b</strong> и <strong>c &lt; d</strong>, где a, b, c, d — <em>положительные</em> числа, то <strong>ac &lt; bd</strong>.
+            </div>
+            <div class="proof-box">
+                <strong>Доказательство:</strong> Умножим обе части неравенства a &lt; b на положительное число c:<br>
+                ac &lt; bc.<br>
+                Умножим обе части неравенства c &lt; d на положительное число b:<br>
+                bc &lt; bd.<br>
+                По транзитивности: <strong>ac &lt; bd</strong>. ∎
+            </div>
+            <p>💡 <strong>Правило:</strong> Верные неравенства одного знака можно почленно умножать, <em>если все части положительны</em>.</p>
+
+            <div class="formula-box" style="background: #fef3c7; border-left-color: var(--warning);">
+                ⚠️ ВАЖНО! Если в неравенствах есть отрицательные числа, Теорема 6 может не работать!<br>
+                Пример: −1 &lt; 2 и −3 &lt; 1 — верные неравенства.<br>
+                Но (−1)·(−3) = 3, а 2·1 = 2, и 3 &gt; 2 — неравенство перевернулось!
+            </div>
+
+            <div class="theorem-box">
+                <strong>Следствие:</strong><br>
+                Если числа <strong>a</strong> и <strong>b</strong> положительны и <strong>a &lt; b</strong>, то <strong>a<sup>n</sup> &lt; b<sup>n</sup></strong>, где n — натуральное число.
+            </div>
+            <div class="proof-box">
+                <strong>Доказательство:</strong> Почленно перемножим n верных неравенств a &lt; b, в которых a и b — положительные числа. Получим верное неравенство a<sup>n</sup> &lt; b<sup>n</sup>.
+            </div>
+
+            <h3>📖 Практическое применение: оценка значений выражений</h3>
+            <p>Эти теоремы позволяют находить <strong>границы</strong> (оценки) для суммы, разности, произведения и частного, когда мы знаем только приблизительные значения величин.</p>
+
+            <div class="example-block">
+                <h4>Пример из учебника (стр. 196)</h4>
+                <p><strong>Дано:</strong> 15 &lt; x &lt; 16 и 2 &lt; y &lt; 3.</p>
+                <p><strong>Требуется:</strong> Оценить сумму x + y, разность x − y, произведение xy и частное x/y.</p>
+                
+                <p><strong>1. Оценка суммы x + y:</strong></p>
+                <div class="step-box">
+                    Складываем неравенства почленно (Теорема 5):<br>
+                    15 &lt; x &lt; 16<br>
+                    +<br>
+                    2 &lt; y &lt; 3<br>
+                    ─────────<br>
+                    <strong>17 &lt; x + y &lt; 19</strong> ✅
+                </div>
+
+                <p><strong>2. Оценка разности x − y:</strong></p>
+                <div class="step-box">
+                    Представим разность как сумму: x − y = x + (−y).<br>
+                    Сначала оценим −y. Из 2 &lt; y &lt; 3 умножим на −1 (знак переворачивается):<br>
+                    −3 &lt; −y &lt; −2.<br>
+                    Теперь сложим:<br>
+                    15 &lt; x &lt; 16<br>
+                    +<br>
+                    −3 &lt; −y &lt; −2<br>
+                    ─────────<br>
+                    <strong>12 &lt; x − y &lt; 14</strong> ✅
+                </div>
+
+                <p><strong>3. Оценка произведения xy:</strong></p>
+                <div class="step-box">
+                    Так как x и y заключены между положительными числами, они сами положительны. Применяем Теорему 6:<br>
+                    15 &lt; x &lt; 16<br>
+                    ×<br>
+                    2 &lt; y &lt; 3<br>
+                    ─────────<br>
+                    15·2 &lt; xy &lt; 16·3<br>
+                    <strong>30 &lt; xy &lt; 48</strong> ✅
+                </div>
+
+                <p><strong>4. Оценка частного x/y:</strong></p>
+                <div class="step-box">
+                    Представим частное как произведение: x/y = x · (1/y).<br>
+                    Сначала оценим 1/y. Из 2 &lt; y &lt; 3 по следствию (или Теореме 4):<br>
+                    1/3 &lt; 1/y &lt; 1/2.<br>
+                    Теперь перемножим (все числа положительны!):<br>
+                    15 &lt; x &lt; 16<br>
+                    ×<br>
+                    1/3 &lt; 1/y &lt; 1/2<br>
+                    ─────────<br>
+                    15·(1/3) &lt; x/y &lt; 16·(1/2)<br>
+                    <strong>5 &lt; x/y &lt; 8</strong> ✅
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: при умножении <strong>все числа должны быть положительными</strong>!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №881. Сложите почленно неравенства: а) 12 &gt; −5 и 9 &gt; 7; б) −2,5 &lt; −0,7 и −6,5 &lt; −1,3.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p><strong>а)</strong> Даны неравенства 12 &gt; −5 и 9 &gt; 7.<br>
+                    По Теореме 5 (почленное сложение):<br>
+                    12 + 9 &gt; (−5) + 7<br>
+                    <strong>21 &gt; 2</strong> ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+                    <p><strong>б)</strong> Даны неравенства −2,5 &lt; −0,7 и −6,5 &lt; −1,3.<br>
+                    По Теореме 5:<br>
+                    (−2,5) + (−6,5) &lt; (−0,7) + (−1,3)<br>
+                    −9 &lt; −2<br>
+                    <strong>−9 &lt; −2</strong> ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №884. Пусть 3 &lt; a &lt; 4 и 4 &lt; b &lt; 5. Оцените: а) a + b; б) a − b; в) ab; г) a/b.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p><strong>а) a + b:</strong><br>
+                    Складываем почленно:<br>
+                    3 &lt; a &lt; 4<br>
+                    +<br>
+                    4 &lt; b &lt; 5<br>
+                    ─────────<br>
+                    <strong>7 &lt; a + b &lt; 9</strong> ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 10px 0;">
+                    <p><strong>б) a − b:</strong><br>
+                    Из 4 &lt; b &lt; 5 умножаем на −1 (знак переворачивается): −5 &lt; −b &lt; −4.<br>
+                    Складываем:<br>
+                    3 &lt; a &lt; 4<br>
+                    +<br>
+                    −5 &lt; −b &lt; −4<br>
+                    ─────────<br>
+                    <strong>−2 &lt; a − b &lt; 0</strong> ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 10px 0;">
+                    <p><strong>в) ab:</strong><br>
+                    Все числа положительны, умножаем почленно:<br>
+                    3 &lt; a &lt; 4<br>
+                    ×<br>
+                    4 &lt; b &lt; 5<br>
+                    ─────────<br>
+                    <strong>12 &lt; ab &lt; 20</strong> ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 10px 0;">
+                    <p><strong>г) a/b:</strong><br>
+                    Из 4 &lt; b &lt; 5: 1/5 &lt; 1/b &lt; 1/4.<br>
+                    Умножаем (все положительны):<br>
+                    3 &lt; a &lt; 4<br>
+                    ×<br>
+                    1/5 &lt; 1/b &lt; 1/4<br>
+                    ─────────<br>
+                    3·(1/5) &lt; a/b &lt; 4·(1/4)<br>
+                    <strong>3/5 &lt; a/b &lt; 1</strong> или <strong>0,6 &lt; a/b &lt; 1</strong> ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №886. Пользуясь тем, что 1,4 &lt; √2 &lt; 1,5 и 1,7 &lt; √3 &lt; 1,8, оцените: а) √2 + √3; б) √3 − √2.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p><strong>а) √2 + √3:</strong><br>
+                    Складываем почленно:<br>
+                    1,4 &lt; √2 &lt; 1,5<br>
+                    +<br>
+                    1,7 &lt; √3 &lt; 1,8<br>
+                    ─────────<br>
+                    <strong>3,1 &lt; √2 + √3 &lt; 3,3</strong> ✅</p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 10px 0;">
+                    <p><strong>б) √3 − √2:</strong><br>
+                    Представим как сумму: √3 + (−√2).<br>
+                    Из 1,4 &lt; √2 &lt; 1,5 умножаем на −1: −1,5 &lt; −√2 &lt; −1,4.<br>
+                    Складываем:<br>
+                    1,7 &lt; √3 &lt; 1,8<br>
+                    +<br>
+                    −1,5 &lt; −√2 &lt; −1,4<br>
+                    ─────────<br>
+                    <strong>0,2 &lt; √3 − √2 &lt; 0,4</strong> ✅</p>
+                    <p><em>Проверка на калькуляторе:</em> √3 − √2 ≈ 1,732 − 1,414 ≈ 0,318. Это число действительно лежит в интервале (0,2; 0,4). Всё верно!</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни</h2>
+            <p>🚀 <strong>Инженерия и допуски:</strong> На производстве изготовлены две детали. Длина первой детали <strong>a</strong> мм, длина второй — <strong>b</strong> мм. Контроль качества показал, что размеры укладываются в следующие диапазоны: <strong>26 ≤ a ≤ 28</strong> и <strong>41 ≤ b ≤ 43</strong>.</p>
+            <p><strong>Вопрос:</strong> В каких границах лежит <strong>периметр</strong> равнобедренного треугольника, основанием которого является первая деталь (a), а боковыми сторонами — две вторые детали (b)?</p>
+            
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Периметр равнобедренного треугольника с основанием <em>a</em> и боковыми сторонами <em>b</em> вычисляется по формуле:<br>
+                    <strong>P = a + 2b</strong></p>
+                    <p>2. По условию известно:<br>
+                    26 ≤ a ≤ 28<br>
+                    41 ≤ b ≤ 43</p>
+                    <p>3. Сначала оценим <strong>2b</strong>. Умножим неравенство 41 ≤ b ≤ 43 на положительное число 2:<br>
+                    82 ≤ 2b ≤ 86</p>
+                    <p>4. Теперь оценим сумму <strong>a + 2b</strong>. Сложим неравенства почленно (Теорема 5):<br>
+                    26 ≤ a ≤ 28<br>
+                    +<br>
+                    82 ≤ 2b ≤ 86<br>
+                    ─────────<br>
+                    <strong>108 ≤ P ≤ 114</strong></p>
+                    <p><strong>Вывод для инженера:</strong> Периметр треугольника гарантированно находится в диапазоне от <strong>108 мм</strong> до <strong>114 мм</strong>. Этот допуск (6 мм) позволяет оценить, подойдёт ли деталь для конкретного узла, не измеряя каждую деталь отдельно.</p>
+                    <p>💡 <em>Обратите внимание:</em> Именно так работают допуски в машиностроении! Зная границы отдельных деталей, инженеры оценивают границы сложных сборок, используя теоремы о сложении и умножении неравенств. (Это задача №888 из учебника!)</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Теорема 5:</strong> Верные неравенства одного знака можно <em>почленно складывать</em> — получится верное неравенство.</li>
+                <li><strong>Теорема 6:</strong> Верные неравенства одного знака можно <em>почленно умножать</em>, но <strong>только если все части положительны</strong>!</li>
+                <li><strong>Следствие:</strong> Если a и b положительны и a &lt; b, то a<sup>n</sup> &lt; b<sup>n</sup> для любого натурального n.</li>
+                <li>Для оценки <em>разности</em> представь её как сумму: x − y = x + (−y), оцени −y и сложи.</li>
+                <li>Для оценки <em>частного</em> представь его как произведение: x/y = x · (1/y), оцени 1/y и перемножь.</li>
+                <li>Эти теоремы — основа работы с <strong>допусками</strong> в инженерии, физике и экономике.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Главная «ловушка» этого урока — Теорема 6. Ученики часто забывают проверять, что все числа положительны, и пытаются умножать неравенства с отрицательными частями. Обязательно продемонстрируйте контрпример: (−1) &lt; 2 и (−3) &lt; 1 — верные неравенства, но их произведение даёт 3 &gt; 2, то есть знак переворачивается. Рекомендуется требовать от учеников писать фразу «Все числа положительны, применяем Теорему 6» перед каждым умножением. Задачи №884 и №888 отлично показывают практическую ценность этих теорем для оценки реальных величин с допусками.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-4-35.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава IV, §11).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
