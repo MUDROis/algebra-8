@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Решение систем неравенств с одной переменной — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Решение систем неравенств с одной переменной</h1>
+            <p class="subtitle">Урок 40 • Глава IV, §12</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 12, п. 40). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Мы научились решать неравенства с одной переменной и записывать их решения в виде промежутков. Но в жизни условия редко укладываются в одно неравенство — чаще нужно, чтобы выполнялось <strong>сразу несколько</strong> условий. Именно для этого существуют <strong>системы неравенств</strong>.</p>
+
+            <div class="formula-box">
+                Определение:<br>
+                Решением системы неравенств с одной переменной называется значение переменной, при котором верно <strong>каждое</strong> из неравенств системы.<br>
+                Решить систему — значит найти все её решения или доказать, что решений нет.
+            </div>
+
+            <h3>📖 Как «рождается» система: задача из учебника</h3>
+            <p><em>«Турист вышел с турбазы по направлению к станции, расположенной на расстоянии 20 км. Если турист увеличит скорость на 1 км/ч, то за 4 ч он пройдёт расстояние, большее 20 км. Если он уменьшит скорость на 1 км/ч, то даже за 5 ч не успеет дойти до станции. Какова скорость туриста?»</em></p>
+            <div class="step-box">
+                Пусть скорость туриста равна $x$ км/ч. Тогда:<br>
+                • со скоростью $(x + 1)$ км/ч за 4 ч он пройдёт $4(x + 1)$ км — по условию <strong>$4(x + 1) > 20$</strong>;<br>
+                • со скоростью $(x - 1)$ км/ч за 5 ч он пройдёт $5(x - 1)$ км — по условию <strong>$5(x - 1) < 20$</strong>.<br><br>
+                Нужно найти значения $x$, при которых верны <em>оба</em> неравенства одновременно:<br>
+                $4(x + 1) > 20 \Rightarrow x + 1 > 5 \Rightarrow x > 4$<br>
+                $5(x - 1) < 20 \Rightarrow x - 1 < 4 \Rightarrow x < 5$<br><br>
+                Ответ: скорость туриста больше 4 км/ч, но меньше 5 км/ч: <strong>$4 < x < 5$</strong>.
+            </div>
+
+            <h3>🛠 Алгоритм решения системы неравенств</h3>
+            <div class="step-box">
+                <strong>Шаг 1.</strong> Решить каждое неравенство системы отдельно.<br><br>
+                <strong>Шаг 2.</strong> Изобразить множества решений каждого неравенства на одной координатной прямой.<br><br>
+                <strong>Шаг 3.</strong> Найти <strong>пересечение</strong> этих множеств — это и есть решение системы. Если пересечение пусто, система решений не имеет.
+            </div>
+
+            <p>Вспомни: пересечение множеств — это их общая часть. Решение системы — это числа, которые попадают в оба промежутка одновременно.</p>
+
+            <h3>📖 Примеры из учебника</h3>
+
+            <p><strong>Пример 1.</strong> Решим систему $\begin{cases} 2x - 7 > 0 \\ x + 2 < 8 \end{cases}$</p>
+            <div class="step-box">
+                $2x - 7 > 0 \Rightarrow 2x > 7 \Rightarrow x > 3{,}5$<br>
+                $x + 2 < 8 \Rightarrow x < 6$<br><br>
+                Изобразим оба решения на одной прямой: общие решения — числа от 3,5 до 6 (но не включая границы):<br>
+                <strong>Ответ:</strong> $3{,}5 < x < 6$, или интервал $(3{,}5;\ 6)$.
+            </div>
+
+            <div class="svg-container">
+                <!-- Числовая прямая: интервал (3,5; 6) -->
+                <svg viewBox="0 0 400 100" width="100%" height="100" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="20" y1="50" x2="380" y2="50" stroke="#1e293b" stroke-width="2" />
+                    <polygon points="380,50 370,45 370,55" fill="#1e293b" />
+                    <line x1="120" y1="45" x2="120" y2="55" stroke="#1e293b" stroke-width="2" />
+                    <text x="120" y="75" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">3,5</text>
+                    <line x1="300" y1="45" x2="300" y2="55" stroke="#1e293b" stroke-width="2" />
+                    <text x="300" y="75" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">6</text>
+                    <line x1="120" y1="30" x2="300" y2="30" stroke="#2563eb" stroke-width="4" />
+                    <circle cx="120" cy="30" r="6" fill="#ffffff" stroke="#2563eb" stroke-width="3" />
+                    <circle cx="300" cy="30" r="6" fill="#ffffff" stroke="#2563eb" stroke-width="3" />
+                    <text x="210" y="20" font-family="sans-serif" font-size="13" fill="#2563eb" font-weight="bold" text-anchor="middle">(3,5; 6)</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Решение системы — пересечение лучей, выколотые границы.</p>
+            </div>
+
+            <p><strong>Пример 2.</strong> Решим систему $\begin{cases} 3x - 2 > 25 \\ x > 5 \end{cases}$</p>
+            <div class="step-box">
+                $3x - 2 > 25 \Rightarrow 3x > 27 \Rightarrow x > 9$<br>
+                Второе неравенство уже решено: $x > 5$.<br><br>
+                Общие решения — числа, которые больше 9 <em>и</em> больше 5, то есть $x > 9$.<br>
+                <strong>Ответ:</strong> $x > 9$, или открытый луч $(9;\ +\infty)$.
+            </div>
+
+            <p><strong>Пример 3.</strong> Решим систему $\begin{cases} 0{,}2x - 1 < 0 \\ x < 2 \end{cases}$</p>
+            <div class="step-box">
+                $0{,}2x - 1 < 0 \Rightarrow 0{,}2x < 1 \Rightarrow x < 5$<br>
+                Второе неравенство: $x < 2$.<br><br>
+                Пересечение множеств $\{x < 5\}$ и $\{x < 2\}$ — это множество $\{x < 2\}$.<br>
+                <strong>Ответ:</strong> $x < 2$, или открытый луч $(-\infty;\ 2)$.
+            </div>
+
+            <p><strong>Пример 4.</strong> Решим систему $\begin{cases} 1 - 5x > 11 \\ 6x - 18 > 0 \end{cases}$</p>
+            <div class="step-box">
+                $1 - 5x > 11 \Rightarrow -5x > 10 \Rightarrow x < -2$<br>
+                $6x - 18 > 0 \Rightarrow 6x > 18 \Rightarrow x > 3$<br><br>
+                Числа, которые одновременно меньше −2 и больше 3, <strong>не существуют</strong>: множества решений не пересекаются.<br>
+                <strong>Ответ:</strong> система решений не имеет.
+            </div>
+
+            <p><strong>Пример 5.</strong> Решим двойное неравенство $-3 < 3 + 2x < 3$ — это иная запись системы $\begin{cases} 3 + 2x > -3 \\ 3 + 2x < 3 \end{cases}$</p>
+            <div class="step-box">
+                Вычтем 3 из всех трёх частей:<br>
+                $-3 - 3 < 2x < 3 - 3 \Rightarrow -6 < 2x < 0$<br>
+                Разделим все части на 2:<br>
+                <strong>$-3 < x < 0$</strong>, или интервал $(-3;\ 0)$.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: решение системы — это <strong>пересечение</strong> решений неравенств!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №975(а). Реши систему неравенств: $\begin{cases} x > 17 \\ x > 12 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Первое неравенство: $x > 17$. Второе: $x > 12$.</p>
+                    <p>2. Изобразим решения на одной прямой. Общие решения — числа, которые больше 17 <em>и</em> больше 12, то есть $x > 17$.</p>
+                    <p><strong>Ответ:</strong> $x > 17$, или открытый луч $(17;\ +\infty)$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №976(а). Реши систему неравенств: $\begin{cases} 2x - 12 > 0 \\ 3x > 9 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. $2x - 12 > 0 \Rightarrow 2x > 12 \Rightarrow x > 6$.</p>
+                    <p>2. $3x > 9 \Rightarrow x > 3$.</p>
+                    <p>3. Общие решения: числа больше 6 <em>и</em> больше 3, то есть $x > 6$.</p>
+                    <p><strong>Ответ:</strong> $x > 6$, или открытый луч $(6;\ +\infty)$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №980(а). Реши систему неравенств: $\begin{cases} 3x - 2 > x - 4 \\ 7 + 6x < x + 17 \end{cases}$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Первое неравенство:<br>
+                    $3x - 2 > x - 4 \Rightarrow 3x - x > -4 + 2 \Rightarrow 2x > -2 \Rightarrow x > -1$.</p>
+                    <p>2. Второе неравенство:<br>
+                    $7 + 6x < x + 17 \Rightarrow 6x - x < 17 - 7 \Rightarrow 5x < 10 \Rightarrow x < 2$.</p>
+                    <p>3. Общие решения — числа от −1 до 2 (не включая границы):<br>
+                    <strong>Ответ:</strong> $-1 < x < 2$, или интервал $(-1;\ 2)$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №991(г). Реши двойное неравенство: $-1 < 5y + 4 < 19$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Вычтем 4 из всех трёх частей:<br>
+                    $-1 - 4 < 5y < 19 - 4 \Rightarrow -5 < 5y < 15$.</p>
+                    <p>2. Разделим все части на 5:<br>
+                    $-1 < y < 3$.</p>
+                    <p>3. <strong>Проверка подстановкой:</strong> при $y = 0$: $-1 < 4 < 19$ — верно. При $y = 2$: $-1 < 14 < 19$ — верно. ✅</p>
+                    <p><strong>Ответ:</strong> $-1 < y < 3$, или интервал $(-1;\ 3)$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Логистика:</strong> В лифт грузоподъёмностью 500 кг загружают клетку весом 180 кг. По правилам безопасности лифт должен быть загружен <strong>не менее чем на 60%</strong> и <strong>не более чем на 90%</strong> своей грузоподъёмности. Сколько килограммов дополнительного груза $x$ можно положить в клетку?</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Составим систему неравенств:<br>
+                    • загрузка не менее 60% от 500 кг: $180 + x \ge 0{,}6 \cdot 500 = 300$;<br>
+                    • загрузка не более 90% от 500 кг: $180 + x \le 0{,}9 \cdot 500 = 450$.</p>
+                    <p>2. Решим каждое неравенство:<br>
+                    $x \ge 120$<br>
+                    $x \le 270$</p>
+                    <p>3. Пересечение решений:<br>
+                    <strong>$120 \le x \le 270$</strong> (кг).</p>
+                    <p>4. <strong>Проверка:</strong> при $x = 200$: загрузка $380$ кг — это $380 / 500 = 76\%$ — попадает в диапазон от 60% до 90%. ✅</p>
+                    <p><strong>Ответ:</strong> добавить можно от 120 до 270 кг, то есть $x \in [120;\ 270]$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Решением системы неравенств называется значение переменной, при котором верно <strong>каждое</strong> неравенство системы.</li>
+                <li>Решение системы — это <strong>пересечение</strong> множеств решений её неравенств.</li>
+                <li>Алгоритм: реши каждое неравенство → изобрази решения на одной прямой → найди общую часть.</li>
+                <li>Если общих точек нет, система <strong>решений не имеет</strong> (например, $x < -2$ и $x > 3$).</li>
+                <li><strong>Двойное неравенство</strong> $a < f(x) < b$ — это иная запись системы: преобразовывай сразу все три части.</li>
+                <li>При делении на отрицательное число не забывай менять знак неравенства!</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Типичная ошибка учеников — находить <em>объединение</em> решений вместо <em>пересечения</em> (например, для системы $x > 3$ и $x < 5$ писать «$x > 3$ или $x < 5$» вместо «$3 < x < 5$»). Требуйте обязательной отрисовки решений на координатной прямой — именно она наглядно показывает общую часть. Обратите внимание на связь с предыдущими уроками: система неравенств — это прямое применение операции пересечения множеств (§ 12, п. 37) и числовых промежутков (п. 38). Двойные неравенства удобно решать, преобразовывая все три части сразу — это уменьшает число действий и риск ошибки.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-4-38.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава IV, §12).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
