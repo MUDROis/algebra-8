@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Пересечение и объединение множеств — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Пересечение и объединение множеств</h1>
+            <p class="subtitle">Урок 37 • Глава IV, §12</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 12, п. 37). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! До сих пор, работая с неравенствами, мы имели дело с <strong>множествами решений</strong>. Например, решение неравенства $x > 3$ — это множество всех чисел, больших 3. Сегодня мы изучим <strong>операции над множествами</strong>, которые являются фундаментом всей современной математики, логики, программирования и даже работы поисковых систем!</p>
+            
+            <div class="formula-box">
+                Определение 1 (Пересечение множеств):<br>
+                Пересечением двух множеств A и B называют множество C, состоящее из всех <strong>общих элементов</strong> этих множеств.<br>
+                Запись: <strong>C = A ∩ B</strong> (читается: «A пересечь B»).<br>
+                Формально: C = {x | x ∈ A <strong>и</strong> x ∈ B}.
+            </div>
+
+            <h3>📖 Пример из учебника (стр. 200)</h3>
+            <p>Пусть <strong>A</strong> — множество натуральных делителей числа 12, а <strong>B</strong> — множество натуральных делителей числа 18.</p>
+            <div class="step-box">
+                Запишем множества перечислением элементов:<br>
+                A = {1, 2, 3, 4, 6, 12}<br>
+                B = {1, 2, 3, 6, 9, 18}<br><br>
+                Обозначим буквой <strong>C</strong> множество <em>общих</em> делителей чисел 12 и 18:<br>
+                <strong>C = {1, 2, 3, 6}</strong><br><br>
+                Это и есть пересечение множеств A и B: <strong>A ∩ B = {1, 2, 3, 6}</strong>.
+            </div>
+
+            <div class="formula-box">
+                Определение 2 (Пустое множество):<br>
+                Если множества A и B <strong>не имеют общих элементов</strong>, то их пересечением является <strong>пустое множество</strong>.<br>
+                Обозначение: <strong>∅</strong> (пустое множество).<br>
+                Запись: A ∩ B = ∅.
+            </div>
+
+            <div class="formula-box">
+                Определение 3 (Объединение множеств):<br>
+                Объединением двух множеств A и B называют множество D, состоящее из <strong>всех элементов</strong>, принадлежащих хотя бы одному из этих множеств.<br>
+                Запись: <strong>D = A ∪ B</strong> (читается: «A объединить B»).<br>
+                Формально: D = {x | x ∈ A <strong>или</strong> x ∈ B}.
+            </div>
+
+            <h3>📖 Продолжение примера</h3>
+            <div class="step-box">
+                Вернёмся к нашим множествам делителей:<br>
+                A = {1, 2, 3, 4, 6, 12}<br>
+                B = {1, 2, 3, 6, 9, 18}<br><br>
+                Обозначим буквой <strong>D</strong> множество всех делителей, которые принадлежат хотя бы одному из множеств A или B. Запишем сначала все элементы A, затем — те элементы B, которых нет в A:<br>
+                <strong>D = {1, 2, 3, 4, 6, 12, 9, 18}</strong><br><br>
+                Это объединение: <strong>A ∪ B = {1, 2, 3, 4, 6, 12, 9, 18}</strong>.
+            </div>
+
+            <h3>🛠 Круги Эйлера — визуализация множеств</h3>
+            <p>Соотношение между множествами удобно иллюстрировать с помощью специальных схем, которые называются <strong>кругами Эйлера</strong> (по имени швейцарского математика Леонарда Эйлера).</p>
+
+            <div class="svg-container">
+                <!-- Круги Эйлера для пересечения и объединения -->
+                <svg viewBox="0 0 500 200" width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Пересечение (A ∩ B) -->
+                    <text x="125" y="20" font-family="sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="middle">Пересечение: A ∩ B</text>
+                    
+                    <!-- Круг A (синий, полупрозрачный) -->
+                    <circle cx="95" cy="110" r="70" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/>
+                    <text x="60" y="70" font-family="sans-serif" font-size="18" fill="#2563eb" font-weight="bold">A</text>
+                    
+                    <!-- Круг B (голубой, полупрозрачный) -->
+                    <circle cx="155" cy="110" r="70" fill="#0ea5e9" fill-opacity="0.2" stroke="#0ea5e9" stroke-width="2"/>
+                    <text x="190" y="70" font-family="sans-serif" font-size="18" fill="#0ea5e9" font-weight="bold">B</text>
+                    
+                    <!-- Подпись пересечения -->
+                    <text x="125" y="195" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle" font-style="italic">Закрашена общая часть</text>
+
+                    <!-- Объединение (A ∪ B) -->
+                    <text x="375" y="20" font-family="sans-serif" font-size="14" fill="#1e293b" font-weight="bold" text-anchor="middle">Объединение: A ∪ B</text>
+                    
+                    <!-- Круг A (синий) -->
+                    <circle cx="345" cy="110" r="70" fill="#2563eb" fill-opacity="0.25" stroke="#2563eb" stroke-width="2"/>
+                    <text x="310" y="70" font-family="sans-serif" font-size="18" fill="#2563eb" font-weight="bold">A</text>
+                    
+                    <!-- Круг B (голубой) -->
+                    <circle cx="405" cy="110" r="70" fill="#0ea5e9" fill-opacity="0.25" stroke="#0ea5e9" stroke-width="2"/>
+                    <text x="440" y="70" font-family="sans-serif" font-size="18" fill="#0ea5e9" font-weight="bold">B</text>
+                    
+                    <!-- Подпись объединения -->
+                    <text x="375" y="195" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle" font-style="italic">Закрашены оба круга</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Круги Эйлера: слева — пересечение (только общая часть), справа — объединение (оба множества).</p>
+            </div>
+
+            <div class="step-box" style="border-left-color: var(--warning); background: #fffbeb;">
+                <strong>💡 Подсказка для запоминания:</strong><br>
+                • Символ <strong>∩</strong> похож на перевёрнутую букву <strong>U</strong> (Union — объединение по-английски) или на крышу дома, которая «соединяет» два множества. На самом деле ∩ — это именно <em>пересечение</em> (Intersection).<br>
+                • Символ <strong>∪</strong> похож на чашку (<strong>U</strong>nion — объединение), которая «собирает» все элементы из обоих множеств.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. <strong>Помни:</strong> в объединении каждый элемент записывается только один раз, даже если он есть в обоих множествах!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №898. X — множество простых чисел, не превосходящих 20; Y — множество двузначных чисел, не превосходящих 20. Найди X ∩ Y и X ∪ Y.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Запишем множества перечислением элементов:<br>
+                    <strong>X = {2, 3, 5, 7, 11, 13, 17, 19}</strong> (все простые числа ≤ 20)<br>
+                    <strong>Y = {10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}</strong> (все двузначные числа ≤ 20)</p>
+                    <p>2. <strong>Найдём пересечение X ∩ Y</strong> (общие элементы):<br>
+                    В обоих множествах присутствуют: <strong>{11, 13, 17, 19}</strong><br>
+                    Это простые двузначные числа, не превосходящие 20.</p>
+                    <p>3. <strong>Найдём объединение X ∪ Y</strong> (все элементы из X и Y, без повторов):<br>
+                    Запишем все элементы X, затем добавим те элементы Y, которых нет в X (10, 12, 14, 15, 16, 18, 20):<br>
+                    <strong>X ∪ Y = {2, 3, 5, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}</strong></p>
+                    <p><strong>Ответ:</strong><br>
+                    X ∩ Y = {11, 13, 17, 19}<br>
+                    X ∪ Y = {2, 3, 5, 7, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20} ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №900. Найди пересечение и объединение: а) множеств цифр, используемых в записи чисел 11 243 и 6321; б) множества простых чисел, не превосходящих 40, и множества двузначных чисел.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p><strong>а)</strong> Пусть A — множество цифр числа 11 243, B — множество цифр числа 6321.</p>
+                    <p>1. Запишем множества (каждую цифру записываем только один раз):<br>
+                    <strong>A = {1, 2, 3, 4}</strong><br>
+                    <strong>B = {1, 2, 3, 6}</strong></p>
+                    <p>2. Пересечение A ∩ B (общие цифры):<br>
+                    <strong>A ∩ B = {1, 2, 3}</strong></p>
+                    <p>3. Объединение A ∪ B (все цифры из обоих множеств):<br>
+                    <strong>A ∪ B = {1, 2, 3, 4, 6}</strong></p>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+                    <p><strong>б)</strong> Пусть P — множество простых чисел ≤ 40, D — множество двузначных чисел.</p>
+                    <p>1. Запишем P перечислением:<br>
+                    <strong>P = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}</strong></p>
+                    <p>2. <strong>Пересечение P ∩ D</strong> — это простые <em>двузначные</em> числа, не превосходящие 40:<br>
+                    <strong>P ∩ D = {11, 13, 17, 19, 23, 29, 31, 37}</strong></p>
+                    <p>3. <strong>Объединение P ∪ D</strong> — это все простые числа ≤ 40 плюс все двузначные числа (их бесконечно много, если не ограничивать). Если ограничиться двузначными числами и простыми ≤ 40, то в объединение входят:<br>
+                    • все простые однозначные числа: 2, 3, 5, 7;<br>
+                    • все двузначные числа (10, 11, 12, ..., 99).<br>
+                    Записать перечислением невозможно — это множество задаётся описанием: <strong>{2, 3, 5, 7} ∪ {двузначные числа}</strong>.</p>
+                    <p><strong>Ответ:</strong><br>
+                    а) P ∩ D = {1, 2, 3}, P ∪ D = {1, 2, 3, 4, 6}<br>
+                    б) P ∩ D = {11, 13, 17, 19, 23, 29, 31, 37}, P ∪ D задаётся описанием ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №904. Иллюстрируй с помощью кругов Эйлера соотношение между множеством N натуральных чисел, множеством Z целых чисел и множеством Q рациональных чисел. Найди пересечения и объединения указанных пар множеств.</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. <strong>Анализ соотношения:</strong> Натуральные числа — это целые положительные числа. Целые числа включают натуральные, ноль и отрицательные целые. Рациональные числа включают все целые и все дроби. Таким образом: <strong>N ⊂ Z ⊂ Q</strong> (N — подмножество Z, Z — подмножество Q).</p>
+
+                    <div class="svg-container">
+                        <!-- Круги Эйлера для вложенных множеств N ⊂ Z ⊂ Q -->
+                        <svg viewBox="0 0 400 220" width="100%" height="220" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Большой круг Q -->
+                            <circle cx="200" cy="110" r="100" fill="#dc2626" fill-opacity="0.1" stroke="#dc2626" stroke-width="2"/>
+                            <text x="295" y="45" font-family="sans-serif" font-size="18" fill="#dc2626" font-weight="bold">Q</text>
+                            
+                            <!-- Средний круг Z -->
+                            <circle cx="175" cy="115" r="70" fill="#0ea5e9" fill-opacity="0.2" stroke="#0ea5e9" stroke-width="2"/>
+                            <text x="240" y="85" font-family="sans-serif" font-size="18" fill="#0ea5e9" font-weight="bold">Z</text>
+                            
+                            <!-- Малый круг N -->
+                            <circle cx="155" cy="120" r="40" fill="#16a34a" fill-opacity="0.3" stroke="#16a34a" stroke-width="2"/>
+                            <text x="155" y="125" font-family="sans-serif" font-size="18" fill="#16a34a" font-weight="bold" text-anchor="middle">N</text>
+                            
+                            <!-- Подписи примеров -->
+                            <text x="155" y="150" font-family="sans-serif" font-size="11" fill="#16a34a" text-anchor="middle">1, 2, 3...</text>
+                            <text x="220" y="155" font-family="sans-serif" font-size="11" fill="#0ea5e9">0, -5, -17...</text>
+                            <text x="280" y="160" font-family="sans-serif" font-size="11" fill="#dc2626">½, -0,75...</text>
+                        </svg>
+                    </div>
+                    
+                    <p>2. <strong>Найдём пересечения и объединения:</strong></p>
+                    <p><strong>а) N и Z:</strong><br>
+                    Так как N ⊂ Z, все элементы N уже являются элементами Z.<br>
+                    N ∩ Z = <strong>N</strong> (меньшее множество)<br>
+                    N ∪ Z = <strong>Z</strong> (большее множество)</p>
+                    <p><strong>б) Z и Q:</strong><br>
+                    Так как Z ⊂ Q, все элементы Z уже являются элементами Q.<br>
+                    Z ∩ Q = <strong>Z</strong><br>
+                    Z ∪ Q = <strong>Q</strong></p>
+                    <p><strong>в) Q и множество иррациональных чисел I:</strong><br>
+                    По определению, иррациональные числа — это числа, не являющиеся рациональными. Они не имеют общих элементов с Q.<br>
+                    Q ∩ I = <strong>∅</strong> (пустое множество)<br>
+                    Q ∪ I = <strong>R</strong> (множество всех действительных чисел)</p>
+                    <p><strong>Вывод:</strong> Если A ⊂ B, то A ∩ B = A и A ∪ B = B. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>IT и базы данных:</strong> Ты — начинающий backend-разработчик. В базе данных школы есть две таблицы: <br>
+            • Таблица A — список учеников, посещающих <strong>кружок по программированию</strong>: {Аня, Боря, Вика, Глеб, Дима, Егор}.<br>
+            • Таблица B — список учеников, посещающих <strong>кружок по робототехнике</strong>: {Вика, Дима, Женя, Зина, Егор, Игорь}.<br>
+            <strong>Вопрос:</strong> Директор школы просит тебя сделать два SQL-запроса:<br>
+            1. Найти учеников, которые ходят <strong>на оба кружка</strong> одновременно (чтобы наградить их).<br>
+            2. Найти <strong>всех</strong> учеников, занимающихся в технических кружках (чтобы пригласить на хакатон).</p>
+            
+            <details>
+                <summary>Показать SQL-решение и математическую модель</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Математически задача сводится к операциям <strong>пересечения</strong> и <strong>объединения</strong> множеств.</p>
+                    <p>2. <strong>Задача 1 (награждение):</strong> нужны ученики из обоих списков — это <strong>пересечение</strong> A ∩ B.<br>
+                    A ∩ B = {<strong>Вика, Дима, Егор</strong>}<br>
+                    В SQL это реализуется оператором <code>INTERSECT</code> или <code>INNER JOIN</code>:</p>
+                    <div class="formula-box" style="background: #1e293b; color: #e2e8f0; border-left-color: #0ea5e9; font-size: 0.95rem;">
+                        SELECT name FROM programming_club<br>
+                        <strong>INTERSECT</strong><br>
+                        SELECT name FROM robotics_club;
+                    </div>
+                    <p>3. <strong>Задача 2 (хакатон):</strong> нужны все ученики из обоих списков — это <strong>объединение</strong> A ∪ B.<br>
+                    A ∪ B = {Аня, Боря, <strong>Вика, Глеб, Дима, Егор</strong>, Женя, Зина, Игорь}<br>
+                    В SQL это реализуется оператором <code>UNION</code>:</p>
+                    <div class="formula-box" style="background: #1e293b; color: #e2e8f0; border-left-color: #0ea5e9; font-size: 0.95rem;">
+                        SELECT name FROM programming_club<br>
+                        <strong>UNION</strong><br>
+                        SELECT name FROM robotics_club;
+                    </div>
+                    <p><strong>Вывод:</strong> Операции пересечения и объединения множеств — это не абстрактная теория, а <strong>фундамент всех баз данных</strong> и поисковых систем! Когда ты пишешь в Google запрос «алгебра <strong>И</strong> геометрия» (AND), ты используешь пересечение. А когда пишешь «алгебра <strong>ИЛИ</strong> геометрия» (OR), ты используешь объединение. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Пересечение A ∩ B</strong> — это множество <em>общих элементов</em> множеств A и B (логическое «И»).</li>
+                <li><strong>Объединение A ∪ B</strong> — это множество <em>всех элементов</em>, принадлежащих хотя бы одному из множеств (логическое «ИЛИ»).</li>
+                <li>Если множества не имеют общих элементов, их пересечение равно <strong>пустому множеству ∅</strong>.</li>
+                <li><strong>Круги Эйлера</strong> — удобный способ визуализировать соотношение множеств.</li>
+                <li>Если A ⊂ B (A — подмножество B), то <strong>A ∩ B = A</strong> и <strong>A ∪ B = B</strong>.</li>
+                <li>Эти операции — основа работы с <strong>базами данных</strong>, <strong>поисковыми системами</strong> и <strong>логическими выражениями</strong> в программировании.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Самая распространённая ошибка учеников при нахождении объединения — записывать общие элементы дважды (например, A ∪ B = {1, 2, 3, 4, 6, 12, 1, 2, 3, 6, 9, 18}). Акцентируйте внимание на том, что <strong>в множестве каждый элемент должен встречаться только один раз</strong> — это одно из фундаментальных свойств множеств. Задача №904 отлично демонстрирует важный частный случай: когда одно множество является подмножеством другого. Это часто встречается в реальной жизни (например, «все ученики 8А класса» ⊂ «все ученики 8 класса»). Связь с SQL-запросами и поисковыми системами делает тему живой и применимой в IT-сфере.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-4-36.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава IV, §12).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
