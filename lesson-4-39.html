@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решение неравенств с одной переменной — Алгебра 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --light-text: #64748b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            text-align: center;
+            color: var(--text);
+        }
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .subtitle { font-size: 1.05rem; color: var(--light-text); }
+
+        .legend { margin-top: 15px; font-size: 0.92rem; color: var(--light-text); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        h3 {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin: 20px 0 12px;
+        }
+
+        p { margin-bottom: 12px; }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+        .terms-table th, .terms-table td {
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            text-align: left;
+        }
+        .terms-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .terms-table tr:nth-child(even) { background-color: #f8fafc; }
+
+        .rule-box {
+            background-color: #eff6ff;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .formula {
+            background-color: #fef2f2;
+            border: 2px dashed var(--formula);
+            color: var(--formula);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding: 0 4px 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding: 2px 4px 0;
+            display: block;
+        }
+        .formula .fraction { color: var(--formula); }
+        .formula .fraction .num { border-bottom-color: var(--formula); }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .task-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .level-basic { background-color: var(--success); }
+        .level-medium { background-color: var(--primary); }
+        .level-hard { background-color: #9333ea; }
+
+        .task-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "🔍"; }
+        details[open] summary::before { content: "💡"; }
+
+        .solution-step {
+            background: #ffffff;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            margin: 8px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .check-step {
+            background: #f0fdf4;
+            border-left: 3px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .practice-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning);
+        }
+        .practice-box h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+        .summary-box {
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+        }
+        .summary-box h2 { color: var(--success); border-bottom-color: #16a34a; }
+        .summary-box ul { padding-left: 20px; }
+        .summary-box li { margin-bottom: 8px; }
+
+        .teacher-note {
+            background: #eff6ff;
+            border: 2px dashed var(--primary);
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        .teacher-note h2 { color: var(--primary); border-bottom-color: var(--accent); font-size: 1.3rem; }
+
+        .values-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .values-table th, .values-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            text-align: center;
+        }
+        .values-table th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        footer .legal {
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .card { padding: 16px; }
+            .formula { font-size: 1rem; padding: 12px; }
+            .terms-table { font-size: 0.85rem; }
+            .terms-table th, .terms-table td { padding: 8px; }
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 24px 0 8px;
+        }
+
+        .lesson-nav a {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            color: var(--primary);
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .lesson-nav a:hover {
+            background: #f1f5f9;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="assets/course.css">
+<meta name="description" content="Урок 39 • Глава IV, §12">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Алгебра 8 класс">
+<meta property="og:title" content="Решение неравенств с одной переменной — Алгебра 8 класс">
+<meta property="og:description" content="Урок 39 • Глава IV, §12">
+<meta property="og:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<meta property="og:url" content="https://интерактивнаяшкола.рф/algebra-8/lesson-4-39.html">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Решение неравенств с одной переменной — Алгебра 8 класс">
+<meta name="twitter:description" content="Урок 39 • Глава IV, §12">
+<meta name="twitter:image" content="https://интерактивнаяшкола.рф/algebra-8/assets/logo.png">
+<link rel="canonical" href="https://интерактивнаяшкола.рф/algebra-8/lesson-4-39.html">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+        <h1>Решение неравенств с одной переменной</h1>
+        <p class="subtitle">Урок 39 • Глава IV, §12</p>
+        <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 12, п. 39). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+    </header>
+
+    <!-- БЛОК 1: ИЗУЧЕНИЕ -->
+    <section class="card">
+        <h2>🧠 Блок 1. Изучение</h2>
+
+        <h3>🪝 Разминка: верно или неверно?</h3>
+        <p>Неравенство <b>5x − 11 &gt; 3</b> при одних значениях переменной x обращается в верное числовое неравенство, а при других — нет. Подставим вместо x число 4: 5·4 − 11 = 9, и 9 &gt; 3 — <b>верно</b>. Подставим число 2: 5·2 − 11 = −1, а −1 &gt; 3 — <b>неверно</b>. Про число 4 говорят, что оно является <b>решением неравенства</b> или <b>удовлетворяет</b> ему.</p>
+        <div class="formula">
+            5x − 11 &gt; 3<br>
+            x = 4: &nbsp;9 &gt; 3 — верно ✓<br>
+            x = 2: &nbsp;−1 &gt; 3 — неверно ✗
+        </div>
+        <p>Проверь сам: числа 100, 180, 1000 тоже являются решениями (чем больше x, тем больше 5x − 11), а числа 2; 0,5; −5 — нет. Таких «подходящих» чисел бесконечно много, и сегодня мы научимся находить их <b>все сразу</b> — одним коротким ответом.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Например: 4" data-answer="4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">Из двух чисел 2 и 4 решением является <b>4</b>: 5·4 − 11 = 9 &gt; 3 — верное числовое неравенство. Число 2 даёт −1 &gt; 3 — неверное ✗.</div>
+        </details>
+
+        <h3>📚 Определения</h3>
+        <div class="rule-box">
+            <b>Определение.</b> <b>Решением неравенства с одной переменной</b> называется значение переменной, которое обращает его в верное числовое неравенство.<br>
+            <b>Решить неравенство</b> — значит найти все его решения или доказать, что решений нет.
+        </div>
+        <p>Неравенства, имеющие одни и те же решения, называются <b>равносильными</b>. Неравенства, не имеющие решений, также считают равносильными.</p>
+
+        <table class="terms-table">
+            <tr>
+                <th>Термин</th>
+                <th>Что означает</th>
+                <th>Пример</th>
+            </tr>
+            <tr>
+                <td><b>Решение неравенства</b></td>
+                <td>Значение переменной, обращающее неравенство в верное числовое неравенство.</td>
+                <td>Для 5x − 11 &gt; 3: число 4 — решение, 2 — нет</td>
+            </tr>
+            <tr>
+                <td><b>Равносильные неравенства</b></td>
+                <td>Имеют одни и те же решения (оба без решений — тоже равносильны).</td>
+                <td>5x − 11 &gt; 3 ⟺ 5x &gt; 14</td>
+            </tr>
+            <tr>
+                <td><b>Линейное неравенство</b></td>
+                <td>Неравенство вида ax &gt; b или ax &lt; b, где a ≠ 0.</td>
+                <td>3x &gt; 45; &nbsp;−10x &gt; 34</td>
+            </tr>
+        </table>
+
+        <h3>⚙️ Свойства равносильных неравенств</h3>
+        <div class="rule-box">
+            <b>1)</b> Если из одной части неравенства перенести в другую слагаемое с противоположным знаком, то получится <b>равносильное</b> ему неравенство.<br><br>
+            <b>2)</b> Если обе части неравенства умножить или разделить на одно и то же <b>положительное</b> число, то получится равносильное ему неравенство; если умножить или разделить на одно и то же <b>отрицательное</b> число, <b>изменив при этом знак неравенства на противоположный</b>, то получится равносильное ему неравенство.
+        </div>
+        <div class="formula">
+            18 + 6x &gt; 0 &nbsp;⟺&nbsp; 6x &gt; −18 &nbsp;⟺&nbsp; x &gt; −3
+        </div>
+        <p>Почему это работает? Пусть число a — решение неравенства 18 + 6x &gt; 0, то есть 18 + 6a &gt; 0 — верное неравенство. Прибавим к обеим частям число −18 (по свойству числовых неравенств): 18 + 6a − 18 &gt; 0 − 18, то есть 6a &gt; −18 — тоже верное. Значит, каждое решение первого неравенства — решение второго. Аналогично наоборот: эти неравенства имеют одни и те же решения, то есть равносильны. Оба свойства доказываются такими рассуждениями в общем виде.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введите 1 или 2" data-answer="1"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">Переход 5x − 11 &gt; 3 → 5x &gt; 14 — это перенос слагаемого −11 в правую часть с противоположным знаком, то есть <b>свойство 1</b>. Умножения или деления здесь нет, поэтому ответ <b>1</b>.</div>
+        </details>
+
+        <h3>📐 Примеры из учебника</h3>
+
+        <p><b>Пример 1.</b> Решим неравенство <b>16x &gt; 13x + 45</b>.</p>
+        <div class="rule-box">
+            <b>Решение.</b> Перенесём слагаемое 13x с противоположным знаком в левую часть:<br>
+            16x − 13x &gt; 45. Приведём подобные члены: <b>3x &gt; 45</b>.<br>
+            Разделим обе части на 3 — число <b>положительное</b>, знак неравенства сохраняется: <b>x &gt; 15</b>.
+        </div>
+        <p>Множество решений состоит из всех чисел, больших 15, — это открытый числовой луч <b>(15; +∞)</b>. Изобразим его на координатной прямой: точка 15 <b>выколотая</b> (неравенство строгое, 15 не входит в ответ), штриховка идёт вправо (рис. 42 из учебника).</p>
+
+        <div class="svg-container">
+            <!-- SVG: рис. 42 — открытый луч (15; +∞) -->
+            <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arr42a" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0ea5e9"/></marker>
+                </defs>
+                <text x="350" y="22" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle" font-weight="bold">Рис. 42. Решение неравенства x &gt; 15 — открытый луч (15; +∞)</text>
+                <line x1="40" y1="70" x2="650" y2="70" stroke="#475569" stroke-width="2"/>
+                <path d="M650,70 l-9,-5 v10 Z" fill="#475569"/>
+                <line x1="200" y1="63" x2="200" y2="77" stroke="#475569" stroke-width="2"/>
+                <line x1="300" y1="63" x2="300" y2="77" stroke="#475569" stroke-width="2"/>
+                <line x1="400" y1="63" x2="400" y2="77" stroke="#475569" stroke-width="2"/>
+                <line x1="500" y1="63" x2="500" y2="77" stroke="#475569" stroke-width="2"/>
+                <text x="200" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">13</text>
+                <text x="300" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">14</text>
+                <text x="400" y="98" font-family="sans-serif" font-size="14" fill="#dc2626" text-anchor="middle" font-weight="bold">15</text>
+                <text x="500" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">16</text>
+                <line x1="408" y1="70" x2="635" y2="70" stroke="#0ea5e9" stroke-width="5" marker-end="url(#arr42a)"/>
+                <circle cx="400" cy="70" r="7" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+                <text x="560" y="48" font-family="'Courier New', monospace" font-size="14" fill="#0ea5e9" text-anchor="middle" font-weight="bold">(15; +∞)</text>
+                <text x="400" y="48" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle">выколотая точка</text>
+            </svg>
+        </div>
+        <p>Ответ можно записать в виде числового промежутка <b>(15; +∞)</b> или в виде неравенства <b>x &gt; 15</b>, задающего этот промежуток.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введите координату точки" data-answer="15"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">Граница промежутка — число <b>15</b>. Оно выколотое, потому что неравенство строгое: 16·15 &gt; 13·15 + 45 превращается в 240 &gt; 240 — неверное равенство-граница, само число 15 не входит в ответ ✗.</div>
+        </details>
+
+        <p><b>Пример 2.</b> Решим неравенство <b>15x − 23(x + 1) &gt; 2x + 11</b>.</p>
+        <div class="rule-box">
+            <b>Шаг 1. Раскроем скобки:</b> 15x − 23x − 23 &gt; 2x + 11.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 2. Перенесём слагаемые:</b> 15x − 23x − 2x &gt; 11 + 23. Приведём подобные члены: <b>−10x &gt; 34</b>.
+        </div>
+        <div class="rule-box">
+            <b>Шаг 3. Разделим обе части на −10</b> — число <b>отрицательное</b>, поэтому знак неравенства меняем на противоположный: <b>x &lt; −3,4</b>.
+        </div>
+        <p>Множество решений — открытый числовой луч <b>(−∞; −3,4)</b> (рис. 43 из учебника): точка −3,4 выколотая, штриховка влево.</p>
+
+        <div class="svg-container">
+            <!-- SVG: рис. 43 — открытый луч (−∞; −3,4) -->
+            <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arr43a" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0ea5e9"/></marker>
+                </defs>
+                <text x="350" y="22" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle" font-weight="bold">Рис. 43. Решение неравенства x &lt; −3,4 — открытый луч (−∞; −3,4)</text>
+                <line x1="40" y1="70" x2="660" y2="70" stroke="#475569" stroke-width="2"/>
+                <path d="M660,70 l-9,-5 v10 Z" fill="#475569"/>
+                <line x1="150" y1="63" x2="150" y2="77" stroke="#475569" stroke-width="2"/>
+                <line x1="250" y1="63" x2="250" y2="77" stroke="#475569" stroke-width="2"/>
+                <line x1="350" y1="63" x2="350" y2="77" stroke="#475569" stroke-width="2"/>
+                <line x1="450" y1="63" x2="450" y2="77" stroke="#475569" stroke-width="2"/>
+                <text x="150" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">−5</text>
+                <text x="250" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">−4</text>
+                <text x="350" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">−3</text>
+                <text x="450" y="98" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle">−2</text>
+                <line x1="65" y1="70" x2="282" y2="70" stroke="#0ea5e9" stroke-width="5" marker-end="url(#arr43a)"/>
+                <circle cx="290" cy="70" r="7" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+                <text x="290" y="98" font-family="sans-serif" font-size="14" fill="#dc2626" text-anchor="middle" font-weight="bold">−3,4</text>
+                <text x="150" y="48" font-family="'Courier New', monospace" font-size="14" fill="#0ea5e9" text-anchor="middle" font-weight="bold">(−∞; −3,4)</text>
+            </svg>
+        </div>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введите границу, например: -3,4" data-answer="-3.4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">−10x &gt; 34 → x &lt; 34 : (−10) = <b>−3,4</b>. Граница промежутка — <b>−3,4</b>, точка выколотая, так как неравенство строгое.</div>
+            <div class="solution-step check-step">Проверка подстановкой: x = −4 (лежит в промежутке): 15·(−4) − 23·(−3) = −60 + 69 = 9; правая часть: 2·(−4) + 11 = 3; 9 &gt; 3 — верно ✓. x = −3 (не в промежутке): 15·(−3) − 23·(−2) = −45 + 46 = 1; 2·(−3) + 11 = 5; 1 &gt; 5 — неверно ✗.</div>
+        </details>
+
+        <p><b>Пример 3.</b> Решим неравенство с дробями: <b>x/3 − x/2 &lt; 2</b>.</p>
+        <div class="rule-box">
+            <b>Решение.</b> Умножим обе части на наименьший общий знаменатель дробей — на число <b>6</b>. Число 6 положительное, поэтому знак неравенства <b>не меняется</b>:<br>
+            x/3 · 6 − x/2 · 6 &lt; 2 · 6 → 2x − 3x &lt; 12 → <b>−x &lt; 12</b>.<br>
+            Разделим обе части на −1 — знак меняется на противоположный: <b>x &gt; −12</b>.
+        </div>
+        <div class="formula">
+            x/3 − x/2 &lt; 2 &nbsp;⟺&nbsp; 2x − 3x &lt; 12 &nbsp;⟺&nbsp; −x &lt; 12 &nbsp;⟺&nbsp; x &gt; −12
+        </div>
+        <p>Ответ: <b>(−12; +∞)</b>. Обрати внимание: умножение на НОЗ — тот же приём, что в дробных уравнениях урока 26. Но там множитель был выражением с переменной, и корни приходилось проверять! Здесь множитель — просто <b>число 6 ≠ 0</b>, поэтому равносильность гарантирована, и никакая проверка не нужна.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Введите число-множитель" data-answer="6"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">Наименьший общий знаменатель дробей x/3 и x/2 — число <b>6</b> (= 3·2). Умножение на положительное число сохраняет знак неравенства: x/3 · 6 = 2x, x/2 · 6 = 3x.</div>
+        </details>
+
+        <h3>🧭 Линейные неравенства и особый случай 0·x</h3>
+        <p>В каждом примере мы заменяли заданное неравенство равносильным ему неравенством вида <b>ax &gt; b</b> или <b>ax &lt; b</b>, где a и b — некоторые числа. Такие неравенства называют <b>линейными неравенствами с одной переменной</b>. Но может случиться, что коэффициент при x окажется нулём — тогда возможны два особых случая.</p>
+        <div class="rule-box">
+            При решении неравенства мы можем прийти к виду <b>0·x &gt; b</b> или <b>0·x &lt; b</b>. Такое неравенство (а значит, и исходное) либо <b>не имеет решений</b>, либо его решением является <b>любое число</b>.
+        </div>
+
+        <table class="terms-table">
+            <tr>
+                <th>Вид неравенства</th>
+                <th>Условие</th>
+                <th>Ответ</th>
+            </tr>
+            <tr>
+                <td>0·x &gt; b</td>
+                <td>b ≥ 0</td>
+                <td><b>Решений нет</b> (неравенство 0 &gt; b неверно)</td>
+            </tr>
+            <tr>
+                <td>0·x &gt; b</td>
+                <td>b &lt; 0</td>
+                <td><b>Любое число</b> (0 &gt; b верно всегда)</td>
+            </tr>
+            <tr>
+                <td>0·x &lt; b</td>
+                <td>b ≤ 0</td>
+                <td><b>Решений нет</b> (неравенство 0 &lt; b неверно)</td>
+            </tr>
+            <tr>
+                <td>0·x &lt; b</td>
+                <td>b &gt; 0</td>
+                <td><b>Любое число</b> (0 &lt; b верно всегда)</td>
+            </tr>
+        </table>
+
+        <p><b>Пример 4.</b> Решим неравенство <b>2(x + 8) − 5x &lt; 4 − 3x</b>.</p>
+        <div class="rule-box">
+            <b>Решение.</b> Раскроем скобки: 2x + 16 − 5x &lt; 4 − 3x.<br>
+            Перенесём слагаемые: 2x − 5x + 3x &lt; 4 − 16. Приведём подобные: <b>0·x &lt; −12</b>.<br>
+            При любом x левая часть равна 0, а 0 &lt; −12 — <b>неверное</b> числовое неравенство. Значит, и заданное неравенство решений не имеет.
+        </div>
+        <div class="formula">
+            0·x &lt; −12 &nbsp;→&nbsp; решений нет
+        </div>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="0 — решений нет, 1 — любое число" data-answer="0"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">0·x &lt; −12 при любом x превращается в 0 &lt; −12 — неверно. <b>Решений нет</b> → ответ <b>0</b>.</div>
+        </details>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="0 — решений нет, 1 — любое число" data-answer="1"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать пояснение</summary>
+            <div class="solution-step">0·x &gt; −7 при любом x превращается в 0 &gt; −7 — верное неравенство. <b>Решением является любое число</b> → ответ <b>1</b>.</div>
+        </details>
+
+        <h3>🗺 Алгоритм решения</h3>
+
+        <div class="svg-container">
+            <!-- SVG: алгоритм решения неравенства -->
+            <svg viewBox="0 0 700 352" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arr39f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#475569"/></marker>
+                </defs>
+                <text x="350" y="20" font-family="sans-serif" font-size="14" fill="#64748b" text-anchor="middle" font-weight="bold">Алгоритм решения неравенства с одной переменной</text>
+                <rect x="110" y="30" width="480" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="55" font-family="sans-serif" font-size="12.5" fill="#1e293b" text-anchor="middle">1. Раскрой скобки и приведи подобные слагаемые</text>
+                <line x1="350" y1="70" x2="350" y2="82" stroke="#475569" stroke-width="2" marker-end="url(#arr39f)"/>
+                <rect x="110" y="84" width="480" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="109" font-family="sans-serif" font-size="12.5" fill="#1e293b" text-anchor="middle">2. Перенеси слагаемые с x влево, числа — вправо (знаки слагаемых меняются!)</text>
+                <line x1="350" y1="124" x2="350" y2="136" stroke="#475569" stroke-width="2" marker-end="url(#arr39f)"/>
+                <rect x="110" y="138" width="480" height="40" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <text x="350" y="163" font-family="sans-serif" font-size="12.5" fill="#1e293b" text-anchor="middle">3. Приведи подобные: получится ax &gt; b или ax &lt; b</text>
+                <line x1="350" y1="178" x2="350" y2="190" stroke="#475569" stroke-width="2" marker-end="url(#arr39f)"/>
+                <rect x="110" y="192" width="480" height="40" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+                <text x="350" y="217" font-family="sans-serif" font-size="12.5" fill="#dc2626" text-anchor="middle" font-weight="bold">4. Раздели на a: a &gt; 0 — знак тот же; a &lt; 0 — знак меняется!</text>
+                <line x1="350" y1="232" x2="350" y2="244" stroke="#475569" stroke-width="2" marker-end="url(#arr39f)"/>
+                <rect x="110" y="246" width="480" height="40" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="350" y="271" font-family="sans-serif" font-size="12.5" fill="#1e293b" text-anchor="middle">5. Изобрази множество решений на координатной прямой</text>
+                <line x1="350" y1="286" x2="350" y2="298" stroke="#475569" stroke-width="2" marker-end="url(#arr39f)"/>
+                <rect x="110" y="300" width="480" height="40" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <text x="350" y="325" font-family="sans-serif" font-size="12.5" fill="#1e293b" text-anchor="middle">6. Запиши ответ числовым промежутком</text>
+            </svg>
+        </div>
+    </section>
+
+    <!-- БЛОК 2: ЗАКРЕПЛЕНИЕ -->
+    <section class="card">
+        <h2>🛠 Блок 2. Закрепление</h2>
+        <p>От теории к практике! Решаем неравенства из учебника (§ 12, п. 39, №№ 932–956). План: раскрыть скобки → перенести слагаемые → привести подобные → разделить на коэффициент (следи за знаком!) → изобразить на прямой → записать промежуток.</p>
+
+        <!-- Задание 1 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 1 (№ 932)</h3>
+            <p>Является ли решением неравенства <b>5y &gt; 2(y − 1) + 6</b> значение y, равное 8; −2; 1,5; 2? Упростим: 5y &gt; 2y + 4 → 3y &gt; 4 → <b>y &gt; 4/3 ≈ 1,33</b>. Введите число, которое <b>НЕ</b> является решением.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -2" data-answer="-2"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Раскроем скобки: 5y &gt; 2y − 2 + 6 → 5y &gt; 2y + 4.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Перенесём 2y влево: 3y &gt; 4 → y &gt; 4/3 ≈ 1,33.</div>
+                <div class="solution-step"><b>Шаг 3:</b> Проверяем числа: 8 &gt; 1,33 ✓; −2 &lt; 1,33 ✗; 1,5 &gt; 1,33 ✓; 2 &gt; 1,33 ✓.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> решением не является только <b>−2</b> ✗</div>
+            </details>
+        </div>
+
+        <!-- Задание 2 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 2 (№ 937)</h3>
+            <p>Решите неравенство <b>5x + 1 &gt; 11</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 3" data-answer="2"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Перенесём 1 вправо: 5x &gt; 10.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Разделим на 5 (положительное — знак сохраняется): x &gt; 2.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &gt; 2, то есть (2; +∞). Три решения, например: 3; 5; 10 ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 3 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 3 (№ 938)</h3>
+            <p>Решите неравенство <b>3x − 2 &lt; 6</b>. Получим x &lt; 8/3 ≈ 2,67. Является ли решением число 2 4/7? Введите его в виде неправильной дроби <b>a/b</b>.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 18/7" data-answer="18 7"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> 3x − 2 &lt; 6 → 3x &lt; 8 → x &lt; 8/3 ≈ 2,67.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Проверяем числа из учебника: 4 &gt; 2,67 — не решение ✗; 2 4/5 = 2,8 &gt; 2,67 — не решение ✗; 2 4/7 = 18/7 ≈ 2,57 &lt; 2,67 — <b>решение</b> ✓.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &lt; 8/3; из данных чисел решением является только 18/7 ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 4 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 4 (№ 935б)</h3>
+            <p>Решите неравенство <b>−4x &lt; −16</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 4" data-answer="4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Разделим обе части на −4 — число <b>отрицательное</b>, знак меняется на противоположный: x &gt; −16 : (−4).</div>
+                <div class="solution-step"><b>Шаг 2:</b> −16 : (−4) = 4.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &gt; 4, то есть (4; +∞) ✓</div>
+                <div class="solution-step">Проверка: x = 5: −20 &lt; −16 ✓ верно. Классическая ловушка — «x &lt; −4» было бы неверно!</div>
+            </details>
+        </div>
+
+        <!-- Задание 5 -->
+        <div class="task-box">
+            <span class="task-level level-basic">🟢 Базовый уровень</span>
+            <h3>Задание 5 (№ 939д)</h3>
+            <p>Решите неравенство <b>17 − x &gt; 10 − 6x</b>. Введите границу промежутка (можно с минусом).</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -1,4" data-answer="-1.4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Перенесём −x вправо, а 10 влево: 17 − 10 &gt; −6x + x → 7 &gt; −5x.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Разделим на −5 (знак меняется): −7/5 &lt; x → x &gt; −1,4.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &gt; −1,4, то есть (−1,4; +∞) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 6 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 6 (№ 940е)</h3>
+            <p>Решите неравенство <b>0,2x − 2 &lt; 7 − 0,8x</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 9" data-answer="9"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Перенесём −0,8x влево, −2 вправо: 0,2x + 0,8x &lt; 7 + 2.</div>
+                <div class="solution-step"><b>Шаг 2:</b> 1x &lt; 9 → x &lt; 9.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &lt; 9, то есть (−∞; 9) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 7 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 7 (№ 943а)</h3>
+            <p>Решите неравенство <b>5(x − 1) + 7 ≤ 1 − 3(x + 2)</b>. Введите границу в виде обыкновенной дроби a/b.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -7/8" data-answer="-7 8"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Раскроем скобки: 5x − 5 + 7 ≤ 1 − 3x − 6 → 5x + 2 ≤ −5 − 3x.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Перенесём: 5x + 3x ≤ −5 − 2 → 8x ≤ −7.</div>
+                <div class="solution-step"><b>Шаг 3:</b> Разделим на 8 (положительное): x ≤ −7/8.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x ≤ −7/8, то есть (−∞; −7/8] ✓ (точка закрашенная — неравенство нестрогое!)</div>
+            </details>
+        </div>
+
+        <!-- Задание 8 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 8 (№ 944а)</h3>
+            <p>Решите неравенство <b>4(2 − 3x) − (5 − x) &gt; 11 − x</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -0,8" data-answer="-0.8"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Раскроем скобки (перед второй — минус, знаки внутри меняются!): 8 − 12x − 5 + x &gt; 11 − x → 3 − 11x &gt; 11 − x.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Перенесём: −11x + x &gt; 11 − 3 → −10x &gt; 8.</div>
+                <div class="solution-step"><b>Шаг 3:</b> Разделим на −10 (знак меняется): x &lt; −0,8.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &lt; −0,8, то есть (−∞; −0,8) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 9 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 9 (№ 948г)</h3>
+            <p>Решите неравенство <b><span class="fraction"><span class="num">3x − 1</span><span class="den">4</span></span> &gt; 2</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 3" data-answer="3"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Умножим обе части на 4 — положительное число, знак сохраняется: 3x − 1 &gt; 8.</div>
+                <div class="solution-step"><b>Шаг 2:</b> 3x &gt; 9 → x &gt; 3.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &gt; 3, то есть (3; +∞) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 10 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 10 (№ 948д)</h3>
+            <p>Решите неравенство <b>2 &gt; <span class="fraction"><span class="num">6 − x</span><span class="den">5</span></span></b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: -4" data-answer="-4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Умножим обе части на 5: 10 &gt; 6 − x.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Перенесём: 10 − 6 &gt; −x → 4 &gt; −x. Умножим на −1 (знак меняется): x &gt; −4.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &gt; −4, то есть (−4; +∞) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 11 -->
+        <div class="task-box">
+            <span class="task-level level-medium">🔵 Средний уровень</span>
+            <h3>Задание 11 (№ 951а)</h3>
+            <p>Решите неравенство <b><span class="fraction"><span class="num">x</span><span class="den">2</span></span> + <span class="fraction"><span class="num">x</span><span class="den">3</span></span> &lt; 5</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 6" data-answer="6"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Умножим обе части на НОЗ = 6 (положительное): 3x + 2x &lt; 30.</div>
+                <div class="solution-step"><b>Шаг 2:</b> 5x &lt; 30 → x &lt; 6.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x &lt; 6, то есть (−∞; 6) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 12 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Повышенный уровень</span>
+            <h3>Задание 12 (№ 953г)</h3>
+            <p>Решите неравенство <b>x − <span class="fraction"><span class="num">x − 3</span><span class="den">5</span></span> + <span class="fraction"><span class="num">2x − 1</span><span class="den">10</span></span> ≤ 4</b>. Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 3,5" data-answer="3.5"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Умножим все части на НОЗ = 10: 10x − 2(x − 3) + (2x − 1) ≤ 40.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Раскроем скобки: 10x − 2x + 6 + 2x − 1 ≤ 40 → 10x + 5 ≤ 40.</div>
+                <div class="solution-step"><b>Шаг 3:</b> 10x ≤ 35 → x ≤ 3,5.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> x ≤ 3,5, то есть (−∞; 3,5] ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 13 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Повышенный уровень</span>
+            <h3>Задание 13 (№ 955а)</h3>
+            <p>При каких значениях a <b>сумма дробей</b> (2a − 1)/4 и (a − 1)/3 <b>положительна</b>? Введите границу промежутка.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 0,7" data-answer="0.7"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Составим неравенство: (2a − 1)/4 + (a − 1)/3 &gt; 0.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Умножим на НОЗ = 12: 3(2a − 1) + 4(a − 1) &gt; 0 → 6a − 3 + 4a − 4 &gt; 0 → 10a &gt; 7.</div>
+                <div class="solution-step"><b>Шаг 3:</b> a &gt; 0,7.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> a &gt; 0,7, то есть (0,7; +∞) ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 14 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Повышенный уровень</span>
+            <h3>Задание 14 (№ 960а)</h3>
+            <p>Найдите <b>наибольшее целое</b> число, удовлетворяющее неравенству <b>1,6 − (3 − 2y) &lt; 5</b>.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 3" data-answer="3"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Раскроем скобки: 1,6 − 3 + 2y &lt; 5 → 2y &lt; 5 − 1,6 + 3 → 2y &lt; 6,4.</div>
+                <div class="solution-step"><b>Шаг 2:</b> y &lt; 3,2.</div>
+                <div class="solution-step"><b>Шаг 3:</b> Наибольшее целое число, меньшее 3,2 — это <b>3</b>.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> 3 ✓ (проверка: 1,6 − (3 − 6) = 4,6 &lt; 5 ✓; а 4 уже не годится: 1,6 − (3 − 8) = 6,6 &gt; 5 ✗)</div>
+            </details>
+        </div>
+
+        <!-- Задание 15 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Повышенный уровень</span>
+            <h3>Задание 15 (№ 961а)</h3>
+            <p>При каких <b>натуральных</b> значениях n разность <b>(2 − 2n) − (5n − 27)</b> положительна? Введите все такие n через запятую.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="Например: 1, 2 и 3" data-answer="1 2 3 4"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Раскроем скобки: 2 − 2n − 5n + 27 &gt; 0 → 29 − 7n &gt; 0.</div>
+                <div class="solution-step"><b>Шаг 2:</b> −7n &gt; −29 → делим на −7, знак меняется: n &lt; 29/7 ≈ 4,14.</div>
+                <div class="solution-step"><b>Шаг 3:</b> Натуральные числа, меньшие 4,14: <b>1, 2, 3, 4</b>.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> n = 1, 2, 3, 4 ✓ (при n = 5: 29 − 35 = −6 &lt; 0 — уже отрицательно)</div>
+            </details>
+        </div>
+
+        <!-- Задание 16 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Повышенный уровень</span>
+            <h3>Задание 16 (№ 956а)</h3>
+            <p>Решите неравенство <b>31(2x + 1) − 12x &gt; 50x</b>. Введите 0, если решений нет, и 1, если решением является любое число.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="0 или 1" data-answer="1"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Раскроем скобки: 62x + 31 − 12x &gt; 50x → 50x + 31 &gt; 50x.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Перенесём 50x влево: 50x − 50x + 31 &gt; 0 → <b>0·x &gt; −31</b>.</div>
+                <div class="solution-step"><b>Шаг 3:</b> 0 &gt; −31 — верно при любом x!</div>
+                <div class="solution-step check-step"><b>Ответ:</b> решением является <b>любое число</b> → в ответе 1 ✓</div>
+            </details>
+        </div>
+
+        <!-- Задание 17 -->
+        <div class="task-box">
+            <span class="task-level level-hard">🟣 Повышенный уровень</span>
+            <h3>Задание 17 (№ 956г)</h3>
+            <p>Решите неравенство <b><span class="fraction"><span class="num">12x − 1</span><span class="den">3</span></span> &lt; 4x − 3</b>. Введите 0, если решений нет, и 1, если решением является любое число.</p>
+
+            <div class="check-row"><input class="check-input" type="text" placeholder="0 или 1" data-answer="0"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+            <details>
+                <summary>Показать подробное решение</summary>
+                <div class="solution-step"><b>Шаг 1:</b> Умножим обе части на 3: 12x − 1 &lt; 12x − 9.</div>
+                <div class="solution-step"><b>Шаг 2:</b> Перенесём: 12x − 12x &lt; −9 + 1 → <b>0·x &lt; −8</b>.</div>
+                <div class="solution-step"><b>Шаг 3:</b> 0 &lt; −8 — неверное неравенство при любом x.</div>
+                <div class="solution-step check-step"><b>Ответ:</b> <b>решений нет</b> → в ответе 0 ✓</div>
+            </details>
+        </div>
+    </section>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ УПРАЖНЕНИЯ -->
+    <section class="card">
+        <h2>🏋️ Дополнительные упражнения для практики</h2>
+        <p>Реши самостоятельно по алгоритму и сверь ответы! Особое внимание — на знак неравенства при делении на отрицательное число.</p>
+
+        <h3>🟢 Базовый уровень</h3>
+        <div class="task-box">
+            <p><b>1.</b> (№ 934г) x − 0,4 ≥ 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>2.</b> (№ 935в) −x ≥ 1</p>
+        </div>
+        <div class="task-box">
+            <p><b>3.</b> (№ 935м) −<span class="fraction"><span class="num">1</span><span class="den">7</span></span>y &lt; −1</p>
+        </div>
+        <div class="task-box">
+            <p><b>4.</b> (№ 936з) 10x ≤ −24</p>
+        </div>
+        <div class="task-box">
+            <p><b>5.</b> (№ 939г) 2 − 3a ≤ 1</p>
+        </div>
+
+        <h3>🔵 Средний уровень</h3>
+        <div class="task-box">
+            <p><b>6.</b> (№ 943б) 4(a + 8) − 7(a − 1) &lt; 12</p>
+        </div>
+        <div class="task-box">
+            <p><b>7.</b> (№ 943ж) 6y − (y + 8) − 3(2 − y) ≤ 2</p>
+        </div>
+        <div class="task-box">
+            <p><b>8.</b> (№ 944г) 2,5(2 − y) − 1,5(y − 4) ≤ 3 − y</p>
+        </div>
+        <div class="task-box">
+            <p><b>9.</b> (№ 953а) <span class="fraction"><span class="num">3 + x</span><span class="den">4</span></span> + <span class="fraction"><span class="num">2 − x</span><span class="den">3</span></span> &lt; 0</p>
+        </div>
+        <div class="task-box">
+            <p><b>10.</b> (№ 955б) <span class="fraction"><span class="num">3b − 1</span><span class="den">2</span></span> − <span class="fraction"><span class="num">1 + 5b</span><span class="den">4</span></span> &lt; 0</p>
+        </div>
+
+        <h3>🟣 Повышенный уровень</h3>
+        <div class="task-box">
+            <p><b>11.</b> (№ 945в) 5y² − 5y(y + 4) ≥ 100</p>
+        </div>
+        <div class="task-box">
+            <p><b>12.</b> (№ 946б) (2x − 5)² − 0,5x &lt; (2x − 1)(2x + 1) − 15</p>
+        </div>
+        <div class="task-box">
+            <p><b>13.</b> (№ 942б) значения двучлена 1,5p − 1 больше значений двучлена 1 + 1,1p</p>
+        </div>
+        <div class="task-box">
+            <p><b>14.</b> (№ 961б) при каких натуральных n сумма (−27,1 + 3n) + (7,1 + 5n) отрицательна?</p>
+        </div>
+        <div class="task-box">
+            <p><b>15.</b> (№ 949е) <span class="fraction"><span class="num">2</span><span class="den">11</span></span>(x − 4) &lt; 3</p>
+        </div>
+
+        <details>
+            <summary>Ответы ко всем упражнениям</summary>
+            <div class="solution-step">
+                1. x ≥ 0,4 — луч [0,4; +∞) (закрашенная точка!)<br>
+                2. x ≤ −1 — луч (−∞; −1] (делили на −1, знак меняется)<br>
+                3. y &gt; 7 (умножили на −7: −(1/7)y · (−7) = y, знак «&lt;» меняется на «&gt;»)<br>
+                4. x ≤ −2,4<br>
+                5. a ≥ 1/3 (−3a ≤ −1, делим на −3 — знак меняется)<br>
+                6. a &gt; 9 (4a + 32 − 7a + 7 &lt; 12 → −3a &lt; −27)<br>
+                7. y ≤ 2 (6y − y − 8 − 6 + 3y ≤ 2 → 8y ≤ 16)<br>
+                8. y ≥ 8/3 ≈ 2,67 (11 − 4y ≤ 3 − y → −3y ≤ −8)<br>
+                9. x &gt; 17 (·12: 9 + 3x + 8 − 4x &lt; 0 → 17 − x &lt; 0)<br>
+                10. b &lt; 3 (·4: 6b − 2 − 1 − 5b &lt; 0 → b &lt; 3)<br>
+                11. y ≤ −5 (5y² − 5y² − 20y ≥ 100 → −20y ≥ 100)<br>
+                12. x &gt; 2 (4x² − 20x + 25 − 0,5x &lt; 4x² − 16 → −20,5x &lt; −41)<br>
+                13. p &gt; 5 (1,5p − 1,1p &gt; 1 + 1 → 0,4p &gt; 2)<br>
+                14. n = 1 и n = 2 (8n − 20 &lt; 0 → n &lt; 2,5)<br>
+                15. x &lt; 20,5 (·11: 2x − 8 &lt; 33 → 2x &lt; 41)
+            </div>
+        </details>
+    </section>
+
+    <!-- БЛОК 3: ПРАКТИЧЕСКОЕ ПРИМЕНЕНИЕ -->
+    <section class="card practice-box">
+        <h2>🏗 Блок 3. Практическое применение</h2>
+
+        <h3>📐 Задача про прямоугольник (№ 964)</h3>
+        <p>Длина одной стороны прямоугольника — 6 см. Какой должна быть длина другой стороны, чтобы <b>периметр прямоугольника был меньше периметра квадрата</b> со стороной 4 см?</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Наибольшее целое, см" data-answer="1"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Периметр квадрата: P = 4·4 = 16 см.</div>
+            <div class="solution-step"><b>Шаг 2:</b> Пусть вторая сторона равна b см. Периметр прямоугольника: 2(6 + b) = 12 + 2b.</div>
+            <div class="solution-step"><b>Шаг 3:</b> Составим неравенство: 12 + 2b &lt; 16 → 2b &lt; 4 → b &lt; 2 (и b &gt; 0, ведь длина положительна).</div>
+            <div class="solution-step check-step"><b>Ответ:</b> вторая сторона должна быть меньше 2 см. Наибольшее целое значение — <b>1 см</b> ✅</div>
+        </details>
+
+        <h3>📚 Задача про переплётные мастерские (№ 966)</h3>
+        <p>Одна переплётная мастерская берёт по <b>480 р.</b> за книгу и ещё <b>630 р.</b> за оформление заказа, а другая — по <b>485 р.</b> за книгу и <b>580 р.</b> за оформление. Укажите <b>наименьшее число книг</b>, при котором заказ выгоднее сделать в первой мастерской.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Например: 11" data-answer="11"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Стоимость в первой мастерской: 480n + 630; во второй: 485n + 580.</div>
+            <div class="solution-step"><b>Шаг 2:</b> Первая выгоднее, если 480n + 630 &lt; 485n + 580.</div>
+            <div class="solution-step"><b>Шаг 3:</b> Переносим слагаемые: 630 − 580 &lt; 485n − 480n → 50 &lt; 5n → n &gt; 10.</div>
+            <div class="solution-step check-step"><b>Ответ:</b> наименьшее натуральное n, большее 10, — это <b>11 книг</b> ✅ (проверка: 480·11 + 630 = 5910 &lt; 485·11 + 580 = 5915 ✓, а при 10 книгах 5430 &gt; 5430 не выполняется — поровну)</div>
+        </details>
+
+        <h3>✉️ Задача про почтовый перевод (№ 967)</h3>
+        <p>За денежный почтовый перевод до 1000 р. в некотором городе берётся плата <b>7 р. плюс 5% от переводимой суммы</b>. Посетитель имеет <b>800 р.</b> Укажите <b>наибольшее целое число рублей</b>, которое он может перевести.</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Например: 750" data-answer="755"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Пусть переводимая сумма — s р. Плата: 7 + 0,05s. Всего нужно: s + 7 + 0,05s ≤ 800.</div>
+            <div class="solution-step"><b>Шаг 2:</b> 1,05s ≤ 793 → s ≤ 793 : 1,05 ≈ 755,24.</div>
+            <div class="solution-step"><b>Шаг 3:</b> Наибольшее целое — <b>755 р.</b></div>
+            <div class="solution-step check-step"><b>Ответ:</b> 755 р. ✅ (проверка: плата 7 + 0,05·755 = 44,75; всего 755 + 44,75 = 799,75 ≤ 800 ✓, а 756 р. не проходит: 756 + 44,8 = 800,8 &gt; 800 ✗)</div>
+        </details>
+
+        <h3>🚤 Задача про туристов на лодке (№ 968)</h3>
+        <p>Туристы отправились на моторной лодке <b>по течению реки</b> и должны вернуться обратно к стоянке <b>не позднее чем через 3 ч</b>. На какое расстояние могут отъехать туристы, если скорость течения реки <b>2 км/ч</b>, а скорость лодки в стоячей воде <b>18 км/ч</b>?</p>
+
+        <div class="check-row"><input class="check-input" type="text" placeholder="Наибольшее целое, км" data-answer="26"><button class="check-btn" type="button">Проверить</button><span class="check-feedback"></span></div>
+        <details>
+            <summary>Показать решение</summary>
+            <div class="solution-step"><b>Шаг 1:</b> Скорость по течению: 18 + 2 = 20 км/ч; против течения: 18 − 2 = 16 км/ч.</div>
+            <div class="solution-step"><b>Шаг 2:</b> Пусть расстояние — s км. Время туда и обратно: s/20 + s/16 ≤ 3.</div>
+            <div class="solution-step"><b>Шаг 3:</b> Умножим на НОЗ = 80: 4s + 5s ≤ 240 → 9s ≤ 240 → s ≤ 240/9 = 26 2/3 ≈ 26,7 км.</div>
+            <div class="solution-step check-step"><b>Ответ:</b> не более 26 2/3 км ≈ 26,7 км. Наибольшее целое — <b>26 км</b> ✅ (проверка: 26/20 + 26/16 = 1,3 + 1,625 = 2,925 ч ≤ 3 ✓)</div>
+        </details>
+
+        <h3>🎨 Бонус: неравенства помогают исследовать уравнения</h3>
+        <p>Составь неравенство с дискриминантом — и ты найдёшь, при каких значениях буквы уравнение имеет нужное число корней (№ 962, 963 из учебника):</p>
+        <div class="rule-box">
+            <b>№ 962.</b> При каких a уравнение (a + 5)x² + 4x − 20 = 0 <b>не имеет корней</b>?<br>
+            D = 16 − 4(a + 5)·(−20) = 16 + 80(a + 5). Корней нет ⟺ D &lt; 0: 16 + 80a + 400 &lt; 0 → 80a &lt; −416 → <b>a &lt; −5,2</b>.<br><br>
+            <b>№ 963.</b> При каких k уравнение (k − 4)x² + 16x − 24 = 0 имеет <b>два корня</b>?<br>
+            Нужны одновременно k ≠ 4 (иначе уравнение линейное) и D &gt; 0: 256 + 96(k − 4) &gt; 0 → 96k &gt; 128 → k &gt; 4/3. Итого: <b>k &gt; 4/3 и k ≠ 4</b>.
+        </div>
+    </section>
+
+    <!-- ИТОГИ -->
+    <section class="card summary-box">
+        <h2>🌟 Главное, что нужно запомнить</h2>
+        <ul>
+            <li><b>Решение неравенства</b> — значение переменной, которое обращает его в верное числовое неравенство. Решить неравенство — найти все его решения или доказать, что решений нет.</li>
+            <li><b>Равносильные неравенства</b> имеют одни и те же решения (два неравенства без решений тоже равносильны).</li>
+            <li><b>Свойства:</b> можно переносить слагаемое из части в часть с противоположным знаком; можно умножать/делить на положительное число (знак сохраняется) и на отрицательное — но тогда <b>знак неравенства меняется на противоположный</b>!</li>
+            <li><b>Линейное неравенство</b> — это ax &gt; b или ax &lt; b. Особый случай 0·x: решений нет (0·x &gt; b при b ≥ 0; 0·x &lt; b при b ≤ 0) или решением является любое число (0·x &gt; b при b &lt; 0; 0·x &lt; b при b &gt; 0).</li>
+            <li><b>Ответ — числовой промежуток:</b> строгое неравенство (&gt;, &lt;) — точка на прямой <b>выколотая</b> и круглая скобка; нестрогое (≥, ≤) — точка <b>закрашенная</b> и квадратная скобка.</li>
+            <li><b>Умножение на НОЗ дробей</b> (число!) делает неравенство равносильным — проверять ничего не нужно, в отличие от дробных уравнений урока 26, где множитель содержал переменную.</li>
+            <li>💡 <b>Лайфхак:</b> решай по алгоритму из 6 шагов и после деления на отрицательное число сразу проговаривай: «делим на минус — флип знака». Проверь себя: подставь граничное число (неравенство должно стать «на грани») и одно число из промежутка (должно быть верно).</li>
+        </ul>
+    </section>
+
+    <!-- МЕТОДИЧЕСКАЯ ПОДСКАЗКА -->
+    <div class="card teacher-note">
+        <h2>💡 Методическая подсказка (для учителя / родителя)</h2>
+        <p><b>🎯 Типичные ошибки:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li><i>Деление на отрицательное без смены знака:</i> в № 935б пишут «−4x &lt; −16 → x &lt; −4» вместо x &gt; 4. Приём: проговаривать вслух «делим на минус — меняем знак» и сразу проверять ответ подстановкой.</li>
+            <li><i>Перенос слагаемого без смены его знака:</i> в № 939д из 17 − x &gt; 10 − 6x получают 5x &gt; 27 вместо 5x &gt; −7. Напомните: меняется знак переносимого слагаемого, а не знак неравенства.</li>
+            <li><i>Смена знака неравенства при переносе:</i> путают два разных правила — при переносе знак неравенства сохраняется, меняется только при умножении/делении на отрицательное число.</li>
+            <li><i>Изображение промежутка:</i> закрашенная точка при строгом неравенстве или штриховка не в ту сторону. Требуйте сопроводительную подпись промежутка под прямой.</li>
+            <li><i>Забыли ограничение «натуральные»:</i> в № 961а пишут «n &lt; 4,14» вместо перечисления n = 1, 2, 3, 4; в № 960а дают ответ «3,2» вместо наибольшего целого 3.</li>
+            <li><i>Случай 0·x:</i> в № 956в пишут «x &gt; 2», хотя после приведения подобных получается 0·x &gt; 2 — решений нет. Разберите № 956а и г с контрастом: «любое число» и «решений нет».</li>
+        </ul>
+        <p><b>🪜 Подмостки для слабых учеников:</b></p>
+        <ul style="margin-left: 20px; margin-bottom: 12px;">
+            <li>Карточка-алгоритм из 6 шагов (схема в блоке 1) на парте: один шаг — одна строка записи.</li>
+            <li>Начните с устных № 935а–з: там нужно только разделить на коэффициент и не забыть про знак.</li>
+            <li>Координатная прямая обязательна для каждого ответа на первых 5–6 заданиях; потом можно только записывать промежуток.</li>
+            <li>Приём самопроверки «два числа»: подставь граничное число (должно получиться равенство на грани) и одно число из промежутка (неравенство должно быть верным).</li>
+        </ul>
+        <p><b>🚀 Вызов для сильных учеников:</b></p>
+        <ul style="margin-left: 20px;">
+            <li>№ 945–947: неравенства, которые сводятся к линейным через тождественные преобразования и формулы сокращённого умножения — отличный тренинг «не бойся высоких степеней».</li>
+            <li>№ 962–963: исследование квадратного уравнения с параметром через дискриминант — готовый мостик к теме «Квадратные уравнения» и к олимпиадной культуре рассуждений.</li>
+            <li>№ 968: дробное неравенство с ограничением по времени (s/20 + s/16 ≤ 3) — подготовка к текстовым задачам урока 40 «Решение систем неравенств с одной переменной».</li>
+            <li>Обсудите связь с уроком 26: там умножали на выражение с переменной и проверяли корни; здесь множитель — только число, поэтому равносильность сохраняется автоматически. Контраст «уравнение ↔ неравенство» — сильная опора для понимания.</li>
+        </ul>
+    </div>
+
+    <nav class="lesson-nav">
+        <a href="index.html">🏠 К оглавлению</a>
+        <a href="lesson-4-38.html">⬅️ Предыдущий урок</a>
+        <a href="lesson-4-40.html">Следующий урок ➡️</a>
+    </nav>
+
+    <footer>
+        <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава IV, §12).</p>
+        <p class="legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+    </footer>
+
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script defer src="assets/axis-math.js"></script>
+<script defer src="assets/answer-core.js"></script>
+<script defer src="assets/course.js"></script>
+</body>
+</html>
