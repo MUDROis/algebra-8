@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Доказательство неравенств — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Доказательство неравенств</h1>
+            <p class="subtitle">Урок 41 • Глава IV, §12</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 12, п. 41). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! В § 11 мы уже доказывали неравенства простейшим приёмом — через знак разности. Но есть неравенства, которые «в лоб» не докажешь. Сегодня мы разберём <strong>четыре приёма</strong>, которыми пользуются математики: метод разности, использование известных неравенств, опора на очевидные соотношения и почленное сложение.</p>
+
+            <div class="theorem-box">
+                <strong>Приём 1. Метод разности.</strong> Чтобы доказать, что $A > B$, составляют разность $A - B$ и показывают, что она положительна при всех допустимых значениях переменных. (Этот приём тебе уже знаком по § 11.)
+            </div>
+
+            <p><strong>Пример 1.</strong> Докажем, что при $x > 0$ верно неравенство<br>
+            $\sqrt{x+1} - \sqrt{x} > \dfrac{1}{2\sqrt{x+1}}$.</p>
+            <div class="step-box">
+                <strong>Доказательство.</strong><br>
+                1. Составим разность и преобразуем её: представим каждую скобку в виде дроби со знаменателем 1 и освободимся от иррациональности в числителе:<br>
+                $\sqrt{x+1} - \sqrt{x} = \dfrac{(\sqrt{x+1} - \sqrt{x})(\sqrt{x+1} + \sqrt{x})}{\sqrt{x+1} + \sqrt{x}} = \dfrac{(x+1) - x}{\sqrt{x+1} + \sqrt{x}} = \dfrac{1}{\sqrt{x+1} + \sqrt{x}}.$<br><br>
+                2. Так как функция $y = \sqrt{x}$ возрастает, то $\sqrt{x+1} > \sqrt{x}$. Значит, знаменатель первой дроби меньше знаменателя второй:<br>
+                $\sqrt{x+1} + \sqrt{x} < 2\sqrt{x+1}$.<br><br>
+                3. У дроби с меньшим знаменателем значение больше:<br>
+                $\dfrac{1}{\sqrt{x+1} + \sqrt{x}} > \dfrac{1}{2\sqrt{x+1}}$.<br><br>
+                Разность положительна — неравенство доказано. ✅
+            </div>
+
+            <div class="theorem-box">
+                <strong>Приём 2. Использование известных неравенств.</strong> Иногда удобно показать, что доказываемое неравенство следует из других неравенств, справедливость которых уже известна. Главный «запас» — соотношение между средним арифметическим и средним геометрическим двух положительных чисел:<br>
+                $\dfrac{a+b}{2} \ge \sqrt{ab}$ при $a > 0,\ b > 0$.
+            </div>
+
+            <p><strong>Пример 2.</strong> Докажем, что при $a > 0,\ b > 0,\ c > 0$ верно неравенство<br>
+            $(a^2 + bc)(b^2 + ac)(c^2 + ab) > 8a^2b^2c^2$.</p>
+            <div class="step-box">
+                <strong>Доказательство.</strong><br>
+                1. Применим неравенство о средних к каждой паре положительных чисел:<br>
+                $a^2 + bc \ge 2a\sqrt{bc},\quad b^2 + ac \ge 2b\sqrt{ac},\quad c^2 + ab \ge 2c\sqrt{ab}$.<br><br>
+                2. Все части неравенств положительны, поэтому их можно перемножить:<br>
+                $(a^2 + bc)(b^2 + ac)(c^2 + ab) \ge 8abc \cdot \sqrt{bc \cdot ac \cdot ab} = 8abc \cdot \sqrt{a^2b^2c^2} = 8a^2b^2c^2$.<br><br>
+                Неравенство доказано. ✅ (Знак $>$ верен, когда числа $a, b, c$ не все равны; равенство достигается при $a = b = c$.)
+            </div>
+
+            <div class="theorem-box">
+                <strong>Приём 3. Опора на очевидные соотношения.</strong> Иногда неравенство удаётся доказать, ссылаясь на простые и наглядные факты — например, на то, что квадрат числа неотрицателен: $(1+a)^2 > 1 + 2a$ при $a \ne 0$, или $1 + a > 1$ при $a > 0$ и т. п.
+            </div>
+
+            <p><strong>Пример 3.</strong> Докажем, что при $x > 1$ верно двойное неравенство<br>
+            $\dfrac{1}{x+1} < \dfrac{1}{x} < \dfrac{1}{x-1}$.</p>
+            <div class="step-box">
+                <strong>Доказательство.</strong><br>
+                1. Заменим разности $x$ и $x-1$, $x+1$ и $x$ равными им дробями:<br>
+                $\dfrac{1}{x-1} - \dfrac{1}{x} = \dfrac{x - (x-1)}{x(x-1)} = \dfrac{1}{x(x-1)}$,<br>
+                $\dfrac{1}{x} - \dfrac{1}{x+1} = \dfrac{(x+1) - x}{x(x+1)} = \dfrac{1}{x(x+1)}$.<br><br>
+                2. При $x > 1$ обе правые части положительны:<br>
+                $\dfrac{1}{x(x-1)} > 0 \Rightarrow \dfrac{1}{x-1} > \dfrac{1}{x}$,<br>
+                $\dfrac{1}{x(x+1)} > 0 \Rightarrow \dfrac{1}{x} > \dfrac{1}{x+1}$.<br><br>
+                Оба неравенства доказаны. ✅
+            </div>
+
+            <div class="theorem-box">
+                <strong>Приём 4. Почленное сложение неравенств.</strong> Если нужно оценить сумму многих величин, можно сравнить каждое слагаемое с одним и тем же числом и сложить полученные неравенства.
+            </div>
+
+            <p><strong>Пример 4.</strong> Докажем, что при любом натуральном $n > 1$ верно неравенство<br>
+            $\dfrac{1}{n+1} + \dfrac{1}{n+2} + \ldots + \dfrac{1}{2n} > \dfrac{1}{2}$.</p>
+            <div class="step-box">
+                <strong>Доказательство.</strong><br>
+                1. При любом натуральном $k$, где $n+1 \le k \le 2n$, знаменатель $k \le 2n$, поэтому<br>
+                $\dfrac{1}{k} \ge \dfrac{1}{2n}$, причём для $k = n+1, \ldots, 2n-1$ неравенство строгое.<br><br>
+                2. Сложим почленно $n$ таких неравенств (для $k = n+1, \ldots, 2n$):<br>
+                $\dfrac{1}{n+1} + \dfrac{1}{n+2} + \ldots + \dfrac{1}{2n} > n \cdot \dfrac{1}{2n} = \dfrac{1}{2}$.<br><br>
+                Неравенство доказано. ✅
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: сначала выбери приём, потом оформляй доказательство через разность!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1005. Докажи, что если $x > 0$ и $y > 0$, то $\dfrac{x}{y} + \dfrac{y}{x} \ge 2$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство (метод разности):</strong></p>
+                    <p>1. Составим разность:<br>
+                    $\dfrac{x}{y} + \dfrac{y}{x} - 2 = \dfrac{x^2 + y^2 - 2xy}{xy} = \dfrac{(x - y)^2}{xy}$.</p>
+                    <p>2. Так как $x > 0$ и $y > 0$, знаменатель $xy > 0$, а числитель $(x-y)^2 \ge 0$ при любых $x$ и $y$.</p>
+                    <p>3. Значит, разность неотрицательна, и $\dfrac{x}{y} + \dfrac{y}{x} \ge 2$. ✅ (Равенство при $x = y$.)</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1007(а). Докажи, что при $a > 0,\ b > 0$: $(a+b)\left(\dfrac{1}{a} + \dfrac{1}{b}\right) \ge 4$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство (метод разности):</strong></p>
+                    <p>1. Раскроем скобки:<br>
+                    $(a+b)\left(\dfrac{1}{a} + \dfrac{1}{b}\right) = 1 + \dfrac{a}{b} + \dfrac{b}{a} + 1 = 2 + \dfrac{a}{b} + \dfrac{b}{a}$.</p>
+                    <p>2. По №1005 $\dfrac{a}{b} + \dfrac{b}{a} \ge 2$, значит, всё выражение $\ge 2 + 2 = 4$.</p>
+                    <p>3. Или методом разности: $(a+b)\left(\dfrac{1}{a} + \dfrac{1}{b}\right) - 4 = \dfrac{(a-b)^2}{ab} \ge 0$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1017(а). Докажи, что при любых $a,\ b$: $a^2 + b^2 + 2 \ge 2(a+b)$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство (выделение полных квадратов):</strong></p>
+                    <p>1. Составим разность и выделим полные квадраты:<br>
+                    $a^2 + b^2 + 2 - 2(a+b) = a^2 - 2a + 1 + b^2 - 2b + 1 = (a-1)^2 + (b-1)^2$.</p>
+                    <p>2. Квадраты неотрицательны, их сумма $\ge 0$. Значит, разность неотрицательна, и $a^2 + b^2 + 2 \ge 2(a+b)$. ✅ (Равенство при $a = b = 1$.)</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1017(б). Докажи, что при любых $a,\ b,\ c$: $a^2 + b^2 + c^2 + 5 > 2(a+b+c)$</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство (выделение полных квадратов):</strong></p>
+                    <p>1. Составим разность:<br>
+                    $a^2 + b^2 + c^2 + 5 - 2(a+b+c) = (a^2 - 2a + 1) + (b^2 - 2b + 1) + (c^2 - 2c + 1) + 2$<br>
+                    $= (a-1)^2 + (b-1)^2 + (c-1)^2 + 2$.</p>
+                    <p>2. Сумма квадратов $\ge 0$, значит, вся разность $\ge 2 > 0$. Разность строго положительна — неравенство доказано. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1008. Докажи, что куб полусуммы любых двух положительных чисел не превосходит полусуммы их кубов</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Формулировка:</strong> при $a > 0,\ b > 0$:<br>
+                    $\left(\dfrac{a+b}{2}\right)^3 \le \dfrac{a^3 + b^3}{2}$.</p>
+                    <p><strong>Доказательство (метод разности):</strong></p>
+                    <p>1. Составим разность:<br>
+                    $\dfrac{a^3 + b^3}{2} - \left(\dfrac{a+b}{2}\right)^3 = \dfrac{4(a^3 + b^3) - (a+b)^3}{8}$.</p>
+                    <p>2. Раскроем $(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$:<br>
+                    $\dfrac{4a^3 + 4b^3 - a^3 - 3a^2b - 3ab^2 - b^3}{8} = \dfrac{3a^3 + 3b^3 - 3a^2b - 3ab^2}{8} = \dfrac{3(a+b)(a^2 - 2ab + b^2)}{8} = \dfrac{3(a+b)(a-b)^2}{8}$.</p>
+                    <p>3. Так как $a > 0,\ b > 0$, множитель $a+b > 0$, а $(a-b)^2 \ge 0$. Разность неотрицательна — неравенство доказано. ✅ (Равенство при $a = b$.)</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Дизайн и оптимизация:</strong> Архитектор проектирует прямоугольный участок для детской площадки. Бюджет позволяет купить ровно <strong>40 м</strong> ограждения. Какие размеры прямоугольника дадут наибольшую площадь?</p>
+            <p>Для решения понадобится только что доказанное неравенство о средних!</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Пусть стороны прямоугольника равны $a$ м и $b$ м. Периметр: $2(a+b) = 40$, откуда $a+b = 20$.</p>
+                    <p>2. Площадь $S = ab$. Воспользуемся неравенством о средних:<br>
+                    $\sqrt{ab} \le \dfrac{a+b}{2} = \dfrac{20}{2} = 10$,<br>
+                    значит, $ab \le 100$.</p>
+                    <p>3. Равенство достигается при $a = b$: $a = b = 10$ м.</p>
+                    <p><strong>Вывод для архитектора:</strong> наибольшая площадь — <strong>100 м²</strong>, и она достигается при квадрате со стороной <strong>10 м</strong>. Среди всех прямоугольников с данным периметром наибольшую площадь имеет квадрат — это прямое следствие неравенства о средних! ✅</p>
+                </div>
+            </details>
+
+            <p>💡 <strong>Ещё одно красивое применение:</strong> полупериметр треугольника больше длины каждой из его сторон. Если стороны равны $a, b, c$, то $p = \dfrac{a+b+c}{2}$, и $p - a = \dfrac{b+c-a}{2} > 0$ по неравенству треугольника. Проверь это самостоятельно!</p>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Метод разности:</strong> $A > B \Leftrightarrow A - B > 0$ — универсальный приём.</li>
+                <li><strong>Среднее арифметическое ≥ среднего геометрического</strong> для положительных чисел: $\dfrac{a+b}{2} \ge \sqrt{ab}$ — мощный «запас» готовых неравенств.</li>
+                <li>Неравенства с положительными частями можно <strong>перемножать</strong> и <strong>складывать почленно</strong>.</li>
+                <li>Квадрат любого выражения неотрицателен: $(A-B)^2 \ge 0$ — основа выделения полных квадратов.</li>
+                <li>Не забывай указывать, <strong>когда достигается равенство</strong> — это часть полного доказательства.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Ученики часто теряются, с чего начать доказательство. Предложите им «дерево приёмов»: если неравенство содержит дроби или корни — попробуй метод разности с преобразованием; если есть произведение сумм — неравенство о средних; если есть квадраты — выделение полных квадратов. Типичная ошибка — перемножать неравенства с отрицательными частями (напомните условие положительности). В примере 2 обратите внимание, что знак $\ge$ при перемножении сохраняется, а строгое $>$ в учебнике получается, когда числа не все равны — это тонкий момент, который стоит обсудить.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-4-40.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава IV, §12).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
