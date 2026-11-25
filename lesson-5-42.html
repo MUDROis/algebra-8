@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Функция. Область определения и множество значений функции — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Функция. Область определения и множество значений функции</h1>
+            <p class="subtitle">Урок 42 • Глава V, §13</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 13, п. 42). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! С функциями мы уже встречались в 7 классе. Сегодня сделаем следующий шаг: дадим строгие определения и познакомимся с двумя важнейшими характеристиками любой функции — <strong>областью определения</strong> и <strong>множеством значений</strong>.</p>
+
+            <div class="formula-box">
+                Определение.<br>
+                Функцией называют такую зависимость переменной $y$ от переменной $x$, при которой <strong>каждому</strong> значению $x$ соответствует <strong>единственное</strong> значение $y$.<br>
+                $x$ — независимая переменная (аргумент), $y$ — зависимая переменная.
+            </div>
+
+            <p>Если зависимость $y$ от $x$ является функцией, то записывают: <strong>$y = f(x)$</strong> (читают: «у равно эф от икс»). Символ $f(x)$ обозначает значение функции, соответствующее значению аргумента $x$.</p>
+
+            <div class="step-box">
+                <strong>Пример.</strong> Функция задана формулой $f(x) = 2x^2 - 6$. Найдём значения функции при $x = 2{,}5$ и $x = -3$:<br>
+                $f(2{,}5) = 2 \cdot 2{,}5^2 - 6 = 2 \cdot 6{,}25 - 6 = 12{,}5 - 6 = 6{,}5$<br>
+                $f(-3) = 2 \cdot (-3)^2 - 6 = 2 \cdot 9 - 6 = 18 - 6 = 12$<br><br>
+                Вместо буквы $f$ используют и другие буквы: $g$, $p$ и т. п.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Область определения и множество значений.</strong><br>
+                • Все значения независимой переменной образуют <strong>область определения функции</strong> — обозначается $D(f)$.<br>
+                • Все значения, которые принимает зависимая переменная, образуют <strong>множество значений функции</strong> — обозначается $E(f)$.
+            </div>
+
+            <p>Функция считается <strong>заданной</strong>, если указаны её область определения и правило, по которому каждому значению аргумента ставится в соответствие единственное значение функции.</p>
+
+            <div class="theorem-box">
+                <strong>Важное правило.</strong> Если функция задана формулой и её область определения не указана, то считают, что область определения состоит из всех значений $x$, при которых выражение $f(x)$ <strong>имеет смысл</strong>.
+            </div>
+
+            <div class="step-box">
+                <strong>Примеры.</strong><br>
+                • $f(x) = 5x + 1$ — область определения: множество всех чисел.<br>
+                • $g(x) = \dfrac{x}{x+3}$ — область определения: все числа, кроме $-3$ (на ноль делить нельзя!).<br>
+                • $h(x) = \sqrt{x-2}$ — область определения: $x \ge 2$, так как подкоренное выражение неотрицательно.
+            </div>
+
+            <p>💡 <strong>Реальный процесс:</strong> зависимость длины $l$ железного стержня от температуры нагревания $t$ выражается формулой $l = l_0(1 + \alpha t)$, где $l_0$ — начальная длина, $\alpha$ — коэффициент линейного расширения. Формула имеет смысл при любых $t$, однако областью определения функции является промежуток в несколько десятков градусов, для которого справедлив закон линейного расширения. Область определения функции, описывающей реальный процесс, зависит от условий его протекания!</p>
+
+            <h3>📐 График функции</h3>
+            <p><strong>Графиком функции</strong> называется множество всех точек координатной плоскости, абсциссы которых равны значениям аргумента, а ординаты — соответствующим значениям функции.</p>
+
+            <div class="svg-container">
+                <!-- Схематичный график функции на отрезке [-3; 7] -->
+                <svg viewBox="0 0 500 300" width="100%" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="500" height="300" fill="#ffffff" />
+                    <!-- Сетка -->
+                    <g stroke="#e2e8f0" stroke-width="1">
+                        <line x1="60" y1="40" x2="60" y2="250"/><line x1="110" y1="40" x2="110" y2="250"/>
+                        <line x1="160" y1="40" x2="160" y2="250"/><line x1="210" y1="40" x2="210" y2="250"/>
+                        <line x1="260" y1="40" x2="260" y2="250"/><line x1="310" y1="40" x2="310" y2="250"/>
+                        <line x1="360" y1="40" x2="360" y2="250"/><line x1="410" y1="40" x2="410" y2="250"/>
+                        <line x1="460" y1="40" x2="460" y2="250"/>
+                        <line x1="60" y1="50" x2="460" y2="50"/><line x1="60" y1="100" x2="460" y2="100"/>
+                        <line x1="60" y1="150" x2="460" y2="150"/><line x1="60" y1="200" x2="460" y2="200"/>
+                    </g>
+                    <!-- Оси -->
+                    <line x1="60" y1="250" x2="460" y2="250" stroke="#1e293b" stroke-width="2"/>
+                    <line x1="60" y1="250" x2="60" y2="40" stroke="#1e293b" stroke-width="2"/>
+                    <text x="452" y="245" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                    <text x="42" y="50" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                    <!-- Метки -->
+                    <text x="60" y="268" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">−3</text>
+                    <text x="210" y="268" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">0</text>
+                    <text x="410" y="268" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">7</text>
+                    <text x="45" y="254" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">−2</text>
+                    <text x="45" y="154" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">0</text>
+                    <text x="45" y="54" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">4</text>
+                    <!-- График функции (схематично) -->
+                    <path d="M 60,250 C 90,240 120,210 160,170 C 200,130 230,90 260,78 C 300,60 340,70 380,100 C 400,115 410,130 410,150"
+                          fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                    <!-- Точки -->
+                    <circle cx="60" cy="250" r="4" fill="#dc2626"/>
+                    <circle cx="260" cy="78" r="4" fill="#f59e0b"/>
+                    <circle cx="410" cy="150" r="4" fill="#16a34a"/>
+                    <!-- Подписи -->
+                    <text x="300" y="30" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">y = f(x)</text>
+                    <text x="52" y="280" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">D(f) = [−3; 7]</text>
+                    <text x="300" y="295" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">E(f) = [−2; 4]</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. График функции: область определения — отрезок [−3; 7], множество значений — отрезок [−2; 4].</p>
+            </div>
+
+            <p>С помощью графика можно найти значения функции: например, $f(-3) = -2$, $f(0) = 2{,}5$, $f(2) = 4$, $f(5) = 2$ (сравни с рис. 49 учебника). Наименьшее значение функции равно −2, наибольшее — 4, при этом любое число от −2 до 4 является значением данной функции: $E(f) = [-2;\ 4]$.</p>
+
+            <h3>📊 Знакомые функции и их области</h3>
+            <div class="step-box">
+                • <strong>Линейная функция</strong> $y = kx + b$: $D(f) = \mathbb{R}$, $E(f) = \mathbb{R}$ (при $k \ne 0$); при $k = 0$ множество значений состоит из одного числа $b$.<br>
+                • <strong>Прямая пропорциональность</strong> $y = kx$ ($k \ne 0$): $D(f) = \mathbb{R}$, $E(f) = \mathbb{R}$.<br>
+                • <strong>Обратная пропорциональность</strong> $y = \dfrac{k}{x}$: $D(f) = \mathbb{R} \setminus \{0\}$, $E(f) = \mathbb{R} \setminus \{0\}$ — график гипербола.<br>
+                • $y = x^2$: $D(f) = \mathbb{R}$, $E(f) = [0;\ +\infty)$.<br>
+                • $y = x^3$: $D(f) = \mathbb{R}$, $E(f) = \mathbb{R}$.<br>
+                • $y = \sqrt{x}$: $D(f) = [0;\ +\infty)$, $E(f) = [0;\ +\infty)$.<br>
+                • $y = |x|$: $D(f) = \mathbb{R}$, $E(f) = [0;\ +\infty)$.
+            </div>
+            <p>Эти выводы стоит запомнить — они систематически используются во всех дальнейших темах.</p>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: область определения по формуле — это все $x$, при которых выражение имеет смысл!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1064. Найди f(0), f(1,5) и f(−1), если f(x) = x³ − 10</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$f(0) = 0^3 - 10 = -10$</p>
+                    <p>$f(1{,}5) = 1{,}5^3 - 10 = 3{,}375 - 10 = -6{,}625$</p>
+                    <p>$f(-1) = (-1)^3 - 10 = -1 - 10 = -11$</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1068. Найди значения x, при которых g(x) = 0, если g(x) = x(x + 4)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$x(x + 4) = 0$ — произведение равно нулю, когда хотя бы один множитель равен нулю:</p>
+                    <p>$x = 0$ или $x + 4 = 0 \Rightarrow x = -4$.</p>
+                    <p><strong>Ответ:</strong> $x = 0$; $x = -4$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1071. Найди x, при котором f(x) = 0,5x − 4 принимает значение: а) −5; б) 0; в) 2,5</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> решим три уравнения:</p>
+                    <p>а) $0{,}5x - 4 = -5 \Rightarrow 0{,}5x = -1 \Rightarrow x = -2$</p>
+                    <p>б) $0{,}5x - 4 = 0 \Rightarrow 0{,}5x = 4 \Rightarrow x = 8$</p>
+                    <p>в) $0{,}5x - 4 = 2{,}5 \Rightarrow 0{,}5x = 6{,}5 \Rightarrow x = 13$</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1082. Укажи область определения и множество значений функций y = √x, y = x³, y = |x|</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>• $y = \sqrt{x}$: $D(f) = [0;\ +\infty)$, $E(f) = [0;\ +\infty)$ — корень определён только для неотрицательных чисел, и его значение тоже неотрицательно.</p>
+                    <p>• $y = x^3$: $D(f) = \mathbb{R}$, $E(f) = \mathbb{R}$ — куб любого числа существует и принимает любые значения.</p>
+                    <p>• $y = |x|$: $D(f) = \mathbb{R}$, $E(f) = [0;\ +\infty)$ — модуль определён для любого числа, но не бывает отрицательным.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1083. Найди область определения и множество значений функции y = x²/(x² + 1)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. <strong>Область определения:</strong> знаменатель $x^2 + 1$ никогда не равен нулю ($x^2 \ge 0$, значит $x^2 + 1 \ge 1 > 0$). Поэтому $D(f) = \mathbb{R}$.</p>
+                    <p>2. <strong>Множество значений:</strong> $y = \dfrac{x^2}{x^2+1}$. При $x = 0$ получаем $y = 0$. При любом $x \ne 0$ числитель меньше знаменателя, значит $0 < y < 1$.</p>
+                    <p>3. Каждое значение из промежутка $[0;\ 1)$ достигается: $E(f) = [0;\ 1)$ — единица не достигается, так как $x^2 < x^2 + 1$ всегда.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1084. Периметр равнобедренного треугольника с основанием 20 см зависит от длины x боковой стороны. Задай функцию, зная, что периметр не превосходит 100 см. Укажи D(f) и E(f)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Периметр: $P = 20 + 2x$.</p>
+                    <p>2. По условию $P \le 100 \Rightarrow 20 + 2x \le 100 \Rightarrow x \le 40$.</p>
+                    <p>3. Неравенство треугольника: основание меньше суммы боковых сторон: $20 < 2x \Rightarrow x > 10$.</p>
+                    <p>4. Итак, $D(f) = (10;\ 40]$ — длина боковой стороны больше 10 см, но не больше 40 см.</p>
+                    <p>5. Множество значений: $P = 20 + 2x$, где $x \in (10;\ 40] \Rightarrow P \in (40;\ 100]$.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Физика и баллистика:</strong> Дальность полёта $S$ (м) снаряда, выпущенного из орудия под углом 45° к горизонту (без учёта сопротивления воздуха), зависит от начальной скорости $v_0$ (м/с):<br>
+            $S = \dfrac{v_0^2}{g}$, где $g \approx 10$ м/с².</p>
+            <p><strong>Вопрос:</strong> а) Найди $S$, если $v_0 = 600$ м/с. б) Найди $v_0$, если $S = 24$ км. Каковы область определения и множество значений этой функции в рамках физически осмысленной задачи?</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $S = \dfrac{600^2}{10} = \dfrac{360000}{10} = 36000$ м = <strong>36 км</strong>.</p>
+                    <p>б) $24$ км $= 24000$ м. Из формулы $S = \dfrac{v_0^2}{g}$ получаем:<br>
+                    $v_0^2 = S \cdot g = 24000 \cdot 10 = 240000$,<br>
+                    $v_0 = \sqrt{240000} \approx 489{,}9$ м/с ≈ <strong>490 м/с</strong>.</p>
+                    <p>Область определения: $v_0 > 0$ (скорость положительна), $D(f) = (0;\ +\infty)$. Множество значений: $S > 0$, $E(f) = (0;\ +\infty)$.</p>
+                    <p>💡 <em>Проверка:</em> при $v_0 = 600$ м/с снаряд летит на 36 км — это согласуется с реальной дальностью артиллерийских орудий!</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Функция</strong> — зависимость, при которой каждому значению аргумента соответствует единственное значение функции: $y = f(x)$.</li>
+                <li><strong>$D(f)$</strong> — область определения: все допустимые значения аргумента. Если область не указана — это все $x$, при которых формула имеет смысл.</li>
+                <li><strong>$E(f)$</strong> — множество значений: все числа, которые функция может принимать.</li>
+                <li>График функции наглядно показывает и $D(f)$ (проекция на ось $x$), и $E(f)$ (проекция на ось $y$).</li>
+                <li>Запомни области определения типовых функций: линейная — все числа; $y = 1/x$ — все числа, кроме 0; $y = \sqrt{x}$ — $x \ge 0$.</li>
+                <li>Функция, описывающая реальный процесс, определена на промежутке, где процесс имеет физический смысл.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Главная трудность для восьмиклассников — отличать область определения от множества значений. Помогает геометрическая интерпретация: $D(f)$ — проекция графика на ось абсцисс, $E(f)$ — проекция на ось ординат. При нахождении области определения по формуле требуйте проговаривать «что не может случиться»: деление на ноль, извлечение корня из отрицательного числа. Полезно коллективно разобрать №1083 (дробь, знаменатель которой никогда не обращается в ноль) и №1084 (задача с двумя ограничениями: периметр и неравенство треугольника). Задача про снаряд показывает практическую ценность понятия области определения.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-4-41.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава V, §13).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
