@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Свойства функций y = k/x и y = √x — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Свойства функций y = k/x и y = √x</h1>
+            <p class="subtitle">Урок 45 • Глава V, §14</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 14, п. 45). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! Сегодня применим наш алгоритм описания свойств к двум важнейшим функциям — <strong>обратной пропорциональности</strong> $y = \dfrac{k}{x}$ и <strong>квадратному корню</strong> $y = \sqrt{x}$.</p>
+
+            <h3>📈 Функция $y = \dfrac{k}{x}$ ($k \ne 0$)</h3>
+            <div class="theorem-box">
+                <strong>Свойства функции $y = \dfrac{k}{x}$:</strong><br>
+                1. Функция определена при любых значениях аргумента, кроме нуля: $D(y) = (-\infty;\ 0) \cup (0;\ +\infty)$.<br>
+                2. Значением функции может быть любое число, кроме нуля: $E(y) = (-\infty;\ 0) \cup (0;\ +\infty)$.<br>
+                3. Функция <strong>нулей не имеет</strong> — дробь $\dfrac{k}{x}$ при $k \ne 0$ ни при каком $x$ не обращается в нуль.<br>
+                4. При $k > 0$ функция принимает отрицательные значения на $(-\infty;\ 0)$ и положительные на $(0;\ +\infty)$; при $k < 0$ — наоборот.<br>
+                5. При $k > 0$ функция убывает на каждом из промежутков $(-\infty;\ 0)$ и $(0;\ +\infty)$; при $k < 0$ — возрастает на каждом из них.
+            </div>
+
+            <div class="proof-box">
+                <strong>Обоснование знака:</strong> при $k > 0$ дробь $\dfrac{k}{x}$ отрицательна при $x < 0$ (минус на плюс) и положительна при $x > 0$ (плюс на плюс). При $k < 0$ — наоборот.
+            </div>
+
+            <p>⚠️ <strong>Очень важное замечание!</strong> Хотя функция $y = \dfrac{k}{x}$ убывает (или возрастает) на каждом из промежутков $(-\infty;\ 0)$ и $(0;\ +\infty)$ по отдельности, она <strong>не является</strong> ни убывающей, ни возрастающей на всей области определения. Например, при $k = 1$: $f(-1) = -1$, а $f(1) = 1$ — при переходе через нуль значения «перепрыгивают». Функция не является монотонной на всей области определения!</p>
+
+            <h3>📈 Функция $y = \sqrt{x}$</h3>
+            <div class="theorem-box">
+                <strong>Свойства функции $y = \sqrt{x}$:</strong><br>
+                1. Функция определена при любых неотрицательных значениях аргумента: $D(y) = [0;\ +\infty)$.<br>
+                2. Функция принимает только неотрицательные значения, причём любое неотрицательное число может являться её значением: $E(y) = [0;\ +\infty)$.<br>
+                3. Функция обращается в нуль при $x = 0$.<br>
+                4. Функция является <strong>возрастающей</strong>.
+            </div>
+
+            <div class="proof-box">
+                <strong>Доказательство возрастания.</strong> Пусть $x_1$ и $x_2$ — произвольные значения аргумента, причём $x_2 > x_1 \ge 0$. Рассмотрим разность:<br>
+                $\sqrt{x_2} - \sqrt{x_1} = \dfrac{(\sqrt{x_2} - \sqrt{x_1})(\sqrt{x_2} + \sqrt{x_1})}{\sqrt{x_2} + \sqrt{x_1}} = \dfrac{x_2 - x_1}{\sqrt{x_2} + \sqrt{x_1}}$.<br>
+                Так как $x_2 - x_1 > 0$ и $\sqrt{x_2} + \sqrt{x_1} > 0$, разность положительна: $\sqrt{x_2} > \sqrt{x_1}$. Значит, функция возрастает. ∎
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: у $y = k/x$ области определения и значений «выколоты» нулём, а у $y = \sqrt{x}$ всё начинается с нуля!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1127. Какие из прямых y = 25, y = 0,09, y = −10 пересекают график функции y = √x? Укажи абсциссы точек пересечения</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Так как $\sqrt{x} \ge 0$, горизонтальная прямая $y = a$ пересекает график, только если $a \ge 0$.</p>
+                    <p>2. $y = 25$: $\sqrt{x} = 25 \Rightarrow x = 625$ — пересекает.</p>
+                    <p>3. $y = 0{,}09$: $\sqrt{x} = 0{,}09 \Rightarrow x = 0{,}0081$ — пересекает.</p>
+                    <p>4. $y = -10$: $\sqrt{x} = -10$ не имеет решений — не пересекает. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1130(а). Дана функция f(x) = √x. Укажи x, при которых f(x) = 10</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$\sqrt{x} = 10 \Rightarrow x = 100$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1130(б). Укажи x, при которых 3 < f(x) < 5 для f(x) = √x</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$3 < \sqrt{x} < 5$ — возведём все части в квадрат (все части неотрицательны, знаки сохраняются):<br>
+                    $9 < x < 25$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1133. Функция y = 16/x. При каких x: а) y = 8; y = −8; б) y < 4; в) y > 2?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $\dfrac{16}{x} = 8 \Rightarrow x = 2$; $\dfrac{16}{x} = -8 \Rightarrow x = -2$.</p>
+                    <p>б) $\dfrac{16}{x} < 4$: при $x > 0$: $16 < 4x \Rightarrow x > 4$; при $x < 0$: $\dfrac{16}{x} < 0 < 4$ — выполняется всегда. Итого: $x < 0$ или $x > 4$.</p>
+                    <p>в) $\dfrac{16}{x} > 2$: при $x > 0$: $16 > 2x \Rightarrow x < 8$; при $x < 0$: $\dfrac{16}{x} < 0$ — не может быть больше 2. Итого: $0 < x < 8$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1134. Является ли возрастающей или убывающей функция: а) y = 5x + 6; б) y = 1/x; в) y = 1/(x + 5)?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $y = 5x + 6$: коэффициент $k = 5 > 0$ — <strong>возрастающая</strong> (на всей прямой).</p>
+                    <p>б) $y = \dfrac{1}{x}$: это $y = \dfrac{k}{x}$ при $k = 1 > 0$ — <strong>убывает</strong> на каждом из промежутков $(-\infty;\ 0)$ и $(0;\ +\infty)$ (но не на всей области определения!).</p>
+                    <p>в) $y = \dfrac{1}{x+5}$: сдвиг гиперболы влево на 5. Область определения: $x \ne -5$. На каждом из промежутков $(-\infty;\ -5)$ и $(-5;\ +\infty)$ функция убывает (как и при $k = 1 > 0$). ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Физика и электротехника:</strong> По закону Ома для участка цепи сила тока зависит от сопротивления проводника: $I = \dfrac{U}{R}$, где $U$ — напряжение (В), $R$ — сопротивление (Ом).</p>
+            <p><strong>Вопрос:</strong> Пусть $U = 220$ В. а) Найди силу тока при $R = 10$ Ом и $R = 100$ Ом; б) при каком сопротивлении ток будет равен 5 А? в) Используя свойства функции $I(R)$, ответь: как изменится ток при увеличении сопротивления?</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $I = \dfrac{220}{10} = 22$ А; $I = \dfrac{220}{100} = 2{,}2$ А.</p>
+                    <p>б) $\dfrac{220}{R} = 5 \Rightarrow R = 44$ Ом.</p>
+                    <p>в) $I(R) = \dfrac{220}{R}$ — обратная пропорциональность с $k = 220 > 0$. При $R > 0$ функция убывает: с увеличением сопротивления сила тока <strong>уменьшается</strong>.</p>
+                    <p>💡 <em>Проверка:</em> при $R = 10$ Ом ток 22 А, при $R = 100$ Ом — 2,2 А: действительно меньше. Область определения: $R > 0$; множество значений: $I > 0$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>$y = \dfrac{k}{x}$: $D(y) = E(y) = (-\infty;\ 0) \cup (0;\ +\infty)$; нулей нет.</li>
+                <li>При $k > 0$ гипербола убывает на каждом промежутке; при $k < 0$ — возрастает на каждом промежутке. Но на всей области определения функция <strong>не монотонна</strong>!</li>
+                <li>$y = \sqrt{x}$: $D(y) = E(y) = [0;\ +\infty)$; нуль при $x = 0$; функция возрастает.</li>
+                <li>Доказательство возрастания $\sqrt{x}$ — через умножение на сопряжённое выражение.</li>
+                <li>Обратная пропорциональность описывает множество реальных зависимостей: $I = U/R$, $t = s/v$, $p = m/V$.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Ключевой момент урока — «ловушка» монотонности: функция $y = k/x$ убывает (или возрастает) на каждом из промежутков по отдельности, но не является монотонной на всей области определения. Это тонкое различие вызывает много ошибок; обязательно разберите пример $f(-1) = -1$, $f(1) = 1$ при $k = 1$ — определение монотонности на промежутке требует, чтобы оба значения лежали в одном промежутке. Для доказательства возрастания $\sqrt{x}$ покажите приём умножения на сопряжённое выражение — он пригодится в дальнейшем (иррациональные неравенства).</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-5-44.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава V, §14).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
