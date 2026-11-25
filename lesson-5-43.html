@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Свойства функции — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Свойства функции</h1>
+            <p class="subtitle">Урок 43 • Глава V, §13</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 13, п. 43). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! На прошлом уроке мы научились находить область определения и множество значений функции. Сегодня научимся «читать» график и описывать <strong>свойства функции</strong>: нули, промежутки знакопостоянства, возрастание и убывание.</p>
+
+            <p>Начнём с примера из учебника. Рассмотрим функцию $y = f(x)$, где $-5 \le x \le 9$, график которой изображён на рисунке 59 (схематично — ниже).</p>
+
+            <div class="svg-container">
+                <!-- Схематичный график функции на отрезке [-5; 9] -->
+                <svg viewBox="0 0 500 320" width="100%" height="320" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="500" height="320" fill="#ffffff" />
+                    <g stroke="#e2e8f0" stroke-width="1">
+                        <line x1="60" y1="50" x2="60" y2="270"/><line x1="110" y1="50" x2="110" y2="270"/>
+                        <line x1="160" y1="50" x2="160" y2="270"/><line x1="210" y1="50" x2="210" y2="270"/>
+                        <line x1="260" y1="50" x2="260" y2="270"/><line x1="310" y1="50" x2="310" y2="270"/>
+                        <line x1="360" y1="50" x2="360" y2="270"/><line x1="410" y1="50" x2="410" y2="270"/>
+                        <line x1="460" y1="50" x2="460" y2="270"/>
+                        <line x1="60" y1="70" x2="460" y2="70"/><line x1="60" y1="120" x2="460" y2="120"/>
+                        <line x1="60" y1="170" x2="460" y2="170"/><line x1="60" y1="220" x2="460" y2="220"/>
+                    </g>
+                    <line x1="60" y1="270" x2="460" y2="270" stroke="#1e293b" stroke-width="2"/>
+                    <line x1="60" y1="270" x2="60" y2="50" stroke="#1e293b" stroke-width="2"/>
+                    <text x="452" y="264" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                    <text x="42" y="60" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                    <text x="60" y="288" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">−5</text>
+                    <text x="190" y="288" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">−3</text>
+                    <text x="260" y="288" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">0</text>
+                    <text x="410" y="288" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">7</text>
+                    <text x="450" y="288" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">9</text>
+                    <text x="45" y="274" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">0</text>
+                    <text x="45" y="124" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">4</text>
+                    <!-- График: нули в -3 и 7, возрастает до 3, затем убывает -->
+                    <path d="M 60,210 C 90,180 130,110 190,170 C 220,220 240,150 260,70 C 290,40 330,80 380,160 C 410,200 430,230 450,250"
+                          fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+                    <circle cx="190" cy="170" r="5" fill="#dc2626"/>
+                    <circle cx="410" cy="160" r="5" fill="#dc2626"/>
+                    <circle cx="260" cy="70" r="5" fill="#f59e0b"/>
+                    <text x="300" y="30" font-family="sans-serif" font-size="14" fill="#1e293b" text-anchor="middle" font-weight="bold">y = f(x), x ∈ [−5; 9]</text>
+                    <text x="170" y="205" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">нуль: −3</text>
+                    <text x="430" y="150" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">нуль: 7</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Схема графика функции из учебника (нули −3 и 7).</p>
+            </div>
+
+            <h3>1️⃣ Нули функции</h3>
+            <div class="theorem-box">
+                Значения аргумента, при которых функция обращается в нуль, называют <strong>нулями функции</strong>. Геометрически это абсциссы точек пересечения графика с осью $x$.
+            </div>
+            <p>В нашем примере график пересекает ось $x$ в точках $x = -3$ и $x = 7$. Значит, числа −3 и 7 — нули функции.</p>
+
+            <h3>2️⃣ Промежутки знакопостоянства</h3>
+            <div class="theorem-box">
+                Промежутки, на которых функция сохраняет знак (только положительные или только отрицательные значения), называют <strong>промежутками знакопостоянства</strong>.
+            </div>
+            <p>Нули разбивают область определения $[-5;\ 9]$ на три промежутка:</p>
+            <div class="step-box">
+                • $[-5;\ -3)$ — точки графика ниже оси $x$, функция принимает <strong>отрицательные</strong> значения;<br>
+                • $(-3;\ 7)$ — точки графика выше оси $x$, функция принимает <strong>положительные</strong> значения;<br>
+                • $(7;\ 9]$ — точки графика ниже оси $x$, функция принимает <strong>отрицательные</strong> значения.
+            </div>
+
+            <h3>3️⃣ Возрастание и убывание</h3>
+            <p>Из графика видно, что с возрастанием $x$ от −5 до 3 значения $y$ увеличиваются, а с возрастанием $x$ от 3 до 9 — уменьшаются. Говорят, что на промежутке $[-5;\ 3]$ функция <strong>возрастает</strong>, а на $[3;\ 9]$ — <strong>убывает</strong>.</p>
+
+            <div class="theorem-box">
+                <strong>Определение.</strong> Функция называется <strong>возрастающей</strong> на некотором промежутке, если большему значению аргумента из этого промежутка соответствует большее значение функции: из $x_2 > x_1$ следует $f(x_2) > f(x_1)$.<br><br>
+                Функция называется <strong>убывающей</strong> на некотором промежутке, если большему значению аргумента соответствует меньшее значение функции: из $x_2 > x_1$ следует $f(x_2) < f(x_1)$.
+            </div>
+
+            <div class="proof-box">
+                Иными словами, для любых $x_1$ и $x_2$ из промежутка: если $x_2 > x_1$, то для возрастающей функции $f(x_2) > f(x_1)$, а для убывающей — $f(x_2) < f(x_1)$.
+            </div>
+
+            <p>Если функция возрастает на всей области определения, её называют <strong>возрастающей функцией</strong>; если убывает на всей области определения — <strong>убывающей функцией</strong>. Промежутки возрастания и убывания называют <strong>промежутками монотонности</strong>.</p>
+
+            <div class="step-box">
+                <strong>Примеры.</strong><br>
+                • $y = 2x + 1$ — возрастающая функция на всей прямой (большему $x$ соответствует большее $y$).<br>
+                • $y = -3x$ — убывающая функция на всей прямой.<br>
+                • $y = x^2$ — убывает на $(-\infty;\ 0]$ и возрастает на $[0;\ +\infty)$.<br>
+                • $y = |x|$ — убывает на $(-\infty;\ 0]$ и возрастает на $[0;\ +\infty)$.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: нули — точки пересечения с осью $x$; знакопостоянство — «выше/ниже» оси; монотонность — «вверх/вниз» по графику!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1101. Опиши свойства функции y = g(x) по алгоритму: область определения, нули, знакопостоянство, монотонность</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Алгоритм описания (для любого графика):</strong></p>
+                    <p>1. Область определения — проекция графика на ось $x$: в №1101 это отрезок $[-5;\ 5]$.</p>
+                    <p>2. Нули — абсциссы точек пересечения графика с осью $x$.</p>
+                    <p>3. Знакопостоянство — промежутки, где график выше оси (положительные) и ниже оси (отрицательные): их границами служат нули функции.</p>
+                    <p>4. Монотонность — промежутки, где график идёт «вверх» (возрастает) и «вниз» (убывает).</p>
+                    <p>5. Наибольшее и наименьшее значения — проекция графика на ось $y$.</p>
+                    <p><em>Пример:</em> если график пересекает ось $x$ в точках −3, 0 и 4, то нули — это числа −3, 0, 4; промежутки знакопостоянства — $[-5;\ -3)$, $(-3;\ 0)$, $(0;\ 4)$, $(4;\ 5]$ (знак на каждом определяется положением графика относительно оси).</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1107. Имеет ли нули функция: а) y = 2,1x − 70; б) y = 4x(x − 2)?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) Решим уравнение $2{,}1x - 70 = 0 \Rightarrow x = \dfrac{70}{2{,}1} = \dfrac{700}{21} = \dfrac{100}{3} \approx 33{,}3$. Нуль существует.</p>
+                    <p>б) $4x(x - 2) = 0 \Rightarrow x = 0$ или $x = 2$. Два нуля.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1106. Найди нули функции: y = (4 + 2x)/(x − 5)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Область определения: $x \ne 5$ (знаменатель не равен нулю).</p>
+                    <p>2. Дробь равна нулю, когда числитель равен нулю: $4 + 2x = 0 \Rightarrow x = -2$.</p>
+                    <p>3. $x = -2$ входит в область определения — нуль функции: $x = -2$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1109(а). Выясни, пересекаются ли прямая y = x + 1 и гипербола y = 2/x. Найди точки пересечения</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Приравняем правые части: $x + 1 = \dfrac{2}{x}$.</p>
+                    <p>2. Умножим на $x$ (при $x \ne 0$): $x^2 + x = 2 \Rightarrow x^2 + x - 2 = 0$.</p>
+                    <p>3. По теореме Виета: $x_1 = 1$, $x_2 = -2$.</p>
+                    <p>4. Найдём $y$: при $x = 1$: $y = 2$; при $x = -2$: $y = -1$.</p>
+                    <p><strong>Ответ:</strong> прямая и гипербола пересекаются в точках $(1;\ 2)$ и $(-2;\ -1)$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1105. Начерти график функции с областью определения [−3; 4], возрастающей на [−3; 0] и убывающей на [0; 4]</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> например, парабола с вершиной в точке $(0;\ 2)$:</p>
+                    <p>$y = 2 - \dfrac{x^2}{4}$ при $-3 \le x \le 4$.</p>
+                    <p>Проверим: на $[-3;\ 0]$ значения растут к вершине (возрастает), на $[0;\ 4]$ — убывают. Ниже — эскиз.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Физика и спорт:</strong> Вспомни задачу из урока 24: высота стрелы, выпущенной вертикально вверх, описывается формулой $h(t) = -5t^2 + 50t + 20$ (м).</p>
+            <p><strong>Вопрос:</strong> Используя свойства функции: а) найди нули функции (моменты, когда стрела на земле); б) укажи, когда стрела поднимается, а когда падает; в) когда высота положительна?</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) Нули: $-5t^2 + 50t + 20 = 0 \Rightarrow t^2 - 10t - 4 = 0$.<br>
+                    $D = 100 + 16 = 116$, $\sqrt{D} = 2\sqrt{29} \approx 10{,}77$.<br>
+                    $t_1 = \dfrac{10 - 10{,}77}{2} \approx -0{,}39$ (не подходит — время неотрицательно),<br>
+                    $t_2 = \dfrac{10 + 10{,}77}{2} \approx 10{,}39$ с.</p>
+                    <p>б) Ветви параболы направлены вниз ($a = -5 < 0$), вершина при $t = \dfrac{-50}{2 \cdot (-5)} = 5$ с. Значит, стрела <strong>поднимается</strong> на $[0;\ 5]$ и <strong>падает</strong> на $[5;\ 10{,}39]$.</p>
+                    <p>в) Высота положительна при $t \in (0;\ 10{,}39)$ — между выстрелом и падением.</p>
+                    <p>💡 <em>Проверка:</em> $h(5) = -125 + 250 + 20 = 145$ м — максимальная высота (мы считали её в уроке 24!). ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>Нули функции</strong> — значения аргумента, при которых $f(x) = 0$ (пересечения графика с осью $x$).</li>
+                <li><strong>Промежутки знакопостоянства</strong> — промежутки, где функция сохраняет знак (график выше или ниже оси $x$).</li>
+                <li><strong>Возрастающая функция</strong>: из $x_2 > x_1$ следует $f(x_2) > f(x_1)$; <strong>убывающая</strong>: $f(x_2) < f(x_1)$.</li>
+                <li><strong>Промежутки монотонности</strong> — промежутки возрастания и убывания.</li>
+                <li>Нули функции разбивают область определения на промежутки знакопостоянства — это удобный план анализа графика.</li>
+                <li>Свойства функции наглядно «читаются» с графика: нули, знаки, монотонность, наибольшие и наименьшие значения.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Научите учеников единому алгоритму описания свойств функции по графику: 1) область определения (проекция на ось $x$); 2) нули (пересечения с осью $x$); 3) знакопостоянство (промежутки выше/ниже оси); 4) монотонность (промежутки возрастания/убывания); 5) наибольшее и наименьшее значения (проекция на ось $y$). Типичная ошибка — путать «нули функции» (точки на оси $x$) с «значениями функции» (точки на оси $y$). Подчеркните связь с практикой: по графику температуры (рис. 58) или скорости (№1097) видно, как свойства функции описывают реальные процессы.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-5-42.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава V, §13).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
