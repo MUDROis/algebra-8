@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Свойства линейной функции — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Свойства линейной функции</h1>
+            <p class="subtitle">Урок 44 • Глава V, §14</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 14, п. 44). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! На прошлом уроке мы научились описывать свойства функции по графику. Сегодня применим этот алгоритм к <strong>линейной функции</strong> $y = kx + b$ ($k \ne 0$) — одной из самых важных моделей реальных процессов. Все свойства можно вывести строго, решая уравнения и неравенства.</p>
+
+            <div class="theorem-box">
+                <strong>Свойства функции $y = kx + b$ (при $k \ne 0$):</strong><br>
+                1. Функция определена при любых значениях $x$: $D(f) = \mathbb{R}$.<br>
+                2. Значением функции может быть любое число: $E(f) = \mathbb{R}$.<br>
+                3. Функция обращается в нуль при $x = -\dfrac{b}{k}$ (решение уравнения $kx + b = 0$).<br>
+                4. При $k > 0$ функция принимает отрицательные значения при $x < -\dfrac{b}{k}$ и положительные при $x > -\dfrac{b}{k}$; при $k < 0$ — наоборот.<br>
+                5. При $k > 0$ функция возрастает, при $k < 0$ — убывает.
+            </div>
+
+            <p>Докажем свойство 5 — монотонность. Пусть $x_1$ и $x_2$ — произвольные значения аргумента, причём $x_2 > x_1$. Обозначим соответствующие значения функции: $y_1 = kx_1 + b$ и $y_2 = kx_2 + b$. Рассмотрим разность:</p>
+
+            <div class="proof-box">
+                $y_2 - y_1 = (kx_2 + b) - (kx_1 + b) = kx_2 - kx_1 = k(x_2 - x_1)$.
+            </div>
+
+            <p>Множитель $x_2 - x_1$ положителен, так как $x_2 > x_1$. Поэтому знак произведения $k(x_2 - x_1)$ определяется знаком коэффициента $k$:</p>
+            <div class="step-box">
+                • Если $k > 0$, то $k(x_2 - x_1) > 0$, значит, $y_2 > y_1$ — функция <strong>возрастает</strong>.<br>
+                • Если $k < 0$, то $k(x_2 - x_1) < 0$, значит, $y_2 < y_1$ — функция <strong>убывает</strong>.
+            </div>
+
+            <div class="svg-container">
+                <!-- Графики: k>0 (возрастающая) и k<0 (убывающая) -->
+                <svg viewBox="0 0 520 260" width="100%" height="260" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="520" height="260" fill="#ffffff" />
+                    <g stroke="#e2e8f0" stroke-width="1">
+                        <line x1="130" y1="30" x2="130" y2="230"/><line x1="180" y1="30" x2="180" y2="230"/>
+                        <line x1="230" y1="30" x2="230" y2="230"/><line x1="280" y1="30" x2="280" y2="230"/>
+                        <line x1="330" y1="30" x2="330" y2="230"/><line x1="380" y1="30" x2="380" y2="230"/>
+                        <line x1="430" y1="30" x2="430" y2="230"/><line x1="480" y1="30" x2="480" y2="230"/>
+                        <line x1="130" y1="70" x2="480" y2="70"/><line x1="130" y1="120" x2="480" y2="120"/>
+                        <line x1="130" y1="170" x2="480" y2="170"/>
+                    </g>
+                    <line x1="130" y1="230" x2="480" y2="230" stroke="#1e293b" stroke-width="2"/>
+                    <line x1="130" y1="230" x2="130" y2="30" stroke="#1e293b" stroke-width="2"/>
+                    <text x="472" y="224" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                    <text x="112" y="40" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                    <text x="130" y="250" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">0</text>
+                    <text x="280" y="250" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">x₀ = −b/k</text>
+                    <!-- k > 0: возрастающая -->
+                    <line x1="150" y1="210" x2="460" y2="60" stroke="#2563eb" stroke-width="3"/>
+                    <text x="420" y="55" font-family="sans-serif" font-size="13" fill="#2563eb" font-weight="bold">k > 0: возрастает</text>
+                    <!-- k < 0: убывающая -->
+                    <line x1="150" y1="60" x2="460" y2="210" stroke="#dc2626" stroke-width="3"/>
+                    <text x="165" y="50" font-family="sans-serif" font-size="13" fill="#dc2626" font-weight="bold">k < 0: убывает</text>
+                    <circle cx="280" cy="135" r="4" fill="#f59e0b"/>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. Графики линейной функции: при k>0 функция возрастает, при k<0 — убывает (обе проходят через точку (x₀; 0)).</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: знак функции определяют, решая неравенство $kx + b > 0$ (или $< 0$)!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1114(а). Построй график функции y = 1,5x − 3 и перечисли её свойства</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Нуль функции: $1{,}5x - 3 = 0 \Rightarrow x = 2$.</p>
+                    <p>2. При $k = 1{,}5 > 0$ функция возрастает.</p>
+                    <p>3. Знак: $y < 0$ при $x < 2$; $y > 0$ при $x > 2$.</p>
+                    <p>4. $D(f) = \mathbb{R}$, $E(f) = \mathbb{R}$.</p>
+                    <p>5. График — прямая через точки $(2;\ 0)$ и $(0;\ -3)$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1117. Какие из линейных функций являются возрастающими, а какие — убывающими: y = 8x − 5, y = −3x + 11, y = −49x − 100, y = x + 1, y = 1 − x?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> смотрим на знак коэффициента $k$:</p>
+                    <p>• <strong>Возрастающие</strong> ($k > 0$): $y = 8x - 5$, $y = x + 1$.</p>
+                    <p>• <strong>Убывающие</strong> ($k < 0$): $y = -3x + 11$, $y = -49x - 100$, $y = 1 - x$ (здесь $k = -1$). ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1116. При каких x функция обращается в нуль, положительна, отрицательна: а) f(x) = −0,7x + 350; б) f(x) = 30x + 10?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) Нуль: $-0{,}7x + 350 = 0 \Rightarrow x = 500$. При $k = -0{,}7 < 0$:<br>
+                    $f(x) > 0$ при $x < 500$; $f(x) < 0$ при $x > 500$.</p>
+                    <p>б) Нуль: $30x + 10 = 0 \Rightarrow x = -\dfrac{1}{3}$. При $k = 30 > 0$:<br>
+                    $f(x) < 0$ при $x < -\dfrac{1}{3}$; $f(x) > 0$ при $x > -\dfrac{1}{3}$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1118. Функция f(x) = 13x − 78. При каких x: а) f(x) = 0; б) f(x) > 0; в) f(x) < 0? Является ли функция возрастающей?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $13x - 78 = 0 \Rightarrow x = 6$.</p>
+                    <p>б) $13x - 78 > 0 \Rightarrow x > 6$.</p>
+                    <p>в) $13x - 78 < 0 \Rightarrow x < 6$.</p>
+                    <p>При $k = 13 > 0$ функция <strong>возрастает</strong>. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1120. Функция f(x) = −1,5x + 6. При каких x выполняется условие 0 < f(x) < 3?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение (алгебраически):</strong></p>
+                    <p>1. Решим двойное неравенство: $0 < -1{,}5x + 6 < 3$.</p>
+                    <p>2. Вычтем 6 из всех частей: $-6 < -1{,}5x < -3$.</p>
+                    <p>3. Разделим на $-1{,}5$ (отрицательное число — знаки меняются):<br>
+                    $\dfrac{-6}{-1{,}5} > x > \dfrac{-3}{-1{,}5} \Rightarrow 4 > x > 2$.</p>
+                    <p><strong>Ответ:</strong> $2 < x < 4$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Экономика и тарифы:</strong> Вернёмся к задачке про тарифы (урок 34): стоимость тарифа «Старт» — $y_1 = 300 + 5x$, «Профи» — $y_2 = 450 + 2x$ (где $x$ — сверхлимитные гигабайты).</p>
+            <p><strong>Вопрос:</strong> Используя свойства линейной функции, определи, при каком $x$ тарифы сравняются, и какой тариф выгоднее при $x > 50$; при $x < 50$.</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Точка равенства: $300 + 5x = 450 + 2x \Rightarrow 3x = 150 \Rightarrow x = 50$.</p>
+                    <p>2. Рассмотрим разность $y_1 - y_2 = (5x + 300) - (2x + 450) = 3x - 150$.</p>
+                    <p>3. Это линейная функция от $x$ с коэффициентом $k = 3 > 0$ — она возрастает.</p>
+                    <p>4. Значит: при $x < 50$ разность отрицательна ($y_1 < y_2$ — выгоднее «Старт»); при $x > 50$ разность положительна ($y_1 > y_2$ — выгоднее «Профи»).</p>
+                    <p>💡 <em>Вывод:</em> свойства линейной функции позволяют ответить на вопрос «кто выгоднее» для всех значений сразу, без перебора! ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Линейная функция $y = kx + b$ ($k \ne 0$): $D(f) = \mathbb{R}$, $E(f) = \mathbb{R}$.</li>
+                <li>Нуль функции: $x = -\dfrac{b}{k}$.</li>
+                <li>При $k > 0$: $y > 0$ при $x > -\dfrac{b}{k}$, $y < 0$ при $x < -\dfrac{b}{k}$; при $k < 0$ — наоборот.</li>
+                <li>При $k > 0$ функция возрастает, при $k < 0$ — убывает (доказательство через разность $y_2 - y_1 = k(x_2 - x_1)$).</li>
+                <li>Прямая пропорциональность $y = kx$ — частный случай ($b = 0$), её свойства те же.</li>
+                <li>Свойства линейной функции позволяют анализировать реальные зависимости «в общем виде».</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Рекомендуется провести доказательство монотонности вместе с классом: оно короткое и демонстрирует стандартный приём (рассмотрение разности значений). Обратите внимание учеников на связь знака $k$ и наклона прямой («вверх»/«вниз»). Типичная ошибка при решении №1120 — забыть сменить знаки неравенства при делении на отрицательное число. Напомните про урок 35 (свойства числовых неравенств) и урок 39 (решение неравенств) — двойное неравенство решается преобразованием всех трёх частей сразу.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-5-43.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава V, §14).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
