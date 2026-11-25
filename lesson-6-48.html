@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Свойства степени с целым показателем — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Свойства степени с целым показателем</h1>
+            <p class="subtitle">Урок 48 • Глава VI, §15</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 15, п. 48). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! На прошлом уроке мы ввели степень с целым отрицательным показателем. Сегодня убедимся, что все знакомые свойства степеней (умножение, деление, возведение в степень) работают и для отрицательных показателей — нужно только, чтобы основание не равнялось нулю.</p>
+
+            <div class="theorem-box">
+                <strong>Свойства степени с целым показателем</strong> (для $a \ne 0$, $b \ne 0$ и любых целых $m$, $n$):<br>
+                (1) $a^m \cdot a^n = a^{m+n}$ — произведение степеней с одинаковыми основаниями;<br>
+                (2) $a^m : a^n = a^{m-n}$ — частное степеней с одинаковыми основаниями;<br>
+                (3) $(a^m)^n = a^{mn}$ — возведение степени в степень;<br>
+                (4) $(ab)^n = a^n b^n$ — возведение произведения в степень;<br>
+                (5) $\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}$ — возведение частного в степень.
+            </div>
+
+            <p>Эти свойства можно доказать, опираясь на определение степени с целым отрицательным показателем и свойства степени с натуральным показателем.</p>
+
+            <div class="proof-box">
+                <strong>Доказательство свойства (1) для отрицательных показателей.</strong> Пусть $k$ и $p$ — натуральные числа и $a \ne 0$. Докажем, что $a^{-k} \cdot a^{-p} = a^{-k-p}$:<br><br>
+                $a^{-k} \cdot a^{-p} = \dfrac{1}{a^k} \cdot \dfrac{1}{a^p} = \dfrac{1}{a^k \cdot a^p} = \dfrac{1}{a^{k+p}} = a^{-(k+p)} = a^{-k-p}$. ∎<br><br>
+                Здесь мы дважды использовали определение степени с отрицательным показателем, а для перехода $\dfrac{1}{a^k \cdot a^p} = \dfrac{1}{a^{k+p}}$ — основное свойство степени с натуральным показателем.
+            </div>
+
+            <p>💡 Из свойств степени вытекает, что действия над степенями с целыми показателями выполняются по тем же правилам, что и над степенями с натуральными показателями.</p>
+
+            <h3>📖 Примеры из учебника</h3>
+
+            <p><strong>Пример 1.</strong> Преобразуем произведение $a^{-17} \cdot a^{21}$:</p>
+            <div class="step-box">
+                При умножении степеней с одинаковыми основаниями основание оставляют тем же, а показатели складывают:<br>
+                $a^{-17} \cdot a^{21} = a^{-17 + 21} = a^4$.
+            </div>
+
+            <p><strong>Пример 2.</strong> Преобразуем частное $b^2 : b^5$:</p>
+            <div class="step-box">
+                При делении степеней с одинаковыми основаниями из показателя делимого вычитают показатель делителя:<br>
+                $b^2 : b^5 = b^{2-5} = b^{-3} = \dfrac{1}{b^3}$.
+            </div>
+
+            <p>⚠️ Для степеней с натуральными и нулевым показателями правило деления можно было применять только когда показатель делимого не меньше показателя делителя. Теперь это ограничение снимается — показатели могут быть любыми целыми числами.</p>
+
+            <p><strong>Пример 3.</strong> Упростим выражение $(2a^3b^{-5})^{-2}$:</p>
+            <div class="step-box">
+                Сначала применим свойство (4), затем — свойство (3):<br>
+                $(2a^3b^{-5})^{-2} = 2^{-2} \cdot (a^3)^{-2} \cdot (b^{-5})^{-2} = \dfrac{1}{4} \cdot a^{-6} \cdot b^{10} = \dfrac{b^{10}}{4a^6}$.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: свойства те же, что и для натуральных показателей, но со знаками нужно быть внимательнее!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1193. Найди значение: а) 10⁴·10⁻⁵·10⁶; г) 2¹⁰ : 2¹²; д) 5⁻³·5⁻⁴</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $10^4 \cdot 10^{-5} \cdot 10^6 = 10^{4-5+6} = 10^5 = 100000$.</p>
+                    <p>г) $2^{10} : 2^{12} = 2^{10-12} = 2^{-2} = \dfrac{1}{4}$.</p>
+                    <p>д) $5^{-3} \cdot 5^{-4} = 5^{-7} = \dfrac{1}{5^7} = \dfrac{1}{78125}$.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1196. Докажи, что степени любого отличного от нуля числа с противоположными показателями взаимно обратны</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Доказательство:</strong></p>
+                    <p>Нужно показать, что $a^n \cdot a^{-n} = 1$ при $a \ne 0$ и любом целом $n$:</p>
+                    <p>$a^n \cdot a^{-n} = a^{n + (-n)} = a^0 = 1$. ∎</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1204(а). Представь выражение a⁻¹⁰ в виде произведения степеней тремя способами</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$a^{-10} = a^{-4} \cdot a^{-6} = a^{-12} \cdot a^2 = a^{-20} \cdot a^{10}$ — и так далее. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1206(а). Представь в виде степени с основанием x частное x¹⁰ : x⁻¹²</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$x^{10} : x^{-12} = x^{10-(-12)} = x^{22}$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1210(б). Представь степень (x + y⁻¹)² в виде произведения</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>По формуле квадрата суммы:<br>
+                    $(x + y^{-1})^2 = x^2 + 2x \cdot y^{-1} + (y^{-1})^2 = x^2 + \dfrac{2x}{y} + \dfrac{1}{y^2}$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Астрономия:</strong> Скорость света — $c = 3 \cdot 10^8$ м/с. Световой год — расстояние, которое свет проходит за год ($\approx 3{,}15 \cdot 10^7$ секунд).</p>
+            <p><strong>Вопрос:</strong> а) Вычисли длину светового года в метрах; б) ближайшая звезда Проксима Центавра находится на расстоянии $\approx 4{,}2$ светового года — сколько это метров?</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $S = c \cdot t = 3 \cdot 10^8 \cdot 3{,}15 \cdot 10^7 = (3 \cdot 3{,}15) \cdot 10^{8+7} = 9{,}45 \cdot 10^{15}$ м.</p>
+                    <p>б) $4{,}2 \cdot 9{,}45 \cdot 10^{15} = 39{,}69 \cdot 10^{15} = 3{,}969 \cdot 10^{16}$ м ≈ $4 \cdot 10^{16}$ м.</p>
+                    <p>💡 <em>Вывод:</em> свойства степеней позволяют выполнять вычисления с очень большими и очень малыми числами, не записывая их полностью: достаточно перемножить мантиссы и сложить показатели. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Все пять свойств степеней справедливы для любых <strong>целых</strong> показателей (основание $\ne 0$).</li>
+                <li>$a^m \cdot a^n = a^{m+n}$; $a^m : a^n = a^{m-n}$; $(a^m)^n = a^{mn}$; $(ab)^n = a^n b^n$; $\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}$.</li>
+                <li>Ограничение для деления снимается: показатели могут быть любыми целыми.</li>
+                <li>Степени с противоположными показателями взаимно обратны: $a^n \cdot a^{-n} = 1$.</li>
+                <li>Свойства степеней — основа вычислений со стандартным видом чисел.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Рекомендуется дать ученикам доказать основное свойство для отрицательных показателей самостоятельно (по образцу из урока) — это закрепляет понимание определения. Обратите внимание на типичные ошибки: сложение показателей вместо умножения при возведении степени в степень; потеря знака при вычитании отрицательного показателя ($a^m : a^{-n} = a^{m+n}$); применение свойства (4) к сумме, а не к произведению. Свяжите свойства со стандартным видом числа (урок 49) — умножение и деление чисел в стандартном виде сводится к действиям над степенями 10.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-6-47.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава VI, §15).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
