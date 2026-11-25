@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Целая и дробная части числа — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Целая и дробная части числа</h1>
+            <p class="subtitle">Урок 46 • Глава V, §14</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 14, п. 46). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! В повседневной жизни мы постоянно «отбрасываем» дробную часть: «2 часа 40 минут — это 2 полных часа», «3,5 метра ткани — это 3 полных метра». Сегодня дадим этим интуитивным действиям строгое математическое определение и построим графики двух новых функций.</p>
+
+            <div class="formula-box">
+                Определение.<br>
+                <strong>Целой частью числа $x$</strong> называется наибольшее целое число, не превосходящее $x$. Обозначение: $[x]$ (читают: «целая часть икс»).<br><br>
+                <strong>Дробной частью числа $x$</strong> называется разность между числом и его целой частью. Обозначение: $\{x\}$.<br>
+                Таким образом, $\{x\} = x - [x]$.
+            </div>
+
+            <div class="step-box">
+                <strong>Примеры целой части:</strong><br>
+                $[5{,}7] = 5$ (наибольшее целое, не превосходящее 5,7);<br>
+                $[10] = 10$; $[-7] = -7$; $[-8{,}2] = -9$ — внимание: −9 не превосходит −8,2!<br><br>
+                <strong>Примеры дробной части:</strong><br>
+                $\{12{,}4\} = 12{,}4 - 12 = 0{,}4$;<br>
+                $\{-3{,}5\} = -3{,}5 - [-3{,}5] = -3{,}5 - (-4) = 0{,}5$;<br>
+                $\{7\} = 7 - 7 = 0$.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Свойства:</strong><br>
+                • $0 \le \{x\} < 1$ для любого числа $x$;<br>
+                • $x = [x] + \{x\}$ — любое число раскладывается на целую и дробную части;<br>
+                • $[x] \le x < [x] + 1$.
+            </div>
+
+            <h3>📈 График функции $y = [x]$</h3>
+            <p>Если $0 \le x < 1$, то $[x] = 0$ — на промежутке $[0;\ 1)$ график совпадает с прямой $y = 0$. Но так как $[1] = 1$, при $x = 1$ график совершает «скачок». Если $1 \le x < 2$, то $[x] = 1$, и т. д. Рассматривая последовательно все промежутки, получаем график, состоящий из «ступенек»:</p>
+
+            <div class="svg-container">
+                <svg viewBox="0 0 420 260" width="100%" height="260" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="420" height="260" fill="#ffffff" />
+                    <g stroke="#e2e8f0" stroke-width="1">
+                        <line x1="70" y1="30" x2="70" y2="220"/><line x1="120" y1="30" x2="120" y2="220"/>
+                        <line x1="170" y1="30" x2="170" y2="220"/><line x1="220" y1="30" x2="220" y2="220"/>
+                        <line x1="270" y1="30" x2="270" y2="220"/><line x1="320" y1="30" x2="320" y2="220"/>
+                        <line x1="370" y1="30" x2="370" y2="220"/>
+                        <line x1="70" y1="70" x2="370" y2="70"/><line x1="70" y1="120" x2="370" y2="120"/>
+                        <line x1="70" y1="170" x2="370" y2="170"/>
+                    </g>
+                    <line x1="70" y1="220" x2="370" y2="220" stroke="#1e293b" stroke-width="2"/>
+                    <line x1="70" y1="220" x2="70" y2="30" stroke="#1e293b" stroke-width="2"/>
+                    <text x="362" y="214" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                    <text x="52" y="40" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                    <text x="70" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">0</text>
+                    <text x="120" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">1</text>
+                    <text x="170" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">2</text>
+                    <text x="220" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">3</text>
+                    <text x="45" y="224" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">0</text>
+                    <text x="45" y="174" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">1</text>
+                    <text x="45" y="124" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">2</text>
+                    <text x="45" y="74" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">3</text>
+                    <!-- Ступеньки -->
+                    <path d="M 70,220 L 118,220 M 120,170 L 168,170 M 170,120 L 218,120 M 220,70 L 268,70 M 270,40 L 318,40"
+                          fill="none" stroke="#2563eb" stroke-width="3"/>
+                    <circle cx="70" cy="220" r="4" fill="#2563eb"/>
+                    <circle cx="120" cy="220" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+                    <circle cx="120" cy="170" r="4" fill="#2563eb"/>
+                    <circle cx="170" cy="170" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+                    <circle cx="170" cy="120" r="4" fill="#2563eb"/>
+                    <circle cx="220" cy="120" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+                    <circle cx="220" cy="70" r="4" fill="#2563eb"/>
+                    <circle cx="270" cy="70" r="4" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+                    <text x="195" y="30" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">y = [x]</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 1. График функции y = [x] — «ступеньки» (закрашенные точки входят, светлые — нет).</p>
+            </div>
+
+            <h3>📈 График функции $y = \{x\}$</h3>
+            <p>Воспользуемся определением: $\{x\} = x - [x]$. Если $0 \le x < 1$, то $[x] = 0$, значит, $\{x\} = x$ — график совпадает с прямой $y = x$. Если $1 \le x < 2$, то $[x] = 1$, значит, $\{x\} = x - 1$ — график совпадает с прямой $y = x - 1$, и т. д. Получаем «пилообразный» график:</p>
+
+            <div class="svg-container">
+                <svg viewBox="0 0 420 260" width="100%" height="260" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="420" height="260" fill="#ffffff" />
+                    <g stroke="#e2e8f0" stroke-width="1">
+                        <line x1="70" y1="30" x2="70" y2="220"/><line x1="120" y1="30" x2="120" y2="220"/>
+                        <line x1="170" y1="30" x2="170" y2="220"/><line x1="220" y1="30" x2="220" y2="220"/>
+                        <line x1="270" y1="30" x2="270" y2="220"/><line x1="320" y1="30" x2="320" y2="220"/>
+                        <line x1="370" y1="30" x2="370" y2="220"/>
+                        <line x1="70" y1="70" x2="370" y2="70"/><line x1="70" y1="120" x2="370" y2="120"/>
+                        <line x1="70" y1="170" x2="370" y2="170"/>
+                    </g>
+                    <line x1="70" y1="220" x2="370" y2="220" stroke="#1e293b" stroke-width="2"/>
+                    <line x1="70" y1="220" x2="70" y2="30" stroke="#1e293b" stroke-width="2"/>
+                    <text x="362" y="214" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">x</text>
+                    <text x="52" y="40" font-family="sans-serif" font-size="14" fill="#1e293b" font-style="italic">y</text>
+                    <text x="70" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">0</text>
+                    <text x="120" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">1</text>
+                    <text x="170" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">2</text>
+                    <text x="220" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">3</text>
+                    <text x="45" y="224" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">0</text>
+                    <text x="45" y="174" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">1</text>
+                    <text x="45" y="124" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">2</text>
+                    <!-- Пила -->
+                    <path d="M 70,220 L 118,120 M 120,220 L 168,120 M 170,220 L 218,120 M 220,220 L 268,120 M 270,220 L 318,120"
+                          fill="none" stroke="#dc2626" stroke-width="3"/>
+                    <circle cx="70" cy="220" r="4" fill="#dc2626"/>
+                    <circle cx="120" cy="220" r="4" fill="#dc2626"/>
+                    <circle cx="120" cy="120" r="4" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+                    <circle cx="170" cy="220" r="4" fill="#dc2626"/>
+                    <circle cx="170" cy="120" r="4" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+                    <circle cx="220" cy="220" r="4" fill="#dc2626"/>
+                    <circle cx="220" cy="120" r="4" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+                    <text x="195" y="30" font-family="sans-serif" font-size="13" fill="#1e293b" text-anchor="middle" font-weight="bold">y = {x}</text>
+                </svg>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Рис. 2. График функции y = {x} — «пила».</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: целая часть — наибольшее целое, <em>не превосходящее</em> число (для отрицательных — не ошибись в знаке!).</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1137. Найди [a], если a = 4,7; 98; −0,01</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$[4{,}7] = 4$; $[98] = 98$; $[-0{,}01] = -1$ (так как −1 — наибольшее целое, не превосходящее −0,01). ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1138. Найди {c}, если c = 5; 4; −0,95; 0; 1,17</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$\{5\} = 0$; $\{4\} = 0$; $\{-0{,}95\} = -0{,}95 - (-1) = 0{,}05$; $\{0\} = 0$; $\{1{,}17\} = 0{,}17$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1139. Найди целую и дробную части числа π</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$\pi \approx 3{,}14159\ldots$: $[\pi] = 3$, $\{\pi\} = \pi - 3 \approx 0{,}14159$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1140. Известно, что x = 2,7. Найди 2[x]; [2x]; [−2x]</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$2[x] = 2 \cdot 2 = 4$;</p>
+                    <p>$[2x] = [5{,}4] = 5$;</p>
+                    <p>$[-2x] = [-5{,}4] = -6$ (наибольшее целое, не превосходящее −5,4). ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1141. Известно, что x = −4,8. Найди {3x}; {−3x}</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$3x = -14{,}4$; $[-14{,}4] = -15$; $\{3x\} = -14{,}4 - (-15) = 0{,}6$.</p>
+                    <p>$-3x = 14{,}4$; $[14{,}4] = 14$; $\{-3x\} = 14{,}4 - 14 = 0{,}4$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1142. Построй график функции y = [2x]</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Функция постоянна на промежутках, где $2x$ попадает в один и тот же «коридор» целых значений.</p>
+                    <p>2. $[2x] = 0$ при $0 \le 2x < 1$, то есть при $0 \le x < 0{,}5$; $[2x] = 1$ при $0{,}5 \le x < 1$; $[2x] = 2$ при $1 \le x < 1{,}5$, и т. д.</p>
+                    <p>3. «Ступеньки» вдвое ýже, чем у $y = [x]$: ширина каждой равна 0,5. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>IT и программирование:</strong> В языках программирования целой части соответствует функция <code>Math.floor(x)</code> (округление вниз), а дробной части — выражение <code>x - Math.floor(x)</code>. Оператор остатка от деления <code>%</code> тоже связан с дробной частью: остаток от деления $a$ на $b$ равен $b \cdot \{a/b\}$.</p>
+            <p><strong>Вопрос:</strong> a) Сколько полных недель в 100 днях? б) Часы показывают 14:50 — какая часть часа «прожита»? в) Мобильный тариф берёт 1 ₽ за каждую <em>начатую</em> минуту. Сколько минут надо оплатить за разговор длительностью 3 мин 40 с?</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $[100/7] = [14{,}28\ldots] = 14$ полных недель.</p>
+                    <p>б) 14:50 — это $14 + \dfrac{50}{60} = 14 + \dfrac{5}{6}$ часа. Дробная часть: $\left\{\dfrac{5}{6}\right\} = \dfrac{5}{6} \approx 0{,}83$ — «прожито» 5/6 часа.</p>
+                    <p>в) 3 мин 40 с = $3 + \dfrac{40}{60} = 3\frac{2}{3}$ мин. Начатые минуты: $[3\frac{2}{3}] + 1 = 3 + 1 = 4$ минуты (3 полные + 1 начатая). ✅</p>
+                    <p>💡 <em>Вывод:</em> целая и дробная части — не просто абстрактные функции, а инструмент моделирования реальных процессов с дискретным «шагом».</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li><strong>$[x]$</strong> — целая часть: наибольшее целое число, не превосходящее $x$ (для отрицательных чисел двигаемся «влево»: $[-0{,}01] = -1$).</li>
+                <li><strong>$\{x\}$</strong> — дробная часть: $\{x\} = x - [x]$, причём $0 \le \{x\} < 1$.</li>
+                <li>Любое число раскладывается: $x = [x] + \{x\}$.</li>
+                <li>График $y = [x]$ — «ступеньки»; график $y = \{x\}$ — «пила».</li>
+                <li>Целая часть применяется везде, где считают «полные» единицы или «начатые» промежутки (тарифы, время, измерения).</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Главная «ловушка» — целая часть отрицательных чисел: ученики часто пишут $[-0{,}01] = 0$ или $[-8{,}2] = -8$, забывая, что нужно наибольшее целое, <em>не превосходящее</em> данное число. Проговорите правило: «двигаемся по числовой прямой влево до ближайшего целого». Полезно построить графики $y = [x]$ и $y = \{x\}$ на доске по точкам: обратите внимание на «скачки» и на то, какая из граничных точек «закрашена», а какая нет. Связь с программированием (Math.floor, %) делает тему живой для интересующихся IT.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-5-45.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава V, §14).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
