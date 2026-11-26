@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Решение задач с большими и малыми числами — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Решение задач с большими и малыми числами</h1>
+            <p class="subtitle">Урок 50 • Глава VI, §16</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 16, п. 50). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! В прошлом уроке мы научились записывать числа в стандартном виде. Сегодня посмотрим, как эта запись помогает <strong>сравнивать</strong> очень большие и очень малые числа и решать практические задачи.</p>
+
+            <h3>📖 Пример 1. Сравнение очень больших чисел: планеты</h3>
+            <p>В таблице приведены примерные расстояния планет до Солнца, записанные в стандартном виде:</p>
+            <div class="step-box">
+                • Меркурий: $5{,}8 \cdot 10^7$ км<br>
+                • Венера: $1{,}08 \cdot 10^8$ км<br>
+                • Земля: $1{,}5 \cdot 10^8$ км<br>
+                • Марс: $2{,}28 \cdot 10^8$ км<br>
+                • Юпитер: $7{,}78 \cdot 10^8$ км<br>
+                • Сатурн: $1{,}42 \cdot 10^9$ км<br>
+                • Уран: $2{,}87 \cdot 10^9$ км<br>
+                • Нептун: $4{,}497 \cdot 10^9$ км
+            </div>
+
+            <div class="theorem-box">
+                <strong>Алгоритм сравнения чисел в стандартном виде:</strong><br>
+                1. Сначала сравниваем <strong>порядки</strong> (показатели 10) — меньше порядок, меньше число.<br>
+                2. Если порядки равны — сравниваем первые множители $a$.
+            </div>
+
+            <p><strong>Решение:</strong> наименьший порядок (7) у Меркурия — он ближе всех к Солнцу. Наибольший порядок (9) у Сатурна, Урана и Нептуна: среди них наибольший первый множитель — $4{,}497$ у Нептуна, значит, он дальше всех. Порядок 8 — у Венеры, Земли, Марса и Юпитера: $1{,}08 < 1{,}5 < 2{,}28 < 7{,}78$.</p>
+
+            <div class="step-box">
+                <strong>Итоговый порядок удалённости:</strong><br>
+                Меркурий → Венера → Земля → Марс → Юпитер → Сатурн → Уран → Нептун. ✅
+            </div>
+
+            <h3>📖 Пример 2. Сравнение очень малых чисел: шумы</h3>
+            <p>В акустике силу звука измеряют в Вт/см². Сравним:</p>
+            <div class="step-box">
+                • шорох листьев в лесу: $1 \cdot 10^{-15}$ Вт/см²<br>
+                • шум на оживлённой городской улице: $1 \cdot 10^{-10}$ Вт/см²<br><br>
+                Разница в порядках: $-10 - (-15) = 5$ — шум улицы громче шороха в $10^5 = 100\,000$ раз!
+            </div>
+            <p>Нетрудно сделать вывод о том, какой из этих «шумов» благоприятнее для человека. ✅</p>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: сначала сравниваем порядки, потом первые множители!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1229. Какой путь пройдёт свет за 2,8·10⁶ с (скорость света 3·10⁵ км/с)?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$S = v \cdot t = 3 \cdot 10^5 \cdot 2{,}8 \cdot 10^6 = 8{,}4 \cdot 10^{11}$ км.</p>
+                    <p><strong>Ответ:</strong> $8{,}4 \cdot 10^{11}$ км. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1230(а). Масса Земли 6,0·10²⁴ кг, Марса 6,4·10²³ кг. Что больше и во сколько раз?</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$6{,}0 \cdot 10^{24} : 6{,}4 \cdot 10^{23} = \dfrac{6{,}0}{6{,}4} \cdot 10^{1} = 0{,}9375 \cdot 10 = 9{,}375 \approx 9{,}4$.</p>
+                    <p>Земля тяжелее Марса примерно в <strong>9,4 раза</strong>. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1231. Плотность железа 7,8·10³ кг/м³. Найди массу плиты 1,2 м × 6·10⁻¹ м × 2,5·10⁻¹ м</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$V = 1{,}2 \cdot 6 \cdot 10^{-1} \cdot 2{,}5 \cdot 10^{-1} = 1{,}8 \cdot 10^{-1} = 0{,}18$ м³.</p>
+                    <p>$m = \rho V = 7{,}8 \cdot 10^3 \cdot 0{,}18 = 1{,}404 \cdot 10^3 = 1404$ кг.</p>
+                    <p><strong>Ответ:</strong> 1404 кг. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1232. Расположи в порядке возрастания: 5,001·10⁵; 0,9999·10⁵; 1,9899·10⁵; 3,76·10⁵; 1,9987·10⁵</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> порядки одинаковы (все 5), сравниваем первые множители:</p>
+                    <p>$0{,}9999 < 1{,}9899 < 1{,}9987 < 3{,}76 < 5{,}001$.</p>
+                    <p><strong>Ответ:</strong> $0{,}9999 \cdot 10^5$; $1{,}9899 \cdot 10^5$; $1{,}9987 \cdot 10^5$; $3{,}76 \cdot 10^5$; $5{,}001 \cdot 10^5$. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1235. В стакане 200 г содержится 66,822·10²³ молекул воды. Найди вес одной молекулы в стандартном виде</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$m_1 = \dfrac{200}{66{,}822 \cdot 10^{23}} = \dfrac{200}{6{,}6822 \cdot 10^{24}} \approx 29{,}93 \cdot 10^{-24} = 2{,}993 \cdot 10^{-23}$ г.</p>
+                    <p><strong>Ответ:</strong> $\approx 3 \cdot 10^{-23}$ г. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Химия:</strong> 1 а. е. м. (атомная единица массы) = $1{,}66 \cdot 10^{-24}$ г. Масса атома водорода — 1,008 а. е. м., атома азота — 14,007 а. е. м.</p>
+            <p><strong>Вопрос:</strong> Вырази в граммах массу атома водорода и атома азота, результат запиши в стандартном виде.</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>• водород: $1{,}008 \cdot 1{,}66 \cdot 10^{-24} = 1{,}67328 \cdot 10^{-24}$ г ≈ $1{,}67 \cdot 10^{-24}$ г;</p>
+                    <p>• азот: $14{,}007 \cdot 1{,}66 \cdot 10^{-24} = 23{,}25162 \cdot 10^{-24} = 2{,}33 \cdot 10^{-23}$ г.</p>
+                    <p>💡 <em>Вывод:</em> умножение чисел в стандартном виде — перемножаем мантиссы и складываем показатели, затем при необходимости приводим к виду $1 \le a < 10$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Сравнение чисел в стандартном виде: сначала порядки, затем первые множители.</li>
+                <li>Разница в $k$ порядков означает разницу в $10^k$ раз.</li>
+                <li>Умножение/деление: перемножаем/делим мантиссы, складываем/вычитаем показатели.</li>
+                <li>После действий приводим результат к стандартному виду ($1 \le a < 10$).</li>
+                <li>Стандартный вид — незаменим в астрономии, физике, химии и биологии.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Главное практическое умение урока — сравнение чисел в стандартном виде «глазами»: порядок даёт мгновенную оценку масштаба. Разберите с классом пример с планетами, а затем предложите самостоятельно сравнить массы планет (№1230). Обратите внимание на аккуратное выполнение арифметики с мантиссами и на то, что после умножения/деления результат нужно приводить к стандартному виду (например, $23{,}25 \cdot 10^{-24} = 2{,}33 \cdot 10^{-23}$). Задача про молекулы воды хороша для развития навыков деления чисел в стандартном виде.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-6-49.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава VI, §16).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
