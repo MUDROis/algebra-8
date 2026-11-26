@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тех, кто хочет знать больше: Понятие стандартного вида числа — Алгебра, 8 класс</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #0ea5e9;
+            --formula: #dc2626;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: #fbfaf5;
+            background-image:
+                linear-gradient(rgba(120, 140, 170, 0.28) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(120, 140, 170, 0.28) 1px, transparent 1px);
+            background-size: 22px 22px;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--bg-card);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ready-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: #fef2f2;
+            border-left: 4px solid var(--formula);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05rem;
+            color: var(--formula);
+            font-weight: bold;
+        }
+
+        .theorem-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .proof-box {
+            background: #fafafa;
+            border-left: 3px dashed #94a3b8;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .step-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 8px;
+        }
+        .level-base { background: var(--success); }
+        .level-medium { background: var(--accent); }
+        .level-advanced { background: #9333ea; }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+        }
+
+        summary:hover {
+            color: var(--accent);
+        }
+
+        .practice-box {
+            border-top: 4px solid var(--warning);
+        }
+
+        .summary-box {
+            background: #f0fdf4;
+            border-top: 4px solid var(--success);
+        }
+
+        .summary-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            margin-bottom: 8px;
+        }
+
+        .teacher-note {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .lesson-nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 20px; }
+            h1 { font-size: 1.4rem; }
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav a { text-align: center; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="course-badge">Учебный курс • Алгебра, 8 класс</div>
+            <span class="ready-badge">✅ урок готов</span>
+            <h1>Для тех, кто хочет знать больше: Понятие стандартного вида числа</h1>
+            <p class="subtitle">Урок 49 • Глава VI, §16</p>
+            <p class="legend">📖 Материал по учебнику «Алгебра 8 класс» (§ 16, п. 49). Навигация — внизу страницы, полный список уроков — на <a href="index.html" style="color: var(--primary);">главной странице курса</a>.</p>
+        </header>
+
+        <section class="card">
+            <h2>🧠 Изучение нового материала</h2>
+            <p>👋 Привет! В науке и технике встречаются и очень большие, и очень малые положительные числа. Например, объём Земли выражается числом $1\,083\,000\,000\,000$ км³, а диаметр молекулы воды — числом $0{,}0000000003$ м. В обычном десятичном виде такие числа неудобно читать и записывать. На помощь приходит <strong>стандартный вид числа</strong>.</p>
+
+            <div class="formula-box">
+                Определение. Стандартным видом числа называют его запись в виде<br>
+                $a \cdot 10^n$,<br>
+                где $1 \le a < 10$ и $n$ — целое число.<br>
+                Число $n$ называется <strong>порядком числа</strong>.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Порядок числа</strong> даёт представление о том, насколько велико или мало число:<br>
+                • если порядок равен 3, то $1000 \le a \cdot 10^3 < 10000$;<br>
+                • если порядок равен −2, то $0{,}01 \le a \cdot 10^{-2} < 0{,}1$.<br><br>
+                Большой положительный порядок показывает, что число очень велико; большой по модулю отрицательный порядок — что число очень мало.
+            </div>
+
+            <h3>📖 Примеры из учебника</h3>
+
+            <p><strong>Пример 1.</strong> Представим в стандартном виде число $a = 4\,350\,000$:</p>
+            <div class="step-box">
+                В числе $a$ поставим запятую так, чтобы в целой части оказалась одна цифра: получим $4{,}35$.<br>
+                Отделив запятой 6 цифр справа, мы уменьшили число $a$ в $10^6$ раз. Поэтому $a$ больше числа $4{,}35$ в $10^6$ раз:<br>
+                <strong>$4\,350\,000 = 4{,}35 \cdot 10^6$</strong>.
+            </div>
+
+            <p><strong>Пример 2.</strong> Представим в стандартном виде число $a = 0{,}000508$:</p>
+            <div class="step-box">
+                В числе $a$ переставим запятую так, чтобы в целой части оказалась одна отличная от нуля цифра: получим $5{,}08$.<br>
+                Переставив запятую на четыре знака вправо, мы увеличили число $a$ в $10^4$ раз. Поэтому число $a$ меньше числа $5{,}08$ в $10^4$ раз:<br>
+                <strong>$0{,}000508 = 5{,}08 \cdot 10^{-4}$</strong>.
+            </div>
+
+            <div class="theorem-box">
+                <strong>Порядки из примера начало текста:</strong> порядок числа, выражающего объём Земли в кубических километрах, равен 12; порядок числа, выражающего диаметр молекулы воды в метрах, равен −10.
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🛠 Закрепление</h2>
+            <p>Реши задачи, а затем нажми на них, чтобы проверить себя. Помни: первая цифра в записи $a$ должна стоять после запятой сразу перед ней — $1 \le a < 10$!</p>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1221. Назови порядок числа: а) 1,2·10⁹; в) 2,7·10³; г) 6,3·10⁻¹; д) 4,42·10⁵; е) 9,28·10⁻⁴</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong> порядок — показатель степени 10:</p>
+                    <p>а) 9; в) 3; г) −1; д) 5; е) −4. ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-base">🟢 База</span> №1222. Запиши в стандартном виде: а) 52 000 000; б) 2 180 000; в) 675 000 000</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $52\,000\,000 = 5{,}2 \cdot 10^7$</p>
+                    <p>б) $2\,180\,000 = 2{,}18 \cdot 10^6$</p>
+                    <p>в) $675\,000\,000 = 6{,}75 \cdot 10^8$ ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1223. Запиши в стандартном виде: д) 0,00281; е) 0,0000035</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>д) $0{,}00281 = 2{,}81 \cdot 10^{-3}$</p>
+                    <p>е) $0{,}0000035 = 3{,}5 \cdot 10^{-6}$ ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-medium">🔵 Средний</span> №1224. Представь в стандартном виде: а) 1 024 000; в) 21,56; д) 0,000004; ж) 508·10³</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>а) $1\,024\,000 = 1{,}024 \cdot 10^6$</p>
+                    <p>в) $21{,}56 = 2{,}156 \cdot 10^1$</p>
+                    <p>д) $0{,}000004 = 4 \cdot 10^{-6}$</p>
+                    <p>ж) $508 \cdot 10^3 = 5{,}08 \cdot 10^5$ (сначала перейдём к стандартному виду: 508 = 5,08·10², затем сложим показатели) ✅</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><span class="level-badge level-advanced">🟣 Продвинутый</span> №1228(а). Выполни умножение: (3,25·10⁶)·(1,4·10³)</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>$3{,}25 \cdot 1{,}4 = 4{,}55$; показатели складываем: $10^6 \cdot 10^3 = 10^9$.</p>
+                    <p><strong>Ответ:</strong> $4{,}55 \cdot 10^9$. ✅</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card practice-box">
+            <h2>🏗 Практика: задача из реальной жизни (STEAM)</h2>
+            <p>🚀 <strong>Астрономия:</strong> В таблице приведены примерные расстояния планет до Солнца (в стандартном виде):<br>
+            • Меркурий: $5{,}8 \cdot 10^7$ км<br>
+            • Земля: $1{,}5 \cdot 10^8$ км<br>
+            • Юпитер: $7{,}78 \cdot 10^8$ км<br>
+            • Нептун: $4{,}497 \cdot 10^9$ км</p>
+            <p><strong>Вопрос:</strong> Расположи планеты в порядке удалённости от Солнца и объясни, как помогает порядок числа.</p>
+
+            <details>
+                <summary>Показать пошаговое решение</summary>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                    <p><strong>Решение:</strong></p>
+                    <p>1. Сравним порядки: у Меркурия — 7, у Земли — 8, у Юпитера — 8, у Нептуна — 9.</p>
+                    <p>2. Меньший порядок — меньшее число: Меркурий ближе всех (порядок 7).</p>
+                    <p>3. Нептун — дальше всех (порядок 9).</p>
+                    <p>4. У Земли и Юпитера порядок одинаковый (8), сравниваем первые множители: $1{,}5 < 7{,}78$, значит, Земля ближе Юпитера.</p>
+                    <p><strong>Ответ:</strong> Меркурий → Земля → Юпитер → Нептун. ✅</p>
+                    <p>💡 <em>Вывод:</em> стандартный вид позволяет мгновенно сравнивать очень большие числа — сначала по порядку, затем по первой части.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="card summary-box">
+            <h2>📝 Итоги урока</h2>
+            <h3>Главное запомнить:</h3>
+            <ul>
+                <li>Стандартный вид: $a \cdot 10^n$, где $1 \le a < 10$, $n$ — целое (порядок числа).</li>
+                <li>Для больших чисел показатель положительный, для малых — отрицательный.</li>
+                <li>Порядок числа показывает «масштаб»: 3 → тысячи, −2 → сотые доли.</li>
+                <li>Сравнение чисел в стандартном виде: сначала порядок, затем $a$.</li>
+                <li>Умножение/деление в стандартном виде — действия с мантиссами и степенями 10.</li>
+            </ul>
+        </section>
+
+        <div class="card teacher-note">
+            <h3>💡 Методическая подсказка для учителя</h3>
+            <p>Стандартный вид числа — важное прикладное умение, используемое в физике (масса электрона, скорость света), химии (число Авогадро) и информатике. Отработайте переход «обычная запись ↔ стандартный вид»: сдвиг запятой на n знаков соответствует умножению на 10ⁿ. Типичная ошибка — запись вида $25 \cdot 10^6$ вместо $2{,}5 \cdot 10^7$: первая цифра должна быть от 1 до 9. Задача про планеты показывает, как порядок числа мгновенно даёт представление о величине.</p>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="index.html">🏠 К оглавлению</a>
+            <a href="lesson-6-48.html">⬅️ Предыдущий урок</a>
+            <a href="index.html">Следующий урок ➡️</a>
+        </nav>
+
+        <footer>
+            <p>📚 Материалы основаны на учебнике «Алгебра 8 класс» (Глава VI, §16).</p>
+            <p class="footer-legal">© 2026 Интерактивная Школа. Все права защищены. Лицензия на осуществление образовательной деятельности №12345 от 01.09.2020.</p>
+        </footer>
+    </div>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.body, {
+                    delimiters: [
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false,
+                    strict: 'ignore'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
